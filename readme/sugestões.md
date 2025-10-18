@@ -16,3 +16,5 @@
 - É crucial usar ferramentas como HTML, CSS entre outras compativeis com o RPG Maker MZ, para deixar bem estruturado, organizado e funcional.
 - Se caso o plugin ficar muito grande, pode criar partições dele mesmo, e deixar que ambos se comuniquem entre si.
 - LEMBRANDO NOVAMENTE: Obrigatótio usar AGENTES para a criação, modulação e conclusão de plugins.
+
+Atualize os plugins que tu editar para a proxima versão.

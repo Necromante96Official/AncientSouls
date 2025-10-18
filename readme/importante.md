@@ -129,7 +129,7 @@ Violações podem ser revertidas e, em caso de recorrência, resultarão em **re
 ```js
 AS.PluginManager.register('AS_X.Y_MeuAgente', {
    name: 'Meu Agente',
-   version: '1.0.0',
+  version: '1.0.0',
    author: 'Necromante96Official & GitHub Copilot',
    description: 'Responsabilidade do agente',
    dependencies: ['AS_0.0_PluginManager'],

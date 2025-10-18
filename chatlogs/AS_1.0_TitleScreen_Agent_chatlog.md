@@ -2,7 +2,7 @@
 
 ## Informações do Agente
 - **Nome:** AS_1.0_TitleScreen_Agent
-- **Versão Atual:** 1.0.9 ← ATUALIZADO!
+- **Versão Atual:** 1.1.1 ← ATUALIZADO!
 - **Autor:** Necromante96Official & GitHub Copilot
 - **Descrição:** Gerenciador da Tela de Título - Ancient Souls
 
@@ -10,7 +10,25 @@
 
 ## Histórico de Alterações
 
-### Entrada #6 - v1.0.9 (ATUAL)
+### Entrada #7 - v1.1.1 (ATUAL)
+- **Data:** 2025-10-18
+- **Autor:** Necromante96Official & GitHub Copilot
+- **Arquivo(s) afetado(s):**
+  - `js/plugins/AS_1.0_TitleScreen_Agent.js` (atualizado para v1.1.1)
+- **Ação:** Implementação de parâmetros de ajuste da logo
+- **Detalhes:**
+  - **Parâmetros adicionados**:
+    - `LogoScale` (0.05 a 2.00, padrão: 0.25) - Controla escala da logo
+    - `LogoPositionX` (0 a 100%, padrão: 50) - Posição horizontal
+    - `LogoPositionY` (0 a 100%, padrão: 30) - Posição vertical
+  - **Sistema de posicionamento parametrizado**: Logo agora usa valores dos parâmetros
+  - **Cálculo dinâmico**: Conversão de porcentagem para pixels com centralização automática
+  - **Logs aprimorados**: Exibe escala e posições nos logs de debug
+  - **Versões atualizadas**: @version, @plugindesc, @help e registro do agente
+  - **Backup criado**: `AS_1.0_TitleScreen_Agent - v1.1.0.js`
+  - **Flexibilidade total**: Usuário pode ajustar posição e tamanho via Plugin Manager sem editar código
+
+### Entrada #6 - v1.0.9
 - **Data:** 2025-10-18
 - **Autor:** Necromante96Official & GitHub Copilot
 - **Arquivo(s) afetado(s):**
@@ -106,7 +124,7 @@
 
 ## Metadados
 - **Status:** ✅ Produção - Estável
-- **Última Atualização:** 2025-10-18 (v1.0.9)
+- **Última Atualização:** 2025-10-18 (v1.1.1)
 - **Problemas Conhecidos:** Nenhum
 - **Próximas Atualizações Planejadas:** 
   - Sistema de múltiplas telas de título temáticas
@@ -115,9 +133,10 @@
 
 ---
 
-## Configurações Atuais (v1.0.9)
-- **Logo Scale:** 25% (0.25)
-- **Logo Position:** 50% da altura da tela (centro perfeito), centralizado horizontalmente
+## Configurações Atuais (v1.1.1)
+- **Logo Scale:** 25% (0.25) - AJUSTÁVEL via parâmetro
+- **Logo Position X:** 50% da largura (centro horizontal) - AJUSTÁVEL via parâmetro
+- **Logo Position Y:** 30% da altura (círculo da explosão) - AJUSTÁVEL via parâmetro
 - **DisableTitleMusic:** false (música ATIVADA por padrão)
 - **Background:** background.png com escala responsiva
 - **Custom Background Path:** js/plugins/assets/resources/background.png

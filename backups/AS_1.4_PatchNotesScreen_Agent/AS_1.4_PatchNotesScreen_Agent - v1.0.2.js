@@ -3,11 +3,11 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc [v1.0.3] Tela de Atualizações (Patch Notes) - Ancient Souls
+ * @plugindesc [v1.0.2] Tela de Atualizações (Patch Notes) - Ancient Souls
  * @author 
  *   Necromante96Official & GitHub Copilot
  * @url https://github.com/Necromante96Official/AncientSouls
- * @version 1.0.3
+ * @version 1.0.2
  * @orderAfter AS_1.0_TitleScreen_Agent
  *
  * @param WindowTitle
@@ -35,7 +35,7 @@
  * @desc Pasta onde os arquivos .md de patch notes estão localizados.
  *
  * @help
- * AS_1.4_PatchNotesScreen_Agent [v1.0.3]
+ * AS_1.4_PatchNotesScreen_Agent [v1.0.2]
  * 
  * ============================================================================
  * Descrição:
@@ -436,272 +436,98 @@ AS.PatchNotes = AS.PatchNotes || {};
             const style = document.createElement('style');
             style.id = 'as-patchnotes-styles';
             style.textContent = `
-                /* ═══════════════════════════════════════════════════════════ */
-                /* ANCIENT SOULS - REDESIGN MEDIEVAL/VINTAGE ÉPICO             */
-                /* ═══════════════════════════════════════════════════════════ */
-                
                 /* Container Principal */
                 #as-patchnotes-container {
                     font-family: 'GameFont', sans-serif;
-                    color: #e8d4a0;
+                    color: #ffffff;
                     user-select: none;
-                    background: 
-                        radial-gradient(ellipse at top, rgba(139, 69, 19, 0.15) 0%, transparent 60%),
-                        linear-gradient(135deg, #0a0a0f 0%, #1a1520 50%, #0f0f1a 100%);
-                    padding: 0;
+                    background: linear-gradient(135deg, ${AS.PatchNotes.backgroundColor} 0%, #0f0f1e 100%);
+                    padding: 40px 20px 120px 20px;
                     box-sizing: border-box;
                     min-height: 100vh;
-                    display: flex;
-                    flex-direction: column;
-                    position: relative;
-                    overflow-x: hidden;
                 }
                 
-                /* Ornamento de fundo sutil */
-                #as-patchnotes-container::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background-image: 
-                        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 215, 0, 0.02) 2px, rgba(255, 215, 0, 0.02) 4px);
-                    pointer-events: none;
-                    z-index: 0;
-                }
-                
-                /* Scrollbar Medieval Customizada */
+                /* Scrollbar customizada */
                 #as-patchnotes-container::-webkit-scrollbar {
-                    width: 14px;
+                    width: 12px;
                 }
                 
                 #as-patchnotes-container::-webkit-scrollbar-track {
-                    background: linear-gradient(to right, 
-                        rgba(139, 69, 19, 0.3) 0%, 
-                        rgba(0, 0, 0, 0.5) 50%, 
-                        rgba(139, 69, 19, 0.3) 100%);
-                    border-left: 1px solid rgba(255, 215, 0, 0.2);
-                    border-right: 1px solid rgba(255, 215, 0, 0.2);
+                    background: rgba(0, 0, 0, 0.3);
+                    border-radius: 10px;
                 }
                 
                 #as-patchnotes-container::-webkit-scrollbar-thumb {
-                    background: linear-gradient(to bottom, 
-                        ${AS.PatchNotes.accentColor} 0%, 
-                        #d4af37 50%, 
-                        #8b6914 100%);
-                    border: 2px solid rgba(0, 0, 0, 0.5);
-                    border-radius: 0;
-                    box-shadow: 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                        0 0 10px rgba(255, 215, 0, 0.5);
+                    background: ${AS.PatchNotes.accentColor};
+                    border-radius: 10px;
+                    transition: background 0.3s;
                 }
                 
                 #as-patchnotes-container::-webkit-scrollbar-thumb:hover {
-                    background: linear-gradient(to bottom, 
-                        #ffed4e 0%, 
-                        ${AS.PatchNotes.accentColor} 50%, 
-                        #d4af37 100%);
-                    box-shadow: 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.5),
-                        0 0 15px rgba(255, 215, 0, 0.8);
+                    background: #ffed4e;
                 }
                 
-                /* Cabeçalho Medieval Ornamentado */
+                /* Título Principal */
                 .as-patchnotes-header {
-                    position: relative;
                     text-align: center;
-                    padding: 40px 20px 30px 20px;
-                    margin-bottom: 40px;
-                    background: linear-gradient(to bottom, 
-                        rgba(139, 69, 19, 0.2) 0%, 
-                        transparent 100%);
-                    border-bottom: 3px double ${AS.PatchNotes.accentColor};
-                    box-shadow: 
-                        0 0 30px rgba(255, 215, 0, 0.1),
-                        inset 0 -1px 0 rgba(255, 215, 0, 0.3);
-                    animation: fadeInDown 0.8s ease-out;
-                    z-index: 1;
-                }
-                
-                /* Ornamento superior do título */
-                .as-patchnotes-header::before {
-                    content: '◆';
-                    position: absolute;
-                    top: 15px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    font-size: 20px;
-                    color: ${AS.PatchNotes.accentColor};
-                    text-shadow: 0 0 10px ${AS.PatchNotes.accentColor};
+                    margin-bottom: 50px;
+                    animation: fadeInDown 0.6s ease-out;
                 }
                 
                 .as-patchnotes-title {
-                    font-size: 48px;
+                    font-size: 56px;
                     font-weight: bold;
                     color: ${AS.PatchNotes.accentColor};
                     text-shadow: 
-                        0 0 20px rgba(255, 215, 0, 0.8),
-                        2px 2px 0 rgba(139, 69, 19, 0.5),
-                        4px 4px 8px rgba(0, 0, 0, 0.9);
-                    margin: 0 0 15px 0;
-                    letter-spacing: 6px;
-                    text-transform: uppercase;
-                    position: relative;
-                    display: inline-block;
-                }
-                
-                /* Ornamentos laterais do título */
-                .as-patchnotes-title::before,
-                .as-patchnotes-title::after {
-                    content: '═══';
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    font-size: 24px;
-                    color: ${AS.PatchNotes.accentColor};
-                    opacity: 0.6;
-                }
-                
-                .as-patchnotes-title::before {
-                    left: -100px;
-                }
-                
-                .as-patchnotes-title::after {
-                    right: -100px;
-                }
-                
-                .as-patchnotes-subtitle {
-                    font-size: 18px;
-                    color: rgba(232, 212, 160, 0.9);
-                    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-                    font-style: italic;
+                        0 0 10px ${AS.PatchNotes.accentColor},
+                        0 0 20px ${AS.PatchNotes.accentColor},
+                        3px 3px 6px rgba(0, 0, 0, 0.8);
+                    margin-bottom: 10px;
                     letter-spacing: 2px;
                 }
                 
-                /* Container de Versões com Moldura */
+                .as-patchnotes-subtitle {
+                    font-size: 22px;
+                    color: rgba(255, 255, 255, 0.8);
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                }
+                
+                /* Container de Versões */
                 .as-versions-container {
-                    max-width: 1100px;
+                    max-width: 1000px;
                     margin: 0 auto;
-                    padding: 0 30px 150px 30px;
-                    position: relative;
-                    z-index: 1;
-                    animation: fadeInUp 1s ease-out;
+                    animation: fadeInUp 0.8s ease-out;
                 }
                 
-                /* Card de Versão Estilo Pergaminho Medieval */
+                /* Card de Versão */
                 .as-version-card {
-                    position: relative;
-                    background: 
-                        linear-gradient(135deg, 
-                            rgba(42, 35, 28, 0.95) 0%, 
-                            rgba(28, 24, 20, 0.98) 50%, 
-                            rgba(35, 30, 25, 0.95) 100%);
-                    border: 3px solid;
-                    border-image: linear-gradient(135deg, 
-                        ${AS.PatchNotes.accentColor} 0%, 
-                        #d4af37 25%,
-                        ${AS.PatchNotes.accentColor} 50%, 
-                        #8b6914 75%,
-                        ${AS.PatchNotes.accentColor} 100%) 1;
-                    padding: 35px;
-                    margin-bottom: 35px;
-                    box-shadow: 
-                        0 15px 40px rgba(0, 0, 0, 0.7),
-                        inset 0 0 60px rgba(0, 0, 0, 0.3),
-                        0 0 0 1px rgba(255, 215, 0, 0.2);
-                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                    clip-path: polygon(
-                        0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px,
-                        100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px)
-                    );
-                }
-                
-                /* Efeito de textura de pergaminho */
-                .as-version-card::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background-image: 
-                        repeating-linear-gradient(90deg, 
-                            transparent, transparent 2px, 
-                            rgba(255, 215, 0, 0.01) 2px, 
-                            rgba(255, 215, 0, 0.01) 4px);
-                    pointer-events: none;
-                    opacity: 0.5;
-                }
-                
-                /* Cantos ornamentados */
-                .as-version-card::after {
-                    content: '◆';
-                    position: absolute;
-                    top: -2px;
-                    left: -2px;
-                    font-size: 12px;
-                    color: ${AS.PatchNotes.accentColor};
-                    text-shadow: 0 0 10px ${AS.PatchNotes.accentColor};
+                    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(15, 15, 30, 0.95));
+                    border: 2px solid ${AS.PatchNotes.accentColor};
+                    border-radius: 15px;
+                    padding: 30px;
+                    margin-bottom: 30px;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
                 }
                 
                 .as-version-card:hover {
-                    transform: translateY(-8px) scale(1.01);
-                    box-shadow: 
-                        0 20px 50px rgba(0, 0, 0, 0.9),
-                        inset 0 0 80px rgba(0, 0, 0, 0.4),
-                        0 0 30px rgba(255, 215, 0, 0.4),
-                        0 0 0 2px ${AS.PatchNotes.accentColor};
-                    border-image: linear-gradient(135deg, 
-                        #ffed4e 0%, 
-                        ${AS.PatchNotes.accentColor} 25%,
-                        #ffed4e 50%, 
-                        ${AS.PatchNotes.accentColor} 75%,
-                        #ffed4e 100%) 1;
+                    transform: translateY(-5px);
+                    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+                    border-color: #ffed4e;
                 }
                 
-                /* Header da Versão com Brasão */
                 .as-version-header {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    margin-bottom: 25px;
-                    padding-bottom: 20px;
-                    border-bottom: 2px solid;
-                    border-image: linear-gradient(to right, 
-                        transparent 0%, 
-                        ${AS.PatchNotes.accentColor} 20%, 
-                        ${AS.PatchNotes.accentColor} 80%, 
-                        transparent 100%) 1;
+                    margin-bottom: 20px;
+                    padding-bottom: 15px;
+                    border-bottom: 2px solid ${AS.PatchNotes.accentColor};
                     flex-wrap: wrap;
                     gap: 15px;
-                    position: relative;
-                }
-                
-                /* Ornamento central do header */
-                .as-version-header::after {
-                    content: '◆';
-                    position: absolute;
-                    bottom: -8px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    font-size: 14px;
-                    color: ${AS.PatchNotes.accentColor};
-                    text-shadow: 0 0 10px ${AS.PatchNotes.accentColor};
-                    background: rgba(28, 24, 20, 1);
-                    padding: 0 10px;
                 }
                 
                 .as-version-number {
-                    font-size: 34px;
-                    font-weight: bold;
-                    color: ${AS.PatchNotes.accentColor};
-                    text-shadow: 
-                        0 0 15px rgba(255, 215, 0, 0.8),
-                        2px 2px 4px rgba(0, 0, 0, 0.9);
-                    font-family: 'GameFont', monospace;
-                    letter-spacing: 2px;
-                }
                     font-size: 32px;
                     font-weight: bold;
                     color: ${AS.PatchNotes.accentColor};
@@ -710,300 +536,147 @@ AS.PatchNotes = AS.PatchNotes || {};
                 
                 .as-version-date {
                     font-size: 18px;
-                    color: rgba(212, 175, 55, 0.9);
-                    font-style: italic;
-                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+                    color: rgba(255, 255, 255, 0.6);
                 }
                 
                 .as-version-title {
-                    font-size: 28px;
-                    color: #e8d4a0;
-                    margin-bottom: 25px;
-                    text-shadow: 
-                        1px 1px 0 rgba(139, 69, 19, 0.8),
-                        3px 3px 6px rgba(0, 0, 0, 0.9);
+                    font-size: 26px;
+                    color: #ffffff;
+                    margin-bottom: 20px;
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
                     font-weight: bold;
-                    letter-spacing: 1px;
-                    position: relative;
-                    padding-left: 20px;
                 }
                 
-                /* Marcador decorativo do título */
-                .as-version-title::before {
-                    content: '❖';
-                    position: absolute;
-                    left: 0;
-                    color: ${AS.PatchNotes.accentColor};
-                    text-shadow: 0 0 10px ${AS.PatchNotes.accentColor};
-                }
-                
-                /* Badge de Categoria Estilo Brasão */
+                /* Badge de Categoria */
                 .as-category-badge {
                     display: inline-block;
-                    padding: 10px 25px;
-                    margin-bottom: 25px;
-                    color: #1a1520;
-                    font-size: 16px;
+                    padding: 8px 20px;
+                    margin-bottom: 20px;
+                    border-radius: 25px;
+                    color: #ffffff;
+                    font-size: 15px;
                     font-weight: bold;
-                    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
-                    box-shadow: 
-                        0 6px 15px rgba(0, 0, 0, 0.5),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
-                    border: 2px solid rgba(0, 0, 0, 0.4);
-                    position: relative;
-                    clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%);
-                    letter-spacing: 1px;
+                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
                 }
                 
-                /* Ornamentos do badge */
-                .as-category-badge::before {
-                    content: '◆';
-                    position: absolute;
-                    left: 8px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    font-size: 10px;
-                    color: rgba(0, 0, 0, 0.5);
-                }
-                
-                .as-category-badge::after {
-                    content: '◆';
-                    position: absolute;
-                    right: 8px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    font-size: 10px;
-                    color: rgba(0, 0, 0, 0.5);
-                }
-                
-                /* Resumo Estilo Pergaminho */
+                /* Resumo */
                 .as-version-summary {
-                    padding: 25px;
-                    margin-bottom: 30px;
-                    background: 
-                        linear-gradient(to right, 
-                            rgba(139, 69, 19, 0.15) 0%, 
-                            rgba(255, 215, 0, 0.08) 50%, 
-                            rgba(139, 69, 19, 0.15) 100%);
-                    border-left: 4px solid ${AS.PatchNotes.accentColor};
-                    border-right: 4px solid ${AS.PatchNotes.accentColor};
-                    font-size: 18px;
-                    line-height: 1.8;
-                    color: rgba(232, 212, 160, 0.95);
-                    font-style: italic;
-                    box-shadow: 
-                        inset 0 0 20px rgba(0, 0, 0, 0.3),
-                        0 4px 10px rgba(0, 0, 0, 0.3);
-                    position: relative;
-                }
-                
-                /* Aspas decorativas */
-                .as-version-summary::before {
-                    content: '"';
-                    position: absolute;
-                    top: 10px;
-                    left: 10px;
-                    font-size: 48px;
-                    color: rgba(255, 215, 0, 0.2);
-                    font-family: Georgia, serif;
-                    line-height: 1;
-                }
-                
-                .as-version-summary::after {
-                    content: '"';
-                    position: absolute;
-                    bottom: 10px;
-                    right: 10px;
-                    font-size: 48px;
-                    color: rgba(255, 215, 0, 0.2);
-                    font-family: Georgia, serif;
-                    line-height: 1;
-                }
-                
-                /* Seções de Mudanças com Ícones Medievais */
-                .as-changes-section {
+                    padding: 20px;
                     margin-bottom: 25px;
-                    position: relative;
-                    padding-left: 10px;
+                    background: rgba(255, 255, 255, 0.08);
+                    border-left: 4px solid ${AS.PatchNotes.accentColor};
+                    border-radius: 8px;
+                    font-size: 17px;
+                    line-height: 1.7;
+                    color: rgba(255, 255, 255, 0.95);
+                    font-style: italic;
+                }
+                
+                /* Seções de Mudanças */
+                .as-changes-section {
+                    margin-bottom: 20px;
                 }
                 
                 .as-changes-category {
-                    font-size: 24px;
+                    font-size: 22px;
                     font-weight: bold;
-                    margin-bottom: 15px;
+                    margin-bottom: 12px;
                     display: flex;
                     align-items: center;
-                    gap: 15px;
-                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-                    position: relative;
-                    padding-bottom: 10px;
-                }
-                
-                /* Linha decorativa sob categoria */
-                .as-changes-category::after {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 40px;
-                    right: 0;
-                    height: 1px;
-                    background: linear-gradient(to right, 
-                        currentColor 0%, 
-                        transparent 100%);
-                    opacity: 0.5;
+                    gap: 12px;
                 }
                 
                 .as-changes-category.added {
-                    color: #7bc850;
+                    color: #4caf50;
                 }
                 
                 .as-changes-category.fixed {
-                    color: #5ba3d0;
+                    color: #2196f3;
                 }
                 
                 .as-changes-category.removed {
-                    color: #d66a5c;
+                    color: #ff5722;
                 }
                 
                 .as-changes-category::before {
                     content: '';
-                    width: 26px;
-                    height: 26px;
+                    width: 24px;
+                    height: 24px;
                     border-radius: 50%;
                     background: currentColor;
-                    box-shadow: 
-                        0 0 20px currentColor,
-                        inset 0 0 10px rgba(0, 0, 0, 0.5);
-                    border: 2px solid rgba(0, 0, 0, 0.3);
-                    flex-shrink: 0;
+                    box-shadow: 0 0 15px currentColor;
                 }
                 
                 .as-changes-list {
                     list-style: none;
-                    padding-left: 45px;
+                    padding-left: 36px;
                 }
                 
                 .as-changes-list li {
-                    font-size: 18px;
-                    color: rgba(232, 212, 160, 0.95);
-                    margin-bottom: 12px;
+                    font-size: 17px;
+                    color: rgba(255, 255, 255, 0.9);
+                    margin-bottom: 10px;
                     position: relative;
-                    padding-left: 30px;
-                    line-height: 1.7;
-                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+                    padding-left: 25px;
+                    line-height: 1.6;
                 }
                 
                 .as-changes-list li::before {
-                    content: '◈';
+                    content: '▸';
                     position: absolute;
                     left: 0;
                     color: ${AS.PatchNotes.accentColor};
-                    font-size: 18px;
-                    text-shadow: 0 0 8px ${AS.PatchNotes.accentColor};
-                }
-                
-                /* Mensagem "Em breve" Estilizada */
-                .as-coming-soon {
-                    text-align: center;
-                    padding: 100px 20px;
-                    font-size: 28px;
-                    color: rgba(212, 175, 55, 0.7);
-                    font-style: italic;
-                    animation: pulse 2s ease-in-out infinite;
-                    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-                    letter-spacing: 2px;
-                }
-                
-                .as-coming-soon::before,
-                .as-coming-soon::after {
-                    content: '◆◆◆';
-                    display: block;
-                    margin: 20px 0;
-                    opacity: 0.5;
                     font-size: 20px;
                 }
                 
-                /* Botão de Voltar Estilo Medieval Épico */
+                /* Mensagem de "Em breve" */
+                .as-coming-soon {
+                    text-align: center;
+                    padding: 80px 20px;
+                    font-size: 26px;
+                    color: rgba(255, 255, 255, 0.6);
+                    font-style: italic;
+                    animation: pulse 2s ease-in-out infinite;
+                }
+                
+                /* Botão de Voltar */
                 .as-back-button {
                     position: fixed;
-                    bottom: 40px;
+                    bottom: 30px;
                     left: 50%;
                     transform: translateX(-50%);
-                    padding: 18px 55px;
-                    font-size: 24px;
+                    padding: 16px 45px;
+                    font-size: 22px;
                     font-weight: bold;
-                    color: #1a1520;
-                    background: linear-gradient(to bottom, 
-                        ${AS.PatchNotes.accentColor} 0%, 
-                        #d4af37 50%, 
-                        #8b6914 100%);
-                    border: 3px solid rgba(0, 0, 0, 0.6);
+                    color: #ffffff;
+                    background: linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7));
+                    border: 3px solid ${AS.PatchNotes.accentColor};
+                    border-radius: 12px;
                     cursor: pointer;
-                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
-                    box-shadow: 
-                        0 8px 30px rgba(0, 0, 0, 0.7),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.4),
-                        inset 0 -1px 0 rgba(0, 0, 0, 0.4),
-                        0 0 30px rgba(255, 215, 0, 0.3);
+                    transition: all 0.3s ease;
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
                     z-index: 1001;
-                    animation: fadeInUp 1.2s ease-out;
-                    clip-path: polygon(15px 0%, calc(100% - 15px) 0%, 100% 50%, calc(100% - 15px) 100%, 15px 100%, 0% 50%);
-                    letter-spacing: 3px;
-                    text-transform: uppercase;
-                }
-                
-                /* Ornamentos do botão */
-                .as-back-button::before {
-                    content: '◆';
-                    position: absolute;
-                    left: 20px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    font-size: 16px;
-                    color: rgba(0, 0, 0, 0.5);
-                }
-                
-                .as-back-button::after {
-                    content: '◆';
-                    position: absolute;
-                    right: 20px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    font-size: 16px;
-                    color: rgba(0, 0, 0, 0.5);
+                    animation: fadeInUp 1s ease-out;
                 }
                 
                 .as-back-button:hover {
-                    background: linear-gradient(to bottom, 
-                        #ffed4e 0%, 
-                        ${AS.PatchNotes.accentColor} 50%, 
-                        #d4af37 100%);
-                    transform: translateX(-50%) translateY(-6px) scale(1.05);
-                    box-shadow: 
-                        0 12px 40px rgba(0, 0, 0, 0.9),
-                        inset 0 2px 0 rgba(255, 255, 255, 0.6),
-                        inset 0 -2px 0 rgba(0, 0, 0, 0.6),
-                        0 0 50px rgba(255, 215, 0, 0.6);
-                    border-color: rgba(0, 0, 0, 0.8);
+                    color: ${AS.PatchNotes.accentColor};
+                    transform: translateX(-50%) translateY(-4px) scale(1.08);
+                    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+                    border-width: 3px;
                 }
                 
                 .as-back-button:active {
-                    transform: translateX(-50%) translateY(-2px) scale(1.02);
-                    box-shadow: 
-                        0 6px 20px rgba(0, 0, 0, 0.8),
-                        inset 0 0 20px rgba(0, 0, 0, 0.3);
+                    transform: translateX(-50%) translateY(-1px) scale(1.02);
                 }
                 
-                /* ═══════════════════════════════════════════════════════════ */
-                /* ANIMAÇÕES MEDIEVAIS                                         */
-                /* ═══════════════════════════════════════════════════════════ */
-                
+                /* Animações */
                 @keyframes fadeInDown {
                     from {
                         opacity: 0;
-                        transform: translateY(-50px);
+                        transform: translateY(-40px);
                     }
                     to {
                         opacity: 1;
@@ -1014,7 +687,7 @@ AS.PatchNotes = AS.PatchNotes || {};
                 @keyframes fadeInUp {
                     from {
                         opacity: 0;
-                        transform: translateY(50px);
+                        transform: translateY(40px);
                     }
                     to {
                         opacity: 1;
@@ -1024,126 +697,43 @@ AS.PatchNotes = AS.PatchNotes || {};
                 
                 @keyframes pulse {
                     0%, 100% {
-                        opacity: 0.7;
-                        transform: scale(1);
+                        opacity: 0.6;
                     }
                     50% {
                         opacity: 1;
-                        transform: scale(1.02);
                     }
                 }
                 
-                /* ═══════════════════════════════════════════════════════════ */
-                /* RESPONSIVIDADE                                               */
-                /* ═══════════════════════════════════════════════════════════ */
-                
+                /* Responsividade */
                 @media (max-width: 768px) {
                     #as-patchnotes-container {
-                        padding: 0;
-                    }
-                    
-                    .as-patchnotes-header {
-                        padding: 30px 15px 25px 15px;
-                        margin-bottom: 30px;
+                        padding: 30px 15px 100px 15px;
                     }
                     
                     .as-patchnotes-title {
-                        font-size: 36px;
-                        letter-spacing: 3px;
-                    }
-                    
-                    .as-patchnotes-title::before,
-                    .as-patchnotes-title::after {
-                        content: '═';
-                        font-size: 18px;
-                    }
-                    
-                    .as-patchnotes-title::before {
-                        left: -40px;
-                    }
-                    
-                    .as-patchnotes-title::after {
-                        right: -40px;
+                        font-size: 40px;
                     }
                     
                     .as-patchnotes-subtitle {
-                        font-size: 16px;
-                        letter-spacing: 1px;
-                    }
-                    
-                    .as-versions-container {
-                        padding: 0 15px 120px 15px;
-                    }
-                    
-                    .as-version-card {
-                        padding: 25px 20px;
-                        margin-bottom: 25px;
-                    }
-                    
-                    .as-version-number {
-                        font-size: 28px;
-                    }
-                    
-                    .as-version-title {
-                        font-size: 24px;
-                        padding-left: 18px;
-                    }
-                    
-                    .as-changes-category {
-                        font-size: 20px;
-                        gap: 12px;
-                    }
-                    
-                    .as-changes-list {
-                        padding-left: 35px;
-                    }
-                    
-                    .as-changes-list li {
-                        font-size: 16px;
-                        padding-left: 25px;
-                    }
-                    
-                    .as-version-summary {
-                        padding: 20px;
-                        font-size: 16px;
-                    }
-                    
-                    .as-back-button {
-                        bottom: 25px;
-                        font-size: 20px;
-                        padding: 15px 45px;
-                        letter-spacing: 2px;
-                    }
-                    
-                    .as-coming-soon {
-                        font-size: 22px;
-                        padding: 70px 15px;
-                    }
-                }
-                
-                /* Telas menores */
-                @media (max-width: 480px) {
-                    .as-patchnotes-title {
-                        font-size: 28px;
-                        letter-spacing: 2px;
-                    }
-                    
-                    .as-version-card {
-                        padding: 20px 15px;
-                    }
-                    
-                    .as-version-number {
-                        font-size: 24px;
-                    }
-                    
-                    .as-version-title {
-                        font-size: 20px;
-                    }
-                    
-                    .as-back-button {
                         font-size: 18px;
-                        padding: 12px 35px;
-                        clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%);
+                    }
+                    
+                    .as-version-card {
+                        padding: 20px;
+                    }
+                    
+                    .as-version-number {
+                        font-size: 26px;
+                    }
+                    
+                    .as-version-title {
+                        font-size: 22px;
+                    }
+                    
+                    .as-back-button {
+                        bottom: 20px;
+                        font-size: 19px;
+                        padding: 13px 35px;
                     }
                 }
             `;
@@ -1375,7 +965,7 @@ AS.PatchNotes = AS.PatchNotes || {};
     
     AS.PluginManager.register('AS_1.4_PatchNotesScreen', {
         name: 'PatchNotes Screen Manager',
-        version: '1.0.3',
+        version: '1.0.2',
         author: 'Necromante96Official & GitHub Copilot',
         description: 'Gerenciador da tela de atualizações com parser de markdown',
         dependencies: ['AS_0.0_PluginManager', 'AS_1.0_TitleScreen'],

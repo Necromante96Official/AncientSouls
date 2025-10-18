@@ -1,7 +1,7 @@
 # Registro Completo da Conversa — Ancient Souls (Cupixa)
 
 Data de início: 18/10/2025  
-Última atualização: 18/10/2025  
+Última atualização: 18/10/2025 - 16:30  
 Participantes: Necromante96Official & Cupixa (GitHub Copilot)  
 Projeto: Ancient Souls (RPG Maker MZ)
 
@@ -34,11 +34,15 @@ Projeto: Ancient Souls (RPG Maker MZ)
 
 ## Regras importantes do usuário (obrigatórias)
 - Nunca criar arquivos .md sem solicitação direta.
+- **SEMPRE criar backup antes de atualizar um plugin** (armazenar em `backups/NOME_DO_PLUGIN/NomeDoPlugin - vX.Y.Z.js`).
+- **SEMPRE atualizar o chatlog do plugin após modificações** (incluir versão, data, mudanças e backups criados).
 - Atualizar apenas chatlogs dos plugins quando solicitado, nunca criar novos arquivos extras.
 - Registrar todos os pedidos e observações do usuário no histórico.
 - Respeitar a ordem e o contexto dos comandos enviados.
 - Manter backups organizados e versões sincronizadas.
 - Não repetir ações não autorizadas (ex.: criação de changelog sem pedido).
+- **Padrão de versionamento dos plugins**: v1.0.0, v1.0.1, v1.0.2... v1.1.0, v1.1.1... v1.2.0, etc.
+- **Padrão de versionamento do jogo (patch notes)**: v0.0.0.0-alfa, v0.0.0.1-alfa... v0.0.1.0-alfa, etc.
 
 ---
 
@@ -129,9 +133,12 @@ Projeto: Ancient Souls (RPG Maker MZ)
 ---
 
 ## Versionamento e backups
+- **Versões dos plugins**: seguem padrão semântico v1.0.0, v1.0.1, v1.0.2... v1.1.0, v1.1.1... v1.2.0, etc.
+- **Versões do jogo (patch notes)**: v0.0.0.0-alfa, v0.0.0.1-alfa, v0.0.0.2-alfa... v0.0.1.0-alfa, v0.0.1.1-alfa, etc.
 - Versões estritas nos cabeçalhos e no corpo dos plugins (vX.Y.Z...).
-- Backups automáticos a cada alteração, armazenados em `backups/NOME_DO_PLUGIN/`.
+- **Backups obrigatórios** a cada alteração, armazenados em `backups/NOME_DO_PLUGIN/`.
 - Nomes de backup padronizados: `PluginName - vX.Y.Z.js` (com sufixos de fix quando aplicável).
+- **Após cada modificação**: criar backup da versão anterior + atualizar chatlog do plugin.
 
 ---
 
@@ -139,10 +146,13 @@ Projeto: Ancient Souls (RPG Maker MZ)
 
 Concluído
 - Logo centralizada e dimensionada de acordo com o feedback visual.
-- Botão “Atualizações” posicionado conforme solicitado.
+- **Parâmetros de ajuste da logo** (LogoScale, LogoPositionX, LogoPositionY) implementados.
+- Botão "Atualizações" posicionado conforme solicitado.
 - Patch notes reescritos em linguagem amigável.
+- **Tela de patch notes renovada** com melhor layout e espaçamento.
 - Versões dos plugins sincronizadas e backups criados.
 - Logs e depuração melhorados, com legendas e rastreio de stack.
+- Sistema de backup e chatlog documentado nas regras.
 
 Pendências
 - Redesign completo da interface de patch notes (layout moderno, dinâmico e animado).

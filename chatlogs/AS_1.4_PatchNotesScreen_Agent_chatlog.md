@@ -2,13 +2,141 @@
 
 ## Informações do Agente
 - **Nome:** AS_1.4_PatchNotesScreen_Agent
-- **Versão Atual:** 1.0.0
+- **Versão Atual:** 1.0.3 ← ATUALIZADO!
 - **Autor:** Necromante96Official & GitHub Copilot
 - **Descrição:** Tela de Atualizações (Patch Notes) - Ancient Souls
 
 ---
 
 ## Histórico de Alterações
+
+### Entrada #3 - v1.0.3 (ATUAL) 🎨 REDESIGN MEDIEVAL ÉPICO
+- **Data:** 2025-10-18
+- **Autor:** Necromante96Official & GitHub Copilot
+- **Arquivo(s) afetado(s):**
+  - `js/plugins/AS_1.4_PatchNotesScreen_Agent.js` (atualizado para v1.0.3)
+- **Ação:** REDESIGN COMPLETO - Estilo Medieval/Vintage Épico
+- **Detalhes:**
+  - **🎨 TEMA MEDIEVAL COMPLETO**:
+    - Background com gradiente escuro medieval + textura sutil de pergaminho
+    - Paleta de cores medieval: #e8d4a0 (texto), dourado (#ffd700), marrom escuro
+    - Fonte GameFont (Pixel Times) em todos os elementos
+    - Ornamentos decorativos (◆, ❖, ◈) em todo o design
+    - Efeitos de textura e profundidade em todos os elementos
+  - **📜 SCROLLBAR MEDIEVAL PERSONALIZADA**:
+    - Design com gradientes dourados (bronze → ouro → dourado escuro)
+    - Bordas ornamentadas com linhas douradas
+    - Sombras internas e brilho exterior
+    - Efeito hover com intensificação do brilho
+  - **👑 CABEÇALHO ORNAMENTADO**:
+    - Bordas duplas douradas com efeito de profundidade
+    - Ornamento superior (◆) com brilho
+    - Título com ornamentos laterais (═══)
+    - Gradiente de fundo marrom escuro
+    - Sombras múltiplas para efeito 3D
+    - Letter-spacing aumentado (6px) estilo brasão
+  - **📰 CARDS ESTILO PERGAMINHO**:
+    - Clip-path com cantos cortados (efeito pergaminho medieval)
+    - Background com gradiente marrom escuro multicamadas
+    - Bordas com gradiente animado dourado
+    - Textura sutil de linhas repetidas
+    - Ornamento decorativo (◆) no canto superior esquerdo
+    - Sombras profundas múltiplas (externa + interna)
+    - Hover épico com escala, brilho e mudança de borda
+  - **🏛️ HEADER DE VERSÃO COM BRASÃO**:
+    - Linha divisória com gradiente (transparente → dourado → transparente)
+    - Ornamento central (◆) sobre a linha
+    - Número da versão com fonte mono space e brilho intenso
+    - Data em itálico dourado
+  - **📝 TÍTULOS E BADGES DECORADOS**:
+    - Título com marcador (❖) brilhante
+    - Badge com clip-path hexagonal (brasão)
+    - Ornamentos laterais (◆) nos badges
+    - Sombras internas e externas em relevo
+    - Cores específicas por categoria com gradientes
+  - **📖 RESUMO ESTILO MANUSCRITO**:
+    - Background com gradiente marrom translúcido
+    - Bordas laterais douradas (4px cada)
+    - Aspas decorativas gigantes (") em segundo plano
+    - Texto itálico cor pergaminho
+    - Sombras internas para profundidade
+  - **✨ SEÇÕES COM ÍCONES MEDIEVAIS**:
+    - Ícones circulares com brilho e sombra interna
+    - Linha decorativa horizontal sob cada categoria
+    - Cores temáticas: verde (#7bc850), azul (#5ba3d0), vermelho (#d66a5c)
+    - Marcadores personalizados (◈) com brilho
+  - **🗡️ BOTÃO "VOLTAR" ÉPICO**:
+    - Clip-path hexagonal com pontas (estilo brasão medieval)
+    - Gradiente tricolor (#ffd700 → #d4af37 → #8b6914)
+    - Ornamentos (◆) nas laterais
+    - Text-transform uppercase + letter-spacing (3px)
+    - Múltiplas sombras (externa, interna, brilho)
+    - Hover com mudança de gradiente e elevação 6px
+    - Efeito active com compressão sutil
+  - **🎭 ANIMAÇÕES APRIMORADAS**:
+    - fadeInDown com translateY(-50px) mais dramático
+    - fadeInUp com translateY(50px) sincronizado
+    - pulse com scale animation para "Em breve"
+    - Transições suaves com cubic-bezier personalizado
+    - Delays escalonados para entrada sequencial
+  - **📱 RESPONSIVIDADE MEDIEVAL**:
+    - 3 breakpoints: 768px, 480px e mobile
+    - Ajustes proporcionais de todos os elementos
+    - Ornamentos simplificados em telas menores
+    - Manutenção da identidade visual em todas as resoluções
+  - **🎨 DETALHES VISUAIS**:
+    - Textura de fundo com linhas horizontais repetidas
+    - Gradiente radial no topo (efeito de iluminação)
+    - Todas as cores ajustadas para paleta medieval
+    - Text-shadows múltiplos para profundidade
+    - Box-shadows complexos em camadas
+    - Transições suaves (0.4s cubic-bezier)
+  - **Versões atualizadas**: @version, @plugindesc, @help e registro do agente
+  - **Backup criado**: `AS_1.4_PatchNotesScreen_Agent - v1.0.2.js`
+
+### Entrada #2 - v1.0.2
+- **Data:** 2025-10-18
+- **Autor:** Necromante96Official & GitHub Copilot
+- **Arquivo(s) afetado(s):**
+  - `js/plugins/AS_1.4_PatchNotesScreen_Agent.js` (atualizado para v1.0.2)
+- **Ação:** Redesign visual da tela de patch notes
+- **Detalhes:**
+  - **Melhorias visuais e layout**:
+    - Título aumentado de 48px para 56px com melhor legibilidade
+    - Subtítulo aumentado de 20px para 22px
+    - Cards de versão com bordas mais destacadas (hover melhorado)
+    - Fontes dos itens aumentadas de 16px para 17px
+    - Badges de categoria maiores (8px/20px → padding otimizado)
+    - Resumos com fonte 17px e estilo itálico para destaque
+    - Header flexível com gap de 15px e quebra de linha responsiva
+  - **Espaçamento otimizado**:
+    - Padding inferior aumentado de 40px para 120px
+    - Evita sobreposição do conteúdo com botão "Voltar"
+    - Margem entre cards mantida em 30px
+    - Lista de mudanças com espaçamento de 10px entre itens
+  - **Botão "Voltar" aprimorado**:
+    - Tamanho da fonte aumentado de 20px para 22px
+    - Padding aumentado de 15px/40px para 16px/45px
+    - Borda aumentada de 2px para 3px
+    - Hover com escala maior (1.05 → 1.08) e elevação de 4px
+    - Sombra mais intensa (20px/0.5 → 25px/0.6)
+  - **Animações melhoradas**:
+    - FadeInDown com translateY(-40px) para mais dramatismo
+    - FadeInUp com translateY(40px) sincronizado
+    - Animação pulse para mensagem "Em breve"
+    - Transições mais suaves em todos os elementos
+  - **Responsividade aprimorada**:
+    - Título responsivo: 56px → 40px mobile
+    - Subtítulo responsivo: 22px → 18px mobile
+    - Botão responsivo: 22px → 19px mobile
+    - Padding ajustado para mobile: 40px/20px → 30px/15px
+  - **Hierarquia visual clara**:
+    - Títulos com font-weight bold
+    - Categorias com indicadores circulares de 24px
+    - Setas de lista aumentadas para 20px
+    - Letter-spacing de 2px no título principal
+  - **Versões atualizadas**: @version, @plugindesc, @help e registro do agente
+  - **Backup criado**: `AS_1.4_PatchNotesScreen_Agent - v1.0.1.js`
 
 ### Entrada #1 - v1.0.0
 - **Data:** 2025-10-18
@@ -63,13 +191,14 @@
 
 ## Metadados
 - **Status:** ✅ Produção - Estável
-- **Última Atualização:** 2025-10-18 (v1.0.0)
+- **Última Atualização:** 2025-10-18 (v1.0.3)
 - **Problemas Conhecidos:** Nenhum
 - **Próximas Atualizações Planejadas:**
   - Sistema de filtros por categoria (botões interativos)
+  - Sidebar lateral com lista de versões
   - Busca/pesquisa de versões específicas
   - Exportação de changelog completo
-  - Animações mais elaboradas entre transições
+  - Animações de transição entre versões
   - Suporte para imagens nos patch notes
   - Sistema de favoritos/destaques
 

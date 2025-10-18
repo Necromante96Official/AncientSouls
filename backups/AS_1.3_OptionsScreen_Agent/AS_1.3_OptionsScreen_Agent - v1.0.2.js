@@ -3,11 +3,11 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc [v1.0.1] Tela de Opções Personalizada - Ancient Souls
+ * @plugindesc [v1.0.2] Tela de Opções Personalizada - Ancient Souls
  * @author 
  *   Necromante96Official & GitHub Copilot
  * @url https://github.com/Necromante96Official/AncientSouls
- * @version 1.0.1
+ * @version 1.0.2
  * @orderAfter AS_1.2_TitleScreenEffects_Agent
  *
  * @param EnableCustomOptions
@@ -35,7 +35,7 @@
  * @desc Mostra a imagem de fundo (background.png) com overlay escuro.
  *
  * @help
- * AS_1.3_OptionsScreen_Agent [v1.0.1]
+ * AS_1.3_OptionsScreen_Agent [v1.0.2]
  * 
  * ============================================================================
  * Descrição:
@@ -778,7 +778,7 @@ AS.OptionsScreen = AS.OptionsScreen || {};
     
     AS.PluginManager.register('AS_1.3_OptionsScreen', {
         name: 'Options Screen Manager',
-        version: '1.0.1',
+        version: '1.0.2',
         author: 'Necromante96Official & GitHub Copilot',
         description: 'Gerenciador da tela de opções personalizada',
         dependencies: ['AS_0.0_PluginManager'],

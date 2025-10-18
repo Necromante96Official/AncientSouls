@@ -3,11 +3,11 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc [v1.1.0] Gerenciador da Tela de Título - Ancient Souls
+ * @plugindesc [v1.0.9] Gerenciador da Tela de Título - Ancient Souls
  * @author 
  *   Necromante96Official & GitHub Copilot
  * @url https://github.com/Necromante96Official/AncientSouls
- * @version 1.1.0
+ * @version 1.0.9
  * @orderAfter AS_0.0_PluginManager_Agent
  * @orderBefore AS_1.1_TitleScreenUI_Agent
  *
@@ -42,7 +42,7 @@
  * @desc Desativa a música de fundo da tela de título.
  *
  * @help
- * AS_1.0_TitleScreen_Agent [v1.1.0]
+ * AS_1.0_TitleScreen_Agent [v1.0.9]
  * 
  * ============================================================================
  * Descrição:
@@ -448,13 +448,13 @@ AS.TitleScreen = AS.TitleScreen || {};
                 this._logoSprite.scale.x = logoScale;
                 this._logoSprite.scale.y = logoScale;
                 
-                // Posiciona o logo EXATAMENTE no centro do círculo/explosão conforme screenshot
-                // Baseado na imagem de referência: logo fica em ~30% da altura (dentro do círculo)
+                // Posiciona o logo EXATAMENTE no centro do círculo/explosão do background
+                // Analisando a imagem de referência: círculo está centralizado na tela
                 const scaledWidth = logoImg.width * logoScale;
                 const scaledHeight = logoImg.height * logoScale;
                 this._logoSprite.x = (Graphics.width - scaledWidth) / 2;
-                // Posicionamento em 30% da altura pra ficar dentro do círculo dourado
-                this._logoSprite.y = Graphics.height * 0.30 - (scaledHeight / 2);
+                // Centro perfeito do círculo (50% vertical, perfeitamente centralizado)
+                this._logoSprite.y = (Graphics.height - scaledHeight) / 2;
                 
                 this.addChild(this._logoSprite);
                 this.log('✓ Logo carregado e posicionado no círculo da explosão');
@@ -607,7 +607,7 @@ AS.TitleScreen = AS.TitleScreen || {};
     
     AS.PluginManager.register('AS_1.0_TitleScreen', {
         name: 'TitleScreen Manager',
-        version: '1.1.0',
+        version: '1.0.9',
         author: 'Necromante96Official & GitHub Copilot',
         description: 'Gerenciador principal da tela de título customizada',
         dependencies: ['AS_0.0_PluginManager'],

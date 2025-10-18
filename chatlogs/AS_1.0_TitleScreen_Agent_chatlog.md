@@ -2,13 +2,38 @@
 
 ## Informações do Agente
 - **Nome:** AS_1.0_TitleScreen_Agent
-- **Versão Atual:** 1.0.7 ← ATUALIZADO!
+- **Versão Atual:** 1.0.9 ← ATUALIZADO!
 - **Autor:** Necromante96Official & GitHub Copilot
 - **Descrição:** Gerenciador da Tela de Título - Ancient Souls
 
 ---
 
 ## Histórico de Alterações
+
+### Entrada #6 - v1.0.9 (ATUAL)
+- **Data:** 2025-10-18
+- **Autor:** Necromante96Official & GitHub Copilot
+- **Arquivo(s) afetado(s):**
+  - `js/plugins/AS_1.0_TitleScreen_Agent.js` (atualizado para v1.0.9)
+- **Ação:** Integração com sistema de Patch Notes e ajustes finais de logo
+- **Detalhes:**
+  - **Integração com AS_1.4_PatchNotesScreen**: Handler `openPatchNotes()` adicionado
+  - **Logo centralizada perfeitamente**: Posicionamento em 50% vertical (centro exato do círculo)
+  - **Navegação estendida**: Menu agora suporta opção 'updates'
+  - **Cleanup aprimorado**: `cleanupHTMLElements()` chamado antes de abrir Patch Notes
+  - **Validação de Scene**: Verificação se `Scene_PatchNotes` existe antes de navegar
+  - **Backup criado**: `AS_1.0_TitleScreen_Agent - v1.0.9.js`
+
+### Entrada #5 - v1.0.8
+- **Data:** 2025-10-18
+- **Autor:** Necromante96Official & GitHub Copilot
+- **Arquivo(s) afetado(s):**
+  - `js/plugins/AS_1.0_TitleScreen_Agent.js` (atualizado para v1.0.8)
+- **Ação:** Ajuste de posicionamento da logo
+- **Detalhes:**
+  - Logo ajustada para 35% da altura (mais próxima do círculo da explosão)
+  - Comentários atualizados para refletir alinhamento com explosão
+  - Logs aprimorados com mensagem específica sobre posicionamento
 
 ### Entrada #4 - v1.0.7 (FINAL)
 - **Data:** 2025-10-18
@@ -81,7 +106,7 @@
 
 ## Metadados
 - **Status:** ✅ Produção - Estável
-- **Última Atualização:** 2025-10-18 (v1.0.7)
+- **Última Atualização:** 2025-10-18 (v1.0.9)
 - **Problemas Conhecidos:** Nenhum
 - **Próximas Atualizações Planejadas:** 
   - Sistema de múltiplas telas de título temáticas
@@ -90,12 +115,13 @@
 
 ---
 
-## Configurações Atuais (v1.0.7)
+## Configurações Atuais (v1.0.9)
 - **Logo Scale:** 25% (0.25)
-- **Logo Position:** 35% da altura da tela, centralizado horizontalmente
+- **Logo Position:** 50% da altura da tela (centro perfeito), centralizado horizontalmente
 - **DisableTitleMusic:** false (música ATIVADA por padrão)
 - **Background:** background.png com escala responsiva
 - **Custom Background Path:** js/plugins/assets/resources/background.png
+- **Menu Options:** newGame, continue, options, updates, exit
 
 ---
 

@@ -157,3 +157,10 @@ AS_0.1_LogEnhancer.js:104 🛑 [ERROR] 15:58:46.439 • Scene_Title ❌ [AS_0.0_
 
 // 13°
 
+- Precisa ajustar a tela de titulo para ficar alinhada e centralizada na imagem #file:background.png como se ve na imagem, ela não está correta!
+- E como se ve na imagem da tela de opções, preciso que reescreva ela deixando visivel tudo, pois ainda não está.
+
+> Gostaria que colocasse centralizada e alinhada com a imagem #file:background.png bem aonde tem o circulo de fogo/explosão essa imagem aqui: #file:ancient-souls.png ela seria o 1° fragmento da logo do meu jogo, então não há mais necessidade de colocar o titulo escrito, pois a imagem já faz isso.
+
+// 14°
+

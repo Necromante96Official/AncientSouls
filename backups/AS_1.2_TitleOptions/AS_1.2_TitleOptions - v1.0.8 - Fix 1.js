@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.9 ☆ Ajustes visuais das opções com estética medieval fantástica
+ * @plugindesc v1.0.8 ☆ Ajustes visuais das opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -22,7 +22,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.0.9';
+    const MODULE_VERSION = '1.0.8';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -55,60 +55,33 @@ AS.TitleOptions = AS.TitleOptions || {};
     };
 
     const LAYOUT = {
-        minWidth: 600,
-        maxWidth: 720,
-        horizontalPadding: 64,
-        verticalPadding: 52,
-        headerHeight: 132,
-        extraWindowHeight: 36,
-        cornerRadius: 28
+        minWidth: 440,
+        maxWidth: 560,
+        horizontalPadding: 48,
+        verticalPadding: 36,
+        headerHeight: 96,
+        extraWindowHeight: 16
     };
 
     const COLORS = {
-        panelOuterTop: 'rgba(34, 22, 58, 0.96)',
-        panelOuterBottom: 'rgba(16, 8, 30, 0.97)',
-        panelStroke: 'rgba(255, 222, 182, 0.9)',
-        panelInnerStroke: 'rgba(255, 224, 190, 0.48)',
-        panelInnerFillTop: 'rgba(42, 26, 70, 0.98)',
-        panelInnerFillBottom: 'rgba(26, 16, 48, 0.95)',
-        headerTop: 'rgba(255, 232, 196, 0.95)',
-        headerBottom: 'rgba(112, 76, 148, 0.62)',
-        headerAccent: 'rgba(255, 214, 164, 0.65)',
-        headerShadow: 'rgba(12, 6, 24, 0.55)',
-        rowGradientStart: 'rgba(56, 36, 92, 0.96)',
-        rowGradientEnd: 'rgba(38, 24, 66, 0.94)',
-        rowAccent: 'rgba(255, 214, 156, 0.96)',
-        rowDivider: 'rgba(255, 214, 156, 0.4)',
-        rowStroke: 'rgba(12, 6, 18, 0.5)',
-        textPrimary: '#fdf6e6',
-        textSecondary: '#f7e5c8',
-        outlinePrimary: 'rgba(18, 8, 32, 0.94)',
-        outlineSecondary: 'rgba(12, 6, 26, 0.86)',
-        highlightFillTop: 'rgba(255, 224, 178, 0.55)',
-        highlightFillBottom: 'rgba(255, 194, 128, 0.28)',
-        highlightOutline: 'rgba(255, 236, 205, 0.6)',
-        backdropOuter: '#0d0718',
-        backdropMid: '#1a1030',
-        backdropInner: '#271b44',
-        backdropBorder: 'rgba(255, 222, 182, 0.32)'
+        panelGradientStart: 'rgba(84, 66, 116, 0.95)',
+        panelGradientEnd: 'rgba(46, 34, 80, 0.98)',
+        panelBorder: 'rgba(248, 222, 168, 0.88)',
+        panelInnerBorder: 'rgba(248, 222, 168, 0.45)',
+        panelFill: 'rgba(64, 48, 90, 0.62)',
+        headerHighlightTop: 'rgba(255, 240, 196, 0.32)',
+        headerHighlightBottom: 'rgba(48, 36, 74, 0.2)',
+        rowBackground: 'rgba(108, 86, 140, 0.78)',
+        rowLeftAccent: 'rgba(255, 229, 176, 0.68)',
+        rowDivider: 'rgba(255, 229, 176, 0.55)',
+        textPrimary: 'rgba(255, 247, 228, 1)',
+        textSecondary: 'rgba(255, 236, 210, 0.98)',
+        outlinePrimary: 'rgba(30, 20, 44, 0.88)',
+        outlineSecondary: 'rgba(36, 24, 48, 0.72)',
+        highlightFill: 'rgba(255, 229, 176, 0.4)'
     };
 
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-
-    function drawRoundedRect(ctx, x, y, width, height, radius) {
-        const r = Math.max(6, Math.min(radius, Math.min(width, height) / 2));
-        ctx.beginPath();
-        ctx.moveTo(x + r, y);
-        ctx.lineTo(x + width - r, y);
-        ctx.quadraticCurveTo(x + width, y, x + width, y + r);
-        ctx.lineTo(x + width, y + height - r);
-        ctx.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
-        ctx.lineTo(x + r, y + height);
-        ctx.quadraticCurveTo(x, y + height, x, y + height - r);
-        ctx.lineTo(x, y + r);
-        ctx.quadraticCurveTo(x, y, x + r, y);
-        ctx.closePath();
-    }
 
     function buildOptionsLayout(scene, rows, windowWidth) {
         const baseHeight = Scene_MenuBase.prototype.calcWindowHeight.call(scene, rows, true);
@@ -135,90 +108,48 @@ AS.TitleOptions = AS.TitleOptions || {};
         const width = bitmap.width;
         const height = bitmap.height;
         const ctx = bitmap.context;
-        const radius = LAYOUT.cornerRadius;
 
-        ctx.save();
-        ctx.shadowColor = 'rgba(8, 4, 16, 0.55)';
-        ctx.shadowBlur = 28;
-        ctx.shadowOffsetY = 18;
-        drawRoundedRect(ctx, 12, 20, width - 24, height - 32, radius + 8);
-        ctx.fillStyle = 'rgba(8, 4, 16, 0.35)';
-        ctx.fill();
-        ctx.restore();
+        const gradient = ctx.createLinearGradient(0, 0, width, height);
+        gradient.addColorStop(0, COLORS.panelGradientStart);
+        gradient.addColorStop(1, COLORS.panelGradientEnd);
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
 
-        ctx.save();
-        drawRoundedRect(ctx, 0, 0, width, height, radius);
-        const outerGradient = ctx.createLinearGradient(0, 0, 0, height);
-        outerGradient.addColorStop(0, COLORS.panelOuterTop);
-        outerGradient.addColorStop(1, COLORS.panelOuterBottom);
-        ctx.fillStyle = outerGradient;
-        ctx.fill();
+        ctx.fillStyle = COLORS.panelFill;
+        ctx.fillRect(12, 12, width - 24, height - 24);
+
         ctx.lineWidth = 2;
-        ctx.strokeStyle = COLORS.panelStroke;
-        ctx.stroke();
-        ctx.restore();
+        ctx.strokeStyle = COLORS.panelBorder;
+        ctx.strokeRect(1, 1, width - 2, height - 2);
 
-        ctx.save();
-        drawRoundedRect(ctx, 10, 14, width - 20, height - 28, radius - 6);
-        const innerGradient = ctx.createLinearGradient(0, 14, 0, height - 14);
-        innerGradient.addColorStop(0, COLORS.panelInnerFillTop);
-        innerGradient.addColorStop(1, COLORS.panelInnerFillBottom);
-        ctx.fillStyle = innerGradient;
-        ctx.fill();
-        ctx.lineWidth = 1.5;
-        ctx.strokeStyle = COLORS.panelInnerStroke;
-        ctx.stroke();
-        ctx.restore();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = COLORS.panelInnerBorder;
+        ctx.strokeRect(12, 12, width - 24, height - 24);
 
         const headerOffsetX = metrics.headerRect.x - metrics.frameRect.x;
         const headerOffsetY = metrics.headerRect.y - metrics.frameRect.y;
         const headerWidth = metrics.headerRect.width;
         const headerHeight = metrics.headerRect.height;
-        const headerRadius = Math.max(16, radius - 10);
-        ctx.save();
-        drawRoundedRect(ctx, headerOffsetX, headerOffsetY, headerWidth, headerHeight, headerRadius);
         const headerGradient = ctx.createLinearGradient(
             0,
             headerOffsetY,
             0,
             headerOffsetY + headerHeight
         );
-        headerGradient.addColorStop(0, COLORS.headerTop);
-        headerGradient.addColorStop(1, COLORS.headerBottom);
+        headerGradient.addColorStop(0, COLORS.headerHighlightTop);
+        headerGradient.addColorStop(1, COLORS.headerHighlightBottom);
         ctx.fillStyle = headerGradient;
-        ctx.fill();
-        ctx.globalAlpha = 0.85;
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = COLORS.headerAccent;
-        ctx.stroke();
-        ctx.restore();
-
-        ctx.save();
-        ctx.strokeStyle = COLORS.headerShadow;
-        ctx.lineWidth = 1;
-        const headerBottom = headerOffsetY + headerHeight;
-        ctx.beginPath();
-        ctx.moveTo(headerOffsetX + 18, headerBottom + 0.5);
-        ctx.lineTo(headerOffsetX + headerWidth - 18, headerBottom + 0.5);
-        ctx.stroke();
-        ctx.restore();
+        ctx.fillRect(headerOffsetX, headerOffsetY, headerWidth, headerHeight);
 
         const contentOffsetX = metrics.windowRect.x - metrics.frameRect.x;
         const contentOffsetY = metrics.windowRect.y - metrics.frameRect.y;
-        ctx.save();
-        drawRoundedRect(
-            ctx,
+        ctx.strokeStyle = COLORS.rowDivider;
+        ctx.strokeRect(
             contentOffsetX,
             contentOffsetY,
             metrics.windowRect.width,
-            metrics.windowRect.height,
-            Math.max(14, radius - 8)
+            metrics.windowRect.height
         );
-        ctx.globalAlpha = 0.45;
-        ctx.strokeStyle = COLORS.rowDivider;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        ctx.restore();
 
         bitmap.baseTexture.update();
     }
@@ -227,18 +158,17 @@ AS.TitleOptions = AS.TitleOptions || {};
         bitmap.clear();
         const width = bitmap.width;
         const height = bitmap.height;
-        bitmap.gradientFillRect(0, 0, width, height, COLORS.headerTop, COLORS.headerBottom, true);
-        bitmap.gradientFillRect(0, height - 5, width, 5, COLORS.headerAccent, 'rgba(255, 214, 164, 0)', true);
+        bitmap.gradientFillRect(0, height - 4, width, 4, COLORS.rowDivider, 'rgba(218, 187, 115, 0)');
         bitmap.fontFace = 'Pixel Times';
-        bitmap.fontSize = 36;
+        bitmap.fontSize = 34;
         bitmap.outlineColor = COLORS.outlinePrimary;
         bitmap.outlineWidth = 4;
         bitmap.textColor = COLORS.textPrimary;
-        bitmap.drawText('Configurações', 0, 6, width, 40, 'center');
+        bitmap.drawText('Configurações', 0, 4, width, 36, 'center');
         bitmap.fontSize = 20;
         bitmap.outlineWidth = 2;
         bitmap.textColor = COLORS.textSecondary;
-        bitmap.drawText('Personalize áudio, controles e preferências gerais', 0, 48, width, 26, 'center');
+        bitmap.drawText('Personalize controles, áudio e preferências gerais', 0, 42, width, 26, 'center');
         bitmap.baseTexture.update();
     }
 
@@ -281,7 +211,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         Scene_Options.prototype.createBackground = function() {
             Scene_Options_createBackground.call(this);
             this._asBackdrop = new Sprite(new Bitmap(Graphics.width, Graphics.height));
-            this._asBackdrop.opacity = 248;
+            this._asBackdrop.opacity = 208;
             renderOptionsBackdrop(this._asBackdrop.bitmap);
             this.addChild(this._asBackdrop);
         };
@@ -290,7 +220,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         Scene_Options.prototype.optionsWindowRect = function() {
             try {
                 const rows = Math.min(this.maxCommands(), this.maxVisibleCommands());
-                const computedWidth = clamp(Math.floor(Graphics.boxWidth * 0.62), LAYOUT.minWidth, LAYOUT.maxWidth);
+                const computedWidth = clamp(Math.floor(Graphics.boxWidth * 0.56), LAYOUT.minWidth, LAYOUT.maxWidth);
                 const metrics = buildOptionsLayout(this, rows, computedWidth);
                 this._asLayoutMetrics = metrics;
                 return metrics.windowRect;
@@ -321,8 +251,8 @@ AS.TitleOptions = AS.TitleOptions || {};
                 this._windowLayer.addChild(this._asOptionsHeader);
 
                 if (this._cancelButton) {
-                    this._cancelButton.x = frameRect.x + frameRect.width - this._cancelButton.width - 32;
-                    this._cancelButton.y = headerRect.y + 12;
+                    this._cancelButton.x = frameRect.x + frameRect.width - this._cancelButton.width - 24;
+                    this._cancelButton.y = headerRect.y + 8;
                 }
                 this._asDecorReady = true;
             } else {
@@ -343,30 +273,16 @@ AS.TitleOptions = AS.TitleOptions || {};
         const height = bitmap.height;
         const ctx = bitmap.context;
 
-        ctx.fillStyle = COLORS.backdropOuter;
+        const gradient = ctx.createLinearGradient(0, 0, width, height);
+        gradient.addColorStop(0, '#322a52');
+        gradient.addColorStop(0.65, '#3e3364');
+        gradient.addColorStop(1, '#2c2248');
+        ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, width, height);
 
-        const radial = ctx.createRadialGradient(
-            width / 2,
-            height / 2,
-            Math.min(width, height) * 0.12,
-            width / 2,
-            height / 2,
-            Math.max(width, height) * 0.72
-        );
-        radial.addColorStop(0, COLORS.backdropInner);
-        radial.addColorStop(0.55, COLORS.backdropMid);
-        radial.addColorStop(1, COLORS.backdropOuter);
-        ctx.globalAlpha = 0.96;
-        ctx.fillStyle = radial;
-        ctx.fillRect(0, 0, width, height);
-
-        ctx.globalAlpha = 1;
+        ctx.strokeStyle = 'rgba(248, 222, 168, 0.45)';
         ctx.lineWidth = 2;
-        ctx.strokeStyle = COLORS.backdropBorder;
         ctx.strokeRect(24, 24, width - 48, height - 48);
-        ctx.lineWidth = 1;
-        ctx.strokeRect(36, 36, width - 72, height - 72);
         bitmap.baseTexture.update();
     }
 
@@ -379,19 +295,19 @@ AS.TitleOptions = AS.TitleOptions || {};
         };
 
         Window_Options.prototype.standardPadding = function() {
-            return 28;
+            return 24;
         };
 
         Window_Options.prototype.itemPadding = function() {
-            return 14;
+            return 12;
         };
 
         Window_Options.prototype.lineHeight = function() {
-            return 52;
+            return 48;
         };
 
         Window_Options.prototype.spacing = function() {
-            return 14;
+            return 12;
         };
 
         Window_Options.prototype.itemHeight = function() {
@@ -402,50 +318,42 @@ AS.TitleOptions = AS.TitleOptions || {};
             const rect = this.itemLineRect(index);
             const text = this.commandName(index);
             const status = this.statusText(index);
-            const labelWidth = Math.floor(rect.width * 0.58);
+            const labelWidth = Math.floor(rect.width * 0.6);
             const statusWidth = rect.width - labelWidth;
 
             this.contents.clearRect(rect.x, rect.y, rect.width, rect.height);
-            this.contents.gradientFillRect(
-                rect.x,
-                rect.y,
-                rect.width,
-                rect.height,
-                COLORS.rowGradientStart,
-                COLORS.rowGradientEnd,
-                true
-            );
-            this.contents.fillRect(rect.x, rect.y, rect.width, 1, COLORS.rowStroke);
+            this.contents.fillRect(rect.x, rect.y, rect.width, rect.height, COLORS.rowBackground);
+            this.contents.fillRect(rect.x, rect.y, 3, rect.height, COLORS.rowLeftAccent);
             this.contents.fillRect(rect.x, rect.y + rect.height - 1, rect.width, 1, COLORS.rowDivider);
-            this.contents.fillRect(rect.x, rect.y, 4, rect.height, COLORS.rowAccent);
 
             this.resetFontSettings();
             this.contents.fontFace = 'Pixel Times';
             this.contents.fontSize = 28;
             this.changeTextColor(COLORS.textPrimary);
             this.changeOutlineColor(COLORS.outlinePrimary);
-            this.drawText(text, rect.x + 28, rect.y + 6, labelWidth - 12, 'left');
+            this.drawText(text, rect.x + 26, rect.y + 4, labelWidth, 'left');
 
             this.contents.fontSize = 24;
             this.changeTextColor(COLORS.textSecondary);
             this.changeOutlineColor(COLORS.outlineSecondary);
-            this.drawText(status, rect.x + labelWidth - 6, rect.y + 6, statusWidth + 6, 'right');
+            this.drawText(status, rect.x + labelWidth - 8, rect.y + 4, statusWidth + 8, 'right');
         };
 
         const Window_Options_updateCursor = Window_Options.prototype._updateCursor;
         Window_Options.prototype._updateCursor = function() {
             Window_Options_updateCursor.call(this);
+            const highlightColor = COLORS.highlightFill;
             const highlightBlendMode = (typeof PIXI !== 'undefined' && PIXI.BLEND_MODES && typeof PIXI.BLEND_MODES.ADD === 'number') ? PIXI.BLEND_MODES.ADD : 1;
-            const insetX = 6;
-            const insetY = 4;
+            const insetX = 4;
+            const insetY = 2;
             if (!this._asHighlighter) {
                 const baseIndex = this.index() >= 0 ? this.index() : (this.maxItems() > 0 ? 0 : -1);
                 const templateRect = baseIndex >= 0 ? this.itemRect(baseIndex) : null;
                 const initialWidth = (templateRect ? templateRect.width : this.innerWidth) - insetX * 2;
                 const initialHeight = this.itemHeight() - insetY * 2;
                 this._asHighlighter = new Sprite(new Bitmap(Math.max(1, initialWidth), Math.max(1, initialHeight)));
+                this._asHighlighter.bitmap.fillAll(highlightColor);
                 this._asHighlighter.blendMode = highlightBlendMode;
-                this._asHighlighter.alpha = 0.9;
                 this._asHighlighter.visible = false;
                 if (this._clientArea && this._clientArea.children) {
                     const contentsIndex = this._clientArea.children.indexOf(this._contentsSprite);
@@ -472,14 +380,7 @@ AS.TitleOptions = AS.TitleOptions || {};
                 bitmap.resize(newWidth, newHeight);
             }
             bitmap.clear();
-            bitmap.gradientFillRect(0, 0, newWidth, newHeight, COLORS.highlightFillTop, COLORS.highlightFillBottom, true);
-            bitmap.fillRect(0, 0, newWidth, 1, COLORS.highlightOutline);
-            bitmap.fillRect(0, newHeight - 1, newWidth, 1, COLORS.highlightOutline);
-            bitmap.fillRect(0, 0, 1, newHeight, COLORS.highlightOutline);
-            bitmap.fillRect(newWidth - 1, 0, 1, newHeight, COLORS.highlightOutline);
-            if (bitmap.baseTexture && typeof bitmap.baseTexture.update === 'function') {
-                bitmap.baseTexture.update();
-            }
+            bitmap.fillAll(highlightColor);
             this._asHighlighter.visible = true;
             this._asHighlighter.x = rect.x + insetX;
             this._asHighlighter.y = rect.y + insetY;

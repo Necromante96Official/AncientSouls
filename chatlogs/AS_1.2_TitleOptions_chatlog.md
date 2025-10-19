@@ -3,6 +3,23 @@
 ## [19/10/2025]
 **Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js
+**Ação:** Debug - Sistema completo de logging para identificar crash
+**Detalhes:** Implementado sistema extensivo de logs em todas as funções críticas:
+- Logs detalhados em cada etapa do Scene_Options.start (9 pontos de verificação)
+- Logs em bindControls para rastrear vinculação de cada controle
+- Logs em bindSlider, bindSelect, bindToggle para identificar elementos não encontrados
+- Warning logs quando elementos HTML não são localizados
+- Console.error para expor erro completo no DevTools
+- Sistema permite identificar exatamente onde o crash ocorre
+- Facilita debug e correção de problemas de inicialização
+**Versão:** v1.1.4 (anterior: v1.1.3)
+**Backup criado:** backups/AS_1.2_TitleOptions/AS_1.2_TitleOptions - v1.1.3.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js
 **Ação:** Correção - Crash ao abrir tela de opções (tratamento de erros robusto)
 **Detalhes:** Implementado sistema completo de tratamento de erros para prevenir crash:
 - Try-catch envolvendo Scene_Options.prototype.start para capturar erros de inicialização

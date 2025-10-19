@@ -80,3 +80,66 @@ DevTools failed to load SourceMap: Could not load content for chrome-extension:/
 
 // 8°
 
+> Conforme a imagem, ainda não está corretamente certo a tela de opções meu amigo.
+- Crie um agente que melhore os logs, para deixar mais organizado e inteligente, mostrando cada detalhes, e erros que tecnicamente não iriamos encontrar.
+
+// 9°
+
+> Veja a imagem e entenda que não aparece as opções corretamente na tela de opções! Tente corrigir isso.
+- Tente corrigir o erro dos logs se encontrar
+- Na tela inicial estava pensando em colocar essa imagem #file:background.png como o fundo, acho que ficaria muito bonito né?
+
+// 10°
+
+- As letras estão muito 'apagadas' na tela de opções como da pra se ver na imagem.
+- Além dos erros de log aqui:
+> DevTools failed to load SourceMap: Could not load content for chrome-extension://njgcanhfjdabfmnlmpmdedalocpafnhl/js/libs/pixi.js.map: System error: net::ERR_FILE_NOT_FOUND
+AS_0.1_LogEnhancer.js:104 🛑 [ERROR] 15:58:43.895 • Scene_Title ❌ [AS_0.0_PluginManager] Falha ao entregar evento titlescreen:ui:command: TypeError: scene.commandExit is not a function
+console.<computed> @ AS_0.1_LogEnhancer.js:104
+error @ AS_0.0_PluginManager.js:50
+(anonymous) @ AS_0.0_PluginManager.js:179
+publish @ AS_0.0_PluginManager.js:175
+publish @ AS_0.0_PluginManager.js:155
+onButtonClick @ AS_1.1_TitleScreenUI.js:157
+AS_0.1_LogEnhancer.js:104 🛑 [ERROR] 15:58:45.630 • Scene_Title ❌ [AS_0.0_PluginManager] Falha ao entregar evento titlescreen:ui:command: TypeError: scene.commandExit is not a function
+console.<computed> @ AS_0.1_LogEnhancer.js:104
+error @ AS_0.0_PluginManager.js:50
+(anonymous) @ AS_0.0_PluginManager.js:179
+publish @ AS_0.0_PluginManager.js:175
+publish @ AS_0.0_PluginManager.js:155
+onButtonClick @ AS_1.1_TitleScreenUI.js:157
+AS_0.1_LogEnhancer.js:104 🛑 [ERROR] 15:58:45.807 • Scene_Title ❌ [AS_0.0_PluginManager] Falha ao entregar evento titlescreen:ui:command: TypeError: scene.commandExit is not a function
+console.<computed> @ AS_0.1_LogEnhancer.js:104
+error @ AS_0.0_PluginManager.js:50
+(anonymous) @ AS_0.0_PluginManager.js:179
+publish @ AS_0.0_PluginManager.js:175
+publish @ AS_0.0_PluginManager.js:155
+onButtonClick @ AS_1.1_TitleScreenUI.js:157
+AS_0.1_LogEnhancer.js:104 🛑 [ERROR] 15:58:45.974 • Scene_Title ❌ [AS_0.0_PluginManager] Falha ao entregar evento titlescreen:ui:command: TypeError: scene.commandExit is not a function
+console.<computed> @ AS_0.1_LogEnhancer.js:104
+error @ AS_0.0_PluginManager.js:50
+(anonymous) @ AS_0.0_PluginManager.js:179
+publish @ AS_0.0_PluginManager.js:175
+publish @ AS_0.0_PluginManager.js:155
+onButtonClick @ AS_1.1_TitleScreenUI.js:157
+AS_0.1_LogEnhancer.js:104 🛑 [ERROR] 15:58:46.127 • Scene_Title ❌ [AS_0.0_PluginManager] Falha ao entregar evento titlescreen:ui:command: TypeError: scene.commandExit is not a function
+console.<computed> @ AS_0.1_LogEnhancer.js:104
+error @ AS_0.0_PluginManager.js:50
+(anonymous) @ AS_0.0_PluginManager.js:179
+publish @ AS_0.0_PluginManager.js:175
+publish @ AS_0.0_PluginManager.js:155
+onButtonClick @ AS_1.1_TitleScreenUI.js:157
+AS_0.1_LogEnhancer.js:104 🛑 [ERROR] 15:58:46.287 • Scene_Title ❌ [AS_0.0_PluginManager] Falha ao entregar evento titlescreen:ui:command: TypeError: scene.commandExit is not a function
+console.<computed> @ AS_0.1_LogEnhancer.js:104
+error @ AS_0.0_PluginManager.js:50
+(anonymous) @ AS_0.0_PluginManager.js:179
+publish @ AS_0.0_PluginManager.js:175
+publish @ AS_0.0_PluginManager.js:155
+onButtonClick @ AS_1.1_TitleScreenUI.js:157
+AS_0.1_LogEnhancer.js:104 🛑 [ERROR] 15:58:46.439 • Scene_Title ❌ [AS_0.0_PluginManager] Falha ao entregar evento titlescreen:ui:command: TypeError: scene.commandExit is not a function
+
+- Na tela de titulo, pode deixar os botões: Iniciar, Continuar, Opções e Sair na forma horizontal?
+- Pode também remover aquela ''background'' no fundo, não á da imagem que te mandei, a outra?
+
+// 11°
+

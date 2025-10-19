@@ -41,10 +41,9 @@
 .as-title__backdrop {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 20%, rgba(218, 187, 115, 0.24), transparent 60%),
-        linear-gradient(120deg, rgba(28, 24, 44, 0.9) 0%, rgba(22, 18, 34, 0.92) 60%, rgba(16, 12, 28, 0.95) 100%);
-    filter: blur(2px);
-    opacity: 0.75;
+    background: transparent;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .as-title__panel {
@@ -52,9 +51,9 @@
     background: var(--as-title-panel);
     border: 2px solid rgba(218, 187, 115, 0.75);
     border-radius: 12px;
-    padding: 48px 64px;
-    width: min(560px, calc(100vw - 96px));
-    max-width: 560px;
+    padding: 48px 72px;
+    width: min(720px, calc(100vw - 96px));
+    max-width: 720px;
     box-shadow: 0 18px 48px rgba(12, 8, 20, 0.65);
     backdrop-filter: blur(6px);
     display: flex;
@@ -99,8 +98,9 @@
 
 .as-title__commands {
     display: flex;
-    flex-direction: column;
-    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px 24px;
 }
 
 .as-title__commands button {
@@ -109,13 +109,14 @@
     color: var(--as-title-gold);
     border: 1px solid rgba(218, 187, 115, 0.4);
     border-radius: 8px;
-    padding: 14px 18px;
-    font-size: 1.25rem;
+    padding: 14px 24px;
+    font-size: 1.2rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
     transition: background 180ms ease, transform 180ms ease, border-color 180ms ease;
     font-family: 'Pixel Times', 'Times New Roman', serif;
+    min-width: 150px;
 }
 
 .as-title__commands button:hover,

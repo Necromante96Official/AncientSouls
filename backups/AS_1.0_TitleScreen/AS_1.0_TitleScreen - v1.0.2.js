@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.3 ☆ Redefine a cena de título com estética medieval fantástica
+ * @plugindesc v1.0.2 ☆ Redefine a cena de título com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @help
@@ -24,7 +24,7 @@ AS.TitleScreen = AS.TitleScreen || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.0_TitleScreen';
-    const MODULE_VERSION = '1.0.3';
+    const MODULE_VERSION = '1.0.2';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
     const BACKGROUND_FOLDER = 'js/plugins/assets/resources/';
     const BACKGROUND_FILENAME = 'background';
@@ -138,7 +138,22 @@ AS.TitleScreen = AS.TitleScreen || {};
         scene._asBackgroundImage.y = Graphics.height / 2;
         fitBackground(scene._asBackgroundImage, backgroundBitmap);
 
+        const color = new PIXI.Graphics();
+        color.beginFill(0x0f101c, 0.65);
+        color.drawRect(0, 0, Graphics.width, Graphics.height);
+        color.endFill();
+
+        scene._backgroundFilter = new PIXI.filters.BlurFilter(1.5);
+        color.filters = [scene._backgroundFilter];
+
+        scene._asColorOverlay = color;
+        scene._backgroundSprite = new Sprite(new Bitmap(Graphics.width, Graphics.height));
+
         scene.addChild(scene._asBackgroundImage);
+        scene.addChild(color);
+        scene.addChild(scene._backgroundSprite);
+        renderGradient(scene._backgroundSprite.bitmap);
+
         scene._foregroundOverlay = new Sprite(new Bitmap(Graphics.width, Graphics.height));
         scene.addChild(scene._foregroundOverlay);
         renderForegroundDecor(scene._foregroundOverlay.bitmap);
@@ -162,7 +177,35 @@ AS.TitleScreen = AS.TitleScreen || {};
             scene._foregroundOverlay.destroy({ children: true, texture: true });
             scene._foregroundOverlay = null;
         }
+        if (scene._backgroundSprite) {
+            scene.removeChild(scene._backgroundSprite);
+            scene._backgroundSprite.destroy({ children: true, texture: true });
+            scene._backgroundSprite = null;
+        }
+        if (scene._asColorOverlay) {
+            scene.removeChild(scene._asColorOverlay);
+            scene._asColorOverlay.destroy({ children: true, texture: true });
+            scene._asColorOverlay = null;
+        }
         scene._asDecorReady = false;
+    }
+
+    function renderGradient(bitmap) {
+        bitmap.clear();
+        const width = bitmap.width;
+        const height = bitmap.height;
+        const gradientColors = [
+            { stop: 0, color: 'rgba(26, 27, 46, 0.0)' },
+            { stop: 0.5, color: 'rgba(26, 23, 38, 0.35)' },
+            { stop: 1, color: 'rgba(22, 17, 32, 0.65)' }
+        ];
+
+        const ctx = bitmap.context;
+        const gradient = ctx.createLinearGradient(0, 0, 0, height);
+        gradientColors.forEach(stop => gradient.addColorStop(stop.stop, stop.color));
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
+        bitmap.baseTexture.update();
     }
 
     function fitBackground(sprite, bitmap) {
@@ -222,10 +265,7 @@ AS.TitleScreen = AS.TitleScreen || {};
                 break;
             case 'shutdown':
                 SoundManager.playOk();
-                AudioManager.fadeOutBgm(60);
-                AudioManager.fadeOutBgs(60);
-                AudioManager.fadeOutMe(60);
-                SceneManager.exit();
+                scene.commandExit();
                 break;
             default:
                 logger.warn(`Comando desconhecido recebido: ${command}`);

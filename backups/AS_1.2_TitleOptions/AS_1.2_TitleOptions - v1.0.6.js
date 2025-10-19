@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.7 ☆ Ajustes visuais das opções com estética medieval fantástica
+ * @plugindesc v1.0.6 ☆ Ajustes visuais das opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -22,7 +22,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.0.7';
+    const MODULE_VERSION = '1.0.6';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -64,21 +64,21 @@ AS.TitleOptions = AS.TitleOptions || {};
     };
 
     const COLORS = {
-        panelGradientStart: 'rgba(84, 66, 116, 0.95)',
-        panelGradientEnd: 'rgba(46, 34, 80, 0.98)',
-        panelBorder: 'rgba(248, 222, 168, 0.88)',
-        panelInnerBorder: 'rgba(248, 222, 168, 0.45)',
-        panelFill: 'rgba(64, 48, 90, 0.62)',
-        headerHighlightTop: 'rgba(255, 240, 196, 0.32)',
-        headerHighlightBottom: 'rgba(48, 36, 74, 0.2)',
-        rowBackground: 'rgba(108, 86, 140, 0.78)',
-        rowLeftAccent: 'rgba(255, 229, 176, 0.68)',
-        rowDivider: 'rgba(255, 229, 176, 0.55)',
-        textPrimary: 'rgba(255, 247, 228, 1)',
-        textSecondary: 'rgba(255, 236, 210, 0.98)',
-        outlinePrimary: 'rgba(30, 20, 44, 0.88)',
-        outlineSecondary: 'rgba(36, 24, 48, 0.72)',
-        highlightFill: 'rgba(255, 229, 176, 0.4)'
+        panelGradientStart: 'rgba(39, 30, 58, 0.92)',
+        panelGradientEnd: 'rgba(18, 12, 30, 0.96)',
+        panelBorder: 'rgba(218, 187, 115, 0.7)',
+        panelInnerBorder: 'rgba(218, 187, 115, 0.28)',
+        panelFill: 'rgba(20, 13, 36, 0.52)',
+        headerHighlightTop: 'rgba(218, 187, 115, 0.22)',
+        headerHighlightBottom: 'rgba(28, 20, 42, 0.0)',
+        rowBackground: 'rgba(41, 33, 63, 0.52)',
+        rowLeftAccent: 'rgba(218, 187, 115, 0.45)',
+        rowDivider: 'rgba(218, 187, 115, 0.28)',
+        textPrimary: 'rgba(243, 215, 150, 0.94)',
+        textSecondary: 'rgba(232, 220, 195, 0.92)',
+        outlinePrimary: 'rgba(8, 4, 18, 0.88)',
+        outlineSecondary: 'rgba(10, 6, 18, 0.66)',
+        highlightFill: 'rgba(218, 187, 115, 0.3)'
     };
 
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
@@ -211,7 +211,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         Scene_Options.prototype.createBackground = function() {
             Scene_Options_createBackground.call(this);
             this._asBackdrop = new Sprite(new Bitmap(Graphics.width, Graphics.height));
-            this._asBackdrop.opacity = 208;
+            this._asBackdrop.opacity = 220;
             renderOptionsBackdrop(this._asBackdrop.bitmap);
             this.addChild(this._asBackdrop);
         };
@@ -271,13 +271,13 @@ AS.TitleOptions = AS.TitleOptions || {};
         const ctx = bitmap.context;
 
         const gradient = ctx.createLinearGradient(0, 0, width, height);
-        gradient.addColorStop(0, '#322a52');
-        gradient.addColorStop(0.65, '#3e3364');
-        gradient.addColorStop(1, '#2c2248');
+        gradient.addColorStop(0, '#1a1b2e');
+        gradient.addColorStop(0.65, '#222038');
+        gradient.addColorStop(1, '#1a1428');
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, width, height);
 
-        ctx.strokeStyle = 'rgba(248, 222, 168, 0.45)';
+        ctx.strokeStyle = 'rgba(218, 187, 115, 0.3)';
         ctx.lineWidth = 2;
         ctx.strokeRect(24, 24, width - 48, height - 48);
         bitmap.baseTexture.update();

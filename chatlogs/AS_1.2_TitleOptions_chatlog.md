@@ -3,6 +3,16 @@
 ## [19/10/2025]
 **Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js
+**Ação:** Ajuste - Legibilidade do painel
+**Detalhes:** Reequilibrados gradientes, opacidades e tons tipográficos para
+aumentar contraste, evitando que opções pareçam "apagadas" ao usuário.
+**Versão:** v1.0.7 (anterior: v1.0.6)
+**Backup criado:** backups/AS_1.2_TitleOptions/AS_1.2_TitleOptions - v1.0.6.js
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js
 **Ação:** Redesign - Painel harmonizado
 **Detalhes:** Reestruturado o layout da Scene_Options com painel central alinhado
 à estética da tela de título, adicionando moldura dupla, cabeçalho informativo,

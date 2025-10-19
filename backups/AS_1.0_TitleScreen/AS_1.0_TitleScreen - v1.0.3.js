@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.4 ☆ Redefine a cena de título com estética medieval fantástica
+ * @plugindesc v1.0.3 ☆ Redefine a cena de título com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @help
@@ -24,7 +24,7 @@ AS.TitleScreen = AS.TitleScreen || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.0_TitleScreen';
-    const MODULE_VERSION = '1.0.4';
+    const MODULE_VERSION = '1.0.3';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
     const BACKGROUND_FOLDER = 'js/plugins/assets/resources/';
     const BACKGROUND_FILENAME = 'background';

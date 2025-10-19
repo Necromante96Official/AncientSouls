@@ -143,3 +143,17 @@ AS_0.1_LogEnhancer.js:104 🛑 [ERROR] 15:58:46.439 • Scene_Title ❌ [AS_0.0_
 
 // 11°
 
+- (C:\Users\lukas\AppData\Roaming\Code\User\workspaceStorage\vscode-chat-images\image-1760901494914.png) Poderia remover aquele fundo roxo que está na imagem e o contorno em 'traços' no #file:background.png pode favor? Deixando somente o nome do jogo e os botões?
+- (C:\Users\lukas\AppData\Roaming\Code\User\workspaceStorage\vscode-chat-images\image-1760901576530.png) Reescreva toda essa tela de opções para algo mais moderno, dinamico e animado, voltado ao estilo fantasia medieval?
+- Poderia tambem aplicar esse mesmo estilo na tela de titulo?
+
+// 12°
+
+- Não sei se você entendeu realmente todo o arquivo #file:README.md , mas quando eu falo sobre as pastas #file:css e #file:html é realmente para colocar esses arquivos dos plugins lá dentro, para não precisar colocar nos proprios plugins sabe? Ou seja, essas pastas são voltadas apenas para isso os plugin são sincronizados para usar esses arquivos dentro dessas pastas.
+- Então se passo precisar ajustar os plugins para remover algum HTML ou CSS deles e criar eles separadamente nessas pastas, faça isso meu amigo!
+
+> Outra coisa importante que vejo que está fazendo errado, a questão dos backups! Não está fazendo certo, tive que criar backup manualmente, apartir de agora foque nas coisas que realmente precisa fazer!
+> Novamente eu peço! FAÇA BACKUP ANTES DE ATUALIZAR QUALQUER PLUGIN!!!!
+
+// 13°
+

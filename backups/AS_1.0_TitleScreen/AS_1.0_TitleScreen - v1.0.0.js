@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.1 ☆ Redefine a cena de título com estética medieval fantástica
+ * @plugindesc v1.0.0 ☆ Redefine a cena de título com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @help
@@ -24,7 +24,7 @@ AS.TitleScreen = AS.TitleScreen || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.0_TitleScreen';
-    const MODULE_VERSION = '1.0.1';
+    const MODULE_VERSION = '1.0.0';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -185,8 +185,8 @@ AS.TitleScreen = AS.TitleScreen || {};
         const gradient = ctx.createLinearGradient(0, 0, 0, height);
         gradientColors.forEach(stop => gradient.addColorStop(stop.stop, stop.color));
         ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, width, height);
-    bitmap.baseTexture.update();
+        ctx.fillRect(0, 0, width, height);
+        bitmap._setDirty();
     }
 
     function renderForegroundDecor(bitmap) {
@@ -198,9 +198,9 @@ AS.TitleScreen = AS.TitleScreen || {};
         const margin = 28;
         const offset = 14;
 
-    ctx.strokeRect(margin, margin, bitmap.width - margin * 2, bitmap.height - margin * 2);
-    ctx.strokeRect(margin + offset, margin + offset, bitmap.width - (margin + offset) * 2, bitmap.height - (margin + offset) * 2);
-    bitmap.baseTexture.update();
+        ctx.strokeRect(margin, margin, bitmap.width - margin * 2, bitmap.height - margin * 2);
+        ctx.strokeRect(margin + offset, margin + offset, bitmap.width - (margin + offset) * 2, bitmap.height - (margin + offset) * 2);
+        bitmap._setDirty();
     }
 
     function executeCommand(command) {

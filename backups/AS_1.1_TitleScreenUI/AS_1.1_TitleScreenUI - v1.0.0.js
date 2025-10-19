@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.2 ☆ Interface HTML da tela de título (layout medieval fantástico)
+ * @plugindesc v1.0.0 ☆ Interface HTML da tela de título (layout medieval fantástico)
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.0_TitleScreen
  * @help
@@ -22,7 +22,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.1_TitleScreenUI';
-    const MODULE_VERSION = '1.0.2';
+    const MODULE_VERSION = '1.0.0';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {

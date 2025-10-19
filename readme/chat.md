@@ -15,3 +15,16 @@
 - A fonte geral de todo o meu jogo é pixel-times.ttf que é a fonte que coloquei no banco de dados do RPG Maker MZ.
 
 > Peço que crie tudo com maestria, seguindo as instruções sempre do arquivo #file:README.md, obrigado pelo ajuda e conto com seu potencial para fazermos tudo dar certo!
+
+// 3°
+
+> Muito obrigado pela sua dedicação! Precisamos consertar alguns erros. (Não esqueça jamais de seguir as intruções do arquivo #file:README.md )
+
+- Com base nessa imagem (C:\Users\lukas\AppData\Roaming\Code\User\workspaceStorage\vscode-chat-images\image-1760892833689.png) não está nada centralizado.
+- Com base nesse log #file:njgcanhfjdabfmnlmpmdedalocpafnhl-1760892744873.log tente corrigir os erros!
+
+// 4°
+
+> Obrigado por tentar consertar os erros anteriores, mas ainda existem alguns para corrigir. Está nesse log #file:njgcanhfjdabfmnlmpmdedalocpafnhl-1760893788260.log 
+
+- Com base na imagem (C:\Users\lukas\AppData\Roaming\Code\User\workspaceStorage\vscode-chat-images\image-1760893852940.png) a tem lugares que tu não aplicou corretamente a fonte pixel times.

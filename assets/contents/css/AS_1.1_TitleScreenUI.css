@@ -11,18 +11,26 @@
     --as-title-panel: rgba(20, 13, 36, 0.72);
 }
 
+.as-title__panel,
+.as-title__panel * {
+    font-family: 'Pixel Times', 'Times New Roman', serif;
+}
+
 #as-title-root {
     position: fixed;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
     pointer-events: none;
     opacity: 0;
     transition: opacity 420ms ease-in-out;
     z-index: 9999;
     font-family: 'Pixel Times', 'Times New Roman', serif;
     color: var(--as-title-gold);
+    box-sizing: border-box;
 }
 
 #as-title-root.as-title--visible {
@@ -45,7 +53,7 @@
     border: 2px solid rgba(218, 187, 115, 0.75);
     border-radius: 12px;
     padding: 48px 64px;
-    min-width: 480px;
+    width: min(560px, calc(100vw - 96px));
     max-width: 560px;
     box-shadow: 0 18px 48px rgba(12, 8, 20, 0.65);
     backdrop-filter: blur(6px);
@@ -78,6 +86,7 @@
     font-size: 1.1rem;
     color: rgba(218, 187, 115, 0.7);
     text-transform: uppercase;
+    font-family: 'Pixel Times', 'Times New Roman', serif;
 }
 
 .as-title__headline {
@@ -85,6 +94,7 @@
     font-size: 3.8rem;
     letter-spacing: 6px;
     text-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+    font-family: 'Pixel Times', 'Times New Roman', serif;
 }
 
 .as-title__commands {
@@ -105,6 +115,7 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: background 180ms ease, transform 180ms ease, border-color 180ms ease;
+    font-family: 'Pixel Times', 'Times New Roman', serif;
 }
 
 .as-title__commands button:hover,
@@ -125,4 +136,5 @@
     font-size: 0.9rem;
     color: rgba(218, 187, 115, 0.55);
     letter-spacing: 1.5px;
+    font-family: 'Pixel Times', 'Times New Roman', serif;
 }

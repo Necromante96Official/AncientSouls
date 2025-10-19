@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.2 ☆ Ajustes visuais das opções com estética medieval fantástica
+ * @plugindesc v1.0.0 ☆ Ajustes visuais das opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -22,7 +22,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.0.2';
+    const MODULE_VERSION = '1.0.0';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -102,7 +102,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         ctx.strokeStyle = 'rgba(218, 187, 115, 0.3)';
         ctx.lineWidth = 2;
         ctx.strokeRect(24, 24, width - 48, height - 48);
-        bitmap.baseTexture.update();
+        bitmap._setDirty();
     }
 
     function applyWindowHooks() {
@@ -135,10 +135,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         Window_Options.prototype._updateCursor = function() {
             Window_Options_updateCursor.call(this);
             if (!this._asHighlighter) {
-                const baseIndex = this.index() >= 0 ? this.index() : (this.maxItems() > 0 ? 0 : -1);
-                const templateRect = baseIndex >= 0 ? this.itemRect(baseIndex) : null;
-                const initialWidth = templateRect ? templateRect.width : this.innerWidth;
-                this._asHighlighter = new Sprite(new Bitmap(Math.max(1, initialWidth), this.itemHeight()));
+                this._asHighlighter = new Sprite(new Bitmap(this.innerWidth, this.itemHeight()));
                 this._asHighlighter.bitmap.fillAll('rgba(218, 187, 115, 0.18)');
                 this._asHighlighter.blendMode = Graphics.BLEND_ADD;
                 this._windowContentsSprite.addChildAt(this._asHighlighter, 0);

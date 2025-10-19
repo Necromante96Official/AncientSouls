@@ -1,0 +1,118 @@
+<div id="as-options-root" class="as-options" aria-hidden="true">
+    <div class="as-options__backdrop"></div>
+    <div class="as-options__container">
+        <header class="as-options__header">
+            <h1 class="as-options__title">Configurações</h1>
+            <p class="as-options__subtitle">Personalize sua experiência</p>
+        </header>
+        
+        <div class="as-options__content">
+            <div class="as-options__tabs">
+                <button class="as-options__tab as-options__tab--active" data-tab="audio">
+                    <span class="as-options__tab-icon">🎵</span>
+                    <span class="as-options__tab-label">Áudio</span>
+                </button>
+                <button class="as-options__tab" data-tab="gameplay">
+                    <span class="as-options__tab-icon">⚔️</span>
+                    <span class="as-options__tab-label">Jogabilidade</span>
+                </button>
+                <button class="as-options__tab" data-tab="display">
+                    <span class="as-options__tab-icon">🖥️</span>
+                    <span class="as-options__tab-label">Visual</span>
+                </button>
+            </div>
+
+            <div class="as-options__panels">
+                <div class="as-options__panel as-options__panel--active" data-panel="audio">
+                    <div class="as-options__section">
+                        <div class="as-options__option">
+                            <label class="as-options__label">Volume Geral</label>
+                            <div class="as-options__slider-container">
+                                <input type="range" class="as-options__slider" id="masterVolume" min="0" max="100" value="80" />
+                                <span class="as-options__value" id="masterVolumeValue">80%</span>
+                            </div>
+                        </div>
+                        <div class="as-options__option">
+                            <label class="as-options__label">Volume da Música</label>
+                            <div class="as-options__slider-container">
+                                <input type="range" class="as-options__slider" id="bgmVolume" min="0" max="100" value="90" />
+                                <span class="as-options__value" id="bgmVolumeValue">90%</span>
+                            </div>
+                        </div>
+                        <div class="as-options__option">
+                            <label class="as-options__label">Volume dos Efeitos</label>
+                            <div class="as-options__slider-container">
+                                <input type="range" class="as-options__slider" id="seVolume" min="0" max="100" value="80" />
+                                <span class="as-options__value" id="seVolumeValue">80%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-options__panel" data-panel="gameplay">
+                    <div class="as-options__section">
+                        <div class="as-options__option">
+                            <label class="as-options__label">Velocidade de Mensagem</label>
+                            <div class="as-options__select-container">
+                                <select class="as-options__select" id="messageSpeed">
+                                    <option value="slow">Lenta</option>
+                                    <option value="normal" selected>Normal</option>
+                                    <option value="fast">Rápida</option>
+                                    <option value="instant">Instantânea</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="as-options__option">
+                            <label class="as-options__label">Modo de Batalha</label>
+                            <div class="as-options__select-container">
+                                <select class="as-options__select" id="battleMode">
+                                    <option value="active" selected>Ativo</option>
+                                    <option value="wait">Espera</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="as-options__option as-options__option--toggle">
+                            <label class="as-options__label">Habilitar Dash Automático</label>
+                            <label class="as-options__toggle">
+                                <input type="checkbox" id="alwaysDash" checked />
+                                <span class="as-options__toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-options__panel" data-panel="display">
+                    <div class="as-options__section">
+                        <div class="as-options__option as-options__option--toggle">
+                            <label class="as-options__label">Tela Cheia</label>
+                            <label class="as-options__toggle">
+                                <input type="checkbox" id="fullscreen" />
+                                <span class="as-options__toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="as-options__option">
+                            <label class="as-options__label">Qualidade dos Efeitos</label>
+                            <div class="as-options__select-container">
+                                <select class="as-options__select" id="effectQuality">
+                                    <option value="low">Baixa</option>
+                                    <option value="medium" selected>Média</option>
+                                    <option value="high">Alta</option>
+                                    <option value="ultra">Ultra</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="as-options__footer">
+            <button class="as-options__button as-options__button--secondary" id="cancelButton">
+                Cancelar
+            </button>
+            <button class="as-options__button as-options__button--primary" id="applyButton">
+                Aplicar
+            </button>
+        </footer>
+    </div>
+</div>

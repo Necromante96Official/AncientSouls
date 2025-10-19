@@ -1,3 +1,5 @@
+- PEDIDOS FEITOS AO CHAT: ADIÇÕES, ERROS, E MUITO MAIS!
+
 // 1°
 
 > Olá, boa tarde. Preciso que me ajude a criar plugins para RPG Maker MZ, cada um vai ser responsavel por alguma melhoria, adição ou implementação do meu jogo chamado Ancient Souls.
@@ -163,4 +165,11 @@ AS_0.1_LogEnhancer.js:104 🛑 [ERROR] 15:58:46.439 • Scene_Title ❌ [AS_0.0_
 > Gostaria que colocasse centralizada e alinhada com a imagem #file:background.png bem aonde tem o circulo de fogo/explosão essa imagem aqui: #file:ancient-souls.png ela seria o 1° fragmento da logo do meu jogo, então não há mais necessidade de colocar o titulo escrito, pois a imagem já faz isso.
 
 // 14°
+
+- A tela de titulo precisa ser exatamente dessa forma: C:\Users\lukas\OneDrive\Imagens\Screenshots\Captura de tela 2025-10-18 131355.png
+- E em forma horizontal coloque os botões abaixo dsa logo bem centralizada com ela.
+- Remova toda o layout da tela de titulo para a forma que eu estou pedindo!
+- Tela de opções precisa rescrever ela do zero, está muito feia, foque nas telas titulos e opçoes para serem bem estilo moderno, dinamico e animado, mas voltado ao medieval fantasia.
+
+// 15°
 

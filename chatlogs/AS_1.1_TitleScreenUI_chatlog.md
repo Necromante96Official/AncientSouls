@@ -3,6 +3,24 @@
 ## [19/10/2025]
 **Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js, assets/contents/css/AS_1.1_TitleScreenUI.css, assets/contents/html/AS_1.1_TitleScreenUI.html
+**Ação:** Reescrita - Layout limpo centralizado
+**Detalhes:** Reescrita completa da tela de título conforme solicitação do usuário:
+- Removido painel com fundo roxo e bordas
+- Logo ancient-souls.png centralizada com animação de flutuação
+- Botões em layout horizontal abaixo da logo (Iniciar, Continuar, Opções, Sair)
+- Efeito de brilho ember (laranja/fogo) ao redor da logo
+- Animações modernas e transições suaves em todos os botões
+- Design minimalista e limpo focado na logo e background.png
+- Responsivo para mobile (botões verticais em telas pequenas)
+- Mantida navegação por teclado e acessibilidade
+**Versão:** v1.0.6 (anterior: v1.0.5)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.0.5.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js, assets/contents/css/AS_1.1_TitleScreenUI.css, assets/contents/html/AS_1.1_TitleScreenUI.html
 **Ação:** Ajuste - Comandos horizontais
 **Detalhes:** Reformatado o painel para acomodar botões alinhados na horizontal,
 com suporte a setas esquerda/direita, remoção do overlay adicional e renomeação

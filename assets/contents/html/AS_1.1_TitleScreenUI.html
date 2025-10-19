@@ -1,20 +1,26 @@
 <div id="as-title-root" class="as-title" aria-hidden="true">
-    <main class="as-title__panel" role="menu">
-        <p class="as-title__tagline">Um conto de espadas e almas</p>
-        <img
-            class="as-title__logo"
-            src="js/plugins/assets/resources/ancient-souls.png"
-            alt="Ancient Souls"
-            draggable="false"
-        />
-        <nav class="as-title__commands" aria-label="Menu principal">
-            <button type="button" data-command="newGame">Iniciar</button>
-            <button type="button" data-command="continue">Continuar</button>
-            <button type="button" data-command="options">Configurações</button>
-            <button type="button" data-command="shutdown">Sair</button>
+    <div class="as-title__container">
+        <div class="as-title__logo-section">
+            <img
+                class="as-title__logo"
+                src="js/plugins/assets/resources/ancient-souls.png"
+                alt="Ancient Souls"
+                draggable="false"
+            />
+        </div>
+        <nav class="as-title__commands" aria-label="Menu principal" role="menu">
+            <button type="button" class="as-title__button" data-command="newGame">
+                <span class="as-title__button-text">Iniciar</span>
+            </button>
+            <button type="button" class="as-title__button" data-command="continue">
+                <span class="as-title__button-text">Continuar</span>
+            </button>
+            <button type="button" class="as-title__button" data-command="options">
+                <span class="as-title__button-text">Opções</span>
+            </button>
+            <button type="button" class="as-title__button" data-command="shutdown">
+                <span class="as-title__button-text">Sair</span>
+            </button>
         </nav>
-        <footer class="as-title__footer">
-            <p>© 2025 Ancient Souls Project</p>
-        </footer>
-    </main>
+    </div>
 </div>

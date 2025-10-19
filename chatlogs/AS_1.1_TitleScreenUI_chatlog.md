@@ -2,6 +2,23 @@
 
 ## [19/10/2025]
 **Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js, assets/contents/css/AS_1.1_TitleScreenUI.css
+**Ação:** Adição - Parâmetros de customização do logo
+**Detalhes:** Implementados parâmetros de plugin para ajustar posicionamento e escala do logo Ancient Souls:
+- logoOffsetX: Deslocamento horizontal (-500 a 500px)
+- logoOffsetY: Deslocamento vertical (-500 a 500px)
+- logoScale: Escala do logo (0.1 a 5.0x)
+- Removido fundo radial-gradient e animações (as-logo-float e as-logo-pulse)
+- Criada função applyLogoCustomization() para aplicar configurações
+- Logo mantém centralização base com ajustes via transform
+- Logs informativos mostram valores aplicados
+**Versão:** v1.0.7 (anterior: v1.0.6)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.0.6.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js, assets/contents/css/AS_1.1_TitleScreenUI.css, assets/contents/html/AS_1.1_TitleScreenUI.html
 **Ação:** Reescrita - Layout limpo centralizado
 **Detalhes:** Reescrita completa da tela de título conforme solicitação do usuário:

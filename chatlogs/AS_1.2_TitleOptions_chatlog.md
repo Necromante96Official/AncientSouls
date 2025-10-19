@@ -3,6 +3,21 @@
 ## [19/10/2025]
 **Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js
+**Ação:** Redesign - Painel harmonizado
+**Detalhes:** Reestruturado o layout da Scene_Options com painel central alinhado
+à estética da tela de título, adicionando moldura dupla, cabeçalho informativo,
+reposicionamento do botão de retorno e redefinição das linhas da Window_Options
+com tipografia ampliada, faixa lateral dourada e destaque translúcido
+reposicionado. Limpeza e métricas personalizadas garantem que o painel seja
+recriado e destruído sem vazamentos. Versão incrementada após validação visual.
+**Versão:** v1.0.5 (anterior: v1.0.4)
+**Backup criado:** backups/AS_1.2_TitleOptions/AS_1.2_TitleOptions - v1.0.4.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js
 **Ação:** Correção - Blend mode inválido
 **Detalhes:** Substituído o uso de `Graphics.BLEND_ADD` por `PIXI.BLEND_MODES.ADD`
 com fallback seguro para preservar o destaque translúcido sem provocar a

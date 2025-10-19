@@ -74,3 +74,9 @@ pixi.js:20905 Uncaught TypeError: Cannot read property 'length' of undefined
 DevTools failed to load SourceMap: Could not load content for chrome-extension://njgcanhfjdabfmnlmpmdedalocpafnhl/js/libs/pixi.js.map: System error: net::ERR_FILE_NOT_FOUND
 
 // 7°
+
+- Perfeito, agora os erros foram consertados.
+> Com base na imagem (C:\Users\lukas\AppData\Roaming\Code\User\workspaceStorage\vscode-chat-images\image-1760897886629.png) poderia melhorar esse layout da tela de opções? Para deixar igual ao layout da tela de titulo, essa tela que está na imagem é a padrão do RPG Maker MZ.
+
+// 8°
+

@@ -67,19 +67,10 @@ AS.TitleOptions = AS.TitleOptions || {};
     };
 
     function applySceneHooks() {
-        // Desabilitar botão de cancelar padrão do RPG Maker
-        const Scene_Options_needsCancelButton = Scene_Options.prototype.needsCancelButton;
-        Scene_Options.prototype.needsCancelButton = function() {
-            return false; // Desabilita o botão padrão
-        };
-
         const Scene_Options_create = Scene_Options.prototype.create;
         Scene_Options.prototype.create = function() {
             Scene_Options_create.call(this);
             this._asOptionsActive = false;
-            if (this._cancelButton) {
-                this._cancelButton.visible = false;
-            }
         };
 
         const Scene_Options_start = Scene_Options.prototype.start;
@@ -88,9 +79,6 @@ AS.TitleOptions = AS.TitleOptions || {};
             if (this._optionsWindow) {
                 this._optionsWindow.deactivate();
                 this._optionsWindow.hide();
-            }
-            if (this._cancelButton) {
-                this._cancelButton.visible = false;
             }
             injectStyles();
             injectMarkup();
@@ -221,11 +209,6 @@ AS.TitleOptions = AS.TitleOptions || {};
         const cancelButton = rootElement.querySelector('#cancelButton');
         if (cancelButton) {
             cancelButton.addEventListener('click', onCancel);
-        }
-
-        const closeButton = rootElement.querySelector('#closeButton');
-        if (closeButton) {
-            closeButton.addEventListener('click', onCancel);
         }
 
         attachKeyboardSupport();

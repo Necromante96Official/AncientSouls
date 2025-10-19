@@ -20,9 +20,12 @@
 
 #as-title-root {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     pointer-events: none;
     opacity: 0;
@@ -40,18 +43,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 48px;
+    justify-content: flex-end;
+    gap: 56px;
     z-index: 2;
     pointer-events: auto;
+    width: 100%;
+    min-height: 100%;
+    padding-bottom: 8vh;
 }
 
 .as-title__logo-section {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     animation: as-logo-float 4s ease-in-out infinite;
+    z-index: 3;
 }
 
 .as-title__logo-section::before {
@@ -71,7 +81,7 @@
 }
 
 .as-title__logo {
-    width: min(480px, 65vw);
+    width: min(450px, 55vw);
     max-width: 100%;
     height: auto;
     filter: drop-shadow(0 8px 24px rgba(255, 157, 66, 0.6))
@@ -88,9 +98,11 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-    width: auto;
+    width: 100%;
+    max-width: 920px;
     flex-wrap: wrap;
     padding: 0 32px;
+    margin: 0 auto;
 }
 
 .as-title__button {

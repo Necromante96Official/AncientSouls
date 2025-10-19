@@ -153,9 +153,9 @@ AS.OptionsScreen = AS.OptionsScreen || {};
             const style = document.createElement('style');
             style.id = 'as-options-styles';
             style.textContent = `
-                /* ═══════════════════════════════════════════════════════════════ */
+                /* ═════════════════════════════════════════════════════════ */
                 /* ANCIENT SOULS - TELA DE OPÇÕES v1.0.5                         */
-                /* ═══════════════════════════════════════════════════════════════ */
+                /* ═════════════════════════════════════════════════════════ */
                 
                 #as-options-container {
                     position: fixed;
@@ -178,7 +178,7 @@ AS.OptionsScreen = AS.OptionsScreen || {};
                     to { opacity: 1; }
                 }
                 
-                /* ═════════════════════ HEADER ════════════════════ */
+                /* ═════════════════════════════════ HEADER ═════════════════ */
                 .as-options-header {
                     position: absolute;
                     top: 40px;
@@ -212,7 +212,7 @@ AS.OptionsScreen = AS.OptionsScreen || {};
                     font-family: 'GameFont', sans-serif;
                 }
                 
-                /* ═════════════════════ PAINEL PRINCIPAL ════════════════════ */
+                /* ═════════════════════════ PAINEL PRINCIPAL ═══════════════ */
                 .as-options-panel {
                     background: linear-gradient(180deg, rgba(20, 20, 25, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%);
                     border: 3px solid ${AS.OptionsScreen.accentColor};
@@ -239,7 +239,7 @@ AS.OptionsScreen = AS.OptionsScreen || {};
                     }
                 }
                 
-                /* ═════════════════════ SISTEMA DE ABAS ════════════════════ */
+                /* ════════════════════════ SISTEMA DE ABAS ═════════════════ */
                 .as-tabs-container {
                     display: flex;
                     gap: 12px;
@@ -322,7 +322,7 @@ AS.OptionsScreen = AS.OptionsScreen || {};
                     50% { opacity: 1; }
                 }
                 
-                /* ═════════════════════ CONTEÚDO DAS ABAS ════════════════════ */
+                /* ═══════════════════════ CONTEÚDO DAS ABAS ════════════════ */
                 .as-tab-content {
                     position: relative;
                     min-height: 280px;
@@ -365,7 +365,7 @@ AS.OptionsScreen = AS.OptionsScreen || {};
                     display: block;
                 }
                 
-                /* ═════════════════════ OPÇÕES ════════════════════ */
+                /* ═══════════════════════════ OPÇÕES ═══════════════════════ */
                 .as-option-group {
                     margin-bottom: 28px;
                     padding: 16px;
@@ -397,7 +397,7 @@ AS.OptionsScreen = AS.OptionsScreen || {};
                     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
                 }
                 
-                /* ═════════════════════ SLIDERS ════════════════════ */
+                /* ══════════════════════════ SLIDERS ═══════════════════════ */
                 .as-slider-container {
                     display: flex;
                     align-items: center;
@@ -471,7 +471,7 @@ AS.OptionsScreen = AS.OptionsScreen || {};
                     text-align: right;
                 }
                 
-                /* ═════════════════════ TOGGLES ════════════════════ */
+                /* ══════════════════════════ TOGGLES ═══════════════════════ */
                 .as-toggle-container {
                     display: flex;
                     align-items: center;
@@ -521,7 +521,7 @@ AS.OptionsScreen = AS.OptionsScreen || {};
                     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 8px rgba(212, 175, 55, 0.5);
                 }
                 
-                /* ═════════════════════ FOOTER ════════════════════ */
+                /* ═══════════════════════════ FOOTER ═══════════════════════ */
                 .as-options-footer {
                     position: absolute;
                     bottom: 40px;
@@ -592,7 +592,7 @@ AS.OptionsScreen = AS.OptionsScreen || {};
                         inset 0 0 10px rgba(212, 175, 55, 0.1);
                 }
                 
-                /* ═════════════════════ RESPONSIVIDADE ════════════════════ */
+                /* ════════════════════════ RESPONSIVIDADE ══════════════════ */
                 @media (max-width: 900px) {
                     .as-options-panel {
                         width: 85%;
@@ -696,7 +696,7 @@ AS.OptionsScreen = AS.OptionsScreen || {};
             gameplayTab.id = 'tab-gameplay';
             
             this.createToggleOption(gameplayTab, 'alwaysDash', '🏃 Sempre Correr', ConfigManager.alwaysDash);
-            this.createToggleOption(gameplayTab, 'commandRemember', '💭 Lembrar Comandos', ConfigManager.commandRemember);
+            this.createToggleOption(gameplayTab, 'commandRemember', '💬 Lembrar Comandos', ConfigManager.commandRemember);
             
             tabContent.appendChild(gameplayTab);
             

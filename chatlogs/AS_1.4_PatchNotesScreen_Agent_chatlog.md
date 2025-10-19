@@ -54,12 +54,13 @@
   - Event listener para 'wheel' adicionado
   - Scroll suave com `e.preventDefault()` + ajuste de scrollTop
   - Comportamento responsivo e natural
+  - Sidebar também com suporte de rolagem via roda do mouse ('.as-versions-sidebar')
   - Scrollbar customizada com visual melhorado
 
-  **🔤 FONTE PIXEL TIMES CORRIGIDA:**
-  - Adicionado @font-face para carregar Pixel Times
-  - Font-family: 'Pixel Times New Roman', serif
-  - Texto renderiza em estilo pixel art medieval
+  **🔤 FONTE PIXEL TIMES (GameFont):**
+  - Padronização para uso da GameFont nativa do projeto
+  - Font-family configurado como `'GameFont', sans-serif` no container
+  - Removido @font-face custom para evitar conflitos
 
   **🎨 ESTILO VISUAL MELHORADO:**
   - Background: #0a0a0f (preto azulado escuro)

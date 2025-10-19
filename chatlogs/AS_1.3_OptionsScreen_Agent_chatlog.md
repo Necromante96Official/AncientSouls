@@ -2,7 +2,7 @@
 
 ## Informações do Agente
 - **Nome:** AS_1.3_OptionsScreen_Agent
-- **Versão Atual:** 1.0.4 ← ATUALIZADO!
+- **Versão Atual:** 1.0.5 ← ATUALIZADO!
 - **Autor:** Necromante96Official & GitHub Copilot
 - **Descrição:** Tela de Opções Personalizada - Ancient Souls
 
@@ -10,7 +10,7 @@
 
 ## Histórico de Alterações
 
-### Entrada #2 - v1.0.4 (ATUAL - REDESIGN COMPLETO)
+### Entrada #2 - v1.0.4 (REDESIGN COMPLETO)
 - **Data:** 2025-01-19
 - **Autor:** Necromante96Official & GitHub Copilot
 - **Arquivo(s) afetado(s):** 
@@ -29,6 +29,21 @@
     - Botões de aba com bordas douradas e efeito hover
     - Aba ativa com fundo dourado (20% opacidade)
     - Transição suave entre abas com animação fadeIn
+### Entrada #3 - v1.0.5 (ATUAL) — Registro no PluginManager + Fonte e Tabs
+- **Data:** 2025-01-19
+- **Autor:** Necromante96Official & GitHub Copilot
+- **Arquivo(s) afetado(s):** 
+  - `js/plugins/AS_1.3_OptionsScreen_Agent.js` (atualizado para v1.0.5)
+  - `js/plugins/backups/AS_1.3_OptionsScreen_Agent/AS_1.3_OptionsScreen_Agent - v1.0.5.js` (backup criado após update)
+- **Ação:** Correções funcionais críticas
+- **Detalhes:**
+  - Registro explícito do agente no sistema: `AS.PluginManager.register('AS_1.3_OptionsScreen', {...})`
+  - Hooks Scene_Options garantidos: create() chama `manager.createUI`, terminate() chama `manager.destroyUI`
+  - Fonte padronizada: uso de `font-family: 'GameFont', sans-serif;` em todos os elementos relevantes
+  - Forçado carregamento da GameFont via `FontManager.load('GameFont')` e `document.fonts.load(...)`
+  - CSS de abas revisado: apenas a aba ativa fica visível (`.as-tab-pane.active { display: block }`)
+  - Logs aprimorados no ciclo de vida (criação/fechamento/cleanup)
+  - Versão sincronizada em @plugindesc/@version/manifest
 
   - **🎚️ SLIDERS SUAVES E ANIMADOS**:
     - 4 sliders na aba Áudio: BGM, BGS, ME, SE

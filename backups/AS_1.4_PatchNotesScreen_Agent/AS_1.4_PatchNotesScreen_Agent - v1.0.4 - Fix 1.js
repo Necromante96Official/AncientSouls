@@ -456,10 +456,10 @@ AS.PatchNotes = AS.PatchNotes || {};
             const style = document.createElement('style');
             style.id = 'as-patchnotes-styles';
             style.textContent = `
-                /* ═══════════════════════════════════════════════════════════ */
+                /* ═════════════════════════════════════════════════════════ */
                 /* ANCIENT SOULS - LAYOUT PATCH NOTES MEDIEVAL                */
                 /* Layout: Sidebar + Content Area + Category Buttons           */
-                /* ═══════════════════════════════════════════════════════════ */
+                /* ═════════════════════════════════════════════════════════ */
                 
                 /* Container Principal */
                 #as-patchnotes-container {

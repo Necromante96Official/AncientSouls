@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.0 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.1.1 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -22,7 +22,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.1.0';
+    const MODULE_VERSION = '1.1.1';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -165,7 +165,11 @@ AS.TitleOptions = AS.TitleOptions || {};
             battleMode: ConfigManager.battleMode || 'active',
             alwaysDash: ConfigManager.alwaysDash !== undefined ? ConfigManager.alwaysDash : true,
             fullscreen: Graphics._isFullScreen(),
-            effectQuality: ConfigManager.effectQuality || 'medium'
+            effectQuality: ConfigManager.effectQuality || 'medium',
+            enableLogoAnimation: ConfigManager.enableLogoAnimation !== undefined ? ConfigManager.enableLogoAnimation : true,
+            animationSpeed: ConfigManager.animationSpeed || 4.0,
+            enableMusicFade: ConfigManager.enableMusicFade !== undefined ? ConfigManager.enableMusicFade : true,
+            musicFadeDuration: ConfigManager.musicFadeDuration || 1000
         };
 
         updateUIFromConfig();
@@ -179,7 +183,16 @@ AS.TitleOptions = AS.TitleOptions || {};
             if (element.type === 'range') {
                 element.value = value;
                 const valueDisplay = rootElement.querySelector(`#${id}Value`);
-                if (valueDisplay) valueDisplay.textContent = `${value}%`;
+                if (valueDisplay) {
+                    // Formatar valor de acordo com o tipo
+                    if (id === 'animationSpeed') {
+                        valueDisplay.textContent = `${value}s`;
+                    } else if (id === 'musicFadeDuration') {
+                        valueDisplay.textContent = `${value}ms`;
+                    } else {
+                        valueDisplay.textContent = `${value}%`;
+                    }
+                }
             } else if (element.type === 'checkbox') {
                 element.checked = value;
             } else if (element.tagName === 'SELECT') {
@@ -195,6 +208,10 @@ AS.TitleOptions = AS.TitleOptions || {};
         setValue('alwaysDash', configValues.alwaysDash);
         setValue('fullscreen', configValues.fullscreen);
         setValue('effectQuality', configValues.effectQuality);
+        setValue('enableLogoAnimation', configValues.enableLogoAnimation);
+        setValue('animationSpeed', configValues.animationSpeed);
+        setValue('enableMusicFade', configValues.enableMusicFade);
+        setValue('musicFadeDuration', configValues.musicFadeDuration);
     }
 
     function bindControls() {
@@ -205,6 +222,8 @@ AS.TitleOptions = AS.TitleOptions || {};
         bindSlider('masterVolume');
         bindSlider('bgmVolume');
         bindSlider('seVolume');
+        bindSlider('animationSpeed', 's');
+        bindSlider('musicFadeDuration', 'ms');
 
         bindSelect('messageSpeed');
         bindSelect('battleMode');
@@ -212,6 +231,8 @@ AS.TitleOptions = AS.TitleOptions || {};
 
         bindToggle('alwaysDash');
         bindToggle('fullscreen');
+        bindToggle('enableLogoAnimation');
+        bindToggle('enableMusicFade');
 
         const applyButton = rootElement.querySelector('#applyButton');
         if (applyButton) {
@@ -256,15 +277,15 @@ AS.TitleOptions = AS.TitleOptions || {};
         SoundManager.playCursor();
     }
 
-    function bindSlider(id) {
+    function bindSlider(id, suffix = '%') {
         const slider = rootElement.querySelector(`#${id}`);
         const valueDisplay = rootElement.querySelector(`#${id}Value`);
         
         if (!slider || !valueDisplay) return;
 
         slider.addEventListener('input', (e) => {
-            const value = parseInt(e.target.value);
-            valueDisplay.textContent = `${value}%`;
+            const value = parseFloat(e.target.value);
+            valueDisplay.textContent = `${value}${suffix}`;
             configValues[id] = value;
             
             if (id === 'bgmVolume') {
@@ -323,6 +344,10 @@ AS.TitleOptions = AS.TitleOptions || {};
         ConfigManager.battleMode = configValues.battleMode;
         ConfigManager.alwaysDash = configValues.alwaysDash;
         ConfigManager.effectQuality = configValues.effectQuality;
+        ConfigManager.enableLogoAnimation = configValues.enableLogoAnimation;
+        ConfigManager.animationSpeed = configValues.animationSpeed;
+        ConfigManager.enableMusicFade = configValues.enableMusicFade;
+        ConfigManager.musicFadeDuration = configValues.musicFadeDuration;
         
         ConfigManager.save();
         
@@ -331,7 +356,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         AudioManager.updateMeParameters({ volume: configValues.bgmVolume });
         AudioManager.updateSeParameters({ volume: configValues.seVolume });
         
-        logger.info('Configurações salvas com sucesso.');
+        logger.info('Configurações salvas com sucesso (incluindo animações e música).');
     }
 
     function showOptions() {

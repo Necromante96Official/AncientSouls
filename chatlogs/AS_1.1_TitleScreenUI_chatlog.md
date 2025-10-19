@@ -3,6 +3,38 @@
 ## [19/10/2025]
 **Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js, assets/contents/css/AS_1.1_TitleScreenUI.css
+**Ação:** Feature - Integração com ConfigManager e imagem de fundo nos botões
+**Detalhes:** Implementadas melhorias visuais e integração com sistema de configurações:
+
+**INTEGRAÇÃO COM CONFIGMANAGER:**
+- Configurações de animação e música agora são lidas do ConfigManager
+- Função getAnimationSettings() criada para obter valores dinâmicos
+- Parâmetros do plugin servem como padrões (fallback)
+- Sistema permite alterar configurações em tempo real via tela de opções
+
+**IMAGEM DE FUNDO NOS BOTÕES:**
+- Background dos botões substituído por botao.png
+- background-image com background-size: 100% 100%
+- Texto centralizado com flexbox (display: flex, align-items, justify-content)
+- image-rendering: high-quality para qualidade máxima
+- Hover usa filter: brightness + drop-shadow
+- Disabled usa grayscale + brightness reduzido
+- Mantida responsividade e acessibilidade
+
+**OTIMIZAÇÕES:**
+- Removido gradiente CSS em favor da imagem
+- filter: drop-shadow() para sombras suaves
+- Transições mantidas para feedback visual
+- Compatível com todos os estados (hover, active, disabled)
+
+**Versão:** v1.1.2 (anterior: v1.1.1)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.1.1.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js, assets/contents/css/AS_1.1_TitleScreenUI.css
 **Ação:** Ajuste - Remoção de animação do base-logo
 **Detalhes:** Removida animação de rotação da imagem base-logo.png conforme solicitado:
 - Removida chamada de `baseLogo.style.animation` na função createBaseLogo()

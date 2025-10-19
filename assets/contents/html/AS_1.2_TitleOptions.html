@@ -104,6 +104,34 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="as-options__option as-options__option--toggle">
+                            <label class="as-options__label">Animação do Logo (Tela Título)</label>
+                            <label class="as-options__toggle">
+                                <input type="checkbox" id="enableLogoAnimation" checked />
+                                <span class="as-options__toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="as-options__option">
+                            <label class="as-options__label">Velocidade da Animação</label>
+                            <div class="as-options__slider-container">
+                                <input type="range" class="as-options__slider" id="animationSpeed" min="1" max="10" step="0.5" value="4" />
+                                <span class="as-options__value" id="animationSpeedValue">4.0s</span>
+                            </div>
+                        </div>
+                        <div class="as-options__option as-options__option--toggle">
+                            <label class="as-options__label">Transição Musical (Fade)</label>
+                            <label class="as-options__toggle">
+                                <input type="checkbox" id="enableMusicFade" checked />
+                                <span class="as-options__toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="as-options__option">
+                            <label class="as-options__label">Duração do Fade Musical</label>
+                            <div class="as-options__slider-container">
+                                <input type="range" class="as-options__slider" id="musicFadeDuration" min="100" max="5000" step="100" value="1000" />
+                                <span class="as-options__value" id="musicFadeDurationValue">1000ms</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

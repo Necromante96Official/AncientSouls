@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.1 ☆ Interface HTML da tela de título (layout medieval fantástico)
+ * @plugindesc v1.1.2 ☆ Interface HTML da tela de título (layout medieval fantástico)
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.0_TitleScreen
  * 
@@ -134,10 +134,10 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.1_TitleScreenUI';
-    const MODULE_VERSION = '1.1.1';
+    const MODULE_VERSION = '1.1.2';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
-    // Carregar parâmetros do plugin
+    // Carregar parâmetros do plugin (padrões estáticos)
     const pluginName = 'AS_1.1_TitleScreenUI';
     const parameters = PluginManager.parameters(pluginName);
     const logoOffsetX = Number(parameters['logoOffsetX'] || 0);
@@ -148,10 +148,16 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
     const baseLogoOffsetY = Number(parameters['baseLogoOffsetY'] || 0);
     const baseLogoScale = Number(parameters['baseLogoScale'] || 1.0);
     const baseLogoOpacity = Number(parameters['baseLogoOpacity'] || 100) / 100;
-    const enableLogoAnimation = parameters['enableLogoAnimation'] !== 'false';
-    const animationSpeed = Number(parameters['animationSpeed'] || 4.0);
-    const enableMusicFade = parameters['enableMusicFade'] !== 'false';
-    const musicFadeDuration = Number(parameters['musicFadeDuration'] || 1000);
+    
+    // Função para obter configurações dinâmicas do ConfigManager
+    function getAnimationSettings() {
+        return {
+            enableLogoAnimation: ConfigManager.enableLogoAnimation !== undefined ? ConfigManager.enableLogoAnimation : (parameters['enableLogoAnimation'] !== 'false'),
+            animationSpeed: ConfigManager.animationSpeed || Number(parameters['animationSpeed'] || 4.0),
+            enableMusicFade: ConfigManager.enableMusicFade !== undefined ? ConfigManager.enableMusicFade : (parameters['enableMusicFade'] !== 'false'),
+            musicFadeDuration: ConfigManager.musicFadeDuration || Number(parameters['musicFadeDuration'] || 1000)
+        };
+    }
 
     const logger = {
         info(message) {
@@ -268,14 +274,19 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
             createBaseLogo(logoSection);
         }
 
+        // Obter configurações dinâmicas
+        const settings = getAnimationSettings();
+
         // Aplicar deslocamento (offset) ao container do logo
         // Não aplicamos aqui porque afetaria o baseLogo também
         // Vamos aplicar diretamente no logoImg
         logoSection.style.transform = 'translate(-50%, -50%)';
 
-        // Aplicar animação se habilitada
-        if (enableLogoAnimation) {
-            logoSection.style.animation = `as-logo-float ${animationSpeed}s ease-in-out infinite`;
+        // Aplicar animação se habilitada (ler do ConfigManager)
+        if (settings.enableLogoAnimation) {
+            logoSection.style.animation = `as-logo-float ${settings.animationSpeed}s ease-in-out infinite`;
+        } else {
+            logoSection.style.animation = 'none';
         }
 
         // Aplicar deslocamento e escala ao logo principal
@@ -293,8 +304,8 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         if (baseLogoEnabled) {
             logger.info(`🖼️ Fundo do logo: offset(${baseLogoOffsetX}px, ${baseLogoOffsetY}px), escala(${baseLogoScale}), opacidade(${baseLogoOpacity})`);
         }
-        if (enableLogoAnimation) {
-            logger.info(`✨ Animação ativada: velocidade ${animationSpeed}s`);
+        if (settings.enableLogoAnimation) {
+            logger.info(`✨ Animação ativada: velocidade ${settings.animationSpeed}s`);
         }
     }
 
@@ -380,21 +391,24 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
             SoundManager.playOk();
         }
         
+        // Obter configurações atuais
+        const settings = getAnimationSettings();
+        
         // Fade de música se habilitado e comando não for 'options'
-        if (enableMusicFade && command !== 'options') {
-            fadeOutMusic();
+        if (settings.enableMusicFade && command !== 'options') {
+            fadeOutMusic(settings.musicFadeDuration);
         }
         
         contextRef.publish('titlescreen:ui:command', { command });
     }
 
-    function fadeOutMusic() {
+    function fadeOutMusic(duration) {
         // Aplicar fade out na BGM da tela de título
         const currentBgm = AudioManager._currentBgs;
-        if (AudioManager._bgmBuffer && enableMusicFade) {
-            const duration = musicFadeDuration / 1000;
-            AudioManager.fadeOutBgm(duration);
-            logger.info(`🎵 Fade out de música aplicado (${musicFadeDuration}ms)`);
+        if (AudioManager._bgmBuffer) {
+            const durationSeconds = duration / 1000;
+            AudioManager.fadeOutBgm(durationSeconds);
+            logger.info(`🎵 Fade out de música aplicado (${duration}ms)`);
         }
     }
 

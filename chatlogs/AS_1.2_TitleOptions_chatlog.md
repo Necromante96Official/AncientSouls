@@ -2,6 +2,43 @@
 
 ## [19/10/2025]
 **Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js, assets/contents/html/AS_1.2_TitleOptions.html
+**Ação:** Feature - Novas opções de animação e música
+**Detalhes:** Adicionadas novas configurações na aba Visual para controlar animações e música:
+
+**NOVAS OPÇÕES ADICIONADAS:**
+1. **Animação do Logo (Tela Título)** - Toggle
+   - Ativa/desativa flutuação do logo na tela de título
+   - Salvo em ConfigManager.enableLogoAnimation
+
+2. **Velocidade da Animação** - Slider (1-10s)
+   - Controla velocidade da flutuação (menor = mais rápido)
+   - Formato: X.Xs (ex: 4.0s)
+   - Salvo em ConfigManager.animationSpeed
+
+3. **Transição Musical (Fade)** - Toggle
+   - Ativa/desativa fade out suave ao sair da tela de título
+   - Salvo em ConfigManager.enableMusicFade
+
+4. **Duração do Fade Musical** - Slider (100-5000ms)
+   - Controla tempo do fade (100ms a 5s)
+   - Formato: Xms (ex: 1000ms)
+   - Salvo em ConfigManager.musicFadeDuration
+
+**MELHORIAS TÉCNICAS:**
+- bindSlider() atualizado com parâmetro suffix para 's' e 'ms'
+- loadConfigValues() carrega valores do ConfigManager
+- saveConfigValues() persiste novas configurações
+- updateUIFromConfig() formata valores corretamente (%, s, ms)
+- Todas as opções salvas no ConfigManager.save()
+
+**Versão:** v1.1.1 (anterior: v1.1.0)
+**Backup criado:** backups/AS_1.2_TitleOptions/AS_1.2_TitleOptions - v1.1.0.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js, assets/contents/css/AS_1.2_TitleOptions.css, assets/contents/html/AS_1.2_TitleOptions.html
 **Ação:** Reescrita Completa - Interface HTML Moderna Medieval Fantasia
 **Detalhes:** Reescrita total do plugin conforme solicitação do usuário:

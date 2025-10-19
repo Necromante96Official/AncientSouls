@@ -2,6 +2,37 @@
 
 ## [19/10/2025]
 **Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js
+**Ação:** Correção - Crash ao abrir tela de opções (tratamento de erros robusto)
+**Detalhes:** Implementado sistema completo de tratamento de erros para prevenir crash:
+- Try-catch envolvendo Scene_Options.prototype.start para capturar erros de inicialização
+- Validação de rootElement em injectMarkup() antes de tentar appendChild
+- Erro logado com stack trace completo para debug
+- Warning logs adicionados em updateUIFromConfig quando rootElement não existe
+- Sistema de log detalhado mostra exatamente onde falha ocorre
+- Prevents game crash, throws error com informação completa para correção
+**Versão:** v1.1.3 (anterior: v1.1.2)
+**Backup criado:** backups/AS_1.2_TitleOptions/AS_1.2_TitleOptions - v1.1.2.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js
+**Ação:** Correção - Crash ao abrir tela de opções
+**Detalhes:** Corrigido erro que causava o fechamento do jogo ao clicar em "Opções":
+- Problema: updateUIFromConfig() chamada antes de rootElement existir
+- Solução: Validação adicionada no início da função
+- Verificação `if (!rootElement) return;` antes de tentar atualizar UI
+- Warning log adicionado para debug
+- Agora aguarda injeção completa do HTML antes de atualizar valores
+**Versão:** v1.1.2 (anterior: v1.1.1)
+**Backup criado:** backups/AS_1.2_TitleOptions/AS_1.2_TitleOptions - v1.1.1.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js, assets/contents/html/AS_1.2_TitleOptions.html
 **Ação:** Feature - Novas opções de animação e música
 **Detalhes:** Adicionadas novas configurações na aba Visual para controlar animações e música:

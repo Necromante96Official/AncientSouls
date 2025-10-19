@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.1 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.1.3 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -22,7 +22,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.1.1';
+    const MODULE_VERSION = '1.1.3';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -84,20 +84,26 @@ AS.TitleOptions = AS.TitleOptions || {};
 
         const Scene_Options_start = Scene_Options.prototype.start;
         Scene_Options.prototype.start = function() {
-            Scene_Options_start.call(this);
-            if (this._optionsWindow) {
-                this._optionsWindow.deactivate();
-                this._optionsWindow.hide();
+            try {
+                Scene_Options_start.call(this);
+                if (this._optionsWindow) {
+                    this._optionsWindow.deactivate();
+                    this._optionsWindow.hide();
+                }
+                if (this._cancelButton) {
+                    this._cancelButton.visible = false;
+                }
+                injectStyles();
+                injectMarkup();
+                loadConfigValues();
+                bindControls();
+                showOptions();
+                this._asOptionsActive = true;
+            } catch (error) {
+                logger.error(`Erro ao iniciar Scene_Options: ${error.message}`);
+                logger.error(`Stack: ${error.stack}`);
+                throw error;
             }
-            if (this._cancelButton) {
-                this._cancelButton.visible = false;
-            }
-            injectStyles();
-            injectMarkup();
-            loadConfigValues();
-            bindControls();
-            showOptions();
-            this._asOptionsActive = true;
         };
 
         const Scene_Options_terminate = Scene_Options.prototype.terminate;
@@ -133,12 +139,19 @@ AS.TitleOptions = AS.TitleOptions || {};
         const wrapper = document.createElement('div');
         wrapper.innerHTML = html.trim();
         rootElement = wrapper.firstElementChild;
+        
+        if (!rootElement) {
+            logger.error('Falha ao criar rootElement a partir do HTML.');
+            return;
+        }
+        
         document.body.appendChild(rootElement);
         
         tabs = Array.from(rootElement.querySelectorAll('.as-options__tab'));
         panels = Array.from(rootElement.querySelectorAll('.as-options__panel'));
         
         logger.info('Markup HTML da tela de opções inserido.');
+        logger.info(`Tabs encontradas: ${tabs.length}, Panels encontrados: ${panels.length}`);
     }
 
     function destroyMarkup() {
@@ -176,6 +189,11 @@ AS.TitleOptions = AS.TitleOptions || {};
     }
 
     function updateUIFromConfig() {
+        if (!rootElement) {
+            logger.warn('updateUIFromConfig: rootElement não existe ainda.');
+            return;
+        }
+        
         const setValue = (id, value) => {
             const element = rootElement.querySelector(`#${id}`);
             if (!element) return;

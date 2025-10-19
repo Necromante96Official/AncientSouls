@@ -105,7 +105,7 @@ img.as-title__base-logo {
 
 .as-title__button {
     appearance: none;
-    background-image: url('../../resources/botao.png');
+    background-image: url('js/plugins/assets/resources/botao.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;

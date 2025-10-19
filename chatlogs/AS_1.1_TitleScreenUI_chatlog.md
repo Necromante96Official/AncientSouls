@@ -2,6 +2,35 @@
 
 ## [19/10/2025]
 **Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** assets/contents/css/AS_1.1_TitleScreenUI.css
+**Ação:** Correção - Caminho absoluto da imagem do botão
+**Detalhes:** Corrigido caminho da imagem botao.png para path absoluto:
+- Antes: `url('../resources/botao.png')` ❌
+- Depois: `url('js/plugins/assets/resources/botao.png')` ✅
+- Caminho absoluto a partir da raiz do projeto (index.html)
+- CSS injetado via <style> no DOM precisa de path absoluto
+- Erro "Failed to load resource: net::ERR_FILE_NOT_FOUND" resolvido
+**Versão:** v1.1.4 (anterior: v1.1.3)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.1.3.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** assets/contents/css/AS_1.1_TitleScreenUI.css
+**Ação:** Correção - Caminho da imagem do botão
+**Detalhes:** Corrigido caminho relativo da imagem botao.png:
+- Antes: `url('../../resources/botao.png')` ❌
+- Depois: `url('../resources/botao.png')` ✅
+- Caminho correto a partir de `assets/contents/css/`
+- Erro "Failed to load resource: net::ERR_FILE_NOT_FOUND" resolvido
+**Versão:** v1.1.3 (anterior: v1.1.2)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.1.2.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js, assets/contents/css/AS_1.1_TitleScreenUI.css
 **Ação:** Feature - Integração com ConfigManager e imagem de fundo nos botões
 **Detalhes:** Implementadas melhorias visuais e integração com sistema de configurações:

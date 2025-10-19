@@ -3,6 +3,19 @@
 ## [19/10/2025]
 **Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js
+**Ação:** Redesign - Painel luminoso compacto
+**Detalhes:** Simplificado o layout da Scene_Options com moldura retangular
+compacta, cabeçalho redesenhado e painel com animações de brilho/ruído. Nova
+paleta translúcida integra melhor com a tela de título e otimizações garantem
+limpeza correta dos sprites decorativos via `_asDecorReady`. Versão incrementada
+após validação visual.
+**Versão:** v1.0.8 (anterior: v1.0.7)
+**Backup criado:** backups/AS_1.2_TitleOptions/AS_1.2_TitleOptions - v1.0.7.js
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js
 **Ação:** Ajuste - Legibilidade do painel
 **Detalhes:** Reequilibrados gradientes, opacidades e tons tipográficos para
 aumentar contraste, evitando que opções pareçam "apagadas" ao usuário.

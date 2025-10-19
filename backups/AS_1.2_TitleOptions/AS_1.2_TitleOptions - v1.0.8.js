@@ -258,140 +258,140 @@ AS.TitleOptions = AS.TitleOptions || {};
             } else {
                 this._asDecorReady = false;
             }
-        };
-
+         };
+ 
         const Scene_Options_terminate = Scene_Options.prototype.terminate;
         Scene_Options.prototype.terminate = function() {
             cleanupSceneDecor(this);
             Scene_Options_terminate.call(this);
         };
-    }
+     }
 
-    function renderOptionsBackdrop(bitmap) {
-        bitmap.clear();
-        const width = bitmap.width;
-        const height = bitmap.height;
-        const ctx = bitmap.context;
+     function renderOptionsBackdrop(bitmap) {
+         bitmap.clear();
+         const width = bitmap.width;
+         const height = bitmap.height;
+         const ctx = bitmap.context;
+ 
+         const gradient = ctx.createLinearGradient(0, 0, width, height);
+         gradient.addColorStop(0, '#322a52');
+         gradient.addColorStop(0.65, '#3e3364');
+         gradient.addColorStop(1, '#2c2248');
+         ctx.fillStyle = gradient;
+         ctx.fillRect(0, 0, width, height);
+ 
+         ctx.strokeStyle = 'rgba(248, 222, 168, 0.45)';
+         ctx.lineWidth = 2;
+         ctx.strokeRect(24, 24, width - 48, height - 48);
+         bitmap.baseTexture.update();
+     }
 
-        const gradient = ctx.createLinearGradient(0, 0, width, height);
-        gradient.addColorStop(0, '#322a52');
-        gradient.addColorStop(0.65, '#3e3364');
-        gradient.addColorStop(1, '#2c2248');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, width, height);
+     function applyWindowHooks() {
+         const Window_Options_initialize = Window_Options.prototype.initialize;
+         Window_Options.prototype.initialize = function(rect) {
+             Window_Options_initialize.call(this, rect);
+             this.opacity = 0;
+             this.backgroundOpacity = 0;
+         };
 
-        ctx.strokeStyle = 'rgba(248, 222, 168, 0.45)';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(24, 24, width - 48, height - 48);
-        bitmap.baseTexture.update();
-    }
+         Window_Options.prototype.standardPadding = function() {
+             return 24;
+         };
 
-    function applyWindowHooks() {
-        const Window_Options_initialize = Window_Options.prototype.initialize;
-        Window_Options.prototype.initialize = function(rect) {
-            Window_Options_initialize.call(this, rect);
-            this.opacity = 0;
-            this.backgroundOpacity = 0;
-        };
+         Window_Options.prototype.itemPadding = function() {
+             return 12;
+         };
 
-        Window_Options.prototype.standardPadding = function() {
-            return 24;
-        };
+         Window_Options.prototype.lineHeight = function() {
+             return 48;
+         };
 
-        Window_Options.prototype.itemPadding = function() {
-            return 12;
-        };
+         Window_Options.prototype.spacing = function() {
+             return 12;
+         };
 
-        Window_Options.prototype.lineHeight = function() {
-            return 48;
-        };
+         Window_Options.prototype.itemHeight = function() {
+             return this.lineHeight();
+         };
 
-        Window_Options.prototype.spacing = function() {
-            return 12;
-        };
+         Window_Options.prototype.drawItem = function(index) {
+             const rect = this.itemLineRect(index);
+             const text = this.commandName(index);
+             const status = this.statusText(index);
+             const labelWidth = Math.floor(rect.width * 0.6);
+             const statusWidth = rect.width - labelWidth;
 
-        Window_Options.prototype.itemHeight = function() {
-            return this.lineHeight();
-        };
+             this.contents.clearRect(rect.x, rect.y, rect.width, rect.height);
+             this.contents.fillRect(rect.x, rect.y, rect.width, rect.height, COLORS.rowBackground);
+             this.contents.fillRect(rect.x, rect.y, 3, rect.height, COLORS.rowLeftAccent);
+             this.contents.fillRect(rect.x, rect.y + rect.height - 1, rect.width, 1, COLORS.rowDivider);
 
-        Window_Options.prototype.drawItem = function(index) {
-            const rect = this.itemLineRect(index);
-            const text = this.commandName(index);
-            const status = this.statusText(index);
-            const labelWidth = Math.floor(rect.width * 0.6);
-            const statusWidth = rect.width - labelWidth;
+             this.resetFontSettings();
+             this.contents.fontFace = 'Pixel Times';
+             this.contents.fontSize = 28;
+             this.changeTextColor(COLORS.textPrimary);
+             this.changeOutlineColor(COLORS.outlinePrimary);
+             this.drawText(text, rect.x + 26, rect.y + 4, labelWidth, 'left');
 
-            this.contents.clearRect(rect.x, rect.y, rect.width, rect.height);
-            this.contents.fillRect(rect.x, rect.y, rect.width, rect.height, COLORS.rowBackground);
-            this.contents.fillRect(rect.x, rect.y, 3, rect.height, COLORS.rowLeftAccent);
-            this.contents.fillRect(rect.x, rect.y + rect.height - 1, rect.width, 1, COLORS.rowDivider);
+             this.contents.fontSize = 24;
+             this.changeTextColor(COLORS.textSecondary);
+             this.changeOutlineColor(COLORS.outlineSecondary);
+             this.drawText(status, rect.x + labelWidth - 8, rect.y + 4, statusWidth + 8, 'right');
+         };
 
-            this.resetFontSettings();
-            this.contents.fontFace = 'Pixel Times';
-            this.contents.fontSize = 28;
-            this.changeTextColor(COLORS.textPrimary);
-            this.changeOutlineColor(COLORS.outlinePrimary);
-            this.drawText(text, rect.x + 26, rect.y + 4, labelWidth, 'left');
+         const Window_Options_updateCursor = Window_Options.prototype._updateCursor;
+         Window_Options.prototype._updateCursor = function() {
+             Window_Options_updateCursor.call(this);
+             const highlightColor = COLORS.highlightFill;
+             const highlightBlendMode = (typeof PIXI !== 'undefined' && PIXI.BLEND_MODES && typeof PIXI.BLEND_MODES.ADD === 'number') ? PIXI.BLEND_MODES.ADD : 1;
+             const insetX = 4;
+             const insetY = 2;
+             if (!this._asHighlighter) {
+                 const baseIndex = this.index() >= 0 ? this.index() : (this.maxItems() > 0 ? 0 : -1);
+                 const templateRect = baseIndex >= 0 ? this.itemRect(baseIndex) : null;
+                 const initialWidth = (templateRect ? templateRect.width : this.innerWidth) - insetX * 2;
+                 const initialHeight = this.itemHeight() - insetY * 2;
+                 this._asHighlighter = new Sprite(new Bitmap(Math.max(1, initialWidth), Math.max(1, initialHeight)));
+                 this._asHighlighter.bitmap.fillAll(highlightColor);
+                 this._asHighlighter.blendMode = highlightBlendMode;
+                 this._asHighlighter.visible = false;
+                 if (this._clientArea && this._clientArea.children) {
+                     const contentsIndex = this._clientArea.children.indexOf(this._contentsSprite);
+                     const insertIndex = contentsIndex >= 0 ? contentsIndex : this._clientArea.children.length;
+                     this._clientArea.addChildAt(this._asHighlighter, insertIndex);
+                 } else {
+                     this.addChild(this._asHighlighter);
+                 }
+             }
+             if (this._cursorAll) {
+                 this._asHighlighter.visible = false;
+                 return;
+             }
+             const index = this.index();
+             if (index < 0) {
+                 this._asHighlighter.visible = false;
+                 return;
+             }
+             const rect = this.itemRect(index);
+             const bitmap = this._asHighlighter.bitmap;
+             const newWidth = Math.max(1, rect.width - insetX * 2);
+             const newHeight = Math.max(1, rect.height - insetY * 2);
+             if (bitmap.width !== newWidth || bitmap.height !== newHeight) {
+                 bitmap.resize(newWidth, newHeight);
+             }
+             bitmap.clear();
+             bitmap.fillAll(highlightColor);
+             this._asHighlighter.visible = true;
+             this._asHighlighter.x = rect.x + insetX;
+             this._asHighlighter.y = rect.y + insetY;
+         };
+     }
 
-            this.contents.fontSize = 24;
-            this.changeTextColor(COLORS.textSecondary);
-            this.changeOutlineColor(COLORS.outlineSecondary);
-            this.drawText(status, rect.x + labelWidth - 8, rect.y + 4, statusWidth + 8, 'right');
-        };
-
-        const Window_Options_updateCursor = Window_Options.prototype._updateCursor;
-        Window_Options.prototype._updateCursor = function() {
-            Window_Options_updateCursor.call(this);
-            const highlightColor = COLORS.highlightFill;
-            const highlightBlendMode = (typeof PIXI !== 'undefined' && PIXI.BLEND_MODES && typeof PIXI.BLEND_MODES.ADD === 'number') ? PIXI.BLEND_MODES.ADD : 1;
-            const insetX = 4;
-            const insetY = 2;
-            if (!this._asHighlighter) {
-                const baseIndex = this.index() >= 0 ? this.index() : (this.maxItems() > 0 ? 0 : -1);
-                const templateRect = baseIndex >= 0 ? this.itemRect(baseIndex) : null;
-                const initialWidth = (templateRect ? templateRect.width : this.innerWidth) - insetX * 2;
-                const initialHeight = this.itemHeight() - insetY * 2;
-                this._asHighlighter = new Sprite(new Bitmap(Math.max(1, initialWidth), Math.max(1, initialHeight)));
-                this._asHighlighter.bitmap.fillAll(highlightColor);
-                this._asHighlighter.blendMode = highlightBlendMode;
-                this._asHighlighter.visible = false;
-                if (this._clientArea && this._clientArea.children) {
-                    const contentsIndex = this._clientArea.children.indexOf(this._contentsSprite);
-                    const insertIndex = contentsIndex >= 0 ? contentsIndex : this._clientArea.children.length;
-                    this._clientArea.addChildAt(this._asHighlighter, insertIndex);
-                } else {
-                    this.addChild(this._asHighlighter);
-                }
-            }
-            if (this._cursorAll) {
-                this._asHighlighter.visible = false;
-                return;
-            }
-            const index = this.index();
-            if (index < 0) {
-                this._asHighlighter.visible = false;
-                return;
-            }
-            const rect = this.itemRect(index);
-            const bitmap = this._asHighlighter.bitmap;
-            const newWidth = Math.max(1, rect.width - insetX * 2);
-            const newHeight = Math.max(1, rect.height - insetY * 2);
-            if (bitmap.width !== newWidth || bitmap.height !== newHeight) {
-                bitmap.resize(newWidth, newHeight);
-            }
-            bitmap.clear();
-            bitmap.fillAll(highlightColor);
-            this._asHighlighter.visible = true;
-            this._asHighlighter.x = rect.x + insetX;
-            this._asHighlighter.y = rect.y + insetY;
-        };
-    }
-
-    if (AS && AS.PluginManager && typeof AS.PluginManager.register === 'function') {
-        AS.PluginManager.register(manifest);
-    } else {
-        logger.error('AS.PluginManager não encontrado. Verifique a ordem de carregamento.');
-    }
+     if (AS && AS.PluginManager && typeof AS.PluginManager.register === 'function') {
+         AS.PluginManager.register(manifest);
+     } else {
+         logger.error('AS.PluginManager não encontrado. Verifique a ordem de carregamento.');
+     }
 })();
 
 //=============================================================================

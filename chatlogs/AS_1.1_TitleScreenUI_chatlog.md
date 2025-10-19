@@ -3,6 +3,96 @@
 ## [19/10/2025]
 **Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js, assets/contents/css/AS_1.1_TitleScreenUI.css
+**Ação:** Ajuste - Remoção de animação do base-logo
+**Detalhes:** Removida animação de rotação da imagem base-logo.png conforme solicitado:
+- Removida chamada de `baseLogo.style.animation` na função createBaseLogo()
+- Removido @keyframes as-base-rotate do CSS
+- Base-logo agora permanece estático (sem rotação)
+- Logo principal mantém animação de flutuação (as-logo-float)
+- Qualidade de imagem e otimizações mantidas
+**Versão:** v1.1.1 (anterior: v1.1.0)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.1.0.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js, assets/contents/css/AS_1.1_TitleScreenUI.css
+**Ação:** Feature - Animações, qualidade de imagem e transições musicais
+**Detalhes:** Implementado sistema completo de animações e melhorias visuais/sonoras:
+
+**ANIMAÇÕES:**
+- Logo principal: animação de flutuação suave (as-logo-float)
+- Fundo do logo: rotação contínua e elegante (as-base-rotate)
+- Velocidade configurável via parâmetro (1-10 segundos)
+- Animações podem ser desativadas via parâmetro
+
+**QUALIDADE DE IMAGEM:**
+- image-rendering: high-quality em logos
+- backface-visibility: hidden para performance
+- willChange: transform para otimização de GPU
+- -webkit-optimize-contrast para renderização suave
+- Aplicado em ancient-souls.png, base-logo.png e background.png
+
+**TRANSIÇÕES MUSICAIS:**
+- Fade out automático da BGM ao sair da tela de título
+- Duração configurável (100-5000ms)
+- Não aplica fade ao abrir menu de opções
+- Sistema usa AudioManager.fadeOutBgm() nativo
+
+**SONS DOS BOTÕES:**
+- Hover: SoundManager.playCursor()
+- Click: SoundManager.playOk()
+- Listeners adicionados via addEventListener
+
+**NOVOS PARÂMETROS:**
+- enableLogoAnimation (boolean, padrão: true)
+- animationSpeed (1-10s, padrão: 4.0)
+- enableMusicFade (boolean, padrão: true)
+- musicFadeDuration (100-5000ms, padrão: 1000)
+
+**Versão:** v1.1.0 (anterior: v1.0.9)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.0.9.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js
+**Ação:** Correção - Bug de posicionamento do logo e fundo
+**Detalhes:** Corrigido erro de posicionamento causado por transforms conflitantes:
+- Problema: aplicar transform na logoSection afetava todos os elementos filhos (incluindo baseLogo)
+- Solução: logoSection mantém apenas translate(-50%, -50%) para centralização básica
+- Logo principal (logoImg) recebe transform próprio: translate(offset) + scale
+- Fundo (baseLogo) recebe transform independente: translate(offset) + scale
+- Ambos os elementos agora usam position: absolute com top: 0 e left: 0 como base
+- Ajustes de offset funcionam de forma independente e previsível
+- Transform-origin mantido em 'center center' para escala correta
+**Versão:** v1.0.9 (anterior: v1.0.8)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.0.8.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js, assets/contents/css/AS_1.1_TitleScreenUI.css
+**Ação:** Adição - Imagem de fundo do logo e remoção de prefixos PT-BR
+**Detalhes:** Implementado sistema de fundo configurável para o logo Ancient Souls:
+- Adicionada imagem base-logo.png como camada de fundo atrás do logo principal
+- Novos parâmetros: baseLogoEnabled, baseLogoOffsetX, baseLogoOffsetY, baseLogoScale, baseLogoOpacity
+- Função createBaseLogo() cria dinamicamente elemento de fundo com estilos inline
+- Fundo posicionado em z-index: 0, logo principal em z-index: 2
+- Removidos todos os prefixos "PT-BR:" dos comentários (agora direto em português)
+- Logs informativos mostram configurações aplicadas para logo e fundo
+- Sistema de camadas permite ajuste independente de cada elemento
+**Versão:** v1.0.8 (anterior: v1.0.7)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.0.7.js
+
+---
+
+## [19/10/2025]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** AS_1.1_TitleScreenUI.js, assets/contents/css/AS_1.1_TitleScreenUI.css
 **Ação:** Adição - Parâmetros de customização do logo
 **Detalhes:** Implementados parâmetros de plugin para ajustar posicionamento e escala do logo Ancient Souls:
 - logoOffsetX: Deslocamento horizontal (-500 a 500px)

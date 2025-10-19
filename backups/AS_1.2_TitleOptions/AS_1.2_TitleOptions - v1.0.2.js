@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.4 ☆ Ajustes visuais das opções com estética medieval fantástica
+ * @plugindesc v1.0.2 ☆ Ajustes visuais das opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -22,7 +22,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.0.4';
+    const MODULE_VERSION = '1.0.2';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -134,23 +134,14 @@ AS.TitleOptions = AS.TitleOptions || {};
         const Window_Options_updateCursor = Window_Options.prototype._updateCursor;
         Window_Options.prototype._updateCursor = function() {
             Window_Options_updateCursor.call(this);
-            const highlightColor = 'rgba(218, 187, 115, 0.18)';
-            const highlightBlendMode = (typeof PIXI !== 'undefined' && PIXI.BLEND_MODES && typeof PIXI.BLEND_MODES.ADD === 'number') ? PIXI.BLEND_MODES.ADD : 1;
             if (!this._asHighlighter) {
                 const baseIndex = this.index() >= 0 ? this.index() : (this.maxItems() > 0 ? 0 : -1);
                 const templateRect = baseIndex >= 0 ? this.itemRect(baseIndex) : null;
                 const initialWidth = templateRect ? templateRect.width : this.innerWidth;
                 this._asHighlighter = new Sprite(new Bitmap(Math.max(1, initialWidth), this.itemHeight()));
-                this._asHighlighter.bitmap.fillAll(highlightColor);
-                this._asHighlighter.blendMode = highlightBlendMode;
-                this._asHighlighter.visible = false;
-                if (this._clientArea && this._clientArea.children) {
-                    const contentsIndex = this._clientArea.children.indexOf(this._contentsSprite);
-                    const insertIndex = contentsIndex >= 0 ? contentsIndex : this._clientArea.children.length;
-                    this._clientArea.addChildAt(this._asHighlighter, insertIndex);
-                } else {
-                    this.addChild(this._asHighlighter);
-                }
+                this._asHighlighter.bitmap.fillAll('rgba(218, 187, 115, 0.18)');
+                this._asHighlighter.blendMode = Graphics.BLEND_ADD;
+                this._windowContentsSprite.addChildAt(this._asHighlighter, 0);
             }
             if (this._cursorAll) {
                 this._asHighlighter.visible = false;
@@ -162,11 +153,9 @@ AS.TitleOptions = AS.TitleOptions || {};
                 return;
             }
             const rect = this.itemRect(index);
-            const bitmap = this._asHighlighter.bitmap;
-            if (bitmap.width !== rect.width || bitmap.height !== rect.height) {
-                bitmap.resize(rect.width, rect.height);
-                bitmap.clear();
-                bitmap.fillAll(highlightColor);
+            if (this._asHighlighter.bitmap.width !== rect.width || this._asHighlighter.bitmap.height !== rect.height) {
+                this._asHighlighter.bitmap = new Bitmap(rect.width, rect.height);
+                this._asHighlighter.bitmap.fillAll('rgba(218, 187, 115, 0.18)');
             }
             this._asHighlighter.visible = true;
             this._asHighlighter.x = rect.x;

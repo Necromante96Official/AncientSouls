@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.4 ☆ Ajustes visuais das opções com estética medieval fantástica
+ * @plugindesc v1.0.3 ☆ Ajustes visuais das opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -22,7 +22,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.0.4';
+    const MODULE_VERSION = '1.0.3';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -135,14 +135,13 @@ AS.TitleOptions = AS.TitleOptions || {};
         Window_Options.prototype._updateCursor = function() {
             Window_Options_updateCursor.call(this);
             const highlightColor = 'rgba(218, 187, 115, 0.18)';
-            const highlightBlendMode = (typeof PIXI !== 'undefined' && PIXI.BLEND_MODES && typeof PIXI.BLEND_MODES.ADD === 'number') ? PIXI.BLEND_MODES.ADD : 1;
             if (!this._asHighlighter) {
                 const baseIndex = this.index() >= 0 ? this.index() : (this.maxItems() > 0 ? 0 : -1);
                 const templateRect = baseIndex >= 0 ? this.itemRect(baseIndex) : null;
                 const initialWidth = templateRect ? templateRect.width : this.innerWidth;
                 this._asHighlighter = new Sprite(new Bitmap(Math.max(1, initialWidth), this.itemHeight()));
                 this._asHighlighter.bitmap.fillAll(highlightColor);
-                this._asHighlighter.blendMode = highlightBlendMode;
+                this._asHighlighter.blendMode = Graphics.BLEND_ADD;
                 this._asHighlighter.visible = false;
                 if (this._clientArea && this._clientArea.children) {
                     const contentsIndex = this._clientArea.children.indexOf(this._contentsSprite);

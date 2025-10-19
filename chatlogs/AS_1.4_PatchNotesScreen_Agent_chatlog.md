@@ -2,7 +2,7 @@
 
 ## Informações do Agente
 - **Nome:** AS_1.4_PatchNotesScreen_Agent
-- **Versão Atual:** 1.0.3 ← ATUALIZADO!
+- **Versão Atual:** 1.0.4 ← ATUALIZADO!
 - **Autor:** Necromante96Official & GitHub Copilot
 - **Descrição:** Tela de Atualizações (Patch Notes) - Ancient Souls
 
@@ -10,7 +10,74 @@
 
 ## Histórico de Alterações
 
-### Entrada #3 - v1.0.3 (ATUAL) 🎨 REDESIGN MEDIEVAL ÉPICO
+### Entrada #3 - v1.0.4 (ATUAL) 📐 LAYOUT SIDEBAR + SCROLL FUNCIONAL
+- **Data:** 2025-01-19
+- **Autor:** Necromante96Official & GitHub Copilot
+- **Arquivo(s) afetado(s):**
+  - `js/plugins/AS_1.4_PatchNotesScreen_Agent.js` (atualizado para v1.0.4)
+  - `js/plugins/backups/AS_1.4_PatchNotesScreen_Agent/AS_1.4_PatchNotesScreen_Agent - v1.0.4.js` (backup criado)
+- **Ação:** REESCRITA COMPLETA - Layout com sidebar funcional + scroll de mouse
+- **Detalhes:**
+
+  **📐 NOVO LAYOUT SIDEBAR + CONTEÚDO:**
+  - Sidebar esquerda (280px) com lista de versões clicáveis
+  - Área de conteúdo direita (flex: 1) com detalhes da versão
+  - Header com título + 6 botões de filtro de categoria
+  - Botão "Fechar" hexagonal no canto inferior direito
+
+  **🔘 SISTEMA DE FILTROS POR CATEGORIA:**
+  - 6 botões: Todas | Grandes | Pequenas | Correções | Pequenas Correções | Base
+  - Método `filterVersions(categoryId)` implementado
+  - Filtragem dinâmica mostrando/ocultando versões
+  - Estilo: bordas douradas (#d4af37), ativo com fundo dourado
+
+  **📜 SIDEBAR COM VERSÕES CLICÁVEIS:**
+  - Método `createSidebarItem(versionData, index)` criado
+  - Cada versão é um item clicável na sidebar
+  - Item selecionado: borda dourada + fundo escuro
+  - Exibe: ícone categoria + nome versão + data
+  - Badge colorida por categoria
+
+  **📄 ÁREA DE CONTEÚDO DINÂMICA:**
+  - Método `createVersionDetail(versionData, index)` criado
+  - Método `showVersionDetail(index)` alterna entre versões
+  - Exibe: cabeçalho com ícone + título + data + categoria
+  - Seções: Resumo, Adicionados, Correções, Removidos
+  - Scroll suave com estilização medieval
+
+  **🎚️ MARKDOWN PARSER ATUALIZADO:**
+  - Reconhece novos emojis de seção (📋, ✨, 🔧, 🗑️)
+  - Mantém compatibilidade com formato antigo (texto descritivo)
+  - Parser robusto e tolerante com variações
+
+  **🖱️ SCROLL COM MOUSE WHEEL FUNCIONAL:**
+  - Event listener para 'wheel' adicionado
+  - Scroll suave com `e.preventDefault()` + ajuste de scrollTop
+  - Comportamento responsivo e natural
+  - Scrollbar customizada com visual melhorado
+
+  **🔤 FONTE PIXEL TIMES CORRIGIDA:**
+  - Adicionado @font-face para carregar Pixel Times
+  - Font-family: 'Pixel Times New Roman', serif
+  - Texto renderiza em estilo pixel art medieval
+
+  **🎨 ESTILO VISUAL MELHORADO:**
+  - Background: #0a0a0f (preto azulado escuro)
+  - Sidebar: rgba(60,50,35,0.95) (marrom escuro medieval)
+  - Content area: #0f0f14 (preto levemente azulado)
+  - Badges redondas com cores por categoria
+  - Bordas douradas (#d4af37) em elementos selecionados
+  - Scrollbar: track escura + thumb dourada com glow
+
+  **✅ VALIDAÇÃO:**
+  - ✓ 0 erros de sintaxe
+  - ✓ Layout sidebar + content completamente funcional
+  - ✓ Scroll com mouse wheel funcionando perfeitamente
+  - ✓ Filtros de categoria operacionais
+  - ✓ Versões clicáveis e selecionáveis
+  - ✓ Fonte Pixel Times carregando
+
+### Entrada #4 - v1.0.3 (Histórico) 🎨 REDESIGN MEDIEVAL ÉPICO
 - **Data:** 2025-10-18
 - **Autor:** Necromante96Official & GitHub Copilot
 - **Arquivo(s) afetado(s):**

@@ -2,7 +2,7 @@
 
 ## Informações do Agente
 - **Nome:** AS_1.3_OptionsScreen_Agent
-- **Versão Atual:** 1.0.1 ← ATUALIZADO!
+- **Versão Atual:** 1.0.4 ← ATUALIZADO!
 - **Autor:** Necromante96Official & GitHub Copilot
 - **Descrição:** Tela de Opções Personalizada - Ancient Souls
 
@@ -10,7 +10,64 @@
 
 ## Histórico de Alterações
 
-### Entrada #2 - v1.0.1 (FINAL)
+### Entrada #2 - v1.0.4 (ATUAL - REDESIGN COMPLETO)
+- **Data:** 2025-01-19
+- **Autor:** Necromante96Official & GitHub Copilot
+- **Arquivo(s) afetado(s):** 
+  - `js/plugins/AS_1.3_OptionsScreen_Agent.js` (atualizado para v1.0.4)
+  - `js/plugins/backups/AS_1.3_OptionsScreen_Agent/AS_1.3_OptionsScreen_Agent - v1.0.4.js` (backup criado)
+- **Ação:** REDESIGN COMPLETO - Interface bonita, dinâmica e animada
+- **Detalhes:**
+  - **🎨 NOVO DESIGN MEDIEVAL BONITO**:
+    - Paleta de cores: #d4af37 (ouro escuro), #0a0a0f (preto medieval), bordas com gradientes
+    - Animações suaves: fade-in na abertura, animação dos sliders, transição entre abas
+    - Layout renovado com melhor espaçamento e organização
+    - Efeitos hover nos botões e sliders
+  
+  - **🔘 SISTEMA DE ABAS DINÂMICO**:
+    - 3 abas principais: 🎵 Áudio | 🎨 Vídeo | 🎮 Gameplay
+    - Botões de aba com bordas douradas e efeito hover
+    - Aba ativa com fundo dourado (20% opacidade)
+    - Transição suave entre abas com animação fadeIn
+
+  - **🎚️ SLIDERS SUAVES E ANIMADOS**:
+    - 4 sliders na aba Áudio: BGM, BGS, ME, SE
+    - Thumb circular dourado com brilho (box-shadow)
+    - Efeito hover: scale(1.2) + intensificação do brilho
+    - Valores sincronizados com ConfigManager
+
+  - **🔘 TOGGLES ANIMADOS**:
+    - 2 toggles na aba Gameplay: Sempre Correr, Lembrar Comandos
+    - Thumb branco que desliza suavemente (0.3s transition)
+    - Cor muda para dourado quando ativo
+    - Estados sincronizados com ConfigManager
+
+  - **🔤 FONTE PIXEL TIMES CORRIGIDA**:
+    - Adicionado @font-face no CSS para carregar Pixel Times
+    - Font-family: 'Pixel Times New Roman', serif em todos elementos
+    - Texto renderiza com estilo pixel art medieval
+
+  - **✨ ANIMAÇÕES COMPLETAS**:
+    - Abertura da tela: fade-in 0.3s
+    - Hover nos botões: scale(1.05) + glow dourado
+    - Clique nos botões: scale(0.98)
+    - Transição de abas: fadeIn 0.3s
+    - Sliders: smooth transition em todos os estados
+
+  - **📦 CSS COMPLETO**:
+    - Container principal com gradiente linear
+    - Painel central com backdrop-filter blur
+    - Footer com botões "OK" e "Cancelar"
+    - Responsividade para diferentes resoluções
+
+  - **✅ VALIDAÇÃO**:
+    - ✓ 0 erros de sintaxe
+    - ✓ Interface completamente funcional
+    - ✓ Animações suaves sem travamentos
+    - ✓ Fonte carregando corretamente
+    - ✓ Layout bem organizado e bonito
+
+### Entrada #3 - v1.0.1 (Histórico)
 - **Data:** 2025-10-18
 - **Autor:** Necromante96Official & GitHub Copilot
 - **Arquivo(s) afetado(s):** 

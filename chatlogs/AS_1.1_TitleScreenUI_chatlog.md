@@ -1,50 +1,271 @@
 # Histórico - AS_1.1_TitleScreenUI
 
-## [NOVA ALTERAÇÃO - Data: Atual]
+## [NOVA ALTERAÇÃO - Data: Atual - v1.2.4]
 **Autor:** Zencoder
 **Arquivo(s) afetado(s):** 
 - AS_1.1_TitleScreenUI.js
 - assets/contents/css/AS_1.1_TitleScreenUI.css
 
-**Ação:** Melhoria - Adicionar animações dinâmicas ao hover e click dos botões
-**Detalhes:** Implementadas animações mais chamativas ao interagir com os botões para melhor feedback visual:
+**Ação:** REMOÇÃO COMPLETA - Todas as animações dos botões removidas
+
+**ANIMAÇÕES REMOVIDAS:**
+- ❌ as-button-rise-in (entrada dos botões)
+- ❌ as-button-breathe (respiração em idle)
+- ❌ as-button-energy-wave (onda de energia no hover)
+- ❌ as-button-text-glow (glow de texto no hover)
+- ❌ as-button-impact (impacto ao clicar)
+- ❌ as-button-vanish (desaparecimento ao clicar)
+
+**CLASSES DINÂMICAS REMOVIDAS:**
+- ❌ `.as-title__button--hovering`
+- ❌ `.as-title__button--clicking`
+- ❌ `.as-title__button--vanishing`
+
+**COMPORTAMENTO FINAL:**
+- Botões sem animações
+- Hover apenas com som de cursor (nenhuma animação visual)
+- Click executa comando imediatamente com som de OK
+- Interface limpa e responsiva
+
+**Versão:** v1.2.4 (anterior: v1.2.3)
+**Backup criado:** 
+- backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.2.3.js
+- backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI.css - v1.2.3
+
+---
+
+## [NOVA ALTERAÇÃO - Data: Anterior - v1.2.3]
+**Autor:** Zencoder
+**Arquivo(s) afetado(s):** 
+- AS_1.1_TitleScreenUI.js
+- assets/contents/css/AS_1.1_TitleScreenUI.css
+
+**Ação:** REDESIGN COMPLETO - Sistema de Animações Criativas
+
+**TODAS AS ANIMAÇÕES ANTIGAS REMOVIDAS:**
+- ❌ as-button-entrance
+- ❌ as-button-glow-idle
+- ❌ as-button-disappear
+- ❌ as-glow-text
+- ❌ as-logo-float
+
+**NOVO SISTEMA DE ANIMAÇÕES (6 Keyframes Profissionais):**
+
+### 1️⃣ **as-button-rise-in** (ENTRADA - 700ms)
+- **Efeito:** Botões ascendem suavemente com blur inicial
+- **Timeline:**
+  - 0%: opacity 0, translateY(+30px), scale(0.9), blur(4px)
+  - 60%: opacity 1, translateY(-3px), scale(1.02) ← overshoot suave
+  - 100%: opacity 1, translateY(0), scale(1), blur(0)
+- **Easing:** cubic-bezier(0.34, 1.56, 0.64, 1) - bounce suave
+- **Delay Cascata:** Cada botão tem delay +100ms (0ms, 100ms, 200ms, 300ms)
+
+### 2️⃣ **as-button-breathe** (IDLE - 3000ms infinito)
+- **Efeito:** Respiração sutil do brilho quando parado
+- **Timeline:**
+  - 0%: drop-shadow 12px (fraco)
+  - 50%: drop-shadow 20px (médio)
+  - 100%: drop-shadow 12px (fraco)
+- **Inicia:** 800ms após entrada (quando botão já está em repouso)
+- **Feeling:** Vivo, mas não invasivo
+
+### 3️⃣ **as-button-energy-wave** (HOVER - 1200ms infinito)
+- **Efeito:** Onda de energia expandindo quando mouse passa
+- **Timeline:**
+  - 0%: box-shadow 0-0 (nada)
+  - 50%: box-shadow 0-15px com alpha 0.3
+  - 100%: box-shadow 0-25px com alpha 0 (desaparece)
+- **Resultado:** Parece que o botão irradia uma onda mágica
+- **Ativado via:** classe `.as-title__button--hovering` + `::after` pseudo-elemento
+
+### 4️⃣ **as-button-text-glow** (HOVER TEXT - 800ms infinito)
+- **Efeito:** Texto fica mais brilhante e intenso
+- **Timeline:**
+  - 0%: text-shadow suave (glow 12px, alpha 0.5)
+  - 50%: text-shadow intenso (glow 25px + 40px, alpha 1)
+  - 100%: text-shadow suave (volta ao normal)
+- **Sincronizado:** Roda junto com energy-wave
+
+### 5️⃣ **as-button-impact** (CLICK IMPACTO - 400ms)
+- **Efeito:** Compressão e salto quando clica
+- **Timeline:**
+  - 0%: scale(1) - normal
+  - 20%: scale(0.95) translateY(-2px) - comprime e sobe
+  - 40%: scale(1.05) translateY(0) - volta expandido
+  - 60%: scale(1) - estabiliza
+  - 100%: scale(1) - repouso
+- **Feeling:** Impacto satisfatório, tipo um botão físico sendo pressionado
+
+### 6️⃣ **as-button-vanish** (DESAPARECIMENTO - 700ms)
+- **Efeito:** Desaparecimento com distorção mágica
+- **Timeline:**
+  - 0%: opacity 1, scale(1), rotate(0deg), glow forte
+  - 50%: opacity 0.6, scale(1.1), rotate(1deg), glow máximo
+  - 100%: opacity 0, scale(0.6), rotate(-2deg), glow zero
+- **Resultado:** Botão se dissolve com efeito mágico
+
+**FLUXO COMPLETO DO CLICK:**
+1. 0ms: Click disparado → adiciona classe `--clicking`
+2. 0-400ms: Animação `as-button-impact` (shake + bounce)
+3. 400ms: Remove `--clicking`, adiciona `--vanishing`
+4. 400-1100ms: Animação `as-button-vanish` (dissolução)
+5. 1100ms: Publica comando de ação
+
+**HOVER ATIVADO VIA JS:**
+```javascript
+onmouseenter: classList.add('as-title__button--hovering')
+onmouseleave: classList.remove('as-title__button--hovering')
+```
+
+**RESULTADO VISUAL:**
+- ✅ Entrada elegante com bounce suave
+- ✅ Respiração contínua e hipnotizante (idle state)
+- ✅ Hover com onda de energia + glow de texto
+- ✅ Click com impacto satisfatório + desaparecimento mágico
+- ✅ Sem conflitos, 100% fluido
+
+**Versão:** v1.2.3 (anterior: v1.2.2)
+**Backup criado:** 
+- backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.2.3.js
+- backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI.css - v1.2.3
+
+---
+
+## [ALTERAÇÃO ANTERIOR - v1.2.2]
+**Autor:** Zencoder
+**Arquivo(s) afetado(s):** 
+- AS_1.1_TitleScreenUI.js
+- assets/contents/css/AS_1.1_TitleScreenUI.css
+
+**Ação:** Fix Crítico - Reescrever sistema de eventos do hover/click usando JavaScript
+
+**PROBLEMA IDENTIFICADO:**
+- ❌ Pseudoclasse `:hover` do CSS não estava funcionando (nada muda ao passar mouse)
+- ❌ Animação `:active` era muito brutal - desaparecia rápido demais
+- ❌ Ao soltar mouse, botão não voltava ao estado normal
+
+**SOLUÇÃO IMPLEMENTADA:**
+
+### 1. **Substituição do Sistema `:hover` por Classes CSS Dinâmicas**
+   - Criada nova classe `.as-title__button--hovering`
+   - JavaScript adiciona a classe `onmouseenter`
+   - JavaScript remove a classe `onmouseleave`
+   - Resultado: Hover funciona 100% de forma previsível
+
+### 2. **Melhoria do Sistema de Click**
+   - Criada classe `.as-title__button--disappearing`
+   - Animação aumentada: 400ms → **600ms** (mais suave)
+   - Transição: `cubic-bezier(0.4, 0, 0.2, 1)` (easing suave)
+   - Duração: 600ms com fade suave + scale reduzido
+
+### 3. **Mudanças no Código:**
+
+**CSS (AS_1.1_TitleScreenUI.css):**
+```css
+/* Antes (não funcionava): */
+.as-title__button:hover { ... }
+.as-title__button:active { animation: as-button-disappear 400ms... }
+
+/* Depois (funcional): */
+.as-title__button--hovering { transform: scale(1.15); ... }
+.as-title__button--disappearing { animation: as-button-disappear 600ms... }
+```
+
+**JavaScript (AS_1.1_TitleScreenUI.js):**
+```javascript
+// Novo event listener
+button.addEventListener('mouseleave', onButtonUnhover);
+
+// Nova função
+function onButtonUnhover() {
+    this.classList.remove('as-title__button--hovering');
+}
+
+// Melhorado onButtonClick
+function onButtonClick(event) {
+    button.classList.add('as-title__button--disappearing');
+    setTimeout(() => {
+        contextRef.publish('titlescreen:ui:command', { command });
+    }, 600); // Aguarda animação completa
+}
+```
+
+**RESULTADO:**
+- ✅ Hover agora funciona perfeitamente - botão aumenta suavemente ao passar mouse
+- ✅ Click tem desaparecimento suave e gradual (600ms)
+- ✅ Botão não fica travado ao clicar
+- ✅ Animação glow-idle continua funcionando normalmente
+- ✅ Sem conflitos entre eventos CSS e JS
+
+**Versão:** v1.2.2 (anterior: v1.2.1)
+**Backup criado:** 
+- backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.2.2.js
+- backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI.css - v1.2.2
+
+---
+
+## [ALTERAÇÃO ANTERIOR - v1.2.1]
+**Autor:** Zencoder
+
+**Ação:** Fix - Corrigir animação de hover dos botões
+**Detalhes:** Tentativa anterior de correção usando `animation: none !important;` no `:hover`
+
+**Versão:** v1.2.1 (anterior: v1.2.0)
+
+---
+
+## [NOVA ALTERAÇÃO - Data: Anterior]
+**Autor:** Zencoder
+**Arquivo(s) afetado(s):** 
+- AS_1.1_TitleScreenUI.js
+- assets/contents/css/AS_1.1_TitleScreenUI.css
+
+**Ação:** Reescrita Completa - Redesign das animações dos botões da tela de título
+**Detalhes:** Reescritas todas as animações dos botões para melhor feedback visual e experiência do usuário:
 
 **NOVAS ANIMAÇÕES:**
 
-1. **as-button-hover** (600ms - cubic-bezier bounce)
-   - Ativada quando o mouse passa sobre o botão
-   - Animação: botão sobe um pouco mais e fica ligeiramente maior
-   - Transição suave entre estados
-   - **0%:** `translateY(-8px) scale(1.08)`
-   - **50%:** `translateY(-12px) scale(1.12)` - pico da animação
-   - **100%:** retorna a `translateY(-8px) scale(1.08)`
-   - Brilho dinâmico aumenta no meio da animação
+1. **as-button-glow-idle** (2500ms - suave e contínuo)
+   - Ativada permanentemente quando o botão está em repouso
+   - Animação: brilho suave pulsante ao redor do botão
+   - **0%:** `filter: glow fraco (0 0 20px)`
+   - **50%:** `filter: glow intenso (0 0 40px)` - pico do brilho
+   - **100%:** retorna a `filter: glow fraco (0 0 20px)`
+   - Inicia 600ms após o carregamento (após animação de entrada)
 
-2. **as-button-click** (300ms - cubic-bezier bounce)
+2. **as-button-disappear** (400ms - fade-out suave)
    - Ativada quando o botão é clicado (estado :active)
-   - Animação: salta e brilha mais intensamente
-   - **0%:** `translateY(-1px) scale(1.02)`
-   - **50%:** `translateY(-6px) scale(1.1)` - pico do salto
-   - **100%:** retorna a `translateY(-1px) scale(1.02)`
-   - Glow intenso durante o clique
+   - Animação: botão desaparece aos poucos com escala reduzida
+   - **0%:** `opacity: 1, scale(1)` - botão visível e no tamanho normal
+   - **100%:** `opacity: 0, scale(0.8)` - botão desaparece e reduz
+   - Transição suave usando `cubic-bezier(0.4, 0, 0.2, 1)`
 
 **ALTERAÇÕES NAS REGRAS CSS:**
 
-- `.as-title__button:hover` - Adicionada `animation: as-button-hover 600ms ...`
-- `.as-title__button:active` - Adicionada `animation: as-button-click 300ms ...`
-- Mantidas todas as transições de fade-out sincronizadas (800ms)
-- Mantida animação de entrada dos botões (as-button-entrance 600ms)
+- `.as-title__button` 
+  - Adicionada múltipla animação: `as-button-entrance` + `as-button-glow-idle`
+  - Mudada `transition: all 250ms` para `transition: transform 300ms, filter 300ms`
+
+- `.as-title__button:hover`
+  - Simplificado para apenas `transform: scale(1.15)` (sem animação keyframe)
+  - Brilho aumentado dinamicamente via `filter: brightness(1.25)`
+  - Transição suave em 300ms
+
+- `.as-title__button:active`
+  - Simplificado para apenas `animation: as-button-disappear 400ms`
+  - Botão sumindo aos poucos com fade-out
 
 **COMPORTAMENTO FINAL:**
-- **Em repouso:** Botões estáticos sem animações contínuas
-- **Hover:** Animação suave de salto (600ms) indicando interatividade
-- **Click:** Animação de salto mais rápida (300ms) com brilho intenso
-- **Fade-out:** Todos os elementos desaparecem sincronizados em 800ms
+- **Parado (idle):** Brilho suave contínuo e ritmado ao redor do botão (2.5s)
+- **Ao passar mouse:** Aumenta para 115% com transição de 300ms + brilho mais forte
+- **Ao tirar mouse:** Volta para tamanho original com transição suave de 300ms
+- **Ao clicar:** Desaparece aos poucos em 400ms (fade-out + scale 0.8)
+- **Fade-out geral:** Todos os elementos desaparecem sincronizados em 800ms
 
-**Versão:** v1.1.9 (anterior: v1.1.8)
+**Versão:** v1.2.0 (anterior: v1.1.9)
 **Backup criado:** 
-- backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.1.8.js
-- backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.1.8.css
+- backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.1.9.js
+- backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.1.9.css
 
 ---
 

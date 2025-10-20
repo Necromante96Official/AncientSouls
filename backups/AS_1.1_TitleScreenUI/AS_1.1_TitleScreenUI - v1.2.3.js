@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.2.4 ☆ Interface HTML da tela de título (layout medieval fantástico)
+ * @plugindesc v1.2.3 ☆ Interface HTML da tela de título (layout medieval fantástico)
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.0_TitleScreen
  * 
@@ -134,7 +134,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.1_TitleScreenUI';
-    const MODULE_VERSION = '1.2.4';
+    const MODULE_VERSION = '1.2.3';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     // Carregar parâmetros do plugin (padrões estáticos)
@@ -379,10 +379,13 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         if (AudioManager.systemAudioContext) {
             SoundManager.playCursor();
         }
+        // Adicionar classe CSS para hover
+        this.classList.add('as-title__button--hovering');
     }
 
     function onButtonUnhover() {
-        // Sem efeitos - apenas feedback sonoro
+        // Remover classe CSS quando sair do botão
+        this.classList.remove('as-title__button--hovering');
     }
 
     function onButtonClick(event) {
@@ -397,6 +400,25 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
             SoundManager.playOk();
         }
         
+        // Remover hover ao clicar
+        button.classList.remove('as-title__button--hovering');
+        
+        // Remover classe de hover de outros botões
+        buttons.forEach(btn => {
+            if (btn !== button) {
+                btn.classList.remove('as-title__button--hovering');
+            }
+        });
+        
+        // Adicionar efeito de impacto
+        button.classList.add('as-title__button--clicking');
+        
+        // Após impacto, iniciar desaparecimento
+        setTimeout(() => {
+            button.classList.remove('as-title__button--clicking');
+            button.classList.add('as-title__button--vanishing');
+        }, 400);
+        
         // Obter configurações atuais
         const settings = getAnimationSettings();
         
@@ -405,8 +427,10 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
             fadeOutMusic(settings.musicFadeDuration);
         }
         
-        // Publicar comando imediatamente (sem animações)
-        contextRef.publish('titlescreen:ui:command', { command });
+        // Aguardar o fim da animação antes de publicar comando
+        setTimeout(() => {
+            contextRef.publish('titlescreen:ui:command', { command });
+        }, 1100); // 400ms (impacto) + 700ms (desaparecimento)
     }
 
     function fadeOutMusic(duration) {

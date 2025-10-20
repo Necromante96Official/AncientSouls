@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.2.4 ☆ Interface HTML da tela de título (layout medieval fantástico)
+ * @plugindesc v1.2.1 ☆ Interface HTML da tela de título (layout medieval fantástico)
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.0_TitleScreen
  * 
@@ -134,7 +134,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.1_TitleScreenUI';
-    const MODULE_VERSION = '1.2.4';
+    const MODULE_VERSION = '1.2.1';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     // Carregar parâmetros do plugin (padrões estáticos)
@@ -370,7 +370,6 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         buttons.forEach(button => {
             button.addEventListener('click', onButtonClick);
             button.addEventListener('mouseenter', onButtonHover);
-            button.addEventListener('mouseleave', onButtonUnhover);
         });
     }
 
@@ -381,13 +380,8 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         }
     }
 
-    function onButtonUnhover() {
-        // Sem efeitos - apenas feedback sonoro
-    }
-
     function onButtonClick(event) {
-        const button = event.currentTarget;
-        const command = button.dataset.command;
+        const command = event.currentTarget.dataset.command;
         if (!command) {
             return;
         }
@@ -405,7 +399,6 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
             fadeOutMusic(settings.musicFadeDuration);
         }
         
-        // Publicar comando imediatamente (sem animações)
         contextRef.publish('titlescreen:ui:command', { command });
     }
 

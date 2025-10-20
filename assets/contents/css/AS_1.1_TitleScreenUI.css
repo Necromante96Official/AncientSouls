@@ -8,7 +8,7 @@
 }
 
 * {
-    font-family: 'Times New Roman', serif;
+    font-family: 'Pixel Times', 'Times New Roman', serif;
     box-sizing: border-box;
 }
 
@@ -20,7 +20,8 @@ img {
 }
 
 img.as-title__logo,
-img.as-title__base-logo {
+img.as-title__base-logo,
+img.as-title__soul-icon {
     image-rendering: high-quality;
     image-rendering: -webkit-optimize-contrast;
     backface-visibility: hidden;
@@ -46,6 +47,16 @@ img.as-title__base-logo {
 #as-title-root.as-title--visible {
     opacity: 1;
     pointer-events: auto;
+}
+
+/* Animação de flutuação para logo e almas */
+@keyframes as-logo-float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
 }
 
 .as-title__container {
@@ -84,6 +95,27 @@ img.as-title__base-logo {
     position: relative;
     z-index: 2;
     transition: opacity 800ms cubic-bezier(0.4, 0, 0.2, 1);
+    animation: as-logo-float 3.5s ease-in-out infinite;
+}
+
+.as-title__soul-icon {
+    position: absolute;
+    top: 50%;
+    width: min(200px, 30vw);
+    height: auto;
+    user-select: none;
+    pointer-events: none;
+    filter: drop-shadow(0 8px 24px rgba(255, 157, 66, 0.4));
+    animation: as-logo-float 4s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+.as-title__soul-icon--dark {
+    left: -20%;
+}
+
+.as-title__soul-icon--light {
+    right: -20%;
 }
 
 .as-title__commands {
@@ -107,8 +139,8 @@ img.as-title__base-logo {
     border-radius: 0;
     outline: none;
     color: var(--as-gold);
-    padding: 24px 48px;
-    font-size: 1.2rem;
+    padding: 32px 56px;
+    font-size: 1.4rem;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -118,8 +150,8 @@ img.as-title__base-logo {
     transition: transform 200ms ease-out, 
                 filter 200ms ease-out;
     filter: drop-shadow(0 4px 16px rgba(6, 3, 12, 0.6));
-    min-width: 220px;
-    min-height: 100px;
+    min-width: 260px;
+    min-height: 120px;
     text-align: center;
     display: flex;
     align-items: center;
@@ -127,6 +159,7 @@ img.as-title__base-logo {
     box-shadow: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    animation: as-button-float 3s ease-in-out infinite;
 }
 
 .as-title__button-frame {
@@ -154,7 +187,15 @@ img.as-title__base-logo {
                  0 0 12px rgba(255, 157, 66, 0.4);
 }
 
-
+/* Animação de flutuação suave para botões */
+@keyframes as-button-float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
 
 .as-title__button:disabled {
     opacity: 0.4;
@@ -183,10 +224,10 @@ img.as-title__base-logo {
     }
 
     .as-title__button {
-        min-width: 200px;
-        min-height: 90px;
-        padding: 22px 44px;
-        font-size: 1.1rem;
+        min-width: 240px;
+        min-height: 110px;
+        padding: 30px 52px;
+        font-size: 1.3rem;
     }
 }
 
@@ -197,10 +238,10 @@ img.as-title__base-logo {
     }
 
     .as-title__button {
-        min-width: 180px;
-        min-height: 85px;
-        padding: 20px 40px;
-        font-size: 1rem;
+        min-width: 220px;
+        min-height: 105px;
+        padding: 28px 48px;
+        font-size: 1.2rem;
     }
 
     .as-title__logo {
@@ -223,10 +264,10 @@ img.as-title__base-logo {
     }
 
     .as-title__button {
-        font-size: 0.95rem;
+        font-size: 1.1rem;
         letter-spacing: 1.5px;
-        padding: 18px 36px;
-        min-width: 160px;
-        min-height: 80px;
+        padding: 26px 44px;
+        min-width: 200px;
+        min-height: 100px;
     }
 }

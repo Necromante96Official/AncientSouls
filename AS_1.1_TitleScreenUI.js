@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.2.4 ☆ Interface HTML da tela de título (layout medieval fantástico)
+ * @plugindesc v1.2.6 ☆ Interface HTML da tela de título (layout medieval fantástico)
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.0_TitleScreen
  * 
@@ -86,6 +86,84 @@
  * @decimals 1
  * @default 4.0
  * 
+ * @param darkSoulEnabled
+ * @text Exibir Dark Soul (Esquerda)
+ * @desc Ativa/desativa a exibição da imagem Dark Soul no lado esquerdo
+ * @type boolean
+ * @default true
+ * 
+ * @param darkSoulOffsetX
+ * @text Dark Soul - Deslocamento Horizontal
+ * @desc Ajusta a posição horizontal da Dark Soul (valores negativos = esquerda)
+ * @type number
+ * @min -300
+ * @max 300
+ * @default 0
+ * 
+ * @param darkSoulOffsetY
+ * @text Dark Soul - Deslocamento Vertical
+ * @desc Ajusta a posição vertical da Dark Soul (valores negativos = cima)
+ * @type number
+ * @min -300
+ * @max 300
+ * @default 0
+ * 
+ * @param darkSoulScale
+ * @text Dark Soul - Escala
+ * @desc Ajusta o tamanho da Dark Soul
+ * @type number
+ * @min 0.1
+ * @max 5.0
+ * @decimals 2
+ * @default 1.0
+ * 
+ * @param darkSoulOpacity
+ * @text Dark Soul - Opacidade
+ * @desc Define a transparência da Dark Soul (0 = invisível, 100 = opaco)
+ * @type number
+ * @min 0
+ * @max 100
+ * @default 100
+ * 
+ * @param lightSoulEnabled
+ * @text Exibir Light Soul (Direita)
+ * @desc Ativa/desativa a exibição da imagem Light Soul no lado direito
+ * @type boolean
+ * @default true
+ * 
+ * @param lightSoulOffsetX
+ * @text Light Soul - Deslocamento Horizontal
+ * @desc Ajusta a posição horizontal da Light Soul (valores negativos = esquerda)
+ * @type number
+ * @min -300
+ * @max 300
+ * @default 0
+ * 
+ * @param lightSoulOffsetY
+ * @text Light Soul - Deslocamento Vertical
+ * @desc Ajusta a posição vertical da Light Soul (valores negativos = cima)
+ * @type number
+ * @min -300
+ * @max 300
+ * @default 0
+ * 
+ * @param lightSoulScale
+ * @text Light Soul - Escala
+ * @desc Ajusta o tamanho da Light Soul
+ * @type number
+ * @min 0.1
+ * @max 5.0
+ * @decimals 2
+ * @default 1.0
+ * 
+ * @param lightSoulOpacity
+ * @text Light Soul - Opacidade
+ * @desc Define a transparência da Light Soul (0 = invisível, 100 = opaco)
+ * @type number
+ * @min 0
+ * @max 100
+ * @default 100
+ * 
  * @param enableMusicFade
  * @text Ativar Fade de Música
  * @desc Fade out suave da música ao sair da tela de título
@@ -119,6 +197,21 @@
  * - baseLogoScale: Redimensiona o fundo (multiplicador)
  * - baseLogoOpacity: Transparência do fundo (0-100)
  * 
+ * PARÂMETROS DAS ALMAS (SOUL ICONS):
+ * Dark Soul (Esquerda):
+ * - darkSoulEnabled: Ativa/desativa exibição
+ * - darkSoulOffsetX: Posição horizontal (px)
+ * - darkSoulOffsetY: Posição vertical (px)
+ * - darkSoulScale: Tamanho (multiplicador)
+ * - darkSoulOpacity: Transparência (0-100)
+ * 
+ * Light Soul (Direita):
+ * - lightSoulEnabled: Ativa/desativa exibição
+ * - lightSoulOffsetX: Posição horizontal (px)
+ * - lightSoulOffsetY: Posição vertical (px)
+ * - lightSoulScale: Tamanho (multiplicador)
+ * - lightSoulOpacity: Transparência (0-100)
+ * 
  * ANIMAÇÕES E EFEITOS:
  * - enableLogoAnimation: Ativa/desativa animação de flutuação
  * - animationSpeed: Velocidade da animação (segundos)
@@ -134,7 +227,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.1_TitleScreenUI';
-    const MODULE_VERSION = '1.2.4';
+    const MODULE_VERSION = '1.2.6';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     // Carregar parâmetros do plugin (padrões estáticos)
@@ -148,6 +241,19 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
     const baseLogoOffsetY = Number(parameters['baseLogoOffsetY'] || 0);
     const baseLogoScale = Number(parameters['baseLogoScale'] || 1.0);
     const baseLogoOpacity = Number(parameters['baseLogoOpacity'] || 100) / 100;
+    
+    // Parâmetros das Soul Icons (Almas)
+    const darkSoulEnabled = parameters['darkSoulEnabled'] === 'true';
+    const darkSoulOffsetX = Number(parameters['darkSoulOffsetX'] || 0);
+    const darkSoulOffsetY = Number(parameters['darkSoulOffsetY'] || 0);
+    const darkSoulScale = Number(parameters['darkSoulScale'] || 1.0);
+    const darkSoulOpacity = Number(parameters['darkSoulOpacity'] || 100) / 100;
+    
+    const lightSoulEnabled = parameters['lightSoulEnabled'] === 'true';
+    const lightSoulOffsetX = Number(parameters['lightSoulOffsetX'] || 0);
+    const lightSoulOffsetY = Number(parameters['lightSoulOffsetY'] || 0);
+    const lightSoulScale = Number(parameters['lightSoulScale'] || 1.0);
+    const lightSoulOpacity = Number(parameters['lightSoulOpacity'] || 100) / 100;
     
     // Função para obter configurações dinâmicas do ConfigManager
     function getAnimationSettings() {
@@ -217,6 +323,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         rootElement.setAttribute('aria-hidden', 'false');
         focusFirstButton();
         attachKeyboardSupport();
+        requestFullscreenMode();
     }
 
     function handleSceneTerminate() {
@@ -226,6 +333,15 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         rootElement.classList.remove('as-title--visible');
         rootElement.setAttribute('aria-hidden', 'true');
         detachKeyboardSupport();
+    }
+
+    function requestFullscreenMode() {
+        const docElement = document.documentElement;
+        if (!document.fullscreenElement && docElement.requestFullscreen) {
+            docElement.requestFullscreen().catch(err => {
+                logger.warn(`Fullscreen request falhou: ${err.message}`);
+            });
+        }
     }
 
     function injectStyles() {
@@ -253,6 +369,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         document.body.appendChild(rootElement);
         buttons = Array.from(rootElement.querySelectorAll('[data-command]'));
         applyLogoCustomization();
+        applySoulIconCustomization();
         logger.info('Markup HTML inserido na árvore DOM.');
     }
 
@@ -306,6 +423,43 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         }
         if (settings.enableLogoAnimation) {
             logger.info(`✨ Animação ativada: velocidade ${settings.animationSpeed}s`);
+        }
+    }
+
+    function applySoulIconCustomization() {
+        // Aplicar customizações nas Soul Icons (Almas)
+        if (!rootElement) {
+            return;
+        }
+
+        // Customizar Dark Soul (esquerda)
+        const darkSoul = rootElement.querySelector('#as-dark-soul');
+        if (darkSoul) {
+            if (darkSoulEnabled) {
+                darkSoul.style.display = 'block';
+                // Transform: translateY(-50%) para centralizar verticalmente + offsets + escala + flip
+                const darkTransform = `translateY(calc(-50% + ${darkSoulOffsetY}px)) translateX(${darkSoulOffsetX}px) scale(${darkSoulScale}) scaleX(-1)`;
+                darkSoul.style.transform = darkTransform;
+                darkSoul.style.opacity = darkSoulOpacity;
+                logger.info(`🌙 Dark Soul: offset(${darkSoulOffsetX}px, ${darkSoulOffsetY}px), escala(${darkSoulScale}), opacidade(${darkSoulOpacity})`);
+            } else {
+                darkSoul.style.display = 'none';
+            }
+        }
+
+        // Customizar Light Soul (direita)
+        const lightSoul = rootElement.querySelector('#as-light-soul');
+        if (lightSoul) {
+            if (lightSoulEnabled) {
+                lightSoul.style.display = 'block';
+                // Transform: translateY(-50%) para centralizar verticalmente + offsets + escala
+                const lightTransform = `translateY(calc(-50% + ${lightSoulOffsetY}px)) translateX(${lightSoulOffsetX}px) scale(${lightSoulScale})`;
+                lightSoul.style.transform = lightTransform;
+                lightSoul.style.opacity = lightSoulOpacity;
+                logger.info(`☀️ Light Soul: offset(${lightSoulOffsetX}px, ${lightSoulOffsetY}px), escala(${lightSoulScale}), opacidade(${lightSoulOpacity})`);
+            } else {
+                lightSoul.style.display = 'none';
+            }
         }
     }
 

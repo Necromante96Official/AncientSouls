@@ -1,9 +1,3 @@
-@font-face {
-    font-family: 'Pixel Times';
-    src: url('fonts/pixel-times.ttf') format('truetype');
-    font-display: swap;
-}
-
 :root {
     --as-gold: #ffd89f;
     --as-gold-bright: #ffe8c4;
@@ -14,7 +8,7 @@
 }
 
 * {
-    font-family: 'Pixel Times', 'Times New Roman', serif;
+    font-family: 'Times New Roman', serif;
     box-sizing: border-box;
 }
 
@@ -105,7 +99,7 @@ img.as-title__base-logo {
 
 .as-title__button {
     appearance: none;
-    background-image: url('../resources/botao.png');
+    background-image: url('../../resources/botao.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

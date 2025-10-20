@@ -3,17 +3,14 @@
 ## [19/10/2025]
 **Autor:** GitHub Copilot
 **Arquivo(s) afetado(s):** AS_1.2_TitleOptions.js
-**Ação:** Debug - Sistema completo de logging para identificar crash
-**Detalhes:** Implementado sistema extensivo de logs em todas as funções críticas:
-- Logs detalhados em cada etapa do Scene_Options.start (9 pontos de verificação)
-- Logs em bindControls para rastrear vinculação de cada controle
-- Logs em bindSlider, bindSelect, bindToggle para identificar elementos não encontrados
-- Warning logs quando elementos HTML não são localizados
-- Console.error para expor erro completo no DevTools
-- Sistema permite identificar exatamente onde o crash ocorre
-- Facilita debug e correção de problemas de inicialização
+**Ação:** Correção - Fallback seguro e carregamento resiliente de assets
+**Detalhes:**
+- Adicionado plano de contingência que restaura a janela padrão caso a UI HTML falhe, evitando fechamento do jogo.
+- Aprimorado o loader de assets para localizar CSS/HTML mesmo quando `process.mainModule` não está disponível no NW.js moderno.
+- Mantidos logs detalhados no fluxo de inicialização para facilitar diagnósticos futuros.
+- Fallback garante que o botão cancelar e a Window_Options voltem a ficar visíveis em erro crítico.
 **Versão:** v1.1.4 (anterior: v1.1.3)
-**Backup criado:** backups/AS_1.2_TitleOptions/AS_1.2_TitleOptions - v1.1.3.js
+**Backup criado:** backups/AS_1.2_TitleOptions/AS_1.2_TitleOptions - v1.1.3 - Fix 1.js
 
 ---
 

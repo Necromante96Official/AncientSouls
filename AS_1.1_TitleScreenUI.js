@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.2.6 ☆ Interface HTML da tela de título (layout medieval fantástico)
+ * @plugindesc v1.2.7 ☆ Interface HTML da tela de título (layout medieval fantástico)
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.0_TitleScreen
  * 
@@ -227,7 +227,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.1_TitleScreenUI';
-    const MODULE_VERSION = '1.2.6';
+    const MODULE_VERSION = '1.2.7';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     // Carregar parâmetros do plugin (padrões estáticos)
@@ -398,6 +398,9 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         // Não aplicamos aqui porque afetaria o baseLogo também
         // Vamos aplicar diretamente no logoImg
         logoSection.style.transform = 'translate(-50%, -50%)';
+        logoSection.style.width = 'min(960px, 82vw)';
+        logoSection.style.height = 'min(620px, 80vh)';
+        logoSection.style.maxWidth = '100%';
 
         // Aplicar animação se habilitada (ler do ConfigManager)
         if (settings.enableLogoAnimation) {
@@ -407,7 +410,12 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         }
 
         // Aplicar deslocamento e escala ao logo principal
-        const logoTransform = `translate(${logoOffsetX}px, ${logoOffsetY}px) scale(${logoScale})`;
+        logoImg.style.position = 'absolute';
+        logoImg.style.top = '50%';
+        logoImg.style.left = '50%';
+        logoImg.style.width = '60%';
+        logoImg.style.maxWidth = '70%';
+        const logoTransform = `translate(-50%, -50%) translate(${logoOffsetX}px, ${logoOffsetY}px) scale(${logoScale})`;
         logoImg.style.transform = logoTransform;
         logoImg.style.transformOrigin = 'center center';
         
@@ -437,8 +445,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         if (darkSoul) {
             if (darkSoulEnabled) {
                 darkSoul.style.display = 'block';
-                // Transform: translateY(-50%) para centralizar verticalmente + offsets + escala + flip
-                const darkTransform = `translateY(calc(-50% + ${darkSoulOffsetY}px)) translateX(${darkSoulOffsetX}px) scale(${darkSoulScale}) scaleX(-1)`;
+                const darkTransform = `translate(-150%, -50%) translate(${darkSoulOffsetX}px, ${darkSoulOffsetY}px) scale(${darkSoulScale}) scaleX(-1)`;
                 darkSoul.style.transform = darkTransform;
                 darkSoul.style.opacity = darkSoulOpacity;
                 logger.info(`🌙 Dark Soul: offset(${darkSoulOffsetX}px, ${darkSoulOffsetY}px), escala(${darkSoulScale}), opacidade(${darkSoulOpacity})`);
@@ -452,8 +459,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         if (lightSoul) {
             if (lightSoulEnabled) {
                 lightSoul.style.display = 'block';
-                // Transform: translateY(-50%) para centralizar verticalmente + offsets + escala
-                const lightTransform = `translateY(calc(-50% + ${lightSoulOffsetY}px)) translateX(${lightSoulOffsetX}px) scale(${lightSoulScale})`;
+                const lightTransform = `translate(150%, -50%) translate(${lightSoulOffsetX}px, ${lightSoulOffsetY}px) scale(${lightSoulScale})`;
                 lightSoul.style.transform = lightTransform;
                 lightSoul.style.opacity = lightSoulOpacity;
                 logger.info(`☀️ Light Soul: offset(${lightSoulOffsetX}px, ${lightSoulOffsetY}px), escala(${lightSoulScale}), opacidade(${lightSoulOpacity})`);

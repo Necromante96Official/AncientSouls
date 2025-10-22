@@ -398,6 +398,9 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         // Não aplicamos aqui porque afetaria o baseLogo também
         // Vamos aplicar diretamente no logoImg
         logoSection.style.transform = 'translate(-50%, -50%)';
+        logoSection.style.width = 'min(960px, 82vw)';
+        logoSection.style.height = 'min(620px, 80vh)';
+        logoSection.style.maxWidth = '100%';
 
         // Aplicar animação se habilitada (ler do ConfigManager)
         if (settings.enableLogoAnimation) {
@@ -407,7 +410,12 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         }
 
         // Aplicar deslocamento e escala ao logo principal
-        const logoTransform = `translate(${logoOffsetX}px, ${logoOffsetY}px) scale(${logoScale})`;
+        logoImg.style.position = 'absolute';
+        logoImg.style.top = '50%';
+        logoImg.style.left = '50%';
+        logoImg.style.width = '60%';
+        logoImg.style.maxWidth = '70%';
+        const logoTransform = `translate(-50%, -50%) translate(${logoOffsetX}px, ${logoOffsetY}px) scale(${logoScale})`;
         logoImg.style.transform = logoTransform;
         logoImg.style.transformOrigin = 'center center';
         
@@ -437,7 +445,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         if (darkSoul) {
             if (darkSoulEnabled) {
                 darkSoul.style.display = 'block';
-                const darkTransform = `translateY(-50%) translateX(${darkSoulOffsetX}px) translateY(${darkSoulOffsetY}px) scale(${darkSoulScale}) scaleX(-1)`;
+                const darkTransform = `translate(-150%, -50%) translate(${darkSoulOffsetX}px, ${darkSoulOffsetY}px) scale(${darkSoulScale}) scaleX(-1)`;
                 darkSoul.style.transform = darkTransform;
                 darkSoul.style.opacity = darkSoulOpacity;
                 darkSoul.style.transformOrigin = 'center center';
@@ -452,7 +460,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         if (lightSoul) {
             if (lightSoulEnabled) {
                 lightSoul.style.display = 'block';
-                const lightTransform = `translateY(-50%) translateX(${lightSoulOffsetX}px) translateY(${lightSoulOffsetY}px) scale(${lightSoulScale})`;
+                const lightTransform = `translate(150%, -50%) translate(${lightSoulOffsetX}px, ${lightSoulOffsetY}px) scale(${lightSoulScale})`;
                 lightSoul.style.transform = lightTransform;
                 lightSoul.style.opacity = lightSoulOpacity;
                 lightSoul.style.transformOrigin = 'center center';
@@ -473,15 +481,15 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
         
         // Aplicar estilos inline
         baseLogo.style.position = 'absolute';
-        baseLogo.style.top = '0';
-        baseLogo.style.left = '0';
-        baseLogo.style.transform = `translate(${baseLogoOffsetX}px, ${baseLogoOffsetY}px) scale(${baseLogoScale})`;
+        baseLogo.style.top = '50%';
+        baseLogo.style.left = '50%';
+        baseLogo.style.transform = `translate(-50%, -50%) translate(${baseLogoOffsetX}px, ${baseLogoOffsetY}px) scale(${baseLogoScale})`;
         baseLogo.style.transformOrigin = 'center center';
         baseLogo.style.opacity = baseLogoOpacity;
         baseLogo.style.pointerEvents = 'none';
         baseLogo.style.userSelect = 'none';
         baseLogo.style.zIndex = '0';
-        baseLogo.style.width = 'min(450px, 55vw)';
+        baseLogo.style.width = '100%';
         baseLogo.style.maxWidth = '100%';
         baseLogo.style.height = 'auto';
         

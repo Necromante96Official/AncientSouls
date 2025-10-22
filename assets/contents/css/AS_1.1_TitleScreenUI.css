@@ -80,20 +80,26 @@ img.as-title__soul-icon {
     position: absolute;
     top: 50%;
     left: 50%;
+    width: min(960px, 82vw);
+    height: min(620px, 80vh);
+    max-width: 100%;
     transform: translate(-50%, -50%);
     z-index: 3;
 }
 
 .as-title__logo {
-    width: min(450px, 55vw);
-    max-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    max-width: 70%;
     height: auto;
     filter: drop-shadow(0 8px 24px rgba(255, 157, 66, 0.6))
             drop-shadow(0 0 48px rgba(255, 157, 66, 0.3));
     user-select: none;
     pointer-events: none;
-    position: relative;
     z-index: 2;
+    transform: translate(-50%, -50%);
     transition: opacity 800ms cubic-bezier(0.4, 0, 0.2, 1);
     animation: as-logo-float 3.5s ease-in-out infinite;
 }
@@ -101,7 +107,9 @@ img.as-title__soul-icon {
 .as-title__soul-icon {
     position: absolute;
     top: 50%;
-    width: min(200px, 30vw);
+    left: 50%;
+    width: 32%;
+    max-width: 32%;
     height: auto;
     user-select: none;
     pointer-events: none;
@@ -111,11 +119,11 @@ img.as-title__soul-icon {
 }
 
 .as-title__soul-icon--dark {
-    left: -20%;
+    transform: translate(-150%, -50%);
 }
 
 .as-title__soul-icon--light {
-    right: -20%;
+    transform: translate(150%, -50%);
 }
 
 .as-title__commands {

@@ -108,8 +108,8 @@ img.as-title__soul-icon {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 32%;
-    max-width: 32%;
+    width: 36%;
+    max-width: 340px;
     height: auto;
     user-select: none;
     pointer-events: none;
@@ -119,11 +119,11 @@ img.as-title__soul-icon {
 }
 
 .as-title__soul-icon--dark {
-    transform: translate(-150%, -50%);
+    transform: translate(-210%, -40%);
 }
 
 .as-title__soul-icon--light {
-    transform: translate(150%, -50%);
+    transform: translate(210%, -46%);
 }
 
 .as-title__commands {
@@ -131,11 +131,11 @@ img.as-title__soul-icon {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 28px;
     width: 100%;
-    max-width: 100%;
+    max-width: min(960px, 90vw);
     flex-wrap: nowrap;
-    padding: 0 32px;
+    padding: 0 24px;
     margin: 0 auto;
     transition: opacity 800ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -147,8 +147,8 @@ img.as-title__soul-icon {
     border-radius: 0;
     outline: none;
     color: var(--as-gold);
-    padding: 32px 56px;
-    font-size: 1.4rem;
+    padding: 30px 54px;
+    font-size: 1.35rem;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -158,8 +158,8 @@ img.as-title__soul-icon {
     transition: transform 200ms ease-out, 
                 filter 200ms ease-out;
     filter: drop-shadow(0 4px 16px rgba(6, 3, 12, 0.6));
-    min-width: 260px;
-    min-height: 120px;
+    min-width: 250px;
+    min-height: 118px;
     text-align: center;
     display: flex;
     align-items: center;

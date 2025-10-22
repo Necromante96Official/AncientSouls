@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.2.9 ☆ Interface HTML da tela de título (layout medieval fantástico)
+ * @plugindesc v1.2.8 ☆ Interface HTML da tela de título (layout medieval fantástico)
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.0_TitleScreen
  * 
@@ -50,8 +50,8 @@
  * @text Deslocamento Vertical do Fundo
  * @desc Ajusta a posição vertical da imagem de fundo
  * @type number
- * @min -20000
- * @max 20000
+ * @min -500
+ * @max 500
  * @default 0
  * 
  * @param baseLogoScale
@@ -96,16 +96,16 @@
  * @text Dark Soul - Deslocamento Horizontal
  * @desc Ajusta a posição horizontal da Dark Soul (valores negativos = esquerda)
  * @type number
- * @min -20000
- * @max 20000
+ * @min -300
+ * @max 300
  * @default 0
  * 
  * @param darkSoulOffsetY
  * @text Dark Soul - Deslocamento Vertical
  * @desc Ajusta a posição vertical da Dark Soul (valores negativos = cima)
  * @type number
- * @min -20000
- * @max 20000
+ * @min -300
+ * @max 300
  * @default 0
  * 
  * @param darkSoulScale
@@ -135,16 +135,16 @@
  * @text Light Soul - Deslocamento Horizontal
  * @desc Ajusta a posição horizontal da Light Soul (valores negativos = esquerda)
  * @type number
- * @min -20000
- * @max 20000
+ * @min -300
+ * @max 300
  * @default 0
  * 
  * @param lightSoulOffsetY
  * @text Light Soul - Deslocamento Vertical
  * @desc Ajusta a posição vertical da Light Soul (valores negativos = cima)
  * @type number
- * @min -20000
- * @max 20000
+ * @min -300
+ * @max 300
  * @default 0
  * 
  * @param lightSoulScale
@@ -227,89 +227,41 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.1_TitleScreenUI';
-    const MODULE_VERSION = '1.2.9';
+    const MODULE_VERSION = '1.2.8';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     // Carregar parâmetros do plugin (padrões estáticos)
     const pluginName = 'AS_1.1_TitleScreenUI';
     const parameters = PluginManager.parameters(pluginName);
-
-    const clamp = (value, min, max) => {
-        if (min === undefined && max === undefined) {
-            return value;
-        }
-        if (min === undefined) {
-            return Math.min(value, max);
-        }
-        if (max === undefined) {
-            return Math.max(value, min);
-        }
-        return Math.min(Math.max(value, min), max);
-    };
-
-    const getNumberParam = (key, defaultValue, min, max) => {
-        const raw = parameters[key];
-        if (raw === undefined || raw === null || raw === '') {
-            return defaultValue;
-        }
-        const parsed = Number(raw);
-        if (!Number.isFinite(parsed)) {
-            return defaultValue;
-        }
-        return clamp(parsed, min, max);
-    };
-
-    const getBooleanParam = (key, defaultValue) => {
-        const raw = parameters[key];
-        if (raw === undefined || raw === null || raw === '') {
-            return defaultValue;
-        }
-        if (raw === 'true') {
-            return true;
-        }
-        if (raw === 'false') {
-            return false;
-        }
-        return defaultValue;
-    };
-
-    const logoOffsetX = getNumberParam('logoOffsetX', 0, -20000, 20000);
-    const logoOffsetY = getNumberParam('logoOffsetY', 0, -20000, 20000);
-    const logoScale = getNumberParam('logoScale', 1.0, 0.1, 5.0);
-    const baseLogoEnabled = getBooleanParam('baseLogoEnabled', true);
-    const baseLogoOffsetX = getNumberParam('baseLogoOffsetX', 0, -20000, 20000);
-    const baseLogoOffsetY = getNumberParam('baseLogoOffsetY', 0, -20000, 20000);
-    const baseLogoScale = getNumberParam('baseLogoScale', 1.0, 0.1, 5.0);
-    const baseLogoOpacity = getNumberParam('baseLogoOpacity', 100, 0, 100) / 100;
-
-    const darkSoulEnabled = getBooleanParam('darkSoulEnabled', true);
-    const darkSoulOffsetX = getNumberParam('darkSoulOffsetX', 0, -20000, 20000);
-    const darkSoulOffsetY = getNumberParam('darkSoulOffsetY', 0, -20000, 20000);
-    const darkSoulScale = getNumberParam('darkSoulScale', 1.0, 0.1, 5.0);
-    const darkSoulOpacity = getNumberParam('darkSoulOpacity', 100, 0, 100) / 100;
-
-    const lightSoulEnabled = getBooleanParam('lightSoulEnabled', true);
-    const lightSoulOffsetX = getNumberParam('lightSoulOffsetX', 0, -20000, 20000);
-    const lightSoulOffsetY = getNumberParam('lightSoulOffsetY', 0, -20000, 20000);
-    const lightSoulScale = getNumberParam('lightSoulScale', 1.0, 0.1, 5.0);
-    const lightSoulOpacity = getNumberParam('lightSoulOpacity', 100, 0, 100) / 100;
-
-    const paramEnableLogoAnimation = getBooleanParam('enableLogoAnimation', true);
-    const paramAnimationSpeed = getNumberParam('animationSpeed', 4.0, 1, 10);
-    const paramEnableMusicFade = getBooleanParam('enableMusicFade', true);
-    const paramMusicFadeDuration = getNumberParam('musicFadeDuration', 1000, 100, 5000);
-
+    const logoOffsetX = Number(parameters['logoOffsetX'] || 0);
+    const logoOffsetY = Number(parameters['logoOffsetY'] || 0);
+    const logoScale = Number(parameters['logoScale'] || 1.0);
+    const baseLogoEnabled = parameters['baseLogoEnabled'] === 'true';
+    const baseLogoOffsetX = Number(parameters['baseLogoOffsetX'] || 0);
+    const baseLogoOffsetY = Number(parameters['baseLogoOffsetY'] || 0);
+    const baseLogoScale = Number(parameters['baseLogoScale'] || 1.0);
+    const baseLogoOpacity = Number(parameters['baseLogoOpacity'] || 100) / 100;
+    
+    // Parâmetros das Soul Icons (Almas)
+    const darkSoulEnabled = parameters['darkSoulEnabled'] === 'true';
+    const darkSoulOffsetX = Number(parameters['darkSoulOffsetX'] || 0);
+    const darkSoulOffsetY = Number(parameters['darkSoulOffsetY'] || 0);
+    const darkSoulScale = Number(parameters['darkSoulScale'] || 1.0);
+    const darkSoulOpacity = Number(parameters['darkSoulOpacity'] || 100) / 100;
+    
+    const lightSoulEnabled = parameters['lightSoulEnabled'] === 'true';
+    const lightSoulOffsetX = Number(parameters['lightSoulOffsetX'] || 0);
+    const lightSoulOffsetY = Number(parameters['lightSoulOffsetY'] || 0);
+    const lightSoulScale = Number(parameters['lightSoulScale'] || 1.0);
+    const lightSoulOpacity = Number(parameters['lightSoulOpacity'] || 100) / 100;
+    
+    // Função para obter configurações dinâmicas do ConfigManager
     function getAnimationSettings() {
-        const configEnableLogoAnimation = ConfigManager.enableLogoAnimation;
-        const configAnimationSpeed = Number(ConfigManager.animationSpeed);
-        const configEnableMusicFade = ConfigManager.enableMusicFade;
-        const configMusicFadeDuration = Number(ConfigManager.musicFadeDuration);
-
         return {
-            enableLogoAnimation: configEnableLogoAnimation !== undefined ? !!configEnableLogoAnimation : paramEnableLogoAnimation,
-            animationSpeed: Number.isFinite(configAnimationSpeed) ? clamp(configAnimationSpeed, 1, 10) : paramAnimationSpeed,
-            enableMusicFade: configEnableMusicFade !== undefined ? !!configEnableMusicFade : paramEnableMusicFade,
-            musicFadeDuration: Number.isFinite(configMusicFadeDuration) ? clamp(configMusicFadeDuration, 100, 5000) : paramMusicFadeDuration
+            enableLogoAnimation: ConfigManager.enableLogoAnimation !== undefined ? ConfigManager.enableLogoAnimation : (parameters['enableLogoAnimation'] !== 'false'),
+            animationSpeed: ConfigManager.animationSpeed || Number(parameters['animationSpeed'] || 4.0),
+            enableMusicFade: ConfigManager.enableMusicFade !== undefined ? ConfigManager.enableMusicFade : (parameters['enableMusicFade'] !== 'false'),
+            musicFadeDuration: ConfigManager.musicFadeDuration || Number(parameters['musicFadeDuration'] || 1000)
         };
     }
 

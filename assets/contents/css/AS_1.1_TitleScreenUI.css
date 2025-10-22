@@ -70,27 +70,27 @@ img.as-title__soul-icon {
     pointer-events: none;
 }
 
-/* Logo Section: posicionada no centro vertical, ligeiramente acima */
+/* Logo Section: CENTRALIZADA NO CÍRCULO DE FOGO (bem no centro da tela) */
 .as-title__logo-section {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 850px;
-    height: 550px;
+    width: 1200px;
+    height: 700px;
     pointer-events: none;
 }
 
-/* Base-logo: moldura dourada que envolve tudo */
+/* Base-logo: moldura dourada BEM GRANDE, centralizada no círculo */
 .as-title__base-logo {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 650px;
+    width: 800px;
     height: auto;
     filter: drop-shadow(0 12px 32px rgba(6, 3, 12, 0.7))
             drop-shadow(0 0 28px rgba(255, 157, 66, 0.3));
@@ -99,13 +99,13 @@ img.as-title__soul-icon {
     z-index: 1;
 }
 
-/* Ancient Souls: nome do jogo dentro da moldura */
+/* Ancient Souls: nome do jogo BEM GRANDE dentro da moldura */
 .as-title__logo {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 500px;
     height: auto;
     filter: drop-shadow(0 8px 24px rgba(255, 157, 66, 0.6))
             drop-shadow(0 0 48px rgba(255, 157, 66, 0.3));
@@ -115,11 +115,11 @@ img.as-title__soul-icon {
     animation: as-logo-float 3.5s ease-in-out infinite;
 }
 
-/* Soul Icons: posicionadas BEM NOS CANTOS, fora da moldura */
+/* Soul Icons: NOS EXTREMOS (bem afastados da moldura) */
 .as-title__soul-icon {
     position: absolute;
     top: 50%;
-    width: 300px;
+    width: 380px;
     height: auto;
     user-select: none;
     pointer-events: none;
@@ -129,35 +129,35 @@ img.as-title__soul-icon {
     z-index: 0;
 }
 
-/* Dark Soul: extremo esquerdo (espelhada) */
+/* Dark Soul: BEM À ESQUERDA (quase na borda) */
 .as-title__soul-icon--dark {
-    left: -250px;
+    left: -280px;
     transform: translateY(-50%) scaleX(-1);
 }
 
-/* Light Soul: extremo direito */
+/* Light Soul: BEM À DIREITA (quase na borda) */
 .as-title__soul-icon--light {
-    right: -250px;
+    right: -280px;
     transform: translateY(-50%);
 }
 
-/* Commands: botões bem embaixo, na horizontal */
+/* Commands: botões BEM NA BASE, alinhados horizontalmente */
 .as-title__commands {
     position: absolute;
-    bottom: 50px;
+    bottom: 60px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 18px;
+    gap: 20px;
     width: auto;
     flex-wrap: nowrap;
     pointer-events: auto;
 }
 
-/* Botões clicáveis */
+/* Botões clicáveis - TAMANHO EXATO DA IMAGEM */
 .as-title__button {
     appearance: none;
     background: transparent;
@@ -168,9 +168,9 @@ img.as-title__soul-icon {
     padding: 0;
     margin: 0;
     font-family: 'Pixel Times', 'Times New Roman', serif;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    letter-spacing: 1.8px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
     position: relative;
@@ -178,8 +178,8 @@ img.as-title__soul-icon {
     transition: transform 180ms ease-out, 
                 filter 180ms ease-out;
     filter: drop-shadow(0 6px 20px rgba(6, 3, 12, 0.8));
-    width: 260px;
-    height: 105px;
+    width: 280px;
+    height: 110px;
     text-align: center;
     display: flex;
     align-items: center;
@@ -243,48 +243,84 @@ img.as-title__soul-icon {
 /* Responsividade */
 @media (max-width: 1366px) {
     .as-title__logo-section {
-        width: 750px;
-        height: 500px;
-        top: 44%;
+        width: 1000px;
+        height: 600px;
     }
 
     .as-title__base-logo {
-        width: 580px;
+        width: 700px;
     }
 
     .as-title__logo {
-        width: 360px;
+        width: 440px;
     }
 
     .as-title__soul-icon {
-        width: 260px;
+        width: 330px;
     }
 
     .as-title__soul-icon--dark {
-        left: -220px;
+        left: -240px;
     }
 
     .as-title__soul-icon--light {
-        right: -220px;
+        right: -240px;
     }
 
     .as-title__button {
-        width: 240px;
-        height: 98px;
-        font-size: 1.1rem;
+        width: 260px;
+        height: 102px;
+        font-size: 1.15rem;
     }
 
     .as-title__commands {
-        gap: 16px;
-        bottom: 45px;
+        gap: 18px;
+        bottom: 55px;
     }
 }
 
 @media (max-width: 1024px) {
     .as-title__logo-section {
-        width: 650px;
+        width: 850px;
+        height: 520px;
+    }
+
+    .as-title__base-logo {
+        width: 600px;
+    }
+
+    .as-title__logo {
+        width: 380px;
+    }
+
+    .as-title__soul-icon {
+        width: 290px;
+    }
+
+    .as-title__soul-icon--dark {
+        left: -200px;
+    }
+
+    .as-title__soul-icon--light {
+        right: -200px;
+    }
+
+    .as-title__button {
+        width: 240px;
+        height: 95px;
+        font-size: 1.1rem;
+    }
+
+    .as-title__commands {
+        gap: 16px;
+        bottom: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .as-title__logo-section {
+        width: 700px;
         height: 450px;
-        top: 43%;
     }
 
     .as-title__base-logo {
@@ -292,50 +328,11 @@ img.as-title__soul-icon {
     }
 
     .as-title__logo {
-        width: 310px;
+        width: 320px;
     }
 
     .as-title__soul-icon {
-        width: 230px;
-    }
-
-    .as-title__soul-icon--dark {
-        left: -190px;
-    }
-
-    .as-title__soul-icon--light {
-        right: -190px;
-    }
-
-    .as-title__button {
-        width: 220px;
-        height: 92px;
-        font-size: 1.05rem;
-    }
-
-    .as-title__commands {
-        gap: 14px;
-        bottom: 40px;
-    }
-}
-
-@media (max-width: 768px) {
-    .as-title__logo-section {
-        width: 550px;
-        height: 380px;
-        top: 42%;
-    }
-
-    .as-title__base-logo {
-        width: 420px;
-    }
-
-    .as-title__logo {
-        width: 260px;
-    }
-
-    .as-title__soul-icon {
-        width: 200px;
+        width: 250px;
     }
 
     .as-title__soul-icon--dark {
@@ -347,14 +344,14 @@ img.as-title__soul-icon {
     }
 
     .as-title__button {
-        width: 200px;
-        height: 85px;
-        font-size: 1rem;
+        width: 220px;
+        height: 88px;
+        font-size: 1.05rem;
         letter-spacing: 1.5px;
     }
 
     .as-title__commands {
-        gap: 12px;
-        bottom: 35px;
+        gap: 14px;
+        bottom: 45px;
     }
 }

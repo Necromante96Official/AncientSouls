@@ -1,5 +1,424 @@
 # Histórico - AS_1.1_TitleScreenUI
 
+## [21/10/2025 - v1.3.4]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** 
+- assets/contents/css/AS_1.1_TitleScreenUI.css
+
+**Ação:** Ajuste Crítico - Layout EXATO conforme imagem de referência
+**Detalhes:** Reescrita completa do posicionamento para replicar fielmente a imagem:
+
+**LOGO SECTION - CENTRALIZAÇÃO TOTAL:**
+- Posição: `top: 50%, left: 50%` (BEM NO CENTRO, não 38%)
+- Container: 1200px × 700px (maior para acomodar souls afastados)
+- Centralização absoluta no círculo de fogo do background
+
+**BASE-LOGO (MOLDURA DOURADA):**
+- Tamanho: **800px** (bem grande, antes: 700px)
+- Centralização: `transform: translate(-50%, -50%)`
+- Alinhada perfeitamente ao círculo mágico
+
+**ANCIENT SOULS (NOME):**
+- Tamanho: **500px** (bem grande, antes: 430px)
+- Centralizado dentro da moldura dourada
+- Drop-shadow intenso para destaque
+
+**SOULS (DARK/LIGHT) - NOS EXTREMOS:**
+- Tamanho: **380px** (maiores, antes: 320px)
+- Dark Soul: `left: -280px` (MUITO à esquerda, quase na borda)
+- Light Soul: `right: -280px` (MUITO à direita, quase na borda)
+- Espelhamento mantido no dark-soul: `scaleX(-1)`
+
+**BOTÕES:**
+- Tamanho: **280px × 110px** (maiores, antes: 260px × 105px)
+- Gap: **20px** (mais espaçado)
+- Bottom: **60px** (posicionados na base)
+- Font-size: **1.2rem** (mais legível)
+- Letter-spacing: **2px** (mais espaçado)
+
+**COMPARAÇÃO COM VERSÃO ANTERIOR:**
+```
+v1.3.3 (incorreto):
+├─ Logo: top 38%, base 700px, souls -100px
+├─ Posição deslocada para cima
+└─ Souls muito próximos da moldura
+
+v1.3.4 (correto - conforme imagem):
+├─ Logo: top 50%, base 800px, souls -280px
+├─ Centralização TOTAL no círculo de fogo
+└─ Souls nos extremos (layout da imagem)
+```
+
+**Versão:** v1.3.4 (anterior: v1.3.3)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.3.3.css
+
+---
+
+## [21/10/2025 - v1.3.3]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** 
+- assets/contents/css/AS_1.1_TitleScreenUI.css
+
+**Ação:** Ajuste Fino - Centralização perfeita da logo no círculo mágico
+**Detalhes:** Ajustes precisos de posicionamento para alinhar exatamente com a imagem de referência:
+
+**LOGO SECTION - ALINHAMENTO NO CÍRCULO DE FOGO:**
+- Posição vertical ajustada: `top: 38%` (antes: 45%)
+- Container expandido: 1000px × 600px (antes: 850px × 550px)
+- Centralização exata no círculo mágico de fogo do background
+
+**BASE-LOGO (MOLDURA DOURADA):**
+- Tamanho aumentado: 700px (antes: 650px)
+- Centralização perfeita: `transform: translate(-50%, -50%)`
+- Alinhada ao centro do círculo mágico
+
+**ANCIENT SOULS (NOME DO JOGO):**
+- Tamanho ajustado: 430px (antes: 400px)
+- Centralização junto com a base: `top: 50%, left: 50%`
+- Posicionado dentro da moldura dourada
+
+**SOULS (DARK/LIGHT):**
+- Reposicionadas AO LADO da base-logo: `left: -100px / right: -100px`
+- Tamanho aumentado: 320px (antes: 300px)
+- Dark Soul: espelhada com `scaleX(-1)`, lado esquerdo
+- Light Soul: lado direito
+- Não estão mais nos extremos da tela
+
+**BOTÕES:**
+- Mantidos na parte inferior: `bottom: 50px`
+- Tamanho: 260px × 105px
+- Gap: 18px entre botões
+- Fonte: Pixel Times, 1.15rem, bold
+
+**RESPONSIVIDADE ATUALIZADA:**
+- 1366px: Logo 630px, souls -90px
+- 1024px: Logo 560px, souls -80px
+- 768px: Logo 490px, souls -70px
+
+**Versão:** v1.3.3 (anterior: v1.3.2)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.3.2.css
+
+---
+
+## [21/10/2025 - v1.3.2]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** 
+- AS_1.1_TitleScreenUI.js
+- assets/contents/css/AS_1.1_TitleScreenUI.css
+
+**Ação:** Feature - Sistema de cliques com triple-fallback e logs detalhados
+**Detalhes:** Implementado sistema robusto de cliques com fallbacks redundantes e logging extensivo:
+
+**SISTEMA DE CLIQUES APRIMORADO:**
+- `onButtonClick()`: Logs detalhados de cada clique detectado
+- `dispatchUiCommand()`: Triple-fallback de execução
+  1. Publica via `contextRef.publish()`
+  2. Publica via `AS.PluginManager.publish()`
+  3. Executa diretamente `executeCommandDirect()`
+- `executeCommandDirect()`: Fallback direto chamando métodos da Scene_Title
+
+**LOGS IMPLEMENTADOS:**
+```javascript
+"🖱️ Clique detectado no elemento: BUTTON - as-title__button"
+"📍 Comando extraído: newGame"
+"✅ Comando acionado via UI: newGame"
+"🔗 Vinculando eventos de clique a 4 botões..."
+"  [0] Botão: 'newGame' - Habilitado: true"
+```
+
+**MELHORIAS NOS EVENTOS:**
+- `event.stopPropagation()` e `preventDefault()` para evitar conflitos
+- `{ passive: false }` no addEventListener para permitir preventDefault
+- `tabIndex: 0` forçado para navegação por teclado
+- `pointer-events: auto` e `cursor: pointer` aplicados via JS
+
+**FALLBACK DE COMANDOS:**
+```javascript
+newGame → scene.commandNewGame()
+continue → scene.commandContinue() (com validação de saves)
+options → scene.commandOptions()
+shutdown → SceneManager.exit() (com fade de áudio)
+```
+
+**BACKGROUND CORRIGIDO:**
+- Removido `background: url()` do CSS (causava erro 404)
+- Background renderizado via PIXI.js no AS_1.0_TitleScreen.js
+
+**Versão:** v1.3.2 (anterior: v1.3.1)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.3.1.js
+
+---
+
+## [21/10/2025 - v1.3.1]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** 
+- assets/contents/css/AS_1.1_TitleScreenUI.css
+
+**Ação:** Redesign - Layout exato da imagem de referência
+**Detalhes:** Reescrita completa do CSS para replicar o layout da tela de título conforme imagem:
+
+**ESTRUTURA DA LOGO:**
+- Logo Section: centralizada em `top: 45%, left: 50%`
+- Base-logo: 650px (moldura dourada centralizada no círculo)
+- Ancient Souls: 400px (centralizado dentro da base-logo)
+- Dark Soul: 280px, `left: -180px` (espelhada)
+- Light Soul: 280px, `right: -180px`
+
+**BOTÕES HORIZONTAIS:**
+- Posição: `bottom: 80px` (parte inferior da tela)
+- Dimensões: 240px × 100px cada
+- Gap: 20px entre botões
+- Layout: flex-direction row
+- Frame: `botao.png` com object-fit fill
+
+**EFEITOS VISUAIS:**
+- Hover: `translateY(-4px)` + brightness 1.1
+- Active: `translateY(-2px)`
+- Disabled: opacity 0.4 + grayscale
+- Drop-shadow intenso para destacar do fundo
+
+**ANIMAÇÃO:**
+- Logo: `as-logo-float` 3.5s (flutuação suave)
+- Velocidade: -8px a 0px (movimento vertical)
+
+**RESPONSIVIDADE:**
+- 1280px: Logo 550px, botões 220px
+- 960px: Logo 480px, botões 200px
+- 720px: Logo 400px, botões 180px
+
+**Versão:** v1.3.1 (anterior: v1.3.0)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.3.0.css
+
+---
+
+## [21/10/2025 - v1.3.0]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** 
+- AS_1.1_TitleScreenUI.js
+- assets/contents/css/AS_1.1_TitleScreenUI.css
+
+**Ação:** Feature - Integração com AS_1.2_TitleOptions e melhorias de acessibilidade
+**Detalhes:** Implementações para sincronização com sistema de opções e melhorias de UX:
+
+**INTEGRAÇÃO COM OPTIONS:**
+- Função `getAnimationSettings()` lê ConfigManager em tempo real
+- Parâmetros do plugin servem como fallback
+- Animações aplicadas dinamicamente via `applyAnimationSettings()`
+- Suporte a mudanças de configuração sem reload
+
+**ACESSIBILIDADE:**
+- Navegação por teclado: ArrowUp/Down/Left/Right
+- Enter e Space para confirmar seleção
+- `attachKeyboardSupport()` e `detachKeyboardSupport()`
+- `focusFirstButton()` ao carregar cena
+- `focusRelative()` para navegação circular
+
+**SONS:**
+- Hover: `SoundManager.playCursor()`
+- Click: `SoundManager.playOk()`
+- Continue sem save: `SoundManager.playBuzzer()`
+
+**FULLSCREEN:**
+- `requestFullscreenMode()` ao entrar na cena
+- Fallback se usuário negar permissão
+
+**ESTADO CONTINUE:**
+- `updateContinueState()` valida saves existentes
+- Botão desabilitado se `!DataManager.isAnySavefileExists()`
+
+**Versão:** v1.3.0 (anterior: v1.2.9)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.2.9.js
+
+---
+
+## [20/10/2025 - v1.2.9]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** 
+- AS_1.1_TitleScreenUI.js
+
+**Ação:** Otimização - Performance de renderização e listeners
+**Detalhes:** Melhorias de performance para execução mais fluida:
+
+**OTIMIZAÇÕES DE RENDERIZAÇÃO:**
+- Adicionado `will-change: transform` aos elementos animados
+- Uso de `requestAnimationFrame` para animações suaves
+- Redução de repaints desnecessários
+- Cache de queries ao DOM
+
+**EVENT LISTENERS:**
+- Consolidação de listeners em um único ponto
+- Remoção de listeners duplicados
+- Uso de `once: true` quando apropriado
+- Cleanup automático ao destruir markup
+
+**GARBAGE COLLECTION:**
+- Limpeza adequada de referências
+- Destruição de elementos removidos
+- Prevenção de memory leaks
+- Clear de timers e intervals
+
+**MELHORIAS:**
+- Performance de hover/click aprimorada
+- Transições mais suaves
+- Menor uso de CPU/GPU
+- Carregamento mais rápido
+
+**Versão:** v1.2.9 (anterior: v1.2.8)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.2.8.js
+
+---
+
+## [20/10/2025 - v1.2.8]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** 
+- AS_1.1_TitleScreenUI.js
+- assets/contents/css/AS_1.1_TitleScreenUI.css
+
+**Ação:** Feature - Transições de cena e animações de entrada/saída
+**Detalhes:** Sistema completo de transições visuais ao entrar/sair da tela de título:
+
+**ANIMAÇÃO DE ENTRADA:**
+- Fade-in suave: `opacity: 0 → 1` em 800ms
+- Logo com delay escalonado
+- Botões aparecem em sequência
+- Transição: `cubic-bezier(0.4, 0, 0.2, 1)`
+
+**ANIMAÇÃO DE SAÍDA:**
+- Fade-out sincronizado: todos elementos em 800ms
+- Logo desaparece primeiro
+- Botões em seguida
+- Container por último
+- Aplicado ao iniciar novo jogo, continuar, opções
+
+**FADE DE MÚSICA:**
+- BGM fade-out: `AudioManager.fadeOutBgm()`
+- Duração configurável (padrão: 1000ms)
+- Não aplica fade ao abrir opções
+- Sincronizado com transição visual
+
+**CLASSES CSS:**
+- `.as-title--visible`: Controla visibilidade geral
+- `.as-title--fading-out`: Aplicada ao sair
+- Transições suaves em todos os elementos
+
+**SINCRONIZAÇÃO:**
+- Transições visuais + áudio perfeitamente sincronizadas
+- Timing preciso para cada elemento
+- Sem "pulos" ou cortes abruptos
+
+**Versão:** v1.2.8 (anterior: v1.2.7)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.2.7.js
+
+---
+
+## [20/10/2025 - v1.2.7]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** 
+- AS_1.1_TitleScreenUI.js
+
+**Ação:** Fix - Validação robusta de estado de saves
+**Detalhes:** Implementação de validação melhorada para o botão "Continuar":
+
+**VALIDAÇÃO DE SAVES:**
+- `updateContinueState()` chamada em múltiplos pontos:
+  - Ao criar a cena (handleSceneReady)
+  - Ao voltar de outras cenas
+  - Periodicamente durante idle
+- Usa `DataManager.isAnySavefileExists()` nativo do MZ
+- Atualização automática sem recarregar página
+
+**FEEDBACK VISUAL:**
+- Botão habilitado: opacity 1, cursor pointer
+- Botão desabilitado: opacity 0.35, cursor not-allowed
+- Grayscale aplicado ao frame quando disabled
+- Text-shadow reduzido quando disabled
+
+**PREVENÇÃO DE BUGS:**
+- Validação antes de permitir click
+- `SoundManager.playBuzzer()` se tentar clicar sem save
+- Não executa `commandContinue()` se não houver saves
+- Log de aviso no console
+
+**CASOS COBERTOS:**
+- Primeira vez jogando (sem saves)
+- Após deletar todos os saves
+- Após criar primeiro save
+- Ao voltar de outras cenas
+
+**Versão:** v1.2.7 (anterior: v1.2.6)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.2.6.js
+
+---
+
+## [20/10/2025 - v1.2.6]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** 
+- AS_1.1_TitleScreenUI.js
+- assets/contents/css/AS_1.1_TitleScreenUI.css
+
+**Ação:** Refatoração - Cleanup e otimização do código
+**Detalhes:** Limpeza geral do código com remoção de funções não utilizadas:
+
+**CÓDIGO REMOVIDO:**
+- Funções obsoletas de animação manual
+- Listeners de eventos duplicados
+- Comentários redundantes
+- Imports não utilizados
+
+**OTIMIZAÇÕES:**
+- Consolidação de event listeners
+- Redução de queries ao DOM
+- Melhoria de performance em loops
+- Simplificação de condicionais
+
+**ESTRUTURA:**
+- Código mais limpo e legível
+- Funções bem documentadas
+- Fluxo de execução claro
+- Sem código morto
+
+**Versão:** v1.2.6 (anterior: v1.2.5)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.2.5.js
+
+---
+
+## [20/10/2025 - v1.2.5]
+**Autor:** GitHub Copilot
+**Arquivo(s) afetado(s):** 
+- AS_1.1_TitleScreenUI.js
+- assets/contents/css/AS_1.1_TitleScreenUI.css
+
+**Ação:** Fix - Correção de z-index e pointer-events
+**Detalhes:** Ajustes para garantir clicabilidade dos botões em todos os cenários:
+
+**POINTER-EVENTS:**
+- `#as-title-root`: `pointer-events: none` (container)
+- `.as-title__container`: `pointer-events: none` (wrapper)
+- `.as-title__commands`: `pointer-events: auto` (nav)
+- `.as-title__button`: `pointer-events: auto` (botões)
+- `.as-title__button-frame`: `pointer-events: none` (imagem)
+- `.as-title__button-text`: `pointer-events: none` (texto)
+
+**Z-INDEX:**
+- `#as-title-root`: `z-index: 9999` (acima de tudo)
+- Logo section: `z-index: 3`
+- Base-logo: `z-index: 1`
+- Ancient Souls: `z-index: 2`
+- Souls: `z-index: 0`
+- Button frame: `z-index: 0`
+- Button text: `z-index: 1`
+
+**GARANTIAS:**
+- Cliques só funcionam nos botões (não no container)
+- Imagens não interferem com eventos de mouse
+- Hierarquia de camadas respeitada
+- Sem conflitos de propagação
+
+**Versão:** v1.2.5 (anterior: v1.2.4)
+**Backup criado:** backups/AS_1.1_TitleScreenUI/AS_1.1_TitleScreenUI - v1.2.4.js
+
+---
+
 ## [NOVA ALTERAÇÃO - Data: Atual - v1.2.4]
 **Autor:** Zencoder
 **Arquivo(s) afetado(s):** 

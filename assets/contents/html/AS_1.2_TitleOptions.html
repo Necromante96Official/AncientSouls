@@ -1,61 +1,108 @@
 <div id="as-options-root" aria-hidden="true">
-    <div class="as-options__backdrop"></div>
-    <div class="as-options__container">
-        <header class="as-options__header">
-            <button class="as-options__close" id="closeButton" aria-label="Fechar">
-                <span class="as-options__close-icon">↩</span>
-            </button>
-            <h1 class="as-options__title">Configurações</h1>
-            <p class="as-options__subtitle">Personalize sua experiência</p>
-        </header>
-        
-        <div class="as-options__content">
-            <div class="as-options__tabs">
-                <button class="as-options__tab as-options__tab--active" data-tab="audio">
-                    <span class="as-options__tab-icon">🎵</span>
-                    <span class="as-options__tab-label">Áudio</span>
-                </button>
-                <button class="as-options__tab" data-tab="gameplay">
-                    <span class="as-options__tab-icon">⚔️</span>
-                    <span class="as-options__tab-label">Jogabilidade</span>
-                </button>
-                <button class="as-options__tab" data-tab="display">
-                    <span class="as-options__tab-icon">🖥️</span>
-                    <span class="as-options__tab-label">Visual</span>
-                </button>
+    <div class="as-options__backdrop" aria-hidden="true"></div>
+    <div class="as-options__container" role="dialog" aria-modal="true" aria-labelledby="as-options-title">
+        <aside class="as-options__sidebar">
+            <div class="as-options__sidebar-header">
+                <span class="as-options__sigil" aria-hidden="true">☽</span>
+                <div class="as-options__sidebar-copy">
+                    <div class="as-options__sidebar-title">Arcanum</div>
+                    <div class="as-options__sidebar-subtitle">Painel do salão místico</div>
+                </div>
             </div>
-
+            <nav class="as-options__tabs" aria-label="Categorias de configuração" role="tablist">
+                <button class="as-options__tab as-options__tab--active" id="tab-audio" type="button" role="tab" aria-selected="true" aria-controls="panel-audio" data-tab="audio">
+                    <span class="as-options__tab-icon" aria-hidden="true">🎵</span>
+                    <span class="as-options__tab-label">
+                        <span>Áudio</span>
+                        <small>Ritmos do além</small>
+                    </span>
+                </button>
+                <button class="as-options__tab" id="tab-gameplay" type="button" role="tab" aria-selected="false" aria-controls="panel-gameplay" data-tab="gameplay">
+                    <span class="as-options__tab-icon" aria-hidden="true">⚔️</span>
+                    <span class="as-options__tab-label">
+                        <span>Jogabilidade</span>
+                        <small>Ritos de batalha</small>
+                    </span>
+                </button>
+                <button class="as-options__tab" id="tab-display" type="button" role="tab" aria-selected="false" aria-controls="panel-display" data-tab="display">
+                    <span class="as-options__tab-icon" aria-hidden="true">🜂</span>
+                    <span class="as-options__tab-label">
+                        <span>Visual</span>
+                        <small>Véu ilusório</small>
+                    </span>
+                </button>
+            </nav>
+        </aside>
+        <section class="as-options__main">
+            <header class="as-options__header">
+                <button class="as-options__close" id="closeButton" type="button" aria-label="Fechar painel">
+                    <span aria-hidden="true">✕</span>
+                </button>
+                <h1 class="as-options__title" id="as-options-title">Salão Arcano</h1>
+                <p class="as-options__subtitle">Personalize o ritual da sua jornada</p>
+            </header>
             <div class="as-options__panels">
-                <div class="as-options__panel as-options__panel--active" data-panel="audio">
+                <div class="as-options__panel as-options__panel--active" id="panel-audio" role="tabpanel" aria-labelledby="tab-audio" data-panel="audio">
                     <div class="as-options__section">
                         <div class="as-options__option">
-                            <label class="as-options__label">Volume Geral</label>
+                            <div class="as-options__option-text">
+                                <label class="as-options__label" for="masterVolume">Volume Geral</label>
+                                <small class="as-options__description">Controla o volume global do jogo.</small>
+                            </div>
                             <div class="as-options__slider-container">
                                 <input type="range" class="as-options__slider" id="masterVolume" min="0" max="100" value="80" />
                                 <span class="as-options__value" id="masterVolumeValue">80%</span>
                             </div>
                         </div>
                         <div class="as-options__option">
-                            <label class="as-options__label">Volume da Música</label>
+                            <div class="as-options__option-text">
+                                <label class="as-options__label" for="bgmVolume">Volume da Música</label>
+                                <small class="as-options__description">Ajusta a intensidade das trilhas sonoras.</small>
+                            </div>
                             <div class="as-options__slider-container">
                                 <input type="range" class="as-options__slider" id="bgmVolume" min="0" max="100" value="90" />
                                 <span class="as-options__value" id="bgmVolumeValue">90%</span>
                             </div>
                         </div>
                         <div class="as-options__option">
-                            <label class="as-options__label">Volume dos Efeitos</label>
+                            <div class="as-options__option-text">
+                                <label class="as-options__label" for="seVolume">Volume dos Efeitos</label>
+                                <small class="as-options__description">Define o eco dos feitiços e interações.</small>
+                            </div>
                             <div class="as-options__slider-container">
                                 <input type="range" class="as-options__slider" id="seVolume" min="0" max="100" value="80" />
                                 <span class="as-options__value" id="seVolumeValue">80%</span>
                             </div>
                         </div>
+                        <div class="as-options__option as-options__option--toggle">
+                            <div class="as-options__option-text">
+                                <span class="as-options__label" id="enableMusicFadeLabel">Transição Musical (Fade)</span>
+                                <small class="as-options__description" id="enableMusicFadeDescription">Suaviza a troca entre faixas.</small>
+                            </div>
+                            <label class="as-options__toggle" aria-labelledby="enableMusicFadeLabel enableMusicFadeDescription">
+                                <input type="checkbox" id="enableMusicFade" checked />
+                                <span class="as-options__toggle-slider" aria-hidden="true"></span>
+                            </label>
+                        </div>
+                        <div class="as-options__option">
+                            <div class="as-options__option-text">
+                                <label class="as-options__label" for="musicFadeDuration">Duração do Fade Musical</label>
+                                <small class="as-options__description">Tempo até silenciar totalmente a música.</small>
+                            </div>
+                            <div class="as-options__slider-container">
+                                <input type="range" class="as-options__slider" id="musicFadeDuration" min="100" max="5000" step="100" value="1000" />
+                                <span class="as-options__value" id="musicFadeDurationValue">1000ms</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="as-options__panel" data-panel="gameplay">
+                <div class="as-options__panel" id="panel-gameplay" role="tabpanel" aria-labelledby="tab-gameplay" data-panel="gameplay" hidden>
                     <div class="as-options__section">
                         <div class="as-options__option">
-                            <label class="as-options__label">Velocidade de Mensagem</label>
+                            <div class="as-options__option-text">
+                                <label class="as-options__label" for="messageSpeed">Velocidade de Mensagem</label>
+                                <small class="as-options__description">Determina a cadência dos diálogos.</small>
+                            </div>
                             <div class="as-options__select-container">
                                 <select class="as-options__select" id="messageSpeed">
                                     <option value="slow">Lenta</option>
@@ -65,27 +112,47 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="as-options__option">
+                            <div class="as-options__option-text">
+                                <label class="as-options__label" for="battleMode">Modo de Batalha</label>
+                                <small class="as-options__description">Escolha entre ritmo ativo ou estratégico.</small>
+                            </div>
+                            <div class="as-options__select-container">
+                                <select class="as-options__select" id="battleMode">
+                                    <option value="wait">Espera</option>
+                                    <option value="active" selected>Ativo</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="as-options__option as-options__option--toggle">
-                            <label class="as-options__label">Habilitar Dash Automático</label>
-                            <label class="as-options__toggle">
+                            <div class="as-options__option-text">
+                                <span class="as-options__label" id="alwaysDashLabel">Dash Automático</span>
+                                <small class="as-options__description" id="alwaysDashDescription">Mantém o herói sempre em passo acelerado.</small>
+                            </div>
+                            <label class="as-options__toggle" aria-labelledby="alwaysDashLabel alwaysDashDescription">
                                 <input type="checkbox" id="alwaysDash" checked />
-                                <span class="as-options__toggle-slider"></span>
+                                <span class="as-options__toggle-slider" aria-hidden="true"></span>
                             </label>
                         </div>
                     </div>
                 </div>
-
-                <div class="as-options__panel" data-panel="display">
+                <div class="as-options__panel" id="panel-display" role="tabpanel" aria-labelledby="tab-display" data-panel="display" hidden>
                     <div class="as-options__section">
                         <div class="as-options__option as-options__option--toggle">
-                            <label class="as-options__label">Tela Cheia</label>
-                            <label class="as-options__toggle">
+                            <div class="as-options__option-text">
+                                <span class="as-options__label" id="fullscreenLabel">Tela Cheia</span>
+                                <small class="as-options__description" id="fullscreenDescription">Expande a projeção arcana para todo o monitor.</small>
+                            </div>
+                            <label class="as-options__toggle" aria-labelledby="fullscreenLabel fullscreenDescription">
                                 <input type="checkbox" id="fullscreen" />
-                                <span class="as-options__toggle-slider"></span>
+                                <span class="as-options__toggle-slider" aria-hidden="true"></span>
                             </label>
                         </div>
                         <div class="as-options__option">
-                            <label class="as-options__label">Qualidade dos Efeitos</label>
+                            <div class="as-options__option-text">
+                                <label class="as-options__label" for="effectQuality">Qualidade dos Efeitos</label>
+                                <small class="as-options__description">Densidade das partículas místicas e brilhos.</small>
+                            </div>
                             <div class="as-options__select-container">
                                 <select class="as-options__select" id="effectQuality">
                                     <option value="low">Baixa</option>
@@ -96,50 +163,34 @@
                             </div>
                         </div>
                         <div class="as-options__option as-options__option--toggle">
-                            <label class="as-options__label">Animação do Logo (Tela Título)</label>
-                            <label class="as-options__toggle">
+                            <div class="as-options__option-text">
+                                <span class="as-options__label" id="enableLogoAnimationLabel">Animação do Logo</span>
+                                <small class="as-options__description" id="enableLogoAnimationDescription">Ativa o brilho ritual na tela título.</small>
+                            </div>
+                            <label class="as-options__toggle" aria-labelledby="enableLogoAnimationLabel enableLogoAnimationDescription">
                                 <input type="checkbox" id="enableLogoAnimation" checked />
-                                <span class="as-options__toggle-slider"></span>
+                                <span class="as-options__toggle-slider" aria-hidden="true"></span>
                             </label>
                         </div>
                         <div class="as-options__option">
-                            <label class="as-options__label">Velocidade da Animação</label>
+                            <div class="as-options__option-text">
+                                <label class="as-options__label" for="animationSpeed">Velocidade da Animação</label>
+                                <small class="as-options__description">Controla o pulso dos glifos e partículas.</small>
+                            </div>
                             <div class="as-options__slider-container">
                                 <input type="range" class="as-options__slider" id="animationSpeed" min="1" max="10" step="0.5" value="4" />
                                 <span class="as-options__value" id="animationSpeedValue">4.0s</span>
                             </div>
                         </div>
-                        <div class="as-options__option as-options__option--toggle">
-                            <label class="as-options__label">Transição Musical (Fade)</label>
-                            <label class="as-options__toggle">
-                                <input type="checkbox" id="enableMusicFade" checked />
-                                <span class="as-options__toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="as-options__option">
-                            <label class="as-options__label">Duração do Fade Musical</label>
-                            <div class="as-options__slider-container">
-                                <input type="range" class="as-options__slider" id="musicFadeDuration" min="100" max="5000" step="100" value="1000" />
-                                <span class="as-options__value" id="musicFadeDurationValue">1000ms</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="as-options__feedback" id="optionsFeedback" role="status" aria-live="polite"></div>
-
-        <footer class="as-options__footer">
-            <button class="as-options__button as-options__button--ghost" id="resetButton" type="button">
-                Restaurar
-            </button>
-            <button class="as-options__button as-options__button--secondary" id="cancelButton" type="button">
-                Cancelar
-            </button>
-            <button class="as-options__button as-options__button--primary" id="applyButton" type="button">
-                Aplicar
-            </button>
-        </footer>
+            <div class="as-options__feedback" id="optionsFeedback" role="status" aria-live="polite"></div>
+            <footer class="as-options__footer">
+                <button class="as-options__button as-options__button--ghost" id="resetButton" type="button">Restaurar</button>
+                <button class="as-options__button as-options__button--secondary" id="cancelButton" type="button">Cancelar</button>
+                <button class="as-options__button as-options__button--primary" id="applyButton" type="button">Aplicar</button>
+            </footer>
+        </section>
     </div>
 </div>

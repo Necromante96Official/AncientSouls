@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.8 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.1.7 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -22,7 +22,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.1.8';
+    const MODULE_VERSION = '1.1.7';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {

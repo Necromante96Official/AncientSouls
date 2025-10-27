@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.2.3 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.2.2 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -22,7 +22,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.2.3';
+    const MODULE_VERSION = '1.2.2';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -45,6 +45,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     const CONFIG_DEFAULTS = {
         masterVolume: 80,
         messageSpeed: 'normal',
+        battleMode: 'active',
         effectQuality: 'medium',
         enableLogoAnimation: true,
         animationSpeed: 4.0,
@@ -100,6 +101,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         bgmVolume: 90,
         seVolume: 80,
         messageSpeed: CONFIG_DEFAULTS.messageSpeed,
+        battleMode: CONFIG_DEFAULTS.battleMode,
         alwaysDash: true,
         fullscreen: false,
         effectQuality: CONFIG_DEFAULTS.effectQuality,
@@ -162,6 +164,7 @@ AS.TitleOptions = AS.TitleOptions || {};
             const config = originalMakeData();
             config.masterVolume = resolveNumber(this.masterVolume, CONFIG_DEFAULTS.masterVolume, 0, 100);
             config.messageSpeed = resolveString(this.messageSpeed, CONFIG_DEFAULTS.messageSpeed);
+            config.battleMode = resolveString(this.battleMode, CONFIG_DEFAULTS.battleMode);
             config.effectQuality = resolveString(this.effectQuality, CONFIG_DEFAULTS.effectQuality);
             config.enableLogoAnimation = resolveBoolean(this.enableLogoAnimation, CONFIG_DEFAULTS.enableLogoAnimation);
             config.animationSpeed = resolveNumber(this.animationSpeed, CONFIG_DEFAULTS.animationSpeed, 1, 10);
@@ -189,6 +192,7 @@ AS.TitleOptions = AS.TitleOptions || {};
             originalApplyData(config);
             this.masterVolume = resolveNumber(config.masterVolume, CONFIG_DEFAULTS.masterVolume, 0, 100);
             this.messageSpeed = resolveString(config.messageSpeed, CONFIG_DEFAULTS.messageSpeed);
+            this.battleMode = resolveString(config.battleMode, CONFIG_DEFAULTS.battleMode);
             this.effectQuality = resolveString(config.effectQuality, CONFIG_DEFAULTS.effectQuality);
             this.enableLogoAnimation = resolveBoolean(config.enableLogoAnimation, CONFIG_DEFAULTS.enableLogoAnimation);
             this.animationSpeed = resolveNumber(config.animationSpeed, CONFIG_DEFAULTS.animationSpeed, 1, 10);
@@ -570,6 +574,7 @@ AS.TitleOptions = AS.TitleOptions || {};
             bgmVolume: resolveNumber(ConfigManager.bgmVolume, 90, 0, 100),
             seVolume: resolveNumber(ConfigManager.seVolume, 80, 0, 100),
             messageSpeed: resolveString(ConfigManager.messageSpeed, CONFIG_DEFAULTS.messageSpeed),
+            battleMode: resolveString(ConfigManager.battleMode, CONFIG_DEFAULTS.battleMode),
             alwaysDash: resolveBoolean(ConfigManager.alwaysDash, true),
             fullscreen: Graphics._isFullScreen(),
             effectQuality: resolveString(ConfigManager.effectQuality, CONFIG_DEFAULTS.effectQuality),
@@ -612,6 +617,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         setValue('bgmVolume', configValues.bgmVolume);
         setValue('seVolume', configValues.seVolume);
         setValue('messageSpeed', configValues.messageSpeed);
+        setValue('battleMode', configValues.battleMode);
         setValue('alwaysDash', configValues.alwaysDash);
         setValue('fullscreen', configValues.fullscreen);
         setValue('effectQuality', configValues.effectQuality);
@@ -641,6 +647,7 @@ AS.TitleOptions = AS.TitleOptions || {};
 
         logger.info('[bindControls] Vinculando selects...');
         bindSelect('messageSpeed');
+        bindSelect('battleMode');
         bindSelect('effectQuality');
 
         logger.info('[bindControls] Vinculando toggles...');
@@ -936,6 +943,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         ConfigManager.meVolume = bgmVolume;
         ConfigManager.seVolume = seVolume;
         ConfigManager.messageSpeed = resolveString(configValues.messageSpeed, CONFIG_DEFAULTS.messageSpeed);
+        ConfigManager.battleMode = resolveString(configValues.battleMode, CONFIG_DEFAULTS.battleMode);
         ConfigManager.alwaysDash = resolveBoolean(configValues.alwaysDash, true);
         ConfigManager.effectQuality = resolveString(configValues.effectQuality, CONFIG_DEFAULTS.effectQuality);
         ConfigManager.enableLogoAnimation = resolveBoolean(configValues.enableLogoAnimation, CONFIG_DEFAULTS.enableLogoAnimation);

@@ -21,6 +21,9 @@
     --as-border: rgba(255, 224, 185, 0.4);
     --as-glyph-shadow: 0 2px 14px rgba(255, 210, 120, 0.4);
     --as-iris: rgba(166, 116, 255, 0.55);
+    --as-glass: rgba(26, 14, 44, 0.78);
+    --as-glass-soft: rgba(16, 8, 28, 0.68);
+    --as-gold-veil: rgba(255, 208, 150, 0.18);
 }
 
 * {
@@ -109,6 +112,7 @@ button[name="cancel"],
     pointer-events: auto;
     animation: as-container-enter 520ms cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 2;
+    backdrop-filter: blur(12px);
 }
 
 .as-options__container::before,
@@ -129,71 +133,85 @@ button[name="cancel"],
     opacity: 0.9;
 }
 
-.as-options__header {
+.as-options__toggle {
     position: relative;
-    padding: 32px 40px 24px;
-    background: linear-gradient(
-        135deg,
-        rgba(52, 30, 94, 0.94) 0%,
-        rgba(36, 18, 62, 0.92) 55%,
-        rgba(24, 11, 40, 0.94) 100%
-    );
-    border-bottom: 1px solid rgba(255, 224, 185, 0.32);
-    box-shadow: 0 6px 24px rgba(6, 3, 12, 0.5),
-                inset 0 -1px 0 rgba(255, 191, 120, 0.24);
-    text-align: center;
+    display: inline-flex;
+    width: 78px;
+    height: 36px;
+    justify-self: end;
 }
 
-.as-options__header::after {
+.as-options__toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.as-options__toggle-slider {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgba(26, 14, 44, 0.96) 0%, rgba(14, 6, 28, 0.94) 100%);
+    border: 1px solid rgba(255, 224, 185, 0.3);
+    border-radius: 999px;
+    transition: all 320ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.55), 0 6px 14px rgba(8, 3, 20, 0.45);
+    overflow: hidden;
+}
+
+.as-options__toggle-slider::before {
     content: '';
     position: absolute;
-    bottom: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--as-gold-bright), transparent);
-    animation: as-header-glint 4.2s ease-in-out infinite;
+    inset: 3px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(82, 48, 132, 0.35) 0%, rgba(20, 10, 34, 0.4) 100%);
+    opacity: 0.7;
+    transition: opacity 320ms ease, background 320ms ease;
+    pointer-events: none;
 }
 
-.as-options__close {
+.as-options__toggle-slider::after {
+    content: '';
     position: absolute;
-    top: 16px;
-    right: 20px;
-    appearance: none;
-    background: linear-gradient(
-        135deg,
-        rgba(42, 28, 72, 0.8) 0%,
-        rgba(32, 20, 56, 0.7) 100%
-    );
-    border: 2px solid var(--as-border);
-    border-radius: 8px;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 250ms ease;
-    z-index: 10;
+    top: 3px;
+    left: 4px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255, 251, 236, 0.98), rgba(255, 226, 188, 0.96) 38%, rgba(255, 184, 116, 0.92) 70%, rgba(236, 140, 92, 0.88) 100%);
+    box-shadow: 0 3px 10px rgba(8, 3, 20, 0.5), 0 0 22px rgba(255, 198, 132, 0.38);
+    transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 320ms ease, background 320ms ease;
 }
 
-.as-options__close-icon {
-    font-size: 1.5rem;
-    color: var(--as-gold);
-    text-shadow: 0 1px 3px var(--as-shadow);
-    transition: all 250ms ease;
+.as-options__toggle input:checked + .as-options__toggle-slider {
+    background: linear-gradient(135deg, rgba(255, 210, 150, 0.95) 0%, rgba(194, 126, 255, 0.9) 55%, rgba(255, 168, 102, 0.92) 100%);
+    border-color: rgba(255, 241, 210, 0.85);
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.35), 0 0 26px rgba(255, 180, 110, 0.45);
+    animation: as-toggle-glow 2s ease-in-out infinite;
 }
 
-.as-options__close:hover {
-    border-color: var(--as-gold);
-    background: linear-gradient(
-        135deg,
-        rgba(52, 36, 88, 0.9) 0%,
-        rgba(42, 28, 72, 0.8) 100%
-    );
-    box-shadow: 0 4px 16px rgba(255, 157, 66, 0.3);
-    transform: translateY(-2px);
+.as-options__toggle input:checked + .as-options__toggle-slider::before {
+    opacity: 1;
+    background: linear-gradient(135deg, rgba(255, 220, 180, 0.6) 0%, rgba(156, 102, 230, 0.55) 60%, rgba(255, 200, 150, 0.5) 100%);
+}
+
+.as-options__toggle input:checked + .as-options__toggle-slider::after {
+    transform: translateX(40px);
+    box-shadow: 0 4px 12px rgba(10, 6, 24, 0.52), 0 0 28px rgba(255, 206, 150, 0.48);
+}
+
+.as-options__toggle input:focus-visible + .as-options__toggle-slider {
+    outline: none;
+    border-color: rgba(255, 242, 210, 0.85);
+    box-shadow: 0 0 0 3px rgba(255, 210, 150, 0.28), 0 0 24px rgba(255, 180, 110, 0.32);
+}
+
+.as-options__toggle input:not(:checked) + .as-options__toggle-slider::after {
+    background: radial-gradient(circle at 35% 35%, rgba(255, 240, 214, 0.92), rgba(238, 190, 140, 0.85) 60%, rgba(168, 112, 232, 0.65) 100%);
+}
+
+.as-options__toggle input:not(:checked) + .as-options__toggle-slider:hover::after {
+    transform: translateX(3px);
 }
 
 .as-options__close:hover .as-options__close-icon {
@@ -216,6 +234,18 @@ button[name="cancel"],
     letter-spacing: 3px;
     text-shadow: 0 2px 9px rgba(0, 0, 0, 0.6), var(--as-glyph-shadow);
     animation: as-title-glow 2.8s ease-in-out infinite;
+    position: relative;
+}
+
+.as-options__title::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 224, 185, 0.5), transparent);
 }
 
 .as-options__subtitle {
@@ -323,6 +353,9 @@ button[name="cancel"],
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 187, 120, 0.6) rgba(22, 12, 32, 0.9);
     scrollbar-gutter: stable both-edges;
+    pointer-events: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
 .as-options__panels::before,
@@ -388,17 +421,17 @@ button[name="cancel"],
 }
 
 .as-options__option {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    justify-content: space-between;
-    padding: 22px 26px;
+    padding: 26px 30px;
     background: linear-gradient(135deg, rgba(42, 24, 76, 0.55) 0%, rgba(24, 12, 40, 0.65) 44%, rgba(16, 6, 28, 0.7) 100%);
     border: 1px solid rgba(255, 213, 144, 0.25);
-    border-radius: 14px;
+    border-radius: 16px;
     transition: all 270ms ease;
     position: relative;
     overflow: hidden;
-    gap: 24px;
+    gap: 12px 34px;
 }
 
 .as-options__option::before,
@@ -423,7 +456,7 @@ button[name="cancel"],
 
 .as-options__option:hover {
     border-color: rgba(255, 216, 159, 0.5);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: 0 16px 32px rgba(8, 3, 20, 0.55), 0 0 26px rgba(255, 198, 140, 0.18);
 }
 
@@ -438,8 +471,8 @@ button[name="cancel"],
 }
 
 .as-options__option--toggle {
-    justify-content: space-between;
-    gap: 32px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px 36px;
 }
 
 .as-options__label {
@@ -448,6 +481,7 @@ button[name="cancel"],
     color: var(--as-gold);
     letter-spacing: 1px;
     text-shadow: 0 1px 3px var(--as-shadow);
+    line-height: 1.4;
 }
 
 .as-options__slider-container {
@@ -456,6 +490,7 @@ button[name="cancel"],
     gap: 16px;
     flex: 1;
     max-width: 350px;
+    justify-self: end;
 }
 
 .as-options__slider {
@@ -519,6 +554,8 @@ button[name="cancel"],
 .as-options__select-container {
     flex: 1;
     max-width: 350px;
+    justify-self: end;
+    width: 100%;
 }
 
 .as-options__select {
@@ -577,6 +614,7 @@ button[name="cancel"],
     display: inline-block;
     width: 64px;
     height: 32px;
+    justify-self: end;
 }
 
 .as-options__toggle input {
@@ -651,6 +689,10 @@ button[name="cancel"],
 
 .as-options__toggle input:not(:checked) + .as-options__toggle-slider::after {
     opacity: 0.5;
+}
+
+.as-options__toggle input:not(:checked) + .as-options__toggle-slider::after {
+    opacity: 0.45;
 }
 
 .as-options__toggle input:not(:checked) + .as-options__toggle-slider:hover::before {
@@ -952,6 +994,32 @@ button[name="cancel"],
 
     .as-options__button::after {
         display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .as-options__container {
+        width: 94vw;
+    }
+
+    .as-options__panels {
+        padding: 24px;
+    }
+
+    .as-options__option {
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: stretch;
+    }
+
+    .as-options__slider-container,
+    .as-options__select-container,
+    .as-options__toggle {
+        justify-self: stretch;
+        width: 100%;
+    }
+
+    .as-options__option {
+        gap: 18px;
     }
 }
 

@@ -70,7 +70,7 @@ img.as-title__soul-icon {
     pointer-events: none;
 }
 
-/* Logo Section: CENTRALIZADA NO CÍRCULO DE FOGO (bem no centro da tela) */
+/* Logo Section: TUDO CENTRALIZADO NO CÍRCULO MÁGICO */
 .as-title__logo-section {
     position: absolute;
     top: 50%;
@@ -79,47 +79,46 @@ img.as-title__soul-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1200px;
-    height: 700px;
+    width: 1000px;
+    height: 600px;
     pointer-events: none;
 }
 
-/* Base-logo: moldura dourada BEM GRANDE, centralizada no círculo */
+/* Base-logo: moldura dourada NO CENTRO DO CÍRCULO */
 .as-title__base-logo {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 800px;
+    width: 650px;
     height: auto;
     filter: drop-shadow(0 12px 32px rgba(6, 3, 12, 0.7))
             drop-shadow(0 0 28px rgba(255, 157, 66, 0.3));
     user-select: none;
     pointer-events: none;
-    z-index: 1;
+    z-index: 2;
 }
 
-/* Ancient Souls: nome do jogo BEM GRANDE dentro da moldura */
+/* Ancient Souls: DENTRO da moldura, centralizado */
 .as-title__logo {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
+    width: 400px;
     height: auto;
     filter: drop-shadow(0 8px 24px rgba(255, 157, 66, 0.6))
             drop-shadow(0 0 48px rgba(255, 157, 66, 0.3));
     user-select: none;
     pointer-events: none;
-    z-index: 2;
+    z-index: 3;
     animation: as-logo-float 3.5s ease-in-out infinite;
 }
 
-/* Soul Icons: NOS EXTREMOS (bem afastados da moldura) */
+/* Soul Icons: NOS CANTOS EXTREMOS (fora da moldura) */
 .as-title__soul-icon {
-    position: absolute;
-    top: 50%;
-    width: 380px;
+    position: fixed;
+    width: 350px;
     height: auto;
     user-select: none;
     pointer-events: none;
@@ -129,15 +128,17 @@ img.as-title__soul-icon {
     z-index: 0;
 }
 
-/* Dark Soul: BEM À ESQUERDA (quase na borda) */
+/* Dark Soul: CANTO ESQUERDO (espelhada) */
 .as-title__soul-icon--dark {
-    left: -280px;
+    top: 50%;
+    left: 40px;
     transform: translateY(-50%) scaleX(-1);
 }
 
-/* Light Soul: BEM À DIREITA (quase na borda) */
+/* Light Soul: CANTO DIREITO */
 .as-title__soul-icon--light {
-    right: -280px;
+    top: 50%;
+    right: 40px;
     transform: translateY(-50%);
 }
 
@@ -242,29 +243,16 @@ img.as-title__soul-icon {
 
 /* Responsividade */
 @media (max-width: 1366px) {
-    .as-title__logo-section {
-        width: 1000px;
-        height: 600px;
-    }
-
-    .as-title__base-logo {
-        width: 700px;
-    }
-
-    .as-title__logo {
-        width: 440px;
-    }
-
     .as-title__soul-icon {
-        width: 330px;
+        width: 310px;
     }
 
     .as-title__soul-icon--dark {
-        left: -240px;
+        left: 30px;
     }
 
     .as-title__soul-icon--light {
-        right: -240px;
+        right: 30px;
     }
 
     .as-title__button {
@@ -280,29 +268,16 @@ img.as-title__soul-icon {
 }
 
 @media (max-width: 1024px) {
-    .as-title__logo-section {
-        width: 850px;
-        height: 520px;
-    }
-
-    .as-title__base-logo {
-        width: 600px;
-    }
-
-    .as-title__logo {
-        width: 380px;
-    }
-
     .as-title__soul-icon {
-        width: 290px;
+        width: 270px;
     }
 
     .as-title__soul-icon--dark {
-        left: -200px;
+        left: 20px;
     }
 
     .as-title__soul-icon--light {
-        right: -200px;
+        right: 20px;
     }
 
     .as-title__button {
@@ -318,29 +293,16 @@ img.as-title__soul-icon {
 }
 
 @media (max-width: 768px) {
-    .as-title__logo-section {
-        width: 700px;
-        height: 450px;
-    }
-
-    .as-title__base-logo {
-        width: 500px;
-    }
-
-    .as-title__logo {
-        width: 320px;
-    }
-
     .as-title__soul-icon {
-        width: 250px;
+        width: 220px;
     }
 
     .as-title__soul-icon--dark {
-        left: -160px;
+        left: 10px;
     }
 
     .as-title__soul-icon--light {
-        right: -160px;
+        right: 10px;
     }
 
     .as-title__button {

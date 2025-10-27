@@ -1,32 +1,44 @@
 <div id="as-title-root" class="as-title" aria-hidden="true">
     <div class="as-title__container">
         <div class="as-title__logo-section">
-            <img
-                class="as-title__base-logo"
-                src="js/plugins/assets/resources/base-logo.png"
-                alt=""
-                draggable="false"
-            />
-            <img
-                class="as-title__logo"
-                src="js/plugins/assets/resources/ancient-souls.png"
-                alt="Ancient Souls"
-                draggable="false"
-            />
-            <img
-                class="as-title__soul-icon as-title__soul-icon--dark"
-                src="js/plugins/assets/resources/dark-soul.png"
-                alt="Dark Soul"
-                draggable="false"
-                id="as-dark-soul"
-            />
-            <img
-                class="as-title__soul-icon as-title__soul-icon--light"
-                src="js/plugins/assets/resources/light-soul.png"
-                alt="Light Soul"
-                draggable="false"
-                id="as-light-soul"
-            />
+            <div class="as-title__logo-group">
+                <div class="as-title__logo-node as-title__logo-node--dark">
+                    <img
+                        class="as-title__soul-icon as-title__soul-icon--dark"
+                        src="js/plugins/assets/resources/dark-soul.png"
+                        alt="Dark Soul"
+                        draggable="false"
+                        id="as-dark-soul"
+                    />
+                </div>
+                <div class="as-title__logo-stack">
+                    <div class="as-title__logo-node as-title__logo-node--base">
+                        <img
+                            class="as-title__base-logo"
+                            src="js/plugins/assets/resources/base-logo.png"
+                            alt=""
+                            draggable="false"
+                        />
+                    </div>
+                    <div class="as-title__logo-node as-title__logo-node--text">
+                        <img
+                            class="as-title__logo"
+                            src="js/plugins/assets/resources/ancient-souls.png"
+                            alt="Ancient Souls"
+                            draggable="false"
+                        />
+                    </div>
+                </div>
+                <div class="as-title__logo-node as-title__logo-node--light">
+                    <img
+                        class="as-title__soul-icon as-title__soul-icon--light"
+                        src="js/plugins/assets/resources/light-soul.png"
+                        alt="Light Soul"
+                        draggable="false"
+                        id="as-light-soul"
+                    />
+                </div>
+            </div>
         </div>
         <nav class="as-title__commands" aria-label="Menu principal" role="menu">
             <button type="button" class="as-title__button" data-command="newGame">

@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.8 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.1.5 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -22,7 +22,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.1.8';
+    const MODULE_VERSION = '1.1.5';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -41,34 +41,6 @@ AS.TitleOptions = AS.TitleOptions || {};
         css: 'js/plugins/assets/contents/css/AS_1.2_TitleOptions.css',
         html: 'js/plugins/assets/contents/html/AS_1.2_TitleOptions.html'
     };
-
-    const CONFIG_DEFAULTS = {
-        masterVolume: 80,
-        messageSpeed: 'normal',
-        battleMode: 'active',
-        effectQuality: 'medium',
-        enableLogoAnimation: true,
-        animationSpeed: 4.0,
-        enableMusicFade: true,
-        musicFadeDuration: 1000,
-        logoGroupOffsetX: 0,
-        logoGroupOffsetY: 0,
-        logoGroupScale: 1,
-        logoBaseOffsetX: 0,
-        logoBaseOffsetY: 0,
-        logoBaseScale: 1,
-        logoTextOffsetX: 0,
-        logoTextOffsetY: 0,
-        logoTextScale: 1,
-        logoDarkOffsetX: 0,
-        logoDarkOffsetY: 0,
-        logoDarkScale: 1,
-        logoLightOffsetX: 0,
-        logoLightOffsetY: 0,
-        logoLightScale: 1
-    };
-
-    ensureConfigExtensions();
 
     let rootElement = null;
     let tabs = [];
@@ -93,117 +65,6 @@ AS.TitleOptions = AS.TitleOptions || {};
             logger.info('Interface de opções removida.');
         }
     };
-
-    function ensureConfigExtensions() {
-        if (ConfigManager._asTitleOptionsPatched) {
-            return;
-        }
-        ConfigManager._asTitleOptionsPatched = true;
-
-        Object.keys(CONFIG_DEFAULTS).forEach(key => {
-            if (ConfigManager[key] === undefined) {
-                ConfigManager[key] = CONFIG_DEFAULTS[key];
-            }
-        });
-
-        const originalMakeData = ConfigManager.makeData.bind(ConfigManager);
-        const originalApplyData = ConfigManager.applyData.bind(ConfigManager);
-
-        ConfigManager.makeData = function() {
-            const config = originalMakeData();
-            config.masterVolume = resolveNumber(this.masterVolume, CONFIG_DEFAULTS.masterVolume, 0, 100);
-            config.messageSpeed = resolveString(this.messageSpeed, CONFIG_DEFAULTS.messageSpeed);
-            config.battleMode = resolveString(this.battleMode, CONFIG_DEFAULTS.battleMode);
-            config.effectQuality = resolveString(this.effectQuality, CONFIG_DEFAULTS.effectQuality);
-            config.enableLogoAnimation = resolveBoolean(this.enableLogoAnimation, CONFIG_DEFAULTS.enableLogoAnimation);
-            config.animationSpeed = resolveNumber(this.animationSpeed, CONFIG_DEFAULTS.animationSpeed, 1, 10);
-            config.enableMusicFade = resolveBoolean(this.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade);
-            config.musicFadeDuration = resolveNumber(this.musicFadeDuration, CONFIG_DEFAULTS.musicFadeDuration, 100, 5000);
-            config.logoGroupOffsetX = resolveNumber(this.logoGroupOffsetX, CONFIG_DEFAULTS.logoGroupOffsetX, -2000, 2000);
-            config.logoGroupOffsetY = resolveNumber(this.logoGroupOffsetY, CONFIG_DEFAULTS.logoGroupOffsetY, -2000, 2000);
-            config.logoGroupScale = resolveNumber(this.logoGroupScale, CONFIG_DEFAULTS.logoGroupScale, 0.1, 4);
-            config.logoBaseOffsetX = resolveNumber(this.logoBaseOffsetX, CONFIG_DEFAULTS.logoBaseOffsetX, -2000, 2000);
-            config.logoBaseOffsetY = resolveNumber(this.logoBaseOffsetY, CONFIG_DEFAULTS.logoBaseOffsetY, -2000, 2000);
-            config.logoBaseScale = resolveNumber(this.logoBaseScale, CONFIG_DEFAULTS.logoBaseScale, 0.1, 4);
-            config.logoTextOffsetX = resolveNumber(this.logoTextOffsetX, CONFIG_DEFAULTS.logoTextOffsetX, -2000, 2000);
-            config.logoTextOffsetY = resolveNumber(this.logoTextOffsetY, CONFIG_DEFAULTS.logoTextOffsetY, -2000, 2000);
-            config.logoTextScale = resolveNumber(this.logoTextScale, CONFIG_DEFAULTS.logoTextScale, 0.1, 4);
-            config.logoDarkOffsetX = resolveNumber(this.logoDarkOffsetX, CONFIG_DEFAULTS.logoDarkOffsetX, -2000, 2000);
-            config.logoDarkOffsetY = resolveNumber(this.logoDarkOffsetY, CONFIG_DEFAULTS.logoDarkOffsetY, -2000, 2000);
-            config.logoDarkScale = resolveNumber(this.logoDarkScale, CONFIG_DEFAULTS.logoDarkScale, 0.1, 4);
-            config.logoLightOffsetX = resolveNumber(this.logoLightOffsetX, CONFIG_DEFAULTS.logoLightOffsetX, -2000, 2000);
-            config.logoLightOffsetY = resolveNumber(this.logoLightOffsetY, CONFIG_DEFAULTS.logoLightOffsetY, -2000, 2000);
-            config.logoLightScale = resolveNumber(this.logoLightScale, CONFIG_DEFAULTS.logoLightScale, 0.1, 4);
-            return config;
-        };
-
-        ConfigManager.applyData = function(config) {
-            originalApplyData(config);
-            this.masterVolume = resolveNumber(config.masterVolume, CONFIG_DEFAULTS.masterVolume, 0, 100);
-            this.messageSpeed = resolveString(config.messageSpeed, CONFIG_DEFAULTS.messageSpeed);
-            this.battleMode = resolveString(config.battleMode, CONFIG_DEFAULTS.battleMode);
-            this.effectQuality = resolveString(config.effectQuality, CONFIG_DEFAULTS.effectQuality);
-            this.enableLogoAnimation = resolveBoolean(config.enableLogoAnimation, CONFIG_DEFAULTS.enableLogoAnimation);
-            this.animationSpeed = resolveNumber(config.animationSpeed, CONFIG_DEFAULTS.animationSpeed, 1, 10);
-            this.enableMusicFade = resolveBoolean(config.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade);
-            this.musicFadeDuration = resolveNumber(config.musicFadeDuration, CONFIG_DEFAULTS.musicFadeDuration, 100, 5000);
-            this.logoGroupOffsetX = resolveNumber(config.logoGroupOffsetX, CONFIG_DEFAULTS.logoGroupOffsetX, -2000, 2000);
-            this.logoGroupOffsetY = resolveNumber(config.logoGroupOffsetY, CONFIG_DEFAULTS.logoGroupOffsetY, -2000, 2000);
-            this.logoGroupScale = resolveNumber(config.logoGroupScale, CONFIG_DEFAULTS.logoGroupScale, 0.1, 4);
-            this.logoBaseOffsetX = resolveNumber(config.logoBaseOffsetX, CONFIG_DEFAULTS.logoBaseOffsetX, -2000, 2000);
-            this.logoBaseOffsetY = resolveNumber(config.logoBaseOffsetY, CONFIG_DEFAULTS.logoBaseOffsetY, -2000, 2000);
-            this.logoBaseScale = resolveNumber(config.logoBaseScale, CONFIG_DEFAULTS.logoBaseScale, 0.1, 4);
-            this.logoTextOffsetX = resolveNumber(config.logoTextOffsetX, CONFIG_DEFAULTS.logoTextOffsetX, -2000, 2000);
-            this.logoTextOffsetY = resolveNumber(config.logoTextOffsetY, CONFIG_DEFAULTS.logoTextOffsetY, -2000, 2000);
-            this.logoTextScale = resolveNumber(config.logoTextScale, CONFIG_DEFAULTS.logoTextScale, 0.1, 4);
-            this.logoDarkOffsetX = resolveNumber(config.logoDarkOffsetX, CONFIG_DEFAULTS.logoDarkOffsetX, -2000, 2000);
-            this.logoDarkOffsetY = resolveNumber(config.logoDarkOffsetY, CONFIG_DEFAULTS.logoDarkOffsetY, -2000, 2000);
-            this.logoDarkScale = resolveNumber(config.logoDarkScale, CONFIG_DEFAULTS.logoDarkScale, 0.1, 4);
-            this.logoLightOffsetX = resolveNumber(config.logoLightOffsetX, CONFIG_DEFAULTS.logoLightOffsetX, -2000, 2000);
-            this.logoLightOffsetY = resolveNumber(config.logoLightOffsetY, CONFIG_DEFAULTS.logoLightOffsetY, -2000, 2000);
-            this.logoLightScale = resolveNumber(config.logoLightScale, CONFIG_DEFAULTS.logoLightScale, 0.1, 4);
-
-            if (!Object.prototype.hasOwnProperty.call(config, 'bgsVolume')) {
-                this.bgsVolume = this.bgmVolume;
-            }
-            if (!Object.prototype.hasOwnProperty.call(config, 'meVolume')) {
-                this.meVolume = this.bgmVolume;
-            }
-        };
-    }
-
-    function resolveNumber(value, fallback, min, max) {
-        const numeric = Number(value);
-        if (!Number.isFinite(numeric)) {
-            return fallback;
-        }
-        return clampNumber(numeric, min, max);
-    }
-
-    function resolveBoolean(value, fallback) {
-        if (value === undefined || value === null) {
-            return fallback;
-        }
-        return !!value;
-    }
-
-    function resolveString(value, fallback) {
-        if (typeof value === 'string' && value.length > 0) {
-            return value;
-        }
-        return fallback;
-    }
-
-    function clampNumber(value, min, max) {
-        let result = value;
-        if (typeof min === 'number') {
-            result = Math.max(min, result);
-        }
-        if (typeof max === 'number') {
-            result = Math.min(max, result);
-        }
-        return result;
-    }
 
     function applySceneHooks() {
         // Desabilitar botão de cancelar padrão do RPG Maker
@@ -347,18 +208,18 @@ AS.TitleOptions = AS.TitleOptions || {};
 
     function loadConfigValues() {
         configValues = {
-            masterVolume: resolveNumber(ConfigManager.masterVolume, CONFIG_DEFAULTS.masterVolume, 0, 100),
-            bgmVolume: resolveNumber(ConfigManager.bgmVolume, 90, 0, 100),
-            seVolume: resolveNumber(ConfigManager.seVolume, 80, 0, 100),
-            messageSpeed: resolveString(ConfigManager.messageSpeed, CONFIG_DEFAULTS.messageSpeed),
-            battleMode: resolveString(ConfigManager.battleMode, CONFIG_DEFAULTS.battleMode),
-            alwaysDash: resolveBoolean(ConfigManager.alwaysDash, true),
+            masterVolume: ConfigManager.masterVolume || 80,
+            bgmVolume: ConfigManager.bgmVolume || 90,
+            seVolume: ConfigManager.seVolume || 80,
+            messageSpeed: ConfigManager.messageSpeed || 'normal',
+            battleMode: ConfigManager.battleMode || 'active',
+            alwaysDash: ConfigManager.alwaysDash !== undefined ? ConfigManager.alwaysDash : true,
             fullscreen: Graphics._isFullScreen(),
-            effectQuality: resolveString(ConfigManager.effectQuality, CONFIG_DEFAULTS.effectQuality),
-            enableLogoAnimation: resolveBoolean(ConfigManager.enableLogoAnimation, CONFIG_DEFAULTS.enableLogoAnimation),
-            animationSpeed: resolveNumber(ConfigManager.animationSpeed, CONFIG_DEFAULTS.animationSpeed, 1, 10),
-            enableMusicFade: resolveBoolean(ConfigManager.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade),
-            musicFadeDuration: resolveNumber(ConfigManager.musicFadeDuration, CONFIG_DEFAULTS.musicFadeDuration, 100, 5000)
+            effectQuality: ConfigManager.effectQuality || 'medium',
+            enableLogoAnimation: ConfigManager.enableLogoAnimation !== undefined ? ConfigManager.enableLogoAnimation : true,
+            animationSpeed: ConfigManager.animationSpeed || 4.0,
+            enableMusicFade: ConfigManager.enableMusicFade !== undefined ? ConfigManager.enableMusicFade : true,
+            musicFadeDuration: ConfigManager.musicFadeDuration || 1000
         };
 
         updateUIFromConfig();
@@ -525,18 +386,12 @@ AS.TitleOptions = AS.TitleOptions || {};
     function previewLiveChange(id, value) {
         try {
             switch (id) {
-                case 'bgmVolume': {
-                    const normalized = resolveNumber(value, ConfigManager.bgmVolume, 0, 100);
-                    AudioManager.bgmVolume = normalized;
-                    AudioManager.bgsVolume = normalized;
-                    AudioManager.meVolume = normalized;
+                case 'bgmVolume':
+                    AudioManager.bgmVolume = value;
                     break;
-                }
-                case 'seVolume': {
-                    const normalized = resolveNumber(value, ConfigManager.seVolume, 0, 100);
-                    AudioManager.seVolume = normalized;
+                case 'seVolume':
+                    AudioManager.seVolume = value;
                     break;
-                }
                 case 'masterVolume':
                     // Master volume preview deixado para implementação futura; mantido sem efeito imediato.
                     break;
@@ -584,34 +439,26 @@ AS.TitleOptions = AS.TitleOptions || {};
     }
 
     function saveConfigValues() {
-    const masterVolume = resolveNumber(configValues.masterVolume, CONFIG_DEFAULTS.masterVolume, 0, 100);
-    const bgmVolume = resolveNumber(configValues.bgmVolume, ConfigManager.bgmVolume, 0, 100);
-    const seVolume = resolveNumber(configValues.seVolume, ConfigManager.seVolume, 0, 100);
-    const animationSpeed = resolveNumber(configValues.animationSpeed, CONFIG_DEFAULTS.animationSpeed, 1, 10);
-    const musicFadeDuration = resolveNumber(configValues.musicFadeDuration, CONFIG_DEFAULTS.musicFadeDuration, 100, 5000);
-
-    ConfigManager.masterVolume = masterVolume;
-    ConfigManager.bgmVolume = bgmVolume;
-    ConfigManager.bgsVolume = bgmVolume;
-    ConfigManager.meVolume = bgmVolume;
-    ConfigManager.seVolume = seVolume;
-    ConfigManager.messageSpeed = resolveString(configValues.messageSpeed, CONFIG_DEFAULTS.messageSpeed);
-    ConfigManager.battleMode = resolveString(configValues.battleMode, CONFIG_DEFAULTS.battleMode);
-    ConfigManager.alwaysDash = resolveBoolean(configValues.alwaysDash, true);
-    ConfigManager.effectQuality = resolveString(configValues.effectQuality, CONFIG_DEFAULTS.effectQuality);
-    ConfigManager.enableLogoAnimation = resolveBoolean(configValues.enableLogoAnimation, CONFIG_DEFAULTS.enableLogoAnimation);
-    ConfigManager.animationSpeed = animationSpeed;
-    ConfigManager.enableMusicFade = resolveBoolean(configValues.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade);
-    ConfigManager.musicFadeDuration = musicFadeDuration;
-
-    ConfigManager.save();
-
-    AudioManager.bgmVolume = bgmVolume;
-    AudioManager.bgsVolume = bgmVolume;
-    AudioManager.meVolume = bgmVolume;
-    AudioManager.seVolume = seVolume;
-
-    logger.info('Configurações salvas com sucesso (incluindo animações e música).');
+        ConfigManager.masterVolume = configValues.masterVolume;
+        ConfigManager.bgmVolume = configValues.bgmVolume;
+        ConfigManager.seVolume = configValues.seVolume;
+        ConfigManager.messageSpeed = configValues.messageSpeed;
+        ConfigManager.battleMode = configValues.battleMode;
+        ConfigManager.alwaysDash = configValues.alwaysDash;
+        ConfigManager.effectQuality = configValues.effectQuality;
+        ConfigManager.enableLogoAnimation = configValues.enableLogoAnimation;
+        ConfigManager.animationSpeed = configValues.animationSpeed;
+        ConfigManager.enableMusicFade = configValues.enableMusicFade;
+        ConfigManager.musicFadeDuration = configValues.musicFadeDuration;
+        
+        ConfigManager.save();
+        
+        AudioManager.updateBgmParameters({ volume: configValues.bgmVolume });
+        AudioManager.updateBgsParameters({ volume: configValues.bgmVolume });
+        AudioManager.updateMeParameters({ volume: configValues.bgmVolume });
+        AudioManager.updateSeParameters({ volume: configValues.seVolume });
+        
+        logger.info('Configurações salvas com sucesso (incluindo animações e música).');
     }
 
     function showOptions() {

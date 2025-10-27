@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.8 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.1.6 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -22,7 +22,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.1.8';
+    const MODULE_VERSION = '1.1.6';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -50,22 +50,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         enableLogoAnimation: true,
         animationSpeed: 4.0,
         enableMusicFade: true,
-        musicFadeDuration: 1000,
-        logoGroupOffsetX: 0,
-        logoGroupOffsetY: 0,
-        logoGroupScale: 1,
-        logoBaseOffsetX: 0,
-        logoBaseOffsetY: 0,
-        logoBaseScale: 1,
-        logoTextOffsetX: 0,
-        logoTextOffsetY: 0,
-        logoTextScale: 1,
-        logoDarkOffsetX: 0,
-        logoDarkOffsetY: 0,
-        logoDarkScale: 1,
-        logoLightOffsetX: 0,
-        logoLightOffsetY: 0,
-        logoLightScale: 1
+        musicFadeDuration: 1000
     };
 
     ensureConfigExtensions();
@@ -119,21 +104,6 @@ AS.TitleOptions = AS.TitleOptions || {};
             config.animationSpeed = resolveNumber(this.animationSpeed, CONFIG_DEFAULTS.animationSpeed, 1, 10);
             config.enableMusicFade = resolveBoolean(this.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade);
             config.musicFadeDuration = resolveNumber(this.musicFadeDuration, CONFIG_DEFAULTS.musicFadeDuration, 100, 5000);
-            config.logoGroupOffsetX = resolveNumber(this.logoGroupOffsetX, CONFIG_DEFAULTS.logoGroupOffsetX, -2000, 2000);
-            config.logoGroupOffsetY = resolveNumber(this.logoGroupOffsetY, CONFIG_DEFAULTS.logoGroupOffsetY, -2000, 2000);
-            config.logoGroupScale = resolveNumber(this.logoGroupScale, CONFIG_DEFAULTS.logoGroupScale, 0.1, 4);
-            config.logoBaseOffsetX = resolveNumber(this.logoBaseOffsetX, CONFIG_DEFAULTS.logoBaseOffsetX, -2000, 2000);
-            config.logoBaseOffsetY = resolveNumber(this.logoBaseOffsetY, CONFIG_DEFAULTS.logoBaseOffsetY, -2000, 2000);
-            config.logoBaseScale = resolveNumber(this.logoBaseScale, CONFIG_DEFAULTS.logoBaseScale, 0.1, 4);
-            config.logoTextOffsetX = resolveNumber(this.logoTextOffsetX, CONFIG_DEFAULTS.logoTextOffsetX, -2000, 2000);
-            config.logoTextOffsetY = resolveNumber(this.logoTextOffsetY, CONFIG_DEFAULTS.logoTextOffsetY, -2000, 2000);
-            config.logoTextScale = resolveNumber(this.logoTextScale, CONFIG_DEFAULTS.logoTextScale, 0.1, 4);
-            config.logoDarkOffsetX = resolveNumber(this.logoDarkOffsetX, CONFIG_DEFAULTS.logoDarkOffsetX, -2000, 2000);
-            config.logoDarkOffsetY = resolveNumber(this.logoDarkOffsetY, CONFIG_DEFAULTS.logoDarkOffsetY, -2000, 2000);
-            config.logoDarkScale = resolveNumber(this.logoDarkScale, CONFIG_DEFAULTS.logoDarkScale, 0.1, 4);
-            config.logoLightOffsetX = resolveNumber(this.logoLightOffsetX, CONFIG_DEFAULTS.logoLightOffsetX, -2000, 2000);
-            config.logoLightOffsetY = resolveNumber(this.logoLightOffsetY, CONFIG_DEFAULTS.logoLightOffsetY, -2000, 2000);
-            config.logoLightScale = resolveNumber(this.logoLightScale, CONFIG_DEFAULTS.logoLightScale, 0.1, 4);
             return config;
         };
 
@@ -147,21 +117,6 @@ AS.TitleOptions = AS.TitleOptions || {};
             this.animationSpeed = resolveNumber(config.animationSpeed, CONFIG_DEFAULTS.animationSpeed, 1, 10);
             this.enableMusicFade = resolveBoolean(config.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade);
             this.musicFadeDuration = resolveNumber(config.musicFadeDuration, CONFIG_DEFAULTS.musicFadeDuration, 100, 5000);
-            this.logoGroupOffsetX = resolveNumber(config.logoGroupOffsetX, CONFIG_DEFAULTS.logoGroupOffsetX, -2000, 2000);
-            this.logoGroupOffsetY = resolveNumber(config.logoGroupOffsetY, CONFIG_DEFAULTS.logoGroupOffsetY, -2000, 2000);
-            this.logoGroupScale = resolveNumber(config.logoGroupScale, CONFIG_DEFAULTS.logoGroupScale, 0.1, 4);
-            this.logoBaseOffsetX = resolveNumber(config.logoBaseOffsetX, CONFIG_DEFAULTS.logoBaseOffsetX, -2000, 2000);
-            this.logoBaseOffsetY = resolveNumber(config.logoBaseOffsetY, CONFIG_DEFAULTS.logoBaseOffsetY, -2000, 2000);
-            this.logoBaseScale = resolveNumber(config.logoBaseScale, CONFIG_DEFAULTS.logoBaseScale, 0.1, 4);
-            this.logoTextOffsetX = resolveNumber(config.logoTextOffsetX, CONFIG_DEFAULTS.logoTextOffsetX, -2000, 2000);
-            this.logoTextOffsetY = resolveNumber(config.logoTextOffsetY, CONFIG_DEFAULTS.logoTextOffsetY, -2000, 2000);
-            this.logoTextScale = resolveNumber(config.logoTextScale, CONFIG_DEFAULTS.logoTextScale, 0.1, 4);
-            this.logoDarkOffsetX = resolveNumber(config.logoDarkOffsetX, CONFIG_DEFAULTS.logoDarkOffsetX, -2000, 2000);
-            this.logoDarkOffsetY = resolveNumber(config.logoDarkOffsetY, CONFIG_DEFAULTS.logoDarkOffsetY, -2000, 2000);
-            this.logoDarkScale = resolveNumber(config.logoDarkScale, CONFIG_DEFAULTS.logoDarkScale, 0.1, 4);
-            this.logoLightOffsetX = resolveNumber(config.logoLightOffsetX, CONFIG_DEFAULTS.logoLightOffsetX, -2000, 2000);
-            this.logoLightOffsetY = resolveNumber(config.logoLightOffsetY, CONFIG_DEFAULTS.logoLightOffsetY, -2000, 2000);
-            this.logoLightScale = resolveNumber(config.logoLightScale, CONFIG_DEFAULTS.logoLightScale, 0.1, 4);
 
             if (!Object.prototype.hasOwnProperty.call(config, 'bgsVolume')) {
                 this.bgsVolume = this.bgmVolume;

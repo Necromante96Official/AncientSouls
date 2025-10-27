@@ -5,6 +5,10 @@
     --as-shadow-deep: rgba(6, 3, 12, 0.85);
     --as-ember: #ff9d42;
     --as-ember-glow: rgba(255, 157, 66, 0.4);
+    --as-logo-width: 650px;
+    --as-logo-text-width: 400px;
+    --as-soul-width: 320px;
+    --as-soul-gap: 40px;
 }
 
 * {
@@ -59,6 +63,15 @@ img.as-title__soul-icon {
     }
 }
 
+@keyframes as-logo-float-mirror {
+    0%, 100% {
+        transform: translateY(0px) scaleX(-1);
+    }
+    50% {
+        transform: translateY(-8px) scaleX(-1);
+    }
+}
+
 .as-title__container {
     position: relative;
     display: flex;
@@ -73,24 +86,59 @@ img.as-title__soul-icon {
 /* Logo Section: TUDO CENTRALIZADO NO CÍRCULO MÁGICO */
 .as-title__logo-section {
     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.as-title__logo-group {
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1000px;
-    height: 600px;
+    gap: var(--as-soul-gap);
+    pointer-events: none;
+    transform-origin: center center;
+}
+
+.as-title__logo-stack {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--as-logo-width);
     pointer-events: none;
 }
 
-/* Base-logo: moldura dourada NO CENTRO DO CÍRCULO */
-.as-title__base-logo {
+.as-title__logo-node {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transform-origin: center center;
+    will-change: transform;
+}
+
+.as-title__logo-node--text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 650px;
+}
+
+/* Base-logo: moldura dourada NO CENTRO DO CÍRCULO */
+.as-title__base-logo {
+    display: block;
+    width: var(--as-logo-width);
     height: auto;
     filter: drop-shadow(0 12px 32px rgba(6, 3, 12, 0.7))
             drop-shadow(0 0 28px rgba(255, 157, 66, 0.3));
@@ -101,11 +149,8 @@ img.as-title__soul-icon {
 
 /* Ancient Souls: DENTRO da moldura, centralizado */
 .as-title__logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
+    display: block;
+    width: var(--as-logo-text-width);
     height: auto;
     filter: drop-shadow(0 8px 24px rgba(255, 157, 66, 0.6))
             drop-shadow(0 0 48px rgba(255, 157, 66, 0.3));
@@ -117,8 +162,8 @@ img.as-title__soul-icon {
 
 /* Soul Icons: NOS CANTOS EXTREMOS (fora da moldura) */
 .as-title__soul-icon {
-    position: fixed;
-    width: 350px;
+    position: relative;
+    width: var(--as-soul-width);
     height: auto;
     user-select: none;
     pointer-events: none;
@@ -130,16 +175,12 @@ img.as-title__soul-icon {
 
 /* Dark Soul: CANTO ESQUERDO (espelhada) */
 .as-title__soul-icon--dark {
-    top: 50%;
-    left: 40px;
-    transform: translateY(-50%) scaleX(-1);
+    animation-name: as-logo-float-mirror;
 }
 
 /* Light Soul: CANTO DIREITO */
 .as-title__soul-icon--light {
-    top: 50%;
-    right: 40px;
-    transform: translateY(-50%);
+    animation-name: as-logo-float;
 }
 
 /* Commands: botões BEM NA BASE, alinhados horizontalmente */
@@ -243,16 +284,11 @@ img.as-title__soul-icon {
 
 /* Responsividade */
 @media (max-width: 1366px) {
-    .as-title__soul-icon {
-        width: 310px;
-    }
-
-    .as-title__soul-icon--dark {
-        left: 30px;
-    }
-
-    .as-title__soul-icon--light {
-        right: 30px;
+    :root {
+        --as-logo-width: 600px;
+        --as-logo-text-width: 370px;
+        --as-soul-width: 290px;
+        --as-soul-gap: 32px;
     }
 
     .as-title__button {
@@ -268,16 +304,11 @@ img.as-title__soul-icon {
 }
 
 @media (max-width: 1024px) {
-    .as-title__soul-icon {
-        width: 270px;
-    }
-
-    .as-title__soul-icon--dark {
-        left: 20px;
-    }
-
-    .as-title__soul-icon--light {
-        right: 20px;
+    :root {
+        --as-logo-width: 540px;
+        --as-logo-text-width: 340px;
+        --as-soul-width: 260px;
+        --as-soul-gap: 28px;
     }
 
     .as-title__button {
@@ -293,16 +324,11 @@ img.as-title__soul-icon {
 }
 
 @media (max-width: 768px) {
-    .as-title__soul-icon {
-        width: 220px;
-    }
-
-    .as-title__soul-icon--dark {
-        left: 10px;
-    }
-
-    .as-title__soul-icon--light {
-        right: 10px;
+    :root {
+        --as-logo-width: 480px;
+        --as-logo-text-width: 300px;
+        --as-soul-width: 220px;
+        --as-soul-gap: 24px;
     }
 
     .as-title__button {

@@ -30,10 +30,14 @@
 
 #as-options-root {
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: clamp(16px, 2.5vw, 40px);
     opacity: 0;
     pointer-events: none;
     transition: opacity 280ms ease;
@@ -68,8 +72,10 @@ button[name="cancel"],
 .as-options__container {
     position: relative;
     display: flex;
-    width: min(960px, 94vw);
-    max-height: 88vh;
+    flex: 1 1 auto;
+    width: min(960px, 100%);
+    max-width: 100%;
+    max-height: min(88vh, 100%);
     background: linear-gradient(150deg, rgba(20, 12, 36, 0.95), rgba(10, 6, 22, 0.98));
     border: 1px solid var(--as-border);
     border-radius: 24px;
@@ -640,8 +646,9 @@ button[name="cancel"],
 @media (max-width: 960px) {
     .as-options__container {
         flex-direction: column;
-        width: min(520px, 92vw);
-        max-height: 94vh;
+        width: min(520px, 100%);
+        max-width: 100%;
+        max-height: min(94vh, 100%);
     }
 
     .as-options__sidebar {
@@ -712,7 +719,7 @@ button[name="cancel"],
 
 @media (max-width: 640px) {
     .as-options__container {
-        width: 94vw;
+        width: 100%;
     }
 
     .as-options__header {

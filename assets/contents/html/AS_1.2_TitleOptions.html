@@ -1,136 +1,527 @@
-<div id="as-options-root" aria-hidden="true">
-    <div class="as-options__backdrop" aria-hidden="true"></div>
-    <div class="as-options__container" role="dialog" aria-modal="true" aria-labelledby="as-options-title">
-        <aside class="as-options__nav">
-            <nav class="as-options__nav-list" role="tablist" aria-label="Categorias de configuração">
-                <button class="as-options__tab as-options__tab--active" id="tab-gameplay" type="button" role="tab" aria-controls="panel-gameplay" aria-selected="true" data-tab="gameplay">
-                    <span class="as-options__tab-label">JOGABILIDADE</span>
+<div class="as-options-adv" role="dialog" aria-labelledby="optionsTitle" aria-modal="true" aria-hidden="true">
+    <!-- Background overlay com efeito de partículas -->
+    <div class="as-options-adv__backdrop"></div>
+    
+    <!-- Container principal -->
+    <div class="as-options-adv__container">
+        
+        <!-- Cabeçalho -->
+        <header class="as-options-adv__header">
+            <div class="as-options-adv__header-ornament as-options-adv__header-ornament--left"></div>
+            <h1 id="optionsTitle" class="as-options-adv__title">
+                <span class="as-options-adv__title-icon">⚙️</span>
+                <span class="as-options-adv__title-text">Configurações</span>
+            </h1>
+            <div class="as-options-adv__header-ornament as-options-adv__header-ornament--right"></div>
+            <button id="closeButton" class="as-options-adv__close-btn" aria-label="Fechar">
+                <span class="as-options-adv__close-icon">✕</span>
+            </button>
+        </header>
+
+        <!-- Layout com sidebar e conteúdo -->
+        <div class="as-options-adv__layout">
+            
+            <!-- Sidebar com abas -->
+            <aside class="as-options-adv__sidebar" role="tablist" aria-label="Categorias de opções">
+                <button class="as-options-adv__tab as-options-adv__tab--active" 
+                        data-tab="audio" 
+                        role="tab" 
+                        aria-selected="true"
+                        aria-controls="panel-audio">
+                    <span class="as-options-adv__tab-icon">🔊</span>
+                    <span class="as-options-adv__tab-label">Áudio</span>
                 </button>
-                <button class="as-options__tab" id="tab-audio" type="button" role="tab" aria-controls="panel-audio" aria-selected="false" data-tab="audio">
-                    <span class="as-options__tab-label">ÁUDIO</span>
+                
+                <button class="as-options-adv__tab" 
+                        data-tab="gameplay" 
+                        role="tab" 
+                        aria-selected="false"
+                        aria-controls="panel-gameplay">
+                    <span class="as-options-adv__tab-icon">🎮</span>
+                    <span class="as-options-adv__tab-label">Jogabilidade</span>
                 </button>
-                <button class="as-options__tab" id="tab-display" type="button" role="tab" aria-controls="panel-display" aria-selected="false" data-tab="display">
-                    <span class="as-options__tab-label">EXIBIÇÃO</span>
+                
+                <button class="as-options-adv__tab" 
+                        data-tab="optimization" 
+                        role="tab" 
+                        aria-selected="false"
+                        aria-controls="panel-optimization">
+                    <span class="as-options-adv__tab-icon">⚡</span>
+                    <span class="as-options-adv__tab-label">Otimização</span>
                 </button>
-            </nav>
-        </aside>
-        <section class="as-options__main">
-            <div class="as-options__panels">
-                <div class="as-options__panel as-options__panel--active" id="panel-gameplay" role="tabpanel" aria-labelledby="tab-gameplay" data-panel="gameplay">
-                    <div class="as-options__panel-card">
-                        <div class="as-options__panel-card-header">
-                            <div class="as-options__panel-title">Jogabilidade</div>
+                
+                <button class="as-options-adv__tab" 
+                        data-tab="credits" 
+                        role="tab" 
+                        aria-selected="false"
+                        aria-controls="panel-credits">
+                    <span class="as-options-adv__tab-icon">✨</span>
+                    <span class="as-options-adv__tab-label">Créditos</span>
+                </button>
+            </aside>
+
+            <!-- Área de conteúdo com scroll -->
+            <main class="as-options-adv__content">
+                
+                <!-- Painel: Áudio -->
+                <section id="panel-audio" 
+                         class="as-options-adv__panel as-options-adv__panel--active" 
+                         data-panel="audio"
+                         role="tabpanel"
+                         aria-labelledby="tab-audio">
+                    
+                    <h2 class="as-options-adv__panel-title">
+                        <span class="as-options-adv__panel-icon">🔊</span>
+                        Configurações de Áudio
+                    </h2>
+                    
+                    <div class="as-options-adv__section">
+                        <h3 class="as-options-adv__section-title">Volume Geral</h3>
+                        
+                        <!-- Master Volume -->
+                        <div class="as-options-adv__control-group">
+                            <label for="masterVolume" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Volume Master</span>
+                                <span id="masterVolumeValue" class="as-options-adv__value">80%</span>
+                            </label>
+                            <div class="as-options-adv__slider-wrapper">
+                                <input type="range" 
+                                       id="masterVolume" 
+                                       class="as-options-adv__slider"
+                                       min="0" 
+                                       max="100" 
+                                       value="80"
+                                       step="1"
+                                       aria-valuemin="0"
+                                       aria-valuemax="100"
+                                       aria-valuenow="80">
+                            </div>
                         </div>
-                        <p class="as-options__panel-description">Configure as opções de controle e jogabilidade.</p>
-                        <div class="as-options__section">
-                            <div class="as-options__option as-options__option--toggle">
-                                <div class="as-options__option-text">
-                                    <span class="as-options__label" id="alwaysDashLabel">Corrida Automática</span>
-                                    <small class="as-options__description" id="alwaysDashDescription">Mantém o personagem correndo sem segurar o botão.</small>
-                                </div>
-                                <label class="as-options__toggle" aria-labelledby="alwaysDashLabel alwaysDashDescription">
-                                    <input type="checkbox" id="alwaysDash" />
-                                    <span class="as-options__toggle-slider" aria-hidden="true"></span>
+                    </div>
+
+                    <div class="as-options-adv__section">
+                        <h3 class="as-options-adv__section-title">Volumes Individuais</h3>
+                        
+                        <!-- BGM Volume -->
+                        <div class="as-options-adv__control-group">
+                            <label for="bgmVolume" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Música de Fundo (BGM)</span>
+                                <span id="bgmVolumeValue" class="as-options-adv__value">90%</span>
+                            </label>
+                            <div class="as-options-adv__slider-wrapper">
+                                <input type="range" 
+                                       id="bgmVolume" 
+                                       class="as-options-adv__slider"
+                                       min="0" 
+                                       max="100" 
+                                       value="90"
+                                       step="1">
+                            </div>
+                        </div>
+
+                        <!-- BGS Volume -->
+                        <div class="as-options-adv__control-group">
+                            <label for="bgsVolume" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Sons Ambientes (BGS)</span>
+                                <span id="bgsVolumeValue" class="as-options-adv__value">90%</span>
+                            </label>
+                            <div class="as-options-adv__slider-wrapper">
+                                <input type="range" 
+                                       id="bgsVolume" 
+                                       class="as-options-adv__slider"
+                                       min="0" 
+                                       max="100" 
+                                       value="90"
+                                       step="1">
+                            </div>
+                        </div>
+
+                        <!-- ME Volume -->
+                        <div class="as-options-adv__control-group">
+                            <label for="meVolume" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Efeitos Musicais (ME)</span>
+                                <span id="meVolumeValue" class="as-options-adv__value">90%</span>
+                            </label>
+                            <div class="as-options-adv__slider-wrapper">
+                                <input type="range" 
+                                       id="meVolume" 
+                                       class="as-options-adv__slider"
+                                       min="0" 
+                                       max="100" 
+                                       value="90"
+                                       step="1">
+                            </div>
+                        </div>
+
+                        <!-- SE Volume -->
+                        <div class="as-options-adv__control-group">
+                            <label for="seVolume" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Efeitos Sonoros (SE)</span>
+                                <span id="seVolumeValue" class="as-options-adv__value">90%</span>
+                            </label>
+                            <div class="as-options-adv__slider-wrapper">
+                                <input type="range" 
+                                       id="seVolume" 
+                                       class="as-options-adv__slider"
+                                       min="0" 
+                                       max="100" 
+                                       value="90"
+                                       step="1">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="as-options-adv__info-box">
+                        <span class="as-options-adv__info-icon">ℹ️</span>
+                        <p class="as-options-adv__info-text">
+                            O volume master controla o volume geral de todos os áudios. 
+                            Os volumes individuais são aplicados sobre o master.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Painel: Jogabilidade -->
+                <section id="panel-gameplay" 
+                         class="as-options-adv__panel" 
+                         data-panel="gameplay"
+                         role="tabpanel"
+                         aria-labelledby="tab-gameplay"
+                         hidden>
+                    
+                    <h2 class="as-options-adv__panel-title">
+                        <span class="as-options-adv__panel-icon">🎮</span>
+                        Configurações de Jogabilidade
+                    </h2>
+
+                    <div class="as-options-adv__section">
+                        <h3 class="as-options-adv__section-title">Controles</h3>
+                        
+                        <!-- Always Dash -->
+                        <div class="as-options-adv__control-group">
+                            <label for="alwaysDash" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Correr Sempre</span>
+                                <span class="as-options-adv__description">Personagem sempre corre sem pressionar botão</span>
+                            </label>
+                            <div class="as-options-adv__toggle-wrapper">
+                                <input type="checkbox" id="alwaysDash" class="as-options-adv__toggle">
+                                <label for="alwaysDash" class="as-options-adv__toggle-label">
+                                    <span class="as-options-adv__toggle-switch"></span>
                                 </label>
                             </div>
-                            <div class="as-options__option as-options__option--toggle">
-                                <div class="as-options__option-text">
-                                    <span class="as-options__label" id="commandRememberLabel">Lembrar Comando</span>
-                                    <small class="as-options__description" id="commandRememberDescription">O cursor volta para o último comando usado em batalha.</small>
-                                </div>
-                                <label class="as-options__toggle" aria-labelledby="commandRememberLabel commandRememberDescription">
-                                    <input type="checkbox" id="commandRemember" />
-                                    <span class="as-options__toggle-slider" aria-hidden="true"></span>
+                        </div>
+
+                        <!-- Command Remember -->
+                        <div class="as-options-adv__control-group">
+                            <label for="commandRemember" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Lembrar Comandos</span>
+                                <span class="as-options-adv__description">Manter seleção anterior em batalhas</span>
+                            </label>
+                            <div class="as-options-adv__toggle-wrapper">
+                                <input type="checkbox" id="commandRemember" class="as-options-adv__toggle">
+                                <label for="commandRemember" class="as-options-adv__toggle-label">
+                                    <span class="as-options-adv__toggle-switch"></span>
                                 </label>
                             </div>
-                            <div class="as-options__option as-options__option--toggle">
-                                <div class="as-options__option-text">
-                                    <span class="as-options__label" id="touchUILabel">Interface Touch</span>
-                                    <small class="as-options__description" id="touchUIDescription">Exibe botões para telas sensíveis ao toque.</small>
-                                </div>
-                                <label class="as-options__toggle" aria-labelledby="touchUILabel touchUIDescription">
-                                    <input type="checkbox" id="touchUI" checked />
-                                    <span class="as-options__toggle-slider" aria-hidden="true"></span>
+                        </div>
+
+                        <!-- Touch UI -->
+                        <div class="as-options-adv__control-group">
+                            <label for="touchUI" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Interface Touch</span>
+                                <span class="as-options-adv__description">Habilitar botões de toque na tela</span>
+                            </label>
+                            <div class="as-options-adv__toggle-wrapper">
+                                <input type="checkbox" id="touchUI" class="as-options-adv__toggle">
+                                <label for="touchUI" class="as-options-adv__toggle-label">
+                                    <span class="as-options-adv__toggle-switch"></span>
                                 </label>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="as-options__panel" id="panel-audio" role="tabpanel" aria-labelledby="tab-audio" data-panel="audio" hidden>
-                    <div class="as-options__panel-card">
-                        <div class="as-options__panel-card-header">
-                            <div class="as-options__panel-title">Áudio</div>
+
+                    <div class="as-options-adv__section">
+                        <h3 class="as-options-adv__section-title">Velocidades</h3>
+                        
+                        <!-- Message Speed -->
+                        <div class="as-options-adv__control-group">
+                            <label for="messageSpeed" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Velocidade de Mensagens</span>
+                            </label>
+                            <select id="messageSpeed" class="as-options-adv__select">
+                                <option value="slow">Lento</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="fast">Rápido</option>
+                                <option value="instant">Instantâneo</option>
+                            </select>
                         </div>
-                        <p class="as-options__panel-description">Ajuste os volumes de música e efeitos sonoros.</p>
-                        <div class="as-options__section">
-                            <div class="as-options__option">
-                                <div class="as-options__option-text">
-                                    <label class="as-options__label" for="bgmVolume">Volume da Música (BGM)</label>
-                                    <small class="as-options__description">Controla o volume das músicas de fundo.</small>
-                                </div>
-                                <div class="as-options__slider-container">
-                                    <input type="range" class="as-options__slider" id="bgmVolume" min="0" max="100" value="90" />
-                                    <span class="as-options__value" id="bgmVolumeValue">90%</span>
-                                </div>
-                            </div>
-                            <div class="as-options__option">
-                                <div class="as-options__option-text">
-                                    <label class="as-options__label" for="bgsVolume">Volume do Ambiente (BGS)</label>
-                                    <small class="as-options__description">Controla o volume dos sons ambientes.</small>
-                                </div>
-                                <div class="as-options__slider-container">
-                                    <input type="range" class="as-options__slider" id="bgsVolume" min="0" max="100" value="90" />
-                                    <span class="as-options__value" id="bgsVolumeValue">90%</span>
-                                </div>
-                            </div>
-                            <div class="as-options__option">
-                                <div class="as-options__option-text">
-                                    <label class="as-options__label" for="meVolume">Volume de Efeitos Musicais (ME)</label>
-                                    <small class="as-options__description">Controla o volume de jingles e fanfarras.</small>
-                                </div>
-                                <div class="as-options__slider-container">
-                                    <input type="range" class="as-options__slider" id="meVolume" min="0" max="100" value="90" />
-                                    <span class="as-options__value" id="meVolumeValue">90%</span>
-                                </div>
-                            </div>
-                            <div class="as-options__option">
-                                <div class="as-options__option-text">
-                                    <label class="as-options__label" for="seVolume">Volume dos Efeitos Sonoros (SE)</label>
-                                    <small class="as-options__description">Controla o volume dos efeitos sonoros.</small>
-                                </div>
-                                <div class="as-options__slider-container">
-                                    <input type="range" class="as-options__slider" id="seVolume" min="0" max="100" value="90" />
-                                    <span class="as-options__value" id="seVolumeValue">90%</span>
-                                </div>
+
+                        <!-- Battle Speed -->
+                        <div class="as-options-adv__control-group">
+                            <label for="battleSpeed" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Velocidade de Batalha</span>
+                            </label>
+                            <select id="battleSpeed" class="as-options-adv__select">
+                                <option value="slow">Lento</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="fast">Rápido</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="as-options-adv__section">
+                        <h3 class="as-options-adv__section-title">Interface</h3>
+                        
+                        <!-- Window Opacity -->
+                        <div class="as-options-adv__control-group">
+                            <label for="windowOpacity" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Opacidade das Janelas</span>
+                                <span id="windowOpacityValue" class="as-options-adv__value">192</span>
+                            </label>
+                            <div class="as-options-adv__slider-wrapper">
+                                <input type="range" 
+                                       id="windowOpacity" 
+                                       class="as-options-adv__slider"
+                                       min="0" 
+                                       max="255" 
+                                       value="192"
+                                       step="5">
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="as-options__panel" id="panel-display" role="tabpanel" aria-labelledby="tab-display" data-panel="display" hidden>
-                    <div class="as-options__panel-card">
-                        <div class="as-options__panel-card-header">
-                            <div class="as-options__panel-title">Exibição</div>
+
+                    <div class="as-options-adv__info-box">
+                        <span class="as-options-adv__info-icon">💡</span>
+                        <p class="as-options-adv__info-text">
+                            Ajuste estas configurações para personalizar sua experiência de jogo.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Painel: Otimização -->
+                <section id="panel-optimization" 
+                         class="as-options-adv__panel" 
+                         data-panel="optimization"
+                         role="tabpanel"
+                         aria-labelledby="tab-optimization"
+                         hidden>
+                    
+                    <h2 class="as-options-adv__panel-title">
+                        <span class="as-options-adv__panel-icon">⚡</span>
+                        Otimização e Performance
+                    </h2>
+
+                    <div class="as-options-adv__section">
+                        <h3 class="as-options-adv__section-title">Gráficos</h3>
+                        
+                        <!-- Graphics Quality -->
+                        <div class="as-options-adv__control-group">
+                            <label for="graphicsQuality" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Qualidade Gráfica</span>
+                            </label>
+                            <select id="graphicsQuality" class="as-options-adv__select">
+                                <option value="low">Baixa (Melhor Performance)</option>
+                                <option value="medium">Média</option>
+                                <option value="high" selected>Alta (Melhor Qualidade)</option>
+                                <option value="ultra">Ultra</option>
+                            </select>
                         </div>
-                        <p class="as-options__panel-description">Configure as opções de tela e interface.</p>
-                        <div class="as-options__section">
-                            <div class="as-options__option">
-                                <div class="as-options__option-text">
-                                    <label class="as-options__label" for="messageSpeed">Velocidade de Texto</label>
-                                    <small class="as-options__description">Define a rapidez com que o texto aparece.</small>
-                                </div>
-                                <div class="as-options__select-container">
-                                    <select class="as-options__select" id="messageSpeed">
-                                        <option value="slow">Lenta</option>
-                                        <option value="normal" selected>Normal</option>
-                                        <option value="fast">Rápida</option>
-                                        <option value="instant">Instantânea</option>
-                                    </select>
-                                </div>
+
+                        <!-- Enable Animations -->
+                        <div class="as-options-adv__control-group">
+                            <label for="enableAnimations" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Animações de Batalha</span>
+                                <span class="as-options-adv__description">Exibir animações de habilidades e ataques</span>
+                            </label>
+                            <div class="as-options-adv__toggle-wrapper">
+                                <input type="checkbox" id="enableAnimations" class="as-options-adv__toggle" checked>
+                                <label for="enableAnimations" class="as-options-adv__toggle-label">
+                                    <span class="as-options-adv__toggle-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Enable Weather Effects -->
+                        <div class="as-options-adv__control-group">
+                            <label for="enableWeatherEffects" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Efeitos Climáticos</span>
+                                <span class="as-options-adv__description">Chuva, neve e outros efeitos de clima</span>
+                            </label>
+                            <div class="as-options-adv__toggle-wrapper">
+                                <input type="checkbox" id="enableWeatherEffects" class="as-options-adv__toggle" checked>
+                                <label for="enableWeatherEffects" class="as-options-adv__toggle-label">
+                                    <span class="as-options-adv__toggle-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Enable Particles -->
+                        <div class="as-options-adv__control-group">
+                            <label for="enableParticles" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Partículas</span>
+                                <span class="as-options-adv__description">Efeitos de partículas decorativas</span>
+                            </label>
+                            <div class="as-options-adv__toggle-wrapper">
+                                <input type="checkbox" id="enableParticles" class="as-options-adv__toggle" checked>
+                                <label for="enableParticles" class="as-options-adv__toggle-label">
+                                    <span class="as-options-adv__toggle-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Smooth Scaling -->
+                        <div class="as-options-adv__control-group">
+                            <label for="smoothScaling" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Escalonamento Suave</span>
+                                <span class="as-options-adv__description">Anti-aliasing para imagens escaladas</span>
+                            </label>
+                            <div class="as-options-adv__toggle-wrapper">
+                                <input type="checkbox" id="smoothScaling" class="as-options-adv__toggle" checked>
+                                <label for="smoothScaling" class="as-options-adv__toggle-label">
+                                    <span class="as-options-adv__toggle-switch"></span>
+                                </label>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="as-options-adv__section">
+                        <h3 class="as-options-adv__section-title">Performance</h3>
+                        
+                        <!-- Target FPS -->
+                        <div class="as-options-adv__control-group">
+                            <label for="targetFPS" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">FPS Alvo</span>
+                                <span id="targetFPSValue" class="as-options-adv__value">60 FPS</span>
+                            </label>
+                            <div class="as-options-adv__slider-wrapper">
+                                <input type="range" 
+                                       id="targetFPS" 
+                                       class="as-options-adv__slider"
+                                       min="30" 
+                                       max="120" 
+                                       value="60"
+                                       step="15">
+                            </div>
+                            <div class="as-options-adv__hint">
+                                <small>Valores mais baixos melhoram a performance em computadores mais fracos</small>
+                            </div>
+                        </div>
+
+                        <!-- Fullscreen -->
+                        <div class="as-options-adv__control-group">
+                            <label for="fullscreen" class="as-options-adv__label">
+                                <span class="as-options-adv__label-text">Tela Cheia</span>
+                                <span class="as-options-adv__description">Modo de tela cheia (F4)</span>
+                            </label>
+                            <div class="as-options-adv__toggle-wrapper">
+                                <input type="checkbox" id="fullscreen" class="as-options-adv__toggle">
+                                <label for="fullscreen" class="as-options-adv__toggle-label">
+                                    <span class="as-options-adv__toggle-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="as-options-adv__warning-box">
+                        <span class="as-options-adv__warning-icon">⚠️</span>
+                        <p class="as-options-adv__warning-text">
+                            Algumas alterações podem exigir reinicialização do jogo para serem aplicadas completamente.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Painel: Créditos -->
+                <section id="panel-credits" 
+                         class="as-options-adv__panel" 
+                         data-panel="credits"
+                         role="tabpanel"
+                         aria-labelledby="tab-credits"
+                         hidden>
+                    
+                    <h2 class="as-options-adv__panel-title">
+                        <span class="as-options-adv__panel-icon">✨</span>
+                        Créditos
+                    </h2>
+
+                    <div class="as-options-adv__credits">
+                        <div class="as-options-adv__credits-section">
+                            <h3 class="as-options-adv__credits-title">Ancient Souls</h3>
+                            <p class="as-options-adv__credits-subtitle">Um RPG Épico de Fantasia Medieval</p>
+                        </div>
+
+                        <div class="as-options-adv__credits-section">
+                            <h4 class="as-options-adv__credits-role">Desenvolvimento</h4>
+                            <p class="as-options-adv__credits-name">Necromante96Official</p>
+                            <p class="as-options-adv__credits-description">Game Design, Programação e Direção</p>
+                        </div>
+
+                        <div class="as-options-adv__credits-section">
+                            <h4 class="as-options-adv__credits-role">Assistência de IA</h4>
+                            <p class="as-options-adv__credits-name">GitHub Copilot</p>
+                            <p class="as-options-adv__credits-description">Desenvolvimento de Sistemas e Plugins</p>
+                        </div>
+
+                        <div class="as-options-adv__credits-section">
+                            <h4 class="as-options-adv__credits-role">Engine</h4>
+                            <p class="as-options-adv__credits-name">RPG Maker MZ</p>
+                            <p class="as-options-adv__credits-description">Kadokawa Corporation</p>
+                        </div>
+
+                        <div class="as-options-adv__credits-section">
+                            <h4 class="as-options-adv__credits-role">Sistemas Desenvolvidos</h4>
+                            <ul class="as-options-adv__credits-list">
+                                <li>✦ Sistema de Gerenciamento de Plugins</li>
+                                <li>✦ Sistema Avançado de Logs</li>
+                                <li>✦ Interface Customizada de Título</li>
+                                <li>✦ Editor de Logo Dinâmico</li>
+                                <li>✦ Sistema de Opções Avançadas</li>
+                                <li>✦ E muito mais...</li>
+                            </ul>
+                        </div>
+
+                        <div class="as-options-adv__credits-section">
+                            <h4 class="as-options-adv__credits-role">Agradecimentos Especiais</h4>
+                            <p class="as-options-adv__credits-text">
+                                A todos os jogadores que embarcaram nesta jornada épica
+                                através das Ancient Souls. Sua aventura mantém viva a magia deste mundo.
+                            </p>
+                        </div>
+
+                        <div class="as-options-adv__credits-footer">
+                            <div class="as-options-adv__credits-divider"></div>
+                            <p class="as-options-adv__credits-copyright">
+                                © 2025 Ancient Souls - Todos os direitos reservados
+                            </p>
+                            <p class="as-options-adv__credits-version">
+                                Versão 2.0.0
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- Footer com botões de ação -->
+        <footer class="as-options-adv__footer">
+            <div class="as-options-adv__footer-ornament"></div>
+            <div class="as-options-adv__actions">
+                <button id="resetButton" class="as-options-adv__btn as-options-adv__btn--secondary">
+                    <span class="as-options-adv__btn-icon">🔄</span>
+                    <span class="as-options-adv__btn-text">Restaurar Padrão</span>
+                </button>
+                <button id="cancelButton" class="as-options-adv__btn as-options-adv__btn--secondary">
+                    <span class="as-options-adv__btn-icon">✕</span>
+                    <span class="as-options-adv__btn-text">Cancelar</span>
+                </button>
+                <button id="applyButton" class="as-options-adv__btn as-options-adv__btn--primary">
+                    <span class="as-options-adv__btn-icon">✓</span>
+                    <span class="as-options-adv__btn-text">Aplicar</span>
+                </button>
             </div>
-        </section>
+        </footer>
+
+        <!-- Feedback toast -->
+        <div id="optionsFeedback" class="as-options-adv__feedback" role="alert" aria-live="polite"></div>
+
     </div>
 </div>

@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.3.0 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.2.9 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @help
@@ -22,14 +22,6 @@
  * - Suporte a scroll do mouse
  * - Botão de voltar e feedback visual
  * - Configurações persistentes
- * - Detecção automática de hardware e sugestão de preset
- * - Monitor de FPS em tempo real configurável
- * - Sistema de tooltips interativos
- * - Animação de confirmação ao salvar (check verde)
- * - Estilos de cursor customizáveis (padrão/retrô/moderno)
- * - Sistema de cache inteligente de recursos
- * - Scroll automático ao trocar de abas
- * - Labels de áudio amigáveis (sem termos técnicos)
  * 
  * ==========================================================================
  */
@@ -41,7 +33,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.3.0';
+    const MODULE_VERSION = '1.2.9';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -90,14 +82,11 @@ AS.TitleOptions = AS.TitleOptions || {};
         graphicsQuality: 'high',
         smoothScaling: true,
         screenShake: true,
-        showFPS: false,
-        cacheStrategy: 'ondemand',
         
         // Visual
         screenFilter: 'none',
         screenBrightness: 100,
         uiScale: 100,
-        cursorStyle: 'default',
         
         // Outros
         enableMusicFade: true,
@@ -132,23 +121,11 @@ AS.TitleOptions = AS.TitleOptions || {};
         init: context => {
             contextRef = context;
             applySceneHooks();
-            
-            // Aplicar FPS monitor se estiver ativado
-            setTimeout(() => {
-                if (ConfigManager.showFPS) {
-                    toggleFPSDisplay(true);
-                }
-                if (ConfigManager.cursorStyle) {
-                    applyCursorStyle(ConfigManager.cursorStyle);
-                }
-            }, 1000);
-            
             logger.info('Sistema avançado de opções inicializado.');
             return {};
         },
         cleanup: () => {
             destroyMarkup();
-            removeFPSMonitor();
             logger.info('Interface de opções avançada removida.');
         }
     };
@@ -195,14 +172,11 @@ AS.TitleOptions = AS.TitleOptions || {};
             config.graphicsQuality = resolveString(this.graphicsQuality, CONFIG_DEFAULTS.graphicsQuality);
             config.smoothScaling = resolveBoolean(this.smoothScaling, CONFIG_DEFAULTS.smoothScaling);
             config.screenShake = resolveBoolean(this.screenShake, CONFIG_DEFAULTS.screenShake);
-            config.showFPS = resolveBoolean(this.showFPS, CONFIG_DEFAULTS.showFPS);
-            config.cacheStrategy = resolveString(this.cacheStrategy, CONFIG_DEFAULTS.cacheStrategy);
             
             // Visual
             config.screenFilter = resolveString(this.screenFilter, CONFIG_DEFAULTS.screenFilter);
             config.screenBrightness = resolveNumber(this.screenBrightness, CONFIG_DEFAULTS.screenBrightness, 50, 150);
             config.uiScale = resolveNumber(this.uiScale, CONFIG_DEFAULTS.uiScale, 75, 150);
-            config.cursorStyle = resolveString(this.cursorStyle, CONFIG_DEFAULTS.cursorStyle);
             
             // Outros
             config.enableMusicFade = resolveBoolean(this.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade);
@@ -239,14 +213,11 @@ AS.TitleOptions = AS.TitleOptions || {};
             this.graphicsQuality = config.graphicsQuality !== undefined ? resolveString(config.graphicsQuality, CONFIG_DEFAULTS.graphicsQuality) : CONFIG_DEFAULTS.graphicsQuality;
             this.smoothScaling = config.smoothScaling !== undefined ? resolveBoolean(config.smoothScaling, CONFIG_DEFAULTS.smoothScaling) : CONFIG_DEFAULTS.smoothScaling;
             this.screenShake = config.screenShake !== undefined ? resolveBoolean(config.screenShake, CONFIG_DEFAULTS.screenShake) : CONFIG_DEFAULTS.screenShake;
-            this.showFPS = config.showFPS !== undefined ? resolveBoolean(config.showFPS, CONFIG_DEFAULTS.showFPS) : CONFIG_DEFAULTS.showFPS;
-            this.cacheStrategy = config.cacheStrategy !== undefined ? resolveString(config.cacheStrategy, CONFIG_DEFAULTS.cacheStrategy) : CONFIG_DEFAULTS.cacheStrategy;
             
             // Visual
             this.screenFilter = config.screenFilter !== undefined ? resolveString(config.screenFilter, CONFIG_DEFAULTS.screenFilter) : CONFIG_DEFAULTS.screenFilter;
             this.screenBrightness = config.screenBrightness !== undefined ? resolveNumber(config.screenBrightness, CONFIG_DEFAULTS.screenBrightness, 50, 150) : CONFIG_DEFAULTS.screenBrightness;
             this.uiScale = config.uiScale !== undefined ? resolveNumber(config.uiScale, CONFIG_DEFAULTS.uiScale, 75, 150) : CONFIG_DEFAULTS.uiScale;
-            this.cursorStyle = config.cursorStyle !== undefined ? resolveString(config.cursorStyle, CONFIG_DEFAULTS.cursorStyle) : CONFIG_DEFAULTS.cursorStyle;
             
             // Outros
             this.enableMusicFade = config.enableMusicFade !== undefined ? resolveBoolean(config.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade) : CONFIG_DEFAULTS.enableMusicFade;
@@ -388,12 +359,6 @@ AS.TitleOptions = AS.TitleOptions || {};
                 loadConfigValues();
                 bindControls();
                 showOptions();
-                
-                // Detectar hardware e sugerir preset (apenas na primeira vez)
-                if (!ConfigManager._hardwareDetected) {
-                    ConfigManager._hardwareDetected = true;
-                    setTimeout(() => detectHardwareAndSuggestPreset(), 500);
-                }
                 
                 this._asOptionsActive = true;
                 logger.info('Interface avançada de opções ativada.');
@@ -591,9 +556,6 @@ AS.TitleOptions = AS.TitleOptions || {};
             targetFPS: resolveNumber(ConfigManager.targetFPS, CONFIG_DEFAULTS.targetFPS, 30, 120),
             graphicsQuality: resolveString(ConfigManager.graphicsQuality, CONFIG_DEFAULTS.graphicsQuality),
             smoothScaling: resolveBoolean(ConfigManager.smoothScaling, CONFIG_DEFAULTS.smoothScaling),
-            showFPS: resolveBoolean(ConfigManager.showFPS, CONFIG_DEFAULTS.showFPS),
-            cacheStrategy: resolveString(ConfigManager.cacheStrategy, CONFIG_DEFAULTS.cacheStrategy),
-            cursorStyle: resolveString(ConfigManager.cursorStyle, CONFIG_DEFAULTS.cursorStyle),
             
             // Outros
             fullscreen: Graphics._isFullScreen ? Graphics._isFullScreen() : false
@@ -656,8 +618,6 @@ AS.TitleOptions = AS.TitleOptions || {};
         bindSelect('messageSpeed');
         bindSelect('battleSpeed');
         bindSelect('graphicsQuality');
-        bindSelect('cacheStrategy');
-        bindSelect('cursorStyle');
         
         // Vincular sliders de otimização
         bindSlider('targetFPS');
@@ -671,7 +631,6 @@ AS.TitleOptions = AS.TitleOptions || {};
         bindToggle('enableParticles');
         bindToggle('smoothScaling');
         bindToggle('fullscreen');
-        bindToggle('showFPS');
 
         enableScrollWheelSupport();
 
@@ -703,7 +662,6 @@ AS.TitleOptions = AS.TitleOptions || {};
         });
 
         attachKeyboardSupport();
-        initializeTooltips();
         logger.info('Controles vinculados.');
     }
 
@@ -758,136 +716,6 @@ AS.TitleOptions = AS.TitleOptions || {};
         showFeedback(`✨ Preset "${preset === 'performance' ? 'Performance' : preset === 'balanced' ? 'Balanceado' : 'Qualidade'}" aplicado!`);
     }
 
-    // Detecção automática de hardware e sugestão de preset
-    function detectHardwareAndSuggestPreset() {
-        try {
-            const canvas = document.createElement('canvas');
-            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-            
-            let score = 0;
-            
-            // Detectar GPU
-            if (gl) {
-                const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-                if (debugInfo) {
-                    const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-                    logger.info(`GPU detectada: ${renderer}`);
-                    
-                    // GPUs high-end
-                    if (renderer.match(/RTX|GeForce GTX (1[6-9]|[2-9])|Radeon RX (5|6|7)|AMD.*Vega|Intel.*Iris Xe/i)) {
-                        score += 3;
-                    }
-                    // GPUs mid-range
-                    else if (renderer.match(/GTX|Radeon|Intel.*HD|Intel.*UHD/i)) {
-                        score += 2;
-                    }
-                    // GPUs low-end
-                    else {
-                        score += 1;
-                    }
-                }
-            }
-            
-            // Detectar memória (RAM)
-            if (navigator.deviceMemory) {
-                const ram = navigator.deviceMemory; // em GB
-                logger.info(`RAM detectada: ${ram}GB`);
-                if (ram >= 8) score += 2;
-                else if (ram >= 4) score += 1;
-            }
-            
-            // Detectar número de núcleos do processador
-            if (navigator.hardwareConcurrency) {
-                const cores = navigator.hardwareConcurrency;
-                logger.info(`CPU cores detectados: ${cores}`);
-                if (cores >= 8) score += 2;
-                else if (cores >= 4) score += 1;
-            }
-            
-            // Determinar preset baseado no score
-            let suggestedPreset = 'balanced';
-            if (score >= 6) {
-                suggestedPreset = 'quality';
-            } else if (score <= 3) {
-                suggestedPreset = 'performance';
-            }
-            
-            logger.info(`Score de hardware: ${score}/7 - Preset sugerido: ${suggestedPreset}`);
-            
-            // Mostrar sugestão ao usuário
-            const presetNames = {
-                performance: 'Performance',
-                balanced: 'Balanceado',
-                quality: 'Qualidade'
-            };
-            
-            showHardwareSuggestion(presetNames[suggestedPreset], suggestedPreset);
-            
-        } catch (error) {
-            logger.warn(`Falha na detecção de hardware: ${error.message}`);
-        }
-    }
-
-    function showHardwareSuggestion(presetName, presetId) {
-        const suggestionHTML = `
-            <div class="as-options-adv__hardware-suggestion" id="hardwareSuggestion">
-                <div class="as-options-adv__suggestion-content">
-                    <span class="as-options-adv__suggestion-icon">💡</span>
-                    <div class="as-options-adv__suggestion-text">
-                        <strong>Sugestão Automática</strong>
-                        <p>Baseado no seu hardware, recomendamos o preset: <strong>${presetName}</strong></p>
-                    </div>
-                    <div class="as-options-adv__suggestion-actions">
-                        <button class="as-options-adv__suggestion-btn as-options-adv__suggestion-btn--accept" data-preset="${presetId}">
-                            ✓ Aplicar
-                        </button>
-                        <button class="as-options-adv__suggestion-btn as-options-adv__suggestion-btn--dismiss">
-                            ✕ Dispensar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        const container = rootElement.querySelector('.as-options-adv__container');
-        if (container) {
-            const suggestionElement = document.createElement('div');
-            suggestionElement.innerHTML = suggestionHTML;
-            container.appendChild(suggestionElement.firstElementChild);
-            
-            // Bind dos botões
-            const acceptBtn = container.querySelector('.as-options-adv__suggestion-btn--accept');
-            const dismissBtn = container.querySelector('.as-options-adv__suggestion-btn--dismiss');
-            
-            if (acceptBtn) {
-                acceptBtn.addEventListener('click', () => {
-                    applyPreset(presetId);
-                    dismissHardwareSuggestion();
-                    if (typeof SoundManager !== 'undefined') {
-                        SoundManager.playOk();
-                    }
-                });
-            }
-            
-            if (dismissBtn) {
-                dismissBtn.addEventListener('click', () => {
-                    dismissHardwareSuggestion();
-                    if (typeof SoundManager !== 'undefined') {
-                        SoundManager.playCancel();
-                    }
-                });
-            }
-        }
-    }
-
-    function dismissHardwareSuggestion() {
-        const suggestion = rootElement.querySelector('#hardwareSuggestion');
-        if (suggestion) {
-            suggestion.style.animation = 'fadeOut 0.3s ease forwards';
-            setTimeout(() => suggestion.remove(), 300);
-        }
-    }
-
     function markAsUnsaved() {
         const indicator = rootElement.querySelector('#unsavedIndicator');
         if (indicator) {
@@ -923,12 +751,6 @@ AS.TitleOptions = AS.TitleOptions || {};
                 panel.setAttribute('hidden', '');
             }
         });
-
-        // Resetar scroll para o topo ao trocar de aba
-        const scrollArea = rootElement.querySelector('.as-options-adv__content');
-        if (scrollArea) {
-            scrollArea.scrollTop = 0;
-        }
 
         if (playSound && typeof SoundManager !== 'undefined') {
             SoundManager.playCursor();
@@ -995,31 +817,10 @@ AS.TitleOptions = AS.TitleOptions || {};
         select.addEventListener('change', (e) => {
             configValues[id] = e.target.value;
             markAsUnsaved();
-            
-            // Aplicar cursor em tempo real
-            if (id === 'cursorStyle') {
-                applyCursorStyle(e.target.value);
-            }
-            
             if (typeof SoundManager !== 'undefined') {
                 SoundManager.playCursor();
             }
         });
-    }
-
-    function applyCursorStyle(style) {
-        const bodyStyle = document.body.style;
-        
-        switch (style) {
-            case 'retro':
-                bodyStyle.cursor = 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\'%3E%3Crect x=\'0\' y=\'0\' width=\'16\' height=\'16\' fill=\'%23FFF\' stroke=\'%23000\' stroke-width=\'2\'/%3E%3C/svg%3E") 8 8, auto';
-                break;
-            case 'modern':
-                bodyStyle.cursor = 'pointer';
-                break;
-            default:
-                bodyStyle.cursor = 'default';
-        }
     }
 
     function bindToggle(id) {
@@ -1040,156 +841,10 @@ AS.TitleOptions = AS.TitleOptions || {};
                 }
             }
             
-            if (id === 'showFPS') {
-                toggleFPSDisplay(e.target.checked);
-            }
-            
             if (typeof SoundManager !== 'undefined') {
                 SoundManager.playCursor();
             }
         });
-    }
-
-    // Sistema de FPS Monitor
-    let fpsMonitorElement = null;
-    let fpsUpdateInterval = null;
-
-    function toggleFPSDisplay(show) {
-        if (show) {
-            createFPSMonitor();
-        } else {
-            removeFPSMonitor();
-        }
-    }
-
-    function createFPSMonitor() {
-        if (fpsMonitorElement) return;
-
-        fpsMonitorElement = document.createElement('div');
-        fpsMonitorElement.id = 'as-fps-monitor';
-        fpsMonitorElement.style.cssText = `
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: rgba(15, 8, 33, 0.9);
-            border: 2px solid rgba(139, 92, 246, 0.6);
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            font-weight: bold;
-            color: #F59E0B;
-            z-index: 9999;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-            pointer-events: none;
-        `;
-        document.body.appendChild(fpsMonitorElement);
-
-        let lastTime = performance.now();
-        let frames = 0;
-        let fps = 60;
-
-        fpsUpdateInterval = setInterval(() => {
-            const currentTime = performance.now();
-            frames++;
-
-            if (currentTime >= lastTime + 1000) {
-                fps = Math.round((frames * 1000) / (currentTime - lastTime));
-                frames = 0;
-                lastTime = currentTime;
-            }
-
-            if (fpsMonitorElement) {
-                const color = fps >= 55 ? '#10B981' : fps >= 30 ? '#F59E0B' : '#EF4444';
-                fpsMonitorElement.style.color = color;
-                fpsMonitorElement.textContent = `FPS: ${fps}`;
-            }
-        }, 100);
-
-        logger.info('Monitor de FPS ativado');
-    }
-
-    function removeFPSMonitor() {
-        if (fpsMonitorElement) {
-            fpsMonitorElement.remove();
-            fpsMonitorElement = null;
-        }
-        if (fpsUpdateInterval) {
-            clearInterval(fpsUpdateInterval);
-            fpsUpdateInterval = null;
-        }
-        logger.info('Monitor de FPS desativado');
-    }
-
-    // Sistema de Tooltips
-    let tooltipElement = null;
-    const tooltipTexts = {
-        masterVolume: 'Controla o volume geral de todos os áudios do jogo',
-        bgmVolume: 'Volume das músicas de fundo durante o jogo',
-        bgsVolume: 'Volume dos sons ambientes (chuva, vento, etc.)',
-        meVolume: 'Volume das músicas especiais (vitória, Game Over, etc.)',
-        seVolume: 'Volume dos efeitos sonoros (ataques, itens, etc.)',
-        messageSpeed: 'Velocidade de exibição das mensagens e diálogos',
-        battleSpeed: 'Velocidade das animações de batalha',
-        windowOpacity: 'Transparência das janelas e menus',
-        graphicsQuality: 'Qualidade gráfica geral do jogo',
-        enableAnimations: 'Mostrar ou ocultar animações de habilidades',
-        enableWeatherEffects: 'Ativar efeitos climáticos como chuva e neve',
-        enableParticles: 'Mostrar partículas decorativas',
-        targetFPS: 'Taxa de quadros por segundo (maior = mais suave)',
-        smoothScaling: 'Suavizar imagens ao redimensionar',
-        showFPS: 'Exibir contador de FPS no canto da tela',
-        cacheStrategy: 'Estratégia de carregamento de recursos',
-        cursorStyle: 'Aparência do cursor do mouse no jogo',
-        fullscreen: 'Alternar entre tela cheia e janela'
-    };
-
-    function initializeTooltips() {
-        if (!rootElement) return;
-
-        const controlGroups = rootElement.querySelectorAll('.as-options-adv__control-group');
-        
-        controlGroups.forEach(group => {
-            const input = group.querySelector('input, select');
-            if (!input || !input.id) return;
-            
-            const tooltipText = tooltipTexts[input.id];
-            if (!tooltipText) return;
-            
-            const label = group.querySelector('.as-options-adv__label');
-            if (!label) return;
-            
-            label.addEventListener('mouseenter', (e) => {
-                showTooltip(e, tooltipText);
-            });
-            
-            label.addEventListener('mouseleave', () => {
-                hideTooltip();
-            });
-        });
-    }
-
-    function showTooltip(event, text) {
-        if (!tooltipElement) {
-            tooltipElement = document.createElement('div');
-            tooltipElement.className = 'as-options-adv__tooltip';
-            document.body.appendChild(tooltipElement);
-        }
-        
-        tooltipElement.textContent = text;
-        tooltipElement.classList.add('as-options-adv__tooltip--visible');
-        
-        // Posicionar tooltip
-        const rect = event.target.getBoundingClientRect();
-        tooltipElement.style.left = `${rect.left + rect.width / 2}px`;
-        tooltipElement.style.top = `${rect.bottom + 10}px`;
-        tooltipElement.style.transform = 'translateX(-50%)';
-    }
-
-    function hideTooltip() {
-        if (tooltipElement) {
-            tooltipElement.classList.remove('as-options-adv__tooltip--visible');
-        }
     }
 
     function previewLiveChange(id, value) {
@@ -1267,7 +922,6 @@ AS.TitleOptions = AS.TitleOptions || {};
         }
         saveConfigValues();
         markAsSaved();
-        showSaveConfirmation();
         showFeedback('✨ Configurações aplicadas com sucesso!');
         
         if (pendingCloseHandle) {
@@ -1277,35 +931,6 @@ AS.TitleOptions = AS.TitleOptions || {};
             pendingCloseHandle = null;
             SceneManager.pop();
         }, APPLY_CLOSE_DELAY);
-    }
-
-    function showSaveConfirmation() {
-        const confirmationHTML = `
-            <div class="as-options-adv__save-confirmation" id="saveConfirmation">
-                <div class="as-options-adv__check-icon">✓</div>
-            </div>
-        `;
-        
-        const container = rootElement.querySelector('.as-options-adv__container');
-        if (container) {
-            const existingConfirmation = container.querySelector('#saveConfirmation');
-            if (existingConfirmation) {
-                existingConfirmation.remove();
-            }
-            
-            const confirmationElement = document.createElement('div');
-            confirmationElement.innerHTML = confirmationHTML;
-            container.appendChild(confirmationElement.firstElementChild);
-            
-            // Remover após animação
-            setTimeout(() => {
-                const confirmation = container.querySelector('#saveConfirmation');
-                if (confirmation) {
-                    confirmation.style.animation = 'checkFadeOut 0.5s ease forwards';
-                    setTimeout(() => confirmation.remove(), 500);
-                }
-            }, 1500);
-        }
     }
 
     function onReset() {
@@ -1351,9 +976,6 @@ AS.TitleOptions = AS.TitleOptions || {};
         ConfigManager.targetFPS = configValues.targetFPS;
         ConfigManager.graphicsQuality = configValues.graphicsQuality;
         ConfigManager.smoothScaling = configValues.smoothScaling;
-        ConfigManager.showFPS = configValues.showFPS;
-        ConfigManager.cacheStrategy = configValues.cacheStrategy;
-        ConfigManager.cursorStyle = configValues.cursorStyle;
 
         // Aplicar volumes em tempo real
         AudioManager.bgmVolume = configValues.bgmVolume;

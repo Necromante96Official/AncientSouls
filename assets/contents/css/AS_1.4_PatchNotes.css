@@ -157,6 +157,100 @@
     box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
 }
 
+/* Export button */
+.as-patchnotes__export-btn {
+    background: rgba(34, 197, 94, 0.2);
+    border: 2px solid #22c55e;
+    border-radius: 8px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #86efac;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.as-patchnotes__export-btn:hover {
+    background: rgba(34, 197, 94, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+/* Search bar */
+.as-patchnotes__search-bar {
+    padding: 15px 30px;
+    background: linear-gradient(180deg, 
+                rgba(30, 20, 60, 0.6) 0%, 
+                transparent 100%);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+    position: relative;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.as-patchnotes__search-input {
+    flex: 1;
+    background: rgba(30, 20, 60, 0.8);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 15px;
+    color: #e9d5ff;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.as-patchnotes__search-input::placeholder {
+    color: rgba(233, 213, 255, 0.5);
+}
+
+.as-patchnotes__search-input:focus {
+    border-color: rgba(139, 92, 246, 0.6);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    background: rgba(30, 20, 60, 0.95);
+}
+
+.as-patchnotes__clear-search {
+    background: rgba(239, 68, 68, 0.2);
+    border: 2px solid #ef4444;
+    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #fca5a5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.as-patchnotes__clear-search:hover {
+    background: rgba(239, 68, 68, 0.3);
+    transform: rotate(90deg);
+}
+
+.as-patchnotes__no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: rgba(233, 213, 255, 0.7);
+}
+
+.as-patchnotes__no-results p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.as-patchnotes__no-results p:first-child {
+    font-size: 20px;
+    font-weight: 600;
+    color: #c4b5fd;
+}
+
 /* Content area */
 .as-patchnotes__content {
     padding: 30px;

@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.0 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
+ * @plugindesc v1.0.9 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.1_TitleScreenUI
@@ -46,7 +46,7 @@ AS.PatchNotes = AS.PatchNotes || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.4_PatchNotes';
-    const MODULE_VERSION = '1.1.0';
+    const MODULE_VERSION = '1.0.9';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -197,13 +197,11 @@ AS.PatchNotes = AS.PatchNotes || {};
         }
         
         injectStyles();
-        injectMarkup(); // CRÍTICO: Criar modal antes de tentar mostrar
         loadPatchNotes();
         showPatchNotes();
         attachKeyboardSupport();
         
         // NÃO fazer nada com a música - deixar tocar normalmente
-        logger.info('Patch notes aberta com sucesso.');
     }
 
     function closePatchNotes() {
@@ -450,46 +448,6 @@ AS.PatchNotes = AS.PatchNotes || {};
                 loadPatchNotes(category);
             });
         });
-        
-        // Vincular busca em tempo real
-        const searchInput = rootElement.querySelector('#patchNotesSearch');
-        const clearSearchBtn = rootElement.querySelector('#patchNotesClearSearch');
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                const query = e.target.value.toLowerCase();
-                filterPatchNotes(query);
-                
-                // Mostrar/esconder botão de limpar
-                if (clearSearchBtn) {
-                    clearSearchBtn.style.display = query.length > 0 ? 'block' : 'none';
-                }
-            });
-        }
-        
-        if (clearSearchBtn) {
-            clearSearchBtn.addEventListener('click', () => {
-                if (searchInput) {
-                    searchInput.value = '';
-                    filterPatchNotes('');
-                    clearSearchBtn.style.display = 'none';
-                    searchInput.focus();
-                }
-                if (typeof SoundManager !== 'undefined') {
-                    SoundManager.playCancel();
-                }
-            });
-        }
-        
-        // Vincular botão de export
-        const exportBtn = rootElement.querySelector('#patchNotesExport');
-        if (exportBtn) {
-            exportBtn.addEventListener('click', () => {
-                exportToMarkdown();
-                if (typeof SoundManager !== 'undefined') {
-                    SoundManager.playOk();
-                }
-            });
-        }
         
         logger.info('Markup HTML do Patch Notes (modal) inserido.');
     }
@@ -1068,140 +1026,6 @@ AS.PatchNotes = AS.PatchNotes || {};
         }
 
         return '';
-    }
-
-    // =========================================================================
-    // NOVAS FUNCIONALIDADES - BUSCA E EXPORT
-    // =========================================================================
-
-    function filterPatchNotes(query) {
-        if (!rootElement) return;
-        
-        const allNotes = rootElement.querySelectorAll('.as-patchnote');
-        let visibleCount = 0;
-        
-        allNotes.forEach(note => {
-            const content = note.textContent.toLowerCase();
-            const matches = content.includes(query);
-            
-            note.style.display = matches ? 'block' : 'none';
-            if (matches) visibleCount++;
-        });
-        
-        // Mostrar mensagem se nenhum resultado
-        const container = rootElement.querySelector('#patchNotesContent');
-        let noResults = container.querySelector('.as-patchnotes__no-results');
-        
-        if (visibleCount === 0 && query.length > 0) {
-            if (!noResults) {
-                noResults = document.createElement('div');
-                noResults.className = 'as-patchnotes__no-results';
-                noResults.innerHTML = `
-                    <p>🔍 Nenhuma atualização encontrada para "${query}"</p>
-                    <p>Tente outro termo de busca.</p>
-                `;
-                container.appendChild(noResults);
-            }
-        } else if (noResults) {
-            noResults.remove();
-        }
-        
-        logger.info(`Filtro aplicado: "${query}" - ${visibleCount} resultados`);
-    }
-
-    function exportToMarkdown() {
-        const allNotes = getPatchNotesData();
-        if (!allNotes || allNotes.length === 0) {
-            logger.warn('Nenhuma atualização para exportar.');
-            return;
-        }
-        
-        let markdown = `# ${document.title || 'Ancient Souls'} - Notas de Atualização\n\n`;
-        markdown += `Exportado em: ${new Date().toLocaleString('pt-BR')}\n\n`;
-        markdown += `Total de atualizações: ${allNotes.length}\n\n`;
-        markdown += '---\n\n';
-        
-        allNotes.forEach(note => {
-            markdown += `## ${note.version} - ${note.stage}\n\n`;
-            markdown += `**Data:** ${note.date}\n\n`;
-            markdown += `**Categoria:** ${getCategoryName(note.category)}\n\n`;
-            markdown += `**Mudanças:**\n\n`;
-            
-            note.changes.forEach(change => {
-                markdown += `- **[${getChangeBadge(change.type)}]** ${change.description}\n`;
-            });
-            
-            markdown += `\n---\n\n`;
-        });
-        
-        // Tentar salvar o arquivo
-        try {
-            if (typeof require !== 'undefined') {
-                const fs = require('fs');
-                const path = require('path');
-                const timestamp = Date.now();
-                const filename = `patch_notes_export_${timestamp}.md`;
-                const basePath = getBasePath();
-                const fullPath = path.join(basePath, 'js', 'plugins', 'assets', 'contents', filename);
-                
-                fs.writeFileSync(fullPath, markdown, 'utf-8');
-                logger.info(`Patch notes exportadas para: ${fullPath}`);
-                alert(`✅ Patch notes exportadas com sucesso!\n\nArquivo: ${filename}\nLocal: js/plugins/assets/contents/`);
-            } else {
-                // Fallback: copiar para clipboard
-                copyToClipboard(markdown);
-                alert('✅ Markdown copiado para a área de transferência!\n\nCole em um editor de texto e salve como .md');
-            }
-        } catch (error) {
-            logger.error('Erro ao exportar:', error);
-            // Fallback: tentar clipboard
-            try {
-                copyToClipboard(markdown);
-                alert('⚠️ Não foi possível salvar arquivo.\n\nMarkdown copiado para área de transferência!');
-            } catch (e) {
-                alert('❌ Erro ao exportar. Verifique o console.');
-            }
-        }
-    }
-
-    function copyToClipboard(text) {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text);
-        } else {
-            // Fallback para navegadores antigos
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-        }
-    }
-
-    function getCategoryName(category) {
-        const names = {
-            'all': 'Todas',
-            'major': 'Grande Atualização',
-            'minor': 'Pequena Atualização',
-            'critical': 'Crítica',
-            'fix': 'Correção',
-            'base': 'Base'
-        };
-        return names[category] || category;
-    }
-
-    function getChangeBadge(type) {
-        const badges = {
-            'new': 'NOVO',
-            'fix': 'CORREÇÃO',
-            'improvement': 'MELHORIA',
-            'removal': 'REMOVIDO',
-            'deprecation': 'DEPRECATED',
-            'security': 'SEGURANÇA'
-        };
-        return badges[type] || type.toUpperCase();
     }
 
     function collectBaseCandidates(pathLib) {

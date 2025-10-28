@@ -206,13 +206,14 @@ img.as-title__soul-icon {
     left: 20px;
     z-index: 10001;
     opacity: 0;
-    transform: translateY(-20px);
-    transition: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* Não usar transform aqui - deixar o pai controlar */
+    transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 180ms ease-out,
+                filter 180ms ease-out;
 }
 
 #as-title-root.as-title--visible .as-title__button--updates {
     opacity: 1;
-    transform: translateY(0);
     transition-delay: 400ms;
 }
 

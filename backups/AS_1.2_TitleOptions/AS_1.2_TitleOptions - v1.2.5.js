@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.2.6 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.2.5 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_1.1_TitleScreenUI
  * @help
@@ -12,6 +12,14 @@
  * --------------------------------------------------------------------------
  * Interface HTML dinâmica e animada para tela de opções com design moderno
  * medieval fantasia, incluindo sistema de abas, sliders, toggles e selects.
+ * 
+ * VERSÃO 2.0.0 - Reconstrução Completa
+ * - Nova estrutura de navegação por abas (8 categorias)
+ * - Controles aprimorados para Bichim (velocidade e aceleração)
+ * - Sistema de modo de controle (Sensor vs. Botões)
+ * - Scroll aprimorado com suporte a mouse wheel
+ * - Animações e transições melhoradas
+ * - Elementos visuais decorativos (criatura azul)
  * ==========================================================================
  */
 
@@ -22,7 +30,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.2.6';
+    const MODULE_VERSION = '1.2.5';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -582,17 +590,25 @@ AS.TitleOptions = AS.TitleOptions || {};
 
     function loadConfigValues() {
         configValues = {
-            alwaysDash: resolveBoolean(ConfigManager.alwaysDash, false),
-            commandRemember: resolveBoolean(ConfigManager.commandRemember, false),
-            touchUI: resolveBoolean(ConfigManager.touchUI, true),
+            masterVolume: resolveNumber(ConfigManager.masterVolume, CONFIG_DEFAULTS.masterVolume, 0, 100),
             bgmVolume: resolveNumber(ConfigManager.bgmVolume, 90, 0, 100),
-            bgsVolume: resolveNumber(ConfigManager.bgsVolume, 90, 0, 100),
-            meVolume: resolveNumber(ConfigManager.meVolume, 90, 0, 100),
-            seVolume: resolveNumber(ConfigManager.seVolume, 90, 0, 100),
-            messageSpeed: resolveString(ConfigManager.messageSpeed, 'normal')
+            seVolume: resolveNumber(ConfigManager.seVolume, 80, 0, 100),
+            messageSpeed: resolveString(ConfigManager.messageSpeed, CONFIG_DEFAULTS.messageSpeed),
+            alwaysDash: resolveBoolean(ConfigManager.alwaysDash, true),
+            fullscreen: Graphics._isFullScreen(),
+            effectQuality: resolveString(ConfigManager.effectQuality, CONFIG_DEFAULTS.effectQuality),
+            enableLogoAnimation: resolveBoolean(ConfigManager.enableLogoAnimation, CONFIG_DEFAULTS.enableLogoAnimation),
+            animationSpeed: resolveNumber(ConfigManager.animationSpeed, CONFIG_DEFAULTS.animationSpeed, 1, 10),
+            enableMusicFade: resolveBoolean(ConfigManager.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade),
+            musicFadeDuration: resolveNumber(ConfigManager.musicFadeDuration, CONFIG_DEFAULTS.musicFadeDuration, 100, 5000),
+            bichimSpeed: resolveNumber(ConfigManager.bichimSpeed, CONFIG_DEFAULTS.bichimSpeed, 0, 10),
+            bichimAcceleration: resolveNumber(ConfigManager.bichimAcceleration, CONFIG_DEFAULTS.bichimAcceleration, 0, 10),
+            cameraSpeed: resolveNumber(ConfigManager.cameraSpeed, CONFIG_DEFAULTS.cameraSpeed, 1, 10),
+            controlMode: resolveString(ConfigManager.controlMode, CONFIG_DEFAULTS.controlMode)
         };
 
         updateUIFromConfig();
+        syncMasterVolume(configValues.masterVolume);
     }
 
     function updateUIFromConfig() {
@@ -611,7 +627,7 @@ AS.TitleOptions = AS.TitleOptions || {};
                 setSliderFill(element, numericValue);
                 const valueDisplay = rootElement.querySelector(`#${id}Value`);
                 if (valueDisplay) {
-                    valueDisplay.textContent = `${numericValue}%`;
+                    valueDisplay.textContent = formatSliderDisplay(id, numericValue);
                 }
             } else if (element.type === 'checkbox') {
                 element.checked = value;
@@ -620,14 +636,23 @@ AS.TitleOptions = AS.TitleOptions || {};
             }
         };
 
-        setValue('alwaysDash', configValues.alwaysDash);
-        setValue('commandRemember', configValues.commandRemember);
-        setValue('touchUI', configValues.touchUI);
+        setValue('masterVolume', configValues.masterVolume);
         setValue('bgmVolume', configValues.bgmVolume);
-        setValue('bgsVolume', configValues.bgsVolume);
-        setValue('meVolume', configValues.meVolume);
         setValue('seVolume', configValues.seVolume);
         setValue('messageSpeed', configValues.messageSpeed);
+        setValue('alwaysDash', configValues.alwaysDash);
+        setValue('fullscreen', configValues.fullscreen);
+        setValue('effectQuality', configValues.effectQuality);
+        setValue('enableLogoAnimation', configValues.enableLogoAnimation);
+        setValue('animationSpeed', configValues.animationSpeed);
+        setValue('enableMusicFade', configValues.enableMusicFade);
+        setValue('musicFadeDuration', configValues.musicFadeDuration);
+        setValue('bichimSpeed', configValues.bichimSpeed);
+        setValue('bichimAcceleration', configValues.bichimAcceleration);
+        setValue('cameraSpeed', configValues.cameraSpeed);
+        
+        // Atualizar botões de modo de controle
+        updateControlModeButtons(configValues.controlMode);
     }
 
     function bindControls() {
@@ -648,22 +673,32 @@ AS.TitleOptions = AS.TitleOptions || {};
         });
 
         logger.info('[bindControls] Vinculando sliders...');
+        bindSlider('masterVolume');
         bindSlider('bgmVolume');
-        bindSlider('bgsVolume');
-        bindSlider('meVolume');
         bindSlider('seVolume');
+        bindSlider('animationSpeed');
+        bindSlider('musicFadeDuration');
+        bindSlider('bichimSpeed');
+        bindSlider('bichimAcceleration');
+        bindSlider('cameraSpeed');
 
         logger.info('[bindControls] Vinculando selects...');
         bindSelect('messageSpeed');
+        bindSelect('effectQuality');
 
         logger.info('[bindControls] Vinculando toggles...');
         bindToggle('alwaysDash');
-        bindToggle('commandRemember');
-        bindToggle('touchUI');
+        bindToggle('fullscreen');
+        bindToggle('enableLogoAnimation');
+        bindToggle('enableMusicFade');
+
+        logger.info('[bindControls] Vinculando botões de modo de controle...');
+        bindControlModeButtons();
+        bindSliderButtons();
 
         enableScrollWheelSupport();
 
-        logger.info('[bindControls] Botão Enter para salvar configurações...');
+        logger.info('[bindControls] Vinculando botões...');
         const applyButton = rootElement.querySelector('#applyButton');
         if (applyButton) {
             applyButton.addEventListener('click', onApply);
@@ -1030,19 +1065,31 @@ AS.TitleOptions = AS.TitleOptions || {};
     }
 
     function saveConfigValues() {
-        const bgmVolume = resolveNumber(configValues.bgmVolume, 90, 0, 100);
-        const bgsVolume = resolveNumber(configValues.bgsVolume, 90, 0, 100);
-        const meVolume = resolveNumber(configValues.meVolume, 90, 0, 100);
-        const seVolume = resolveNumber(configValues.seVolume, 90, 0, 100);
+        const masterVolume = resolveNumber(configValues.masterVolume, CONFIG_DEFAULTS.masterVolume, 0, 100);
+        const bgmVolume = resolveNumber(configValues.bgmVolume, ConfigManager.bgmVolume, 0, 100);
+        const seVolume = resolveNumber(configValues.seVolume, ConfigManager.seVolume, 0, 100);
+        const animationSpeed = resolveNumber(configValues.animationSpeed, CONFIG_DEFAULTS.animationSpeed, 1, 10);
+        const musicFadeDuration = resolveNumber(configValues.musicFadeDuration, CONFIG_DEFAULTS.musicFadeDuration, 100, 5000);
+        const bichimSpeed = resolveNumber(configValues.bichimSpeed, CONFIG_DEFAULTS.bichimSpeed, 0, 10);
+        const bichimAcceleration = resolveNumber(configValues.bichimAcceleration, CONFIG_DEFAULTS.bichimAcceleration, 0, 10);
+        const cameraSpeed = resolveNumber(configValues.cameraSpeed, CONFIG_DEFAULTS.cameraSpeed, 1, 10);
 
-        ConfigManager.alwaysDash = resolveBoolean(configValues.alwaysDash, false);
-        ConfigManager.commandRemember = resolveBoolean(configValues.commandRemember, false);
-        ConfigManager.touchUI = resolveBoolean(configValues.touchUI, true);
+        ConfigManager.masterVolume = masterVolume;
         ConfigManager.bgmVolume = bgmVolume;
-        ConfigManager.bgsVolume = bgsVolume;
-        ConfigManager.meVolume = meVolume;
+        ConfigManager.bgsVolume = bgmVolume;
+        ConfigManager.meVolume = bgmVolume;
         ConfigManager.seVolume = seVolume;
-        ConfigManager.messageSpeed = resolveString(configValues.messageSpeed, 'normal');
+        ConfigManager.messageSpeed = resolveString(configValues.messageSpeed, CONFIG_DEFAULTS.messageSpeed);
+        ConfigManager.alwaysDash = resolveBoolean(configValues.alwaysDash, true);
+        ConfigManager.effectQuality = resolveString(configValues.effectQuality, CONFIG_DEFAULTS.effectQuality);
+        ConfigManager.enableLogoAnimation = resolveBoolean(configValues.enableLogoAnimation, CONFIG_DEFAULTS.enableLogoAnimation);
+        ConfigManager.animationSpeed = animationSpeed;
+        ConfigManager.enableMusicFade = resolveBoolean(configValues.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade);
+        ConfigManager.musicFadeDuration = musicFadeDuration;
+        ConfigManager.bichimSpeed = bichimSpeed;
+        ConfigManager.bichimAcceleration = bichimAcceleration;
+        ConfigManager.cameraSpeed = cameraSpeed;
+        ConfigManager.controlMode = resolveString(configValues.controlMode, CONFIG_DEFAULTS.controlMode);
 
         const saveResult = ConfigManager.save();
         if (saveResult && typeof saveResult.catch === 'function') {
@@ -1050,11 +1097,14 @@ AS.TitleOptions = AS.TitleOptions || {};
         }
 
         AudioManager.bgmVolume = bgmVolume;
-        AudioManager.bgsVolume = bgsVolume;
-        AudioManager.meVolume = meVolume;
+        AudioManager.bgsVolume = bgmVolume;
+        AudioManager.meVolume = bgmVolume;
         AudioManager.seVolume = seVolume;
 
-        logger.info('Configurações salvas com sucesso.');
+        syncMasterVolume(masterVolume);
+        broadcastLogoLayoutUpdate();
+
+        logger.info('Configurações salvas com sucesso (incluindo animações e música).');
     }
 
     function applyResetDefaults() {

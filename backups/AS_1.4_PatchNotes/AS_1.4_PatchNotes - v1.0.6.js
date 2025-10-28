@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.8 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
+ * @plugindesc v1.0.6 ☆ Sistema de notas de atualização com interface medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.1_TitleScreenUI
@@ -36,7 +36,7 @@ AS.PatchNotes = AS.PatchNotes || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.4_PatchNotes';
-    const MODULE_VERSION = '1.0.8';
+    const MODULE_VERSION = '1.0.6';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -62,7 +62,6 @@ AS.PatchNotes = AS.PatchNotes || {};
     let contextRef = null;
     let currentCategory = 'all';
     let patchNotesCache = null;
-    let savedBgm = null;
 
     const manifest = {
         id: MODULE_ID,
@@ -157,72 +156,28 @@ AS.PatchNotes = AS.PatchNotes || {};
     }
 
     function openPatchNotes() {
-        // Salvar estado da música ANTES de fazer qualquer coisa
-        if (typeof AudioManager !== 'undefined') {
-            savedBgm = {
-                name: AudioManager._currentBgm ? AudioManager._currentBgm.name : null,
-                volume: AudioManager._currentBgm ? AudioManager._currentBgm.volume : 90,
-                pitch: AudioManager._currentBgm ? AudioManager._currentBgm.pitch : 100,
-                pan: AudioManager._currentBgm ? AudioManager._currentBgm.pan : 0,
-                pos: AudioManager._bgmBuffer ? AudioManager._bgmBuffer.seek() : 0
-            };
-            
-            logger.info(`BGM salva: ${savedBgm.name} na posição ${savedBgm.pos}`);
-            
-            // Prevenir que o AudioManager pare a música
-            const originalStopBgm = AudioManager.stopBgm;
-            AudioManager._patchNotesPreventStop = true;
-            AudioManager.stopBgm = function() {
-                if (!AudioManager._patchNotesPreventStop) {
-                    originalStopBgm.call(this);
-                }
-            };
-        }
-        
         injectStyles();
         loadPatchNotes();
         showPatchNotes();
         attachKeyboardSupport();
         
-        // Garantir que a música continue tocando após abrir modal
-        if (savedBgm && savedBgm.name && typeof AudioManager !== 'undefined') {
+        // Garantir que a música de fundo continue tocando
+        if (typeof AudioManager !== 'undefined' && AudioManager._currentBgm) {
+            const currentBgm = AudioManager._currentBgm;
             setTimeout(() => {
-                if (AudioManager._bgmBuffer && !AudioManager._bgmBuffer.isPlaying()) {
-                    logger.info('Reativando BGM...');
-                    AudioManager.playBgm(savedBgm);
-                    if (AudioManager._bgmBuffer && savedBgm.pos > 0) {
-                        AudioManager._bgmBuffer.seek(savedBgm.pos);
-                    }
+                if (!AudioManager.isCurrentBgm(currentBgm)) {
+                    AudioManager.playBgm(currentBgm);
                 }
             }, 100);
         }
     }
 
     function closePatchNotes() {
-        // Restaurar função original do AudioManager
-        if (typeof AudioManager !== 'undefined' && AudioManager._patchNotesPreventStop) {
-            AudioManager._patchNotesPreventStop = false;
-            // A função stopBgm volta ao normal automaticamente na próxima vez
-        }
-        
         if (typeof SoundManager !== 'undefined') {
             SoundManager.playCancel();
         }
         
         hidePatchNotes();
-        
-        // Garantir que a música continue após fechar
-        if (savedBgm && savedBgm.name && typeof AudioManager !== 'undefined') {
-            setTimeout(() => {
-                if (AudioManager._bgmBuffer && !AudioManager._bgmBuffer.isPlaying()) {
-                    logger.info('Restaurando BGM ao fechar...');
-                    AudioManager.playBgm(savedBgm);
-                    if (AudioManager._bgmBuffer && savedBgm.pos > 0) {
-                        AudioManager._bgmBuffer.seek(savedBgm.pos);
-                    }
-                }
-            }, 50);
-        }
         
         setTimeout(() => {
             destroyMarkup();
@@ -429,18 +384,6 @@ AS.PatchNotes = AS.PatchNotes || {};
             closeButton.addEventListener('click', closePatchNotes);
         }
         
-        // Vincular botão de expandir/colapsar tudo
-        const toggleAllButton = rootElement.querySelector('#patchNotesToggleAll');
-        if (toggleAllButton) {
-            toggleAllButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (typeof SoundManager !== 'undefined') {
-                    SoundManager.playCursor();
-                }
-                toggleAllPatchNotes(toggleAllButton);
-            });
-        }
-        
         // Vincular abas de categoria
         const tabs = rootElement.querySelectorAll('.as-patchnotes__tab');
         tabs.forEach(tab => {
@@ -509,32 +452,14 @@ AS.PatchNotes = AS.PatchNotes || {};
     function updateCategoryTabs(activeCategory) {
         if (!rootElement) return;
         
-        const allNotes = getPatchNotesData();
         const tabs = rootElement.querySelectorAll('.as-patchnotes__tab');
-        
         tabs.forEach(tab => {
             const tabCategory = tab.dataset.category;
-            
-            // Atualizar classe active
             if (tabCategory === activeCategory) {
                 tab.classList.add('as-patchnotes__tab--active');
             } else {
                 tab.classList.remove('as-patchnotes__tab--active');
             }
-            
-            // Adicionar contador
-            const count = tabCategory === 'all' 
-                ? allNotes.length 
-                : allNotes.filter(note => note.category === tabCategory).length;
-            
-            // Verificar se já existe badge de contador
-            let badge = tab.querySelector('.as-patchnotes__tab-count');
-            if (!badge) {
-                badge = document.createElement('span');
-                badge.className = 'as-patchnotes__tab-count';
-                tab.appendChild(badge);
-            }
-            badge.textContent = count;
         });
     }
 
@@ -778,7 +703,7 @@ AS.PatchNotes = AS.PatchNotes || {};
 
     function createPatchNoteElement(note) {
         const article = document.createElement('article');
-        article.className = 'as-patchnote as-patchnote--collapsed';
+        article.className = 'as-patchnote';
         article.dataset.category = note.category;
         
         const header = document.createElement('header');
@@ -813,26 +738,14 @@ AS.PatchNotes = AS.PatchNotes || {};
         header.appendChild(titleContainer);
         header.appendChild(date);
         
-        // Adicionar evento de clique no header para expandir/colapsar
-        header.addEventListener('click', () => {
-            if (typeof SoundManager !== 'undefined') {
-                SoundManager.playCursor();
-            }
-            togglePatchNote(article);
-        });
-        
         article.appendChild(header);
-        
-        // Corpo (descrição + seções)
-        const body = document.createElement('div');
-        body.className = 'as-patchnote__body';
         
         // Descrição
         if (note.description) {
             const desc = document.createElement('p');
             desc.className = 'as-patchnote__description';
             desc.textContent = note.description;
-            body.appendChild(desc);
+            article.appendChild(desc);
         }
         
         // Seções
@@ -869,53 +782,11 @@ AS.PatchNotes = AS.PatchNotes || {};
                     sectionElement.appendChild(list);
                 }
                 
-                body.appendChild(sectionElement);
+                article.appendChild(sectionElement);
             });
         }
-        
-        article.appendChild(body);
         
         return article;
-    }
-
-    function togglePatchNote(article) {
-        const isCollapsed = article.classList.contains('as-patchnote--collapsed');
-        
-        if (isCollapsed) {
-            article.classList.remove('as-patchnote--collapsed');
-            article.classList.add('as-patchnote--expanded');
-        } else {
-            article.classList.remove('as-patchnote--expanded');
-            article.classList.add('as-patchnote--collapsed');
-        }
-    }
-
-    function toggleAllPatchNotes(button) {
-        if (!rootElement) return;
-        
-        const allPatchNotes = rootElement.querySelectorAll('.as-patchnote');
-        if (allPatchNotes.length === 0) return;
-        
-        // Verificar se todas estão expandidas
-        const allExpanded = Array.from(allPatchNotes).every(note => 
-            note.classList.contains('as-patchnote--expanded')
-        );
-        
-        if (allExpanded) {
-            // Colapsar todas
-            allPatchNotes.forEach(note => {
-                note.classList.remove('as-patchnote--expanded');
-                note.classList.add('as-patchnote--collapsed');
-            });
-            button.classList.remove('all-expanded');
-        } else {
-            // Expandir todas
-            allPatchNotes.forEach(note => {
-                note.classList.remove('as-patchnote--collapsed');
-                note.classList.add('as-patchnote--expanded');
-            });
-            button.classList.add('all-expanded');
-        }
     }
 
     function getCategoryName(category) {
@@ -947,19 +818,6 @@ AS.PatchNotes = AS.PatchNotes || {};
         requestAnimationFrame(() => {
             rootElement.classList.add('as-patchnotes--visible');
             rootElement.setAttribute('aria-hidden', 'false');
-            
-            // Garantir que o scroll funcione
-            const content = rootElement.querySelector('.as-patchnotes__content');
-            if (content) {
-                // Forçar o foco no elemento para habilitar scroll
-                content.setAttribute('tabindex', '-1');
-                content.focus();
-                
-                // Permitir scroll com mouse wheel
-                content.addEventListener('wheel', (e) => {
-                    e.stopPropagation();
-                }, { passive: true });
-            }
         });
     }
 

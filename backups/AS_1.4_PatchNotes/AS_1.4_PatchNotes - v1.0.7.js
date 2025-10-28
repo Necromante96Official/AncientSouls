@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.8 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
+ * @plugindesc v1.0.7 ☆ Sistema de notas de atualização com acordeão expansível e preservação de BGM
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.1_TitleScreenUI
@@ -36,7 +36,7 @@ AS.PatchNotes = AS.PatchNotes || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.4_PatchNotes';
-    const MODULE_VERSION = '1.0.8';
+    const MODULE_VERSION = '1.0.7';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -168,15 +168,6 @@ AS.PatchNotes = AS.PatchNotes || {};
             };
             
             logger.info(`BGM salva: ${savedBgm.name} na posição ${savedBgm.pos}`);
-            
-            // Prevenir que o AudioManager pare a música
-            const originalStopBgm = AudioManager.stopBgm;
-            AudioManager._patchNotesPreventStop = true;
-            AudioManager.stopBgm = function() {
-                if (!AudioManager._patchNotesPreventStop) {
-                    originalStopBgm.call(this);
-                }
-            };
         }
         
         injectStyles();
@@ -199,12 +190,6 @@ AS.PatchNotes = AS.PatchNotes || {};
     }
 
     function closePatchNotes() {
-        // Restaurar função original do AudioManager
-        if (typeof AudioManager !== 'undefined' && AudioManager._patchNotesPreventStop) {
-            AudioManager._patchNotesPreventStop = false;
-            // A função stopBgm volta ao normal automaticamente na próxima vez
-        }
-        
         if (typeof SoundManager !== 'undefined') {
             SoundManager.playCancel();
         }
@@ -429,18 +414,6 @@ AS.PatchNotes = AS.PatchNotes || {};
             closeButton.addEventListener('click', closePatchNotes);
         }
         
-        // Vincular botão de expandir/colapsar tudo
-        const toggleAllButton = rootElement.querySelector('#patchNotesToggleAll');
-        if (toggleAllButton) {
-            toggleAllButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (typeof SoundManager !== 'undefined') {
-                    SoundManager.playCursor();
-                }
-                toggleAllPatchNotes(toggleAllButton);
-            });
-        }
-        
         // Vincular abas de categoria
         const tabs = rootElement.querySelectorAll('.as-patchnotes__tab');
         tabs.forEach(tab => {
@@ -509,32 +482,14 @@ AS.PatchNotes = AS.PatchNotes || {};
     function updateCategoryTabs(activeCategory) {
         if (!rootElement) return;
         
-        const allNotes = getPatchNotesData();
         const tabs = rootElement.querySelectorAll('.as-patchnotes__tab');
-        
         tabs.forEach(tab => {
             const tabCategory = tab.dataset.category;
-            
-            // Atualizar classe active
             if (tabCategory === activeCategory) {
                 tab.classList.add('as-patchnotes__tab--active');
             } else {
                 tab.classList.remove('as-patchnotes__tab--active');
             }
-            
-            // Adicionar contador
-            const count = tabCategory === 'all' 
-                ? allNotes.length 
-                : allNotes.filter(note => note.category === tabCategory).length;
-            
-            // Verificar se já existe badge de contador
-            let badge = tab.querySelector('.as-patchnotes__tab-count');
-            if (!badge) {
-                badge = document.createElement('span');
-                badge.className = 'as-patchnotes__tab-count';
-                tab.appendChild(badge);
-            }
-            badge.textContent = count;
         });
     }
 
@@ -890,34 +845,6 @@ AS.PatchNotes = AS.PatchNotes || {};
         }
     }
 
-    function toggleAllPatchNotes(button) {
-        if (!rootElement) return;
-        
-        const allPatchNotes = rootElement.querySelectorAll('.as-patchnote');
-        if (allPatchNotes.length === 0) return;
-        
-        // Verificar se todas estão expandidas
-        const allExpanded = Array.from(allPatchNotes).every(note => 
-            note.classList.contains('as-patchnote--expanded')
-        );
-        
-        if (allExpanded) {
-            // Colapsar todas
-            allPatchNotes.forEach(note => {
-                note.classList.remove('as-patchnote--expanded');
-                note.classList.add('as-patchnote--collapsed');
-            });
-            button.classList.remove('all-expanded');
-        } else {
-            // Expandir todas
-            allPatchNotes.forEach(note => {
-                note.classList.remove('as-patchnote--collapsed');
-                note.classList.add('as-patchnote--expanded');
-            });
-            button.classList.add('all-expanded');
-        }
-    }
-
     function getCategoryName(category) {
         const categories = {
             'base': 'Base Inicial',
@@ -947,19 +874,6 @@ AS.PatchNotes = AS.PatchNotes || {};
         requestAnimationFrame(() => {
             rootElement.classList.add('as-patchnotes--visible');
             rootElement.setAttribute('aria-hidden', 'false');
-            
-            // Garantir que o scroll funcione
-            const content = rootElement.querySelector('.as-patchnotes__content');
-            if (content) {
-                // Forçar o foco no elemento para habilitar scroll
-                content.setAttribute('tabindex', '-1');
-                content.focus();
-                
-                // Permitir scroll com mouse wheel
-                content.addEventListener('wheel', (e) => {
-                    e.stopPropagation();
-                }, { passive: true });
-            }
         });
     }
 

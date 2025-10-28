@@ -12,17 +12,84 @@
                 <span class="as-patchnotes__title-icon">📜</span>
                 Notas de Atualização
             </h1>
-            <button 
-                id="patchNotesClose" 
-                class="as-patchnotes__close" 
-                aria-label="Fechar notas de atualização"
-                title="Fechar (ESC)"
-            >
-                ✕
-            </button>
+            <div class="as-patchnotes__header-actions">
+                <button 
+                    id="patchNotesToggleAll" 
+                    class="as-patchnotes__toggle-all" 
+                    aria-label="Expandir/Colapsar todas"
+                    title="Expandir/Colapsar tudo"
+                >
+                    <span class="as-patchnotes__toggle-icon">▼▼</span>
+                </button>
+                <button 
+                    id="patchNotesClose" 
+                    class="as-patchnotes__close" 
+                    aria-label="Fechar notas de atualização"
+                    title="Fechar (ESC)"
+                >
+                    ✕
+                </button>
+            </div>
         </header>
         
-        <div class="as-patchnotes__content" id="patchNotesContent">
+        <nav class="as-patchnotes__tabs" role="tablist">
+            <button 
+                class="as-patchnotes__tab as-patchnotes__tab--active" 
+                data-category="all" 
+                role="tab"
+                aria-selected="true"
+            >
+                <span class="as-patchnotes__tab-icon">🌟</span>
+                Todas
+            </button>
+            <button 
+                class="as-patchnotes__tab" 
+                data-category="major" 
+                role="tab"
+                aria-selected="false"
+            >
+                <span class="as-patchnotes__tab-icon">⚡</span>
+                Grandes
+            </button>
+            <button 
+                class="as-patchnotes__tab" 
+                data-category="minor" 
+                role="tab"
+                aria-selected="false"
+            >
+                <span class="as-patchnotes__tab-icon">✨</span>
+                Pequenas
+            </button>
+            <button 
+                class="as-patchnotes__tab" 
+                data-category="critical" 
+                role="tab"
+                aria-selected="false"
+            >
+                <span class="as-patchnotes__tab-icon">🔥</span>
+                Críticas
+            </button>
+            <button 
+                class="as-patchnotes__tab" 
+                data-category="fix" 
+                role="tab"
+                aria-selected="false"
+            >
+                <span class="as-patchnotes__tab-icon">🔧</span>
+                Correções
+            </button>
+            <button 
+                class="as-patchnotes__tab" 
+                data-category="base" 
+                role="tab"
+                aria-selected="false"
+            >
+                <span class="as-patchnotes__tab-icon">🎮</span>
+                Base
+            </button>
+        </nav>
+        
+        <div class="as-patchnotes__content" id="patchNotesContent" role="tabpanel">
             <!-- Conteúdo será injetado dinamicamente pelo JavaScript -->
         </div>
     </div>

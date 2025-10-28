@@ -294,6 +294,142 @@ img.as-title__soul-icon {
     text-shadow: 0 1px 3px var(--as-shadow-deep);
 }
 
+/* ==================== BOTÃO DO CRIADOR ==================== */
+
+.as-creator-badge {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10002;
+    pointer-events: all;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg,
+        rgba(139, 92, 246, 0.95) 0%,
+        rgba(245, 158, 11, 0.85) 100%);
+    border: 2px solid rgba(255, 216, 159, 0.8);
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.6),
+                0 0 40px rgba(245, 158, 11, 0.3);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: float-gentle 3s ease-in-out infinite,
+               glow-pulse 2s ease-in-out infinite;
+    overflow: hidden;
+}
+
+.as-creator-badge::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 70%);
+    transform: rotate(45deg);
+    animation: shine 3s ease-in-out infinite;
+}
+
+.as-creator-badge__icon {
+    font-size: 20px;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+    animation: icon-bounce 2s ease-in-out infinite;
+}
+
+.as-creator-badge__text {
+    position: relative;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.as-creator-badge__glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle,
+        rgba(255, 255, 255, 0.2) 0%,
+        transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.as-creator-badge:hover {
+    transform: translateX(-50%) translateY(-4px) scale(1.05);
+    border-color: #ffe8c4;
+    box-shadow: 0 6px 30px rgba(139, 92, 246, 0.8),
+                0 0 60px rgba(245, 158, 11, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.as-creator-badge:hover .as-creator-badge__glow {
+    opacity: 1;
+}
+
+.as-creator-badge:hover .as-creator-badge__icon {
+    animation: icon-bounce 0.6s ease-in-out infinite;
+}
+
+.as-creator-badge:active {
+    transform: translateX(-50%) translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.6),
+                0 0 40px rgba(245, 158, 11, 0.3);
+}
+
+/* Animações */
+@keyframes float-gentle {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-8px);
+    }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.6),
+                    0 0 40px rgba(245, 158, 11, 0.3);
+    }
+    50% {
+        box-shadow: 0 6px 30px rgba(139, 92, 246, 0.8),
+                    0 0 60px rgba(245, 158, 11, 0.5);
+    }
+}
+
+@keyframes shine {
+    0% {
+        transform: rotate(45deg) translateX(-100%);
+    }
+    100% {
+        transform: rotate(45deg) translateX(100%);
+    }
+}
+
+@keyframes icon-bounce {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+/* ==================== FIM BOTÃO DO CRIADOR ==================== */
+
 /* Responsividade */
 @media (max-width: 1366px) {
     :root {

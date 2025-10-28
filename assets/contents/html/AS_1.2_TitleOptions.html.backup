@@ -425,72 +425,7 @@
                 </section>
 
                 <!-- Painel: Créditos -->
-                <section id="panel-credits" 
-                         class="as-options-adv__panel" 
-                         data-panel="credits"
-                         role="tabpanel"
-                         aria-labelledby="tab-credits"
-                         hidden>
-                    
-                    <h2 class="as-options-adv__panel-title" style="text-align: center;">
-                        <span class="as-options-adv__panel-icon">✨</span>
-                        Créditos
-                    </h2>
-
-                    <div class="as-options-adv__credits" style="text-align: center;">
-                        <!-- Seção principal - sempre visível -->
-                        <div class="as-options-adv__credits-main" style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 2px solid rgba(139, 92, 246, 0.3);">
-                            <div class="as-options-adv__credits-section" style="margin-bottom: 2rem;">
-                                <h3 class="as-options-adv__credits-title" style="font-size: 2.5rem; background: linear-gradient(135deg, #8B5CF6, #F59E0B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;">Ancient Souls</h3>
-                                <p class="as-options-adv__credits-subtitle" style="font-size: 1.1rem; color: #A78BFA; font-style: italic;">Um RPG Épico de Fantasia Medieval</p>
-                                <p class="as-options-adv__credits-version" style="font-size: 1.2rem; color: #F59E0B; font-weight: bold; margin-top: 1rem; letter-spacing: 2px;">
-                                    v0.0.0.0-alfa
-                                </p>
-                            </div>
-
-                            <div class="as-options-adv__credits-section" style="margin-bottom: 1.5rem;">
-                                <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.2rem; margin-bottom: 0.5rem;">👑 Desenvolvimento</h4>
-                                <p class="as-options-adv__credits-name" style="font-size: 1.3rem; font-weight: bold; color: #E9D5FF;">Necromante96Official</p>
-                                <p class="as-options-adv__credits-description" style="color: #D1D5DB;">Game Design • Programação • Direção</p>
-                            </div>
-
-                            <div class="as-options-adv__credits-section" style="margin-bottom: 1.5rem;">
-                                <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.2rem; margin-bottom: 0.5rem;">🤖 Assistência de IA</h4>
-                                <p class="as-options-adv__credits-name" style="font-size: 1.1rem; color: #E9D5FF;">GitHub Copilot</p>
-                                <p class="as-options-adv__credits-description" style="color: #D1D5DB;">Desenvolvimento de Sistemas e Plugins</p>
-                            </div>
-
-                            <div class="as-options-adv__credits-section" style="margin-bottom: 0;">
-                                <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.2rem; margin-bottom: 0.5rem;">⚙️ Engine</h4>
-                                <p class="as-options-adv__credits-name" style="font-size: 1.1rem; color: #E9D5FF;">RPG Maker MZ</p>
-                                <p class="as-options-adv__credits-description" style="color: #D1D5DB;">Kadokawa Corporation</p>
-                            </div>
-                        </div>
-
-                        <!-- Sub-abas de créditos -->
-                        <nav class="as-options-adv__credits-subtabs" role="tablist" aria-label="Categorias de Créditos">
-                            <button class="as-options-adv__credits-subtab as-options-adv__credits-subtab--active" 
-                                    data-credits-panel="systems" 
-                                    role="tab" 
-                                    aria-selected="true">
-                                <span class="as-options-adv__credits-subtab-icon">💻</span>
-                                <span>Sistemas</span>
-                            </button>
-                            <button class="as-options-adv__credits-subtab" 
-                                    data-credits-panel="thanks" 
-                                    role="tab" 
-                                    aria-selected="false">
-                                <span class="as-options-adv__credits-subtab-icon">💖</span>
-                                <span>Agradecimentos</span>
-                            </button>
-                            <button class="as-options-adv__credits-subtab" 
-                                    data-credits-panel="legal" 
-                                    role="tab" 
-                                    aria-selected="false">
-                                <span class="as-options-adv__credits-subtab-icon">©</span>
-                                <span>Informações</span>
-                            </button>
-                        </nav>
+                <section id="panel-credits"
 
                         <!-- Painéis das sub-abas -->
                         <div class="as-options-adv__credits-panels">

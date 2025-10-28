@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.2 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
+ * @plugindesc v1.1.1 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.1_TitleScreenUI
@@ -46,7 +46,7 @@ AS.PatchNotes = AS.PatchNotes || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.4_PatchNotes';
-    const MODULE_VERSION = '1.1.2';
+    const MODULE_VERSION = '1.1.1';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -455,11 +455,6 @@ AS.PatchNotes = AS.PatchNotes || {};
         const searchInput = rootElement.querySelector('#patchNotesSearch');
         const clearSearchBtn = rootElement.querySelector('#patchNotesClearSearch');
         if (searchInput) {
-            // Proteger o input contra handlers globais do RPG Maker
-            searchInput.addEventListener('keydown', (e) => {
-                e.stopPropagation(); // Impede que eventos globais capturem as teclas
-            }, true);
-            
             searchInput.addEventListener('input', (e) => {
                 const query = e.target.value.toLowerCase();
                 filterPatchNotes(query);

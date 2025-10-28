@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.4 ☆ Redefine a cena de título com estética medieval fantástica
+ * @plugindesc v1.1.3 ☆ Redefine a cena de título com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_0.1_LogEnhancer
@@ -25,8 +25,10 @@ AS.TitleScreen = AS.TitleScreen || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.0_TitleScreen';
-    const MODULE_VERSION = '1.1.4';
+    const MODULE_VERSION = '1.1.3';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
+    const BACKGROUND_FOLDER = 'js/plugins/assets/resources/';
+    const BACKGROUND_FILENAME = 'background';
     const UI_ROOT_ID = 'as-title-root';
     const REQUIRED_UI_PLUGIN_ID = 'AS_1.1_TitleScreenUI';
 
@@ -116,13 +118,6 @@ AS.TitleScreen = AS.TitleScreen || {};
                     console.warn(`[${MODULE_ID}] Falha ao publicar scene:ready no start:`, e);
                 }
             }
-            
-            // Forçar verificação e criação do background se necessário
-            if (!this._asBackgroundImage || !this._asBackgroundImage.parent) {
-                logger.warn('Background não detectado no start, forçando recriação...');
-                this._asDecorReady = false;
-                setupTitleScene();
-            }
         };
 
         const Scene_Title_terminate = Scene_Title.prototype.terminate;
@@ -177,7 +172,7 @@ AS.TitleScreen = AS.TitleScreen || {};
         }
 
         if (scene._asDecorReady) {
-            logger.info('Background já está pronto.');
+            AudioManager.playBgm($dataSystem.titleBgm);
             return;
         }
 
@@ -185,31 +180,20 @@ AS.TitleScreen = AS.TitleScreen || {};
             logger.warn('UI não detectada. Cenário visual avançado não será aplicado nesta execução.');
         }
 
-        // Garantir que os sprites padrão estejam ocultos
         scene._backSprite1 = scene._backSprite1 || new Sprite();
         scene._backSprite2 = scene._backSprite2 || new Sprite();
-        scene._backSprite1.visible = false;
-        scene._backSprite2.visible = false;
 
-        // Usar ImageManager padrão do RPG Maker para carregar da pasta img/titles1/
-        const backgroundBitmap = ImageManager.loadTitle1('AS_Background');
+        const backgroundBitmap = ImageManager.loadBitmap(BACKGROUND_FOLDER, BACKGROUND_FILENAME);
         scene._asBackgroundImage = new Sprite(backgroundBitmap);
         scene._asBackgroundImage.anchor.x = 0.5;
         scene._asBackgroundImage.anchor.y = 0.5;
         scene._asBackgroundImage.x = Graphics.width / 2;
         scene._asBackgroundImage.y = Graphics.height / 2;
-        
-        // Garantir que o sprite esteja visível
-        scene._asBackgroundImage.visible = true;
-        scene._asBackgroundImage.opacity = 255;
-        
         fitBackground(scene._asBackgroundImage, backgroundBitmap);
 
-        // Adicionar na posição 0 (atrás de tudo)
-        scene.addChildAt(scene._asBackgroundImage, 0);
+        scene.addChild(scene._asBackgroundImage);
 
         scene._asDecorReady = true;
-        logger.info('Background customizado criado com sucesso.');
         AudioManager.playBgm($dataSystem.titleBgm);
     }
 

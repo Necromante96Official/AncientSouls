@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.3.9 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.3.8 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.0_TitleScreen
@@ -42,7 +42,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.3.9';
+    const MODULE_VERSION = '1.3.8';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -904,7 +904,7 @@ AS.TitleOptions = AS.TitleOptions || {};
                     if (typeof SoundManager !== 'undefined') {
                         SoundManager.playOk();
                     }
-                    showFeedback('✨ Preset aplicado e salvo! Feche e reabra o jogo para aplicar completamente.');
+                    showFeedback('✨ Preset aplicado e salvo com sucesso!');
                 });
             }
             
@@ -1418,9 +1418,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         AudioManager.seVolume = configValues.seVolume;
         syncMasterVolume(configValues.masterVolume);
 
-        // Aplicar FPS em tempo real (comentado para evitar problemas de renderização)
-        // Será aplicado na próxima vez que o jogo for iniciado
-        /*
+        // Aplicar FPS em tempo real
         if (typeof Graphics !== 'undefined') {
             Graphics.setTickHandler(null);
             Graphics._tickHandler = null;
@@ -1428,9 +1426,6 @@ AS.TitleOptions = AS.TitleOptions || {};
             Graphics._app._ticker.minFPS = configValues.targetFPS;
             logger.info(`FPS definido para: ${configValues.targetFPS}`);
         }
-        */
-        
-        logger.info(`FPS será aplicado na próxima inicialização: ${configValues.targetFPS}`);
 
         const saveResult = ConfigManager.save();
         if (saveResult && typeof saveResult.catch === 'function') {

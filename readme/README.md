@@ -25,11 +25,10 @@ Este documento não descreve plugins específicos. Ele ensina a **lógica, conce
 5. [Sistema de Comunicação (Pub/Sub)](#sistema-de-comunicação-pubsub)
 6. [Versionamento e Controle de Versão](#versionamento-e-controle-de-versão)
 7. [Política de Desenvolvimento Obrigatória](#política-de-desenvolvimento-obrigatória)
-8. [Backups e Segurança](#backups-e-segurança)
-9. [Sistema de Logs e Debugging](#sistema-de-logs-e-debugging)
-10. [Fluxo de Navegação e Integração](#fluxo-de-navegação-e-integração)
-11. [Governança e Permissões](#governança-e-permissões)
-12. [Próximos Passos e Roadmap](#próximos-passos-e-roadmap)
+8. [Sistema de Logs e Debugging](#sistema-de-logs-e-debugging)
+9. [Fluxo de Navegação e Integração](#fluxo-de-navegação-e-integração)
+10. [Governança e Permissões](#governança-e-permissões)
+11. [Próximos Passos e Roadmap](#próximos-passos-e-roadmap)
 
 ---
 
@@ -270,16 +269,6 @@ js/plugins/
 │   └── resources/               # Recursos gráficos
 │       └── [imagens, etc]
 │
-├── backups/                     # Histórico de versões
-│   ├── AS_0.0_NomeDoNucleo/
-│   │   ├── AS_0.0_NomeDoNucleo - v1.0.0.js
-│   │   └── ...
-│   │
-│   └── AS_1.0_NomePrincipal/
-│       ├── AS_1.0_NomePrincipal - v1.0.0.js
-│       ├── AS_1.0_NomePrincipal - v1.0.1.js
-│       └── ...
-│
 ├── chatlogs/                   # Histórico de desenvolvimento
 │   ├── AS_0.0_NomeDoNucleo_chatlog.md
 │   ├── AS_1.0_NomePrincipal_chatlog.md
@@ -312,57 +301,6 @@ assets/contents/
 - Agente: `AS_1.0_BattleUI.js`
 - CSS: `assets/contents/css/AS_1.0_BattleUI.css`
 - HTML: `assets/contents/html/AS_1.0_BattleUI.html`
-
-### Padrão para Arquivos de Backup
-
-Sempre que atualizar um agente, crie um backup **antes** de começar.
-
-**Formato Versão Completa:**
-```
-AS_X.Y_NomeAgente - vX.Y.Z.js
-```
-
-**Componentes:**
-- Nome do agente original (exato)
-- `vX.Y.Z` = versão semântica (NUNCA sufixos como -alfa)
-- `.js` = extensão
-
-**Exemplos Corretos:**
-- `AS_1.0_BattleUI - v1.0.0.js` ✓
-- `AS_1.3_Options - v1.0.9.js` ✓
-- `AS_0.0_Manager - v1.0.0.js` ✓
-
-**Formato para Correção Rápida (Fix):**
-```
-AS_X.Y_NomeAgente - vX.Y.Z - Fix N.js
-```
-
-**Uso:** Quando encontra bug crítico e precisa corrigir a mesma versão.
-
-**Exemplos:**
-- `AS_1.0_BattleUI - v1.0.0 - Fix 1.js` ✓ (Primeira correção)
-- `AS_1.0_BattleUI - v1.0.0 - Fix 2.js` ✓ (Segunda correção)
-
-### Estrutura de Pasta de Backup
-
-Cada agente tem sua própria pasta:
-
-```
-backups/
-├── AS_0.0_NomeDoNucleo/
-│   ├── AS_0.0_NomeDoNucleo - v1.0.0.js
-│   ├── AS_0.0_NomeDoNucleo - v1.0.1.js
-│   └── AS_0.0_NomeDoNucleo - v1.0.2.js
-│
-└── AS_1.0_NomePrincipal/
-    ├── AS_1.0_NomePrincipal - v1.0.0.js
-    ├── AS_1.0_NomePrincipal - v1.0.1.js
-    ├── AS_1.0_NomePrincipal - v1.1.0.js
-    ├── AS_1.0_NomePrincipal - v1.1.1.js
-    └── AS_1.0_NomePrincipal - v1.1.1 - Fix 1.js
-```
-
-**Política de Limpeza:** Manter últimas 5 versões + todas as fixes da versão atual.
 
 ## Ciclo de Vida dos Agentes
 
@@ -852,29 +790,23 @@ Você **não pula fases**. Você vai de alfa para beta apenas quando MAJOR ating
 2. **Solicitar Autorização**
    - Informar mudanças implementadas
    - Descrever impacto
-   - Referenciar backups criados
+   - Descrever testes realizados
 
 3. **Após Aprovação: Ordem Obrigatória**
    ```
-   PASSO 1: Criar backup
-   ├─ Copiar versão atual
-   ├─ Salvar em backups/AS_X.Y_Nome/
-   └─ Nome: AS_X.Y_Nome - vX.Y.Z.js
-   
-   PASSO 2: Implementar mudanças
+   PASSO 1: Implementar mudanças
    ├─ Alterar código
    ├─ Testar completamente
    └─ Validar dependências
    
-   PASSO 3: Incrementar versão (sequencialmente)
+   PASSO 2: Incrementar versão (sequencialmente)
    ├─ @version no cabeçalho (próximo número na sequência)
    ├─ version no manifesto (mesmo número)
    └─ Em 2 lugares!
    
-   PASSO 4: Atualizar chatlog (APENAS AGORA!)
+   PASSO 3: Atualizar chatlog (APENAS AGORA!)
    ├─ Uma nova entrada
    ├─ Com data, autor, detalhes
-   ├─ Referenciar backup
    └─ Confirmar nova versão
    ```
 
@@ -888,38 +820,33 @@ ESTADO INICIAL:
 - Status: Funcionando
 
 MUDANÇA 1 - Bug Fix #1:
-1. BACKUP: AS_1.0_Battle - v1.0.5.js
-2. FIX: Corrigir bug X
-3. VERSION: 1.0.5 → 1.0.6 (próximo na sequência)
-4. CHATLOG: Entrada com detalhes
+1. FIX: Corrigir bug X
+2. VERSION: 1.0.5 → 1.0.6 (próximo na sequência)
+3. CHATLOG: Entrada com detalhes
 
 MUDANÇA 2 - Bug Fix #2:
-1. BACKUP: AS_1.0_Battle - v1.0.6.js
-2. FIX: Corrigir bug Y
-3. VERSION: 1.0.6 → 1.0.7
-4. CHATLOG: Entrada nova
+1. FIX: Corrigir bug Y
+2. VERSION: 1.0.6 → 1.0.7
+3. CHATLOG: Entrada nova
 
 ... (continua assim até 1.0.9)
 
 MUDANÇA N - Bug Fix #N:
-1. BACKUP: AS_1.0_Battle - v1.0.8.js
-2. FIX: Corrigir bug Z
-3. VERSION: 1.0.8 → 1.0.9
-4. CHATLOG: Entrada
+1. FIX: Corrigir bug Z
+2. VERSION: 1.0.8 → 1.0.9
+3. CHATLOG: Entrada
 
 MUDANÇA N+1 - Nova Feature:
-1. BACKUP: AS_1.0_Battle - v1.0.9.js ← Agora incrementa MINOR!
-2. FEATURE: Adicionar nova funcionalidade
-3. VERSION: 1.0.9 → 1.1.0 ← PATCH reseta para 0, MINOR incrementa
-4. CHATLOG: Entrada
+1. FEATURE: Adicionar nova funcionalidade
+2. VERSION: 1.0.9 → 1.1.0 ← PATCH reseta para 0, MINOR incrementa
+3. CHATLOG: Entrada
 
 ... (continua em 1.1.x até 1.1.9)
 
 MUDANÇA M - Quando atingir 1.9.9:
-1. BACKUP: AS_1.0_Battle - v1.9.9.js ← Última versão antes do MAJOR
-2. MAJOR CHANGE: Mudança quebra compatibilidade
-3. VERSION: 1.9.9 → 2.0.0 ← MAJOR incrementa, MINOR e PATCH resetam
-4. CHATLOG: Entrada
+1. MAJOR CHANGE: Mudança quebra compatibilidade
+2. VERSION: 1.9.9 → 2.0.0 ← MAJOR incrementa, MINOR e PATCH resetam
+3. CHATLOG: Entrada
 ```
 
 ---
@@ -1051,7 +978,6 @@ chatlogs/
              de range. Testado com valores extremos (0, 100) e intermediários.
              Nenhuma regressão detectada nos demais sliders.
 **Versão:** v1.0.10 (anterior: v1.0.9)
-**Backup criado:** AS_1.3_OptionsScreen - v1.0.9.js
 
 ---
 
@@ -1064,7 +990,6 @@ chatlogs/
              CSS estilizado em assets/contents/css/AS_1.3_OptionsScreen.css
              Compatível com sistema de saves existente.
 **Versão:** v1.0.9 (anterior: v1.0.8)
-**Backup criado:** AS_1.3_OptionsScreen - v1.0.8.js
 ```
 
 ### Quando Atualizar o Chatlog
@@ -1093,7 +1018,6 @@ chatlogs/
 **Ação:** Correção - Slider volume
 **Detalhes:** Slider de volume não salva valor. Fix implementado.
 **Versão:** v1.0.10
-**Backup criado:** AS_1.3_OptionsScreen - v1.0.9.js
 
 ---
 
@@ -1107,7 +1031,6 @@ chatlogs/
              UI modularizada em HTML/CSS separado. Transições suaves.
              Compatível com navegação por teclado.
 **Versão:** v1.0.9
-**Backup criado:** AS_1.3_OptionsScreen - v1.0.8.js
 
 ---
 
@@ -1118,7 +1041,6 @@ chatlogs/
 **Detalhes:** Plugin criado. Funcionalidades básicas implementadas.
              UI simples com sliders de volume e toggle de dash.
 **Versão:** v1.0.0
-**Backup criado:** Nenhum (primeira versão)
 ```
 
 ---
@@ -1465,10 +1387,9 @@ O sistema Ancient Souls foi construído com rigor para garantir:
    **Ação:** <descrição curta>
    **Detalhes:** <explicação breve>
    **Versão afetada:** X.Y.Z
-   **Backup criado:** PluginName - vX.Y.Z.js
    ```
 
-3. **Sempre seguir template de cabeçalho obrigatório**
+2. **Sempre seguir template de cabeçalho obrigatório**
 
    Todos os plugins DEVEM iniciar com:
    ```javascript
@@ -1488,7 +1409,7 @@ O sistema Ancient Souls foi construído com rigor para garantir:
 
    Veja a seção "Template de Estrutura para Novo Plugin" acima para exemplo completo.
 
-4. **Sempre incluir manifest completo no registro**
+3. **Sempre incluir manifest completo no registro**
 
    ```javascript
    AS.PluginManager.register('AS_X.Y_NomeDoPluign', {
@@ -1511,7 +1432,7 @@ O sistema Ancient Souls foi construído com rigor para garantir:
 
    Veja a seção "Template de Estrutura para Novo Plugin" acima para referência completa.
 
-5. **Sempre manter compatibilidade com versionamento**
+4. **Sempre manter compatibilidade com versionamento**
 
    - Incrementos PATCH = compatível com versões anteriores
    - Incrementos MINOR = compatível com versões anteriores

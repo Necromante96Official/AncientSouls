@@ -1,638 +1,1274 @@
-100 bibliotecas JS/Node que você pode usar em projetos com RPG Maker MZ (engine HTML5/JS). Cada linha: nome + o que faz (uma frase). Fontes de referência para algumas das mais importantes: PixiJS, Howler, GSAP, Matter.js, Lodash e Axios. 
+# Bibliotecas JavaScript para RPG Maker MZ100 bibliotecas JS/Node que você pode usar em projetos com RPG Maker MZ (engine HTML5/JS). Cada linha: nome + o que faz (uma frase). Fontes de referência para algumas das mais importantes: PixiJS, Howler, GSAP, Matter.js, Lodash e Axios. 
 
-PixiJS — renderização 2D WebGL rápida (sprites, contêineres, filtros).
 
-Howler.js — gerenciamento e playback de áudio (WebAudio + fallback).
 
-GSAP — animações/timelines profissionais e tweens de alto desempenho.
+Este documento lista bibliotecas úteis categorizadas por finalidade. RPG Maker MZ usa HTML5/JavaScript, permitindo integração com a maioria das bibliotecas JS/Node.PixiJS — renderização 2D WebGL rápida (sprites, contêineres, filtros).
 
-Matter.js — motor de física 2D (rigid bodies, colisões).
 
-p5.js — utilitários criativos para gráficos e interatividade.
 
-Three.js — renderização 3D/WebGL (se quiser objetos 3D dentro de HTML).
+---Howler.js — gerenciamento e playback de áudio (WebAudio + fallback).
 
-Phaser — framework de jogos 2D (pode ser usado modularmente).
 
-EaselJS (CreateJS) — manipulação de canvas e gráficos 2D.
 
-Tone.js — síntese e processamento de áudio avançado (sintetizadores, efeitos).
+## 📊 ÍndiceGSAP — animações/timelines profissionais e tweens de alto desempenho.
 
-tween.js — biblioteca simples de tweening para transições.
 
-anime.js — animações DOM/SVG/canvas com API simples.
 
-RxJS — programação reativa (streams/eventos complexos).
+1. [Renderização 2D/3D e Gráficos](#renderização-2d3d-e-gráficos)Matter.js — motor de física 2D (rigid bodies, colisões).
 
-Lodash — utilitários para arrays/objetos/funções (facilita lógica).
+2. [Áudio e Música](#áudio-e-música)
 
-Underscore.js — utilitários funcionais leves (similar ao Lodash).
+3. [Animações e Transições](#animações-e-transições)p5.js — utilitários criativos para gráficos e interatividade.
 
-Immutable.js — estruturas de dados imutáveis (estado previsível).
+4. [Física e Colisões](#física-e-colisões)
 
-Fuse.js — busca fuzzy (pesquisa por nomes/itens sem erro exato).
+5. [IA e Pathfinding](#ia-e-pathfinding)Three.js — renderização 3D/WebGL (se quiser objetos 3D dentro de HTML).
 
-pathfinding.js — algoritmos de pathfinding (A*, Dijkstra) em grids.
+6. [Matemática e Vetores](#matemática-e-vetores)
 
-Yuka — IA para jogos (comportamentos, steering, navegação).
+7. [Armazenamento e Banco de Dados](#armazenamento-e-banco-de-dados)Phaser — framework de jogos 2D (pode ser usado modularmente).
 
-JSZip — criar/ler arquivos ZIP (packs, hotloads).
+8. [Requisições HTTP e Comunicação](#requisições-http-e-comunicação)
 
-pako — compressão/decompressão zlib/deflate em JS.
+9. [Manipulação de Dados](#manipulação-de-dados)EaselJS (CreateJS) — manipulação de canvas e gráficos 2D.
 
-socket.io-client — comunicação em tempo real (multiplayer, sync).
+10. [Internacionalização e Formatação](#internacionalização-e-formatação)
 
-Axios — requisições HTTP/REST (promises).
+11. [Parsing e Serialização](#parsing-e-serialização)Tone.js — síntese e processamento de áudio avançado (sintetizadores, efeitos).
+
+12. [Compressão e Criptografia](#compressão-e-criptografia)
+
+13. [Validação e Schemas](#validação-e-schemas)tween.js — biblioteca simples de tweening para transições.
+
+14. [Eventos e Reatividade](#eventos-e-reatividade)
+
+15. [Gerenciamento de Estado](#gerenciamento-de-estado)anime.js — animações DOM/SVG/canvas com API simples.
+
+16. [UI e Componentes](#ui-e-componentes)
+
+17. [CSS e Estilos](#css-e-estilos)RxJS — programação reativa (streams/eventos complexos).
+
+18. [Debugging e Testing](#debugging-e-testing)
+
+19. [Build Tools e Bundlers](#build-tools-e-bundlers)Lodash — utilitários para arrays/objetos/funções (facilita lógica).
+
+20. [Utilidades Gerais](#utilidades-gerais)
+
+21. [Machine Learning](#machine-learning)Underscore.js — utilitários funcionais leves (similar ao Lodash).
+
+22. [Desktop e Mobile](#desktop-e-mobile)
+
+23. [Backend e Servidores](#backend-e-servidores)Immutable.js — estruturas de dados imutáveis (estado previsível).
+
+24. [Procedural Generation](#procedural-generation)
+
+25. [Engines de Jogos](#engines-de-jogos)Fuse.js — busca fuzzy (pesquisa por nomes/itens sem erro exato).
+
+
+
+---pathfinding.js — algoritmos de pathfinding (A*, Dijkstra) em grids.
+
+
+
+## Renderização 2D/3D e GráficosYuka — IA para jogos (comportamentos, steering, navegação).
+
+
+
+### Renderização 2DJSZip — criar/ler arquivos ZIP (packs, hotloads).
+
+- **PixiJS** — Renderização WebGL 2D de alto desempenho (sprites, containers, filtros, máscaras)
+
+- **EaselJS (CreateJS)** — Biblioteca canvas 2D para gráficos e animaçõespako — compressão/decompressão zlib/deflate em JS.
+
+- **Konva** — Framework canvas 2D com suporte a cenas, camadas e eventos
+
+- **Fabric.js** — Camada de alto nível sobre canvas para objetos interativossocket.io-client — comunicação em tempo real (multiplayer, sync).
+
+- **p5.js** — Framework criativo para gráficos generativos e interatividade
+
+- **pixi-filters** — Coleção de filtros para PixiJS (blur, glow, displacement, etc)Axios — requisições HTTP/REST (promises).
+
+- **pixi-particles** — Sistema de partículas para PixiJS
 
 localForage — armazenamento assíncrono (IndexedDB com API simples).
 
-Dexie.js — wrapper avançado para IndexedDB (queries fáceis).
+### Renderização 3D
 
-idb — wrapper minimalista para IndexedDB (promessa-friendly).
+- **Three.js** — Biblioteca WebGL completa para renderização 3D (objetos, câmeras, luzes, shaders)Dexie.js — wrapper avançado para IndexedDB (queries fáceis).
 
-i18next — internacionalização / tradução de strings.
+- **regl** — Wrapper funcional para WebGL, facilita criação de shaders
 
-dayjs — manipulação de datas leve (alternativa ao moment).
+- **twgl.js** — Utilitários WebGL para simplificar buffers e shadersidb — wrapper minimalista para IndexedDB (promessa-friendly).
 
-moment.js — manipulação de datas (amplamente usado, pesado).
 
-numeral.js — formatação de números (moeda, porcentagem).
+
+### Manipulação de Imagensi18next — internacionalização / tradução de strings.
+
+- **sharp** — Processamento de imagens em Node (redimensionar, crop, otimizar)
+
+- **Jimp** — Processamento de imagem puro JS (browser e Node)dayjs — manipulação de datas leve (alternativa ao moment).
+
+- **imagemin** — Pipeline de otimização de imagens para builds
+
+- **imagemin-pngquant** — Plugin PNG para compressão eficientemoment.js — manipulação de datas (amplamente usado, pesado).
+
+- **color-thief** — Extrai paleta de cores dominantes de imagens
+
+- **svgo** — Otimizador SVG (remove metadados, reduz tamanho)numeral.js — formatação de números (moeda, porcentagem).
+
+- **svgson** — Converte SVG para JSON para manipulação programática
 
 dat.GUI — painel de debug/config em runtime (tweak params).
 
+---
+
 lil-gui — fork moderno/minimal do dat.GUI.
+
+## Áudio e Música
 
 stats.js — monitor FPS e perf metrics em dev.
 
-tmx-parser — parser de mapas TMX (Tiled) para uso JS.
+### Playback e Gerenciamento
 
-spritesheet-js — ferramentas para gerar/ler spritesheets.
+- **Howler.js** — Gerenciamento de áudio robusto (WebAudio + fallback HTML5)tmx-parser — parser de mapas TMX (Tiled) para uso JS.
+
+- **Tone.js** — Síntese e processamento de áudio avançado (sintetizadores, efeitos, sequências)
+
+- **soundfont-player** — Toca instrumentos SoundFont no browser (MIDI-like)spritesheet-js — ferramentas para gerar/ler spritesheets.
+
+- **midi.js** — Carrega e reproduz arquivos MIDI
 
 sharp — processamento de imagens em Node (tooling: redimensionar, crop).
 
-Jimp — processamento de imagem puro JS (Node).
+### Análise e Processamento
 
-Fabric.js — camada de alto nível sobre canvas para objetos interativos.
+- **fft.js** — Transformada rápida de Fourier para análise de frequênciasJimp — processamento de imagem puro JS (Node).
 
-Konva — biblioteca para canvas 2D com suporte a cenas e eventos.
+- **jsfft** — FFT/DFT para análise de sinais
 
-pixi-particles — sistema de partículas integrado ao Pixi.
+- **ndarray-fft** — FFT para estruturas ndarray (científico)Fabric.js — camada de alto nível sobre canvas para objetos interativos.
 
-simplex-noise — ruído simplex para procedural generation.
 
-noisejs — Perlin/Simplex noise (mapas, terreno procedural).
 
-seedrandom — gerador RNG com seed determinística.
+### Reconhecimento e SínteseKonva — biblioteca para canvas 2D com suporte a cenas e eventos.
 
-random-js — utilitários avançados para RNG.
+- **annyang** — Reconhecimento de voz simples (Web Speech API)
 
-uuid — geração de UUIDs (IDs únicos para entidades, saves).
+- **artyom.js** — Assistente de voz com TTS e reconhecimentopixi-particles — sistema de partículas integrado ao Pixi.
+
+- **abcjs** — Renderiza e toca notação ABC (música)
+
+- **scribbletune** — Geração algorítmica de música e MIDIsimplex-noise — ruído simplex para procedural generation.
+
+
+
+---noisejs — Perlin/Simplex noise (mapas, terreno procedural).
+
+
+
+## Animações e Transiçõesseedrandom — gerador RNG com seed determinística.
+
+
+
+- **GSAP** — Biblioteca de animações profissionais de alto desempenho (timelines, tweens, efeitos)random-js — utilitários avançados para RNG.
+
+- **anime.js** — Animações DOM/SVG/Canvas com API simples e fluente
+
+- **tween.js** — Biblioteca leve de tweening para transições suavesuuid — geração de UUIDs (IDs únicos para entidades, saves).
+
+- **Velocity.js** — Animações DOM performáticas (alternativa ao jQuery)
 
 js-yaml — parse e geração YAML (configurações legíveis).
 
+---
+
 marked — parser Markdown rápido (documentação/descrições).
+
+## Física e Colisões
 
 Handlebars — templating HTML/strings para UIs e texto dinâmico.
 
-Mustache — templating logic-less para textos/menus.
+### Física 2D
 
-@sentry/browser — captura de erros/client-side para monitoramento.
+- **Matter.js** — Motor de física 2D completo (rigid bodies, colisões, constraints)Mustache — templating logic-less para textos/menus.
 
-Rollup — bundler focado em pacotes e tree-shaking (tooling).
+- **Planck.js** — Port JavaScript do Box2D (física 2D profissional)
 
-Webpack — bundler generalista (assets, loaders).
+- **box2dweb** — Box2D para web (alternativa clássica)@sentry/browser — captura de erros/client-side para monitoramento.
 
-Vite — dev server e bundler rápido (hot reload).
+- **SAT.js** — Detecção de colisão usando Separating Axis Theorem
+
+- **poly-decomp.js** — Decomposição de polígonos para colisões complexasRollup — bundler focado em pacotes e tree-shaking (tooling).
+
+
+
+### Física 3DWebpack — bundler generalista (assets, loaders).
+
+- **Cannon.js / cannon-es** — Motor de física 3D (rigid bodies, forças, constraints)
+
+- **Ammo.js** — Port do Bullet Physics para JS (física complexa)Vite — dev server e bundler rápido (hot reload).
+
+- **Oimo.js** — Motor de física 3D leve e simples
 
 esbuild — bundler/transpiler ultrarrápido (tooling).
 
-Parcel — bundler zero-config (fácil pra protótipos).
+### Estruturas Espaciais
 
-Babel — transpiler JS (suporte a sintaxes modernas).
+- **rbush** — Árvore R-tree para indexação espacial rápida (colisões, queries)Parcel — bundler zero-config (fácil pra protótipos).
+
+- **quadtree-js** — Quadtree para particionamento espacial em 2D
+
+- **earcut** — Triangulação rápida de polígonosBabel — transpiler JS (suporte a sintaxes modernas).
+
+- **clipper-lib** — Operações booleanas com polígonos (união, interseção, offset)
 
 TypeScript — tipagem estática para segurança em grandes projetos.
 
+---
+
 ESLint — linting/qualidade de código JS.
+
+## IA e Pathfinding
 
 Prettier — formatação automática de código.
 
-Jest — testes unitários (Node/browser).
+### Pathfinding
 
-Mocha — runner de testes flexível.
+- **pathfinding.js** — Algoritmos de pathfinding (A*, Dijkstra, JPS) para gridsJest — testes unitários (Node/browser).
 
-Chai — assertions para testes (usado com Mocha).
+- **easystar.js** — Pathfinding A* otimizado para tiles
+
+- **graphlib** — Criação e manipulação de grafos + algoritmos (paths, topologia)Mocha — runner de testes flexível.
+
+- **fastpriorityqueue** — Fila de prioridade rápida (útil em pathfinding)
+
+- **heap-js** — Estruturas de heap/priority queueChai — assertions para testes (usado com Mocha).
+
+- **tinyqueue** — Fila de prioridade extremamente leve
 
 Puppeteer — automação/headless Chrome (testes e builds).
 
-Playwright — automação cross-browser (testes E2E).
+### Comportamentos e IA
+
+- **Yuka** — Framework de IA para jogos (steering behaviors, navegação, decision making)Playwright — automação cross-browser (testes E2E).
+
+- **rot.js** — Toolkit para roguelikes (geração de mapas, FOV, pathfinding)
 
 pixi-filters — coleção de filtros para Pixi (blur, glow, etc.).
 
-regl — camada functional WebGL para shaders/rápido protótipo.
+### NLP e Processamento de Texto
 
-twgl.js — utilitários WebGL para facilitar shaders e buffers.
+- **natural** — Toolkit NLP (tokenização, stemming, classificadores)regl — camada functional WebGL para shaders/rápido protótipo.
+
+- **compromise** — NLP leve para extração de entidades e análise no browser
+
+- **js-levenshtein** — Distância de Levenshtein para fuzzy matchingtwgl.js — utilitários WebGL para facilitar shaders e buffers.
+
+- **Fuse.js** — Busca fuzzy para pesquisa tolerante a erros
 
 gl-matrix — algebra linear (matrizes/vetores) otimizada.
 
+---
+
 Victor — biblioteca de vetores 2D simples (operações vetoriais).
+
+## Matemática e Vetores
 
 mathjs — funções matemáticas avançadas e parser de expressões.
 
-rbush — árvore R para indexação espacial rápida (colisões, query).
+### Vetores e Matrizes
 
-quadtree-js — quadtree para particionamento espacial em 2D.
+- **gl-matrix** — Álgebra linear otimizada (vetores, matrizes, quaternions)rbush — árvore R para indexação espacial rápida (colisões, query).
 
-earcut — triangulação rápida de polígonos (meshes, sombras).
+- **Victor** — Biblioteca de vetores 2D simples
 
-poly-decomp.js — decomposição de polígonos (colisão complexa).
+- **mathjs** — Funções matemáticas avançadas e parser de expressõesquadtree-js — quadtree para particionamento espacial em 2D.
 
-SAT.js — colisões por Separating Axis Theorem (entidades simples).
+- **ndarray** — Arrays N-dimensionais para cálculos numéricos
 
-Planck.js — port do Box2D para JavaScript (física 2D avançada).
+- **numjs** — Utilitários numéricos estilo NumPyearcut — triangulação rápida de polígonos (meshes, sombras).
 
-box2dweb — Box2D para web (alternativa física clássica).
 
-opentype.js — leitura/manipulação de fontes (text rendering custom).
 
-webfontloader — carregamento de fontes web com callbacks.
+### Precisão Numéricapoly-decomp.js — decomposição de polígonos (colisão complexa).
 
-file-saver — salvar arquivos no cliente (exports, saves manuais).
+- **bignumber.js** — Operações numéricas com alta precisão
 
-downloadjs — utilitário simples para disparar downloads do browser.
+- **decimal.js** — Aritmética decimal precisa (evita erros de float)SAT.js — colisões por Separating Axis Theorem (entidades simples).
+
+
+
+---Planck.js — port do Box2D para JavaScript (física 2D avançada).
+
+
+
+## Armazenamento e Banco de Dadosbox2dweb — Box2D para web (alternativa física clássica).
+
+
+
+### Browser Storageopentype.js — leitura/manipulação de fontes (text rendering custom).
+
+- **localForage** — Armazenamento assíncrono (IndexedDB) com API simples tipo localStorage
+
+- **Dexie.js** — Wrapper avançado para IndexedDB com queries fáceiswebfontloader — carregamento de fontes web com callbacks.
+
+- **idb** — Wrapper minimalista para IndexedDB (promise-friendly)
+
+- **idb-keyval** — Key-value simples e leve sobre IndexedDBfile-saver — salvar arquivos no cliente (exports, saves manuais).
+
+- **store.js** — Wrapper para localStorage/sessionStorage com fallbacks
+
+- **secure-ls** — localStorage com encriptação simplesdownloadjs — utilitário simples para disparar downloads do browser.
+
+- **BrowserFS** — Emula sistema de arquivos POSIX no navegador
 
 Hammer.js — gestures/touch (swipe, pinch) para mobile.
 
-screenfull — API simplificada para fullscreen.
+### Banco de Dados Embarcados
 
-clipboard.js — copiar/colar programático.
+- **PouchDB** — Banco NoSQL offline-first que sincroniza com CouchDBscreenfull — API simplificada para fullscreen.
 
-chroma.js — manipulação e conversão de cores.
+- **RxDB** — Banco reativo para apps offline/realtime com sync
 
-tinycolor2 — utilitário menor para operações com cores.
+- **LokiJS** — Banco em memória super-rápido com índices e persistênciaclipboard.js — copiar/colar programático.
 
-color-thief — extrai paleta de cores de imagens.
+- **NeDB** — Banco leve tipo MongoDB para protótipos
 
-yjs — CRDT para sincronização colaborativa (multiplayer/offline sync).
+- **lowdb** — DB simples baseado em JSONchroma.js — manipulação e conversão de cores.
 
-Automerge — CRDT para dados colaborativos/offline-first.
+- **sql.js** — SQLite compilado em WASM para browser
 
-protobufjs — Protobuf em JS (mensagens compactas, rede).
+- **sqlite-wasm** — SQLite via WASM (alternativa)tinycolor2 — utilitário menor para operações com cores.
 
-msgpack-lite — MessagePack para JS (serialização binária leve).
+
+
+### SQL (Node)color-thief — extrai paleta de cores de imagens.
+
+- **sqlite3** — Driver SQLite para Node
+
+- **better-sqlite3** — Wrapper SQLite síncrono e rápidoyjs — CRDT para sincronização colaborativa (multiplayer/offline sync).
+
+- **pg (node-postgres)** — Cliente PostgreSQL
+
+- **mysql2** — Cliente MySQL com PromisesAutomerge — CRDT para dados colaborativos/offline-first.
+
+- **knex** — Query builder SQL para migrations e queries
+
+- **sequelize** — ORM para bancos SQL (models, associations)protobufjs — Protobuf em JS (mensagens compactas, rede).
+
+- **typeorm** — ORM TypeScript para SQL/NoSQL
+
+- **objection** — ORM flexível baseado em Knexmsgpack-lite — MessagePack para JS (serialização binária leve).
+
+- **Prisma** — ORM moderno com migrations e type safety
 
 bignumber.js — operações numéricas com alta precisão.
 
-decimal.js — aritmética decimal precisa (evita erros de float).
+### NoSQL (Node)
+
+- **mongoose** — ODM para MongoDBdecimal.js — aritmética decimal precisa (evita erros de float).
+
+- **redis / ioredis** — Cliente Redis para caching e pub/sub
 
 serialize-javascript — serialização segura para injeção/transferência.
 
+---
+
 jsdom — DOM em Node (testes, tools sem browser).
+
+## Requisições HTTP e Comunicação
 
 node-fetch — fetch para Node (tooling/server).
 
-cross-fetch — fetch isomórfico (node + browser).
+### HTTP Clients
 
-detect-it — detectar touch vs mouse vs pointer capabilities.
+- **Axios** — Cliente HTTP com promises (browser e Node)cross-fetch — fetch isomórfico (node + browser).
 
-Mousetrap — atalhos de teclado fáceis (combinações).
+- **node-fetch** — Fetch API para Node
+
+- **cross-fetch** — Fetch isomórfico (browser + Node)detect-it — detectar touch vs mouse vs pointer capabilities.
+
+- **got** — Cliente HTTP moderno com retries e streams
+
+- **superagent** — Cliente HTTP leve para browser/NodeMousetrap — atalhos de teclado fáceis (combinações).
+
+- **undici** — Cliente HTTP de alto desempenho para Node
 
 keypress.js — detecção avançada de teclas/combos (alternative).
 
-FingerprintJS — identificação/browser fingerprinting (anti-fraude/analytics).
+### Real-time
 
-BrowserFS — emula um sistema de arquivos no navegador (POSIX-like) para ler/escrever arquivos localmente.
+- **socket.io-client** — Comunicação em tempo real bidirecionalFingerprintJS — identificação/browser fingerprinting (anti-fraude/analytics).
 
-idb-keyval — key-value simples e leve sobre IndexedDB (armazenamento assíncrono fácil).
+- **ws** — WebSocket leve para Node
+
+- **sockjs-client** — WebSocket com fallback para transports antigosBrowserFS — emula um sistema de arquivos no navegador (POSIX-like) para ler/escrever arquivos localmente.
+
+- **engine.io-client** — Camada de transporte em tempo real
+
+- **socketcluster-client** — Cliente para servidores escaláveisidb-keyval — key-value simples e leve sobre IndexedDB (armazenamento assíncrono fácil).
+
+- **signalr-client** — Cliente SignalR (Microsoft)
 
 store.js — wrapper para localStorage/sessionStorage com fallbacks e API simples.
 
-fastpriorityqueue — implementação de fila de prioridade muito rápida (útil em pathfinding/IA).
+### WebRTC
+
+- **PeerJS** — Wrapper simplificado para WebRTC peer-to-peerfastpriorityqueue — implementação de fila de prioridade muito rápida (útil em pathfinding/IA).
+
+- **simple-peer** — WebRTC P2P com API simples
 
 heap-js — estruturas de heap/priority queue em JavaScript.
 
-graphlib — criação e manipulação de grafos + algoritmos (paths, ordenação topológica).
+### CRDT e Sync
 
-js-levenshtein — cálculo da distância de Levenshtein (compara strings para fuzzy match).
+- **Yjs** — CRDT para sincronização colaborativa offline-firstgraphlib — criação e manipulação de grafos + algoritmos (paths, ordenação topológica).
 
-natural — toolkit NLP (tokenização, stemmers, classificadores básicos).
+- **y-websocket** — Backend WebSocket para Yjs
 
-compromise — NLP leve para extração de entidades e análise de texto no browser.
+- **Automerge** — CRDT para dados colaborativosjs-levenshtein — cálculo da distância de Levenshtein (compara strings para fuzzy match).
 
-nearley — gerador de parsers para gramáticas com ambiguidades (parsing avançado).
 
-chevrotain — toolkit para construir parsers de alto desempenho em JS.
 
-pegjs — gerador de parsers PEG (criar parsers customizados para scripts/eventos).
+---natural — toolkit NLP (tokenização, stemmers, classificadores básicos).
 
-dotenv — carrega variáveis de ambiente de arquivos .env (tooling/deploy).
 
-cross-env — define variáveis de ambiente de forma cross-platform em scripts npm.
 
-concurrently — roda vários comandos em paralelo (dev scripts).
+## Manipulação de Dadoscompromise — NLP leve para extração de entidades e análise de texto no browser.
+
+
+
+### Utilitiesnearley — gerador de parsers para gramáticas com ambiguidades (parsing avançado).
+
+- **Lodash** — Utilitários para arrays/objetos/funções (facilita lógica complexa)
+
+- **Underscore.js** — Utilitários funcionais leveschevrotain — toolkit para construir parsers de alto desempenho em JS.
+
+- **Ramda** — Programação funcional (currying, composição, imutabilidade)
+
+- **Immutable.js** — Estruturas de dados imutáveispegjs — gerador de parsers PEG (criar parsers customizados para scripts/eventos).
+
+- **immer** — Imutabilidade fácil (produce com sintaxe mutável)
+
+- **collect.js** — Collections encadeáveis estilo Laraveldotenv — carrega variáveis de ambiente de arquivos .env (tooling/deploy).
+
+- **deepmerge** — Mescla objetos profundamente
+
+- **rfdc** — Clone profundo ultrarrápidocross-env — define variáveis de ambiente de forma cross-platform em scripts npm.
+
+- **fast-deep-equal** — Checagem rápida de igualdade profunda
+
+- **dequal** — Igualdade profunda pequena e confiávelconcurrently — roda vários comandos em paralelo (dev scripts).
+
+- **Flatted** — stringify/parse JSON com suporte a referências circulares
 
 nodemon — reinicia automaticamente apps Node durante desenvolvimento.
 
-pm2 — gerenciador de processos Node para produção (monitoramento/restart).
+### Performance
 
-express — servidor HTTP minimalista para APIs e ferramentas locais.
+- **memoizee** — Memoização configurável para funções caraspm2 — gerenciador de processos Node para produção (monitoramento/restart).
 
-koa — framework web moderno baseado em middleware async (servers/tooling).
+- **micro-memoize** — Memoização muito leve
 
-fastify — framework Node orientado a performance e baixo overhead.
+- **lru-cache** — Cache LRU eficienteexpress — servidor HTTP minimalista para APIs e ferramentas locais.
 
-ws — implementação leve de WebSocket para Node (comunicação em tempo real).
+- **quick-lru** — LRU minimalista
 
-sockjs-client — cliente WebSocket com fallback para transports antigos.
+- **transducers-js** — Transducers para transformação de coleçõeskoa — framework web moderno baseado em middleware async (servers/tooling).
 
-engine.io-client — camada de transporte em tempo real (base para socket libs).
 
-query-string — parse/stringify de query strings com API simples.
 
-qs — parser/stringifier para queries complexas (arrays/objetos).
+---fastify — framework Node orientado a performance e baixo overhead.
 
-form-data — construir formulários multipart/form-data programaticamente.
 
-multer — middleware para uploads multipart/form-data em Express.
 
-formidable — parser de uploads e formulários no Node.
+## Internacionalização e Formataçãows — implementação leve de WebSocket para Node (comunicação em tempo real).
 
-imagemin — pipeline de otimização de imagens para builds.
 
-imagemin-pngquant — plugin PNG para compressão eficiente em imagemin.
 
-svgo — otimiza SVGs removendo metadados e reduzindo tamanho.
+### i18nsockjs-client — cliente WebSocket com fallback para transports antigos.
 
-svgson — converte SVG em JSON para manipulação programática.
+- **i18next** — Framework completo de internacionalização
 
-xml2js — parse e construção de XML em JavaScript.
+- **dayjs** — Manipulação de datas leve (alternativa ao moment)engine.io-client — camada de transporte em tempo real (base para socket libs).
 
-sax — parser XML streaming (baixo uso de memória, alta velocidade).
+- **moment.js** — Manipulação de datas (amplamente usado, mas pesado)
 
-papaparse — parser CSV robusto para browser e Node.
+- **numeral.js** — Formatação de números (moeda, porcentagem)query-string — parse/stringify de query strings com API simples.
 
-csv-parse — parsing CSV em Node com streaming e opções avançadas.
+
+
+---qs — parser/stringifier para queries complexas (arrays/objetos).
+
+
+
+## Parsing e Serializaçãoform-data — construir formulários multipart/form-data programaticamente.
+
+
+
+### Formatos de Textomulter — middleware para uploads multipart/form-data em Express.
+
+- **marked** — Parser Markdown rápido
+
+- **papaparse** — Parser CSV robusto (browser e Node)formidable — parser de uploads e formulários no Node.
+
+- **csv-parse** — Parsing CSV em Node com streaming
+
+- **js-yaml** — Parse e geração YAMLimagemin — pipeline de otimização de imagens para builds.
+
+- **xml2js** — Parse e construção de XML
+
+- **sax** — Parser XML streaming (baixo uso de memória)imagemin-pngquant — plugin PNG para compressão eficiente em imagemin.
+
+
+
+### Templatingsvgo — otimiza SVGs removendo metadados e reduzindo tamanho.
+
+- **Handlebars** — Templating HTML/strings para UIs
+
+- **Mustache** — Templating logic-lesssvgson — converte SVG em JSON para manipulação programática.
+
+- **nunjucks** — Templating eficiente para builds
+
+- **ejs** — Templates simples embutidos em strings/HTMLxml2js — parse e construção de XML em JavaScript.
+
+
+
+### Bináriossax — parser XML streaming (baixo uso de memória, alta velocidade).
+
+- **protobufjs** — Protocol Buffers em JS (mensagens compactas)
+
+- **msgpack-lite / msgpack5** — MessagePack para serialização binária levepapaparse — parser CSV robusto para browser e Node.
+
+- **cbor** — Serialização CBOR compacta
+
+- **flatbuffers** — Serialização eficiente para estruturas bináriascsv-parse — parsing CSV em Node com streaming e opções avançadas.
+
+- **serialize-javascript** — Serialização segura para transferência
 
 pouchdb — banco NoSQL offline-first que sincroniza com CouchDB.
 
-lokijs — banco em memória super-rápido com índices e persistência opcional.
+### Parsers Customizados
 
-nedb — banco leve tipo MongoDB para protótipos e pequenos servidores.
+- **nearley** — Gerador de parsers para gramáticas com ambiguidadeslokijs — banco em memória super-rápido com índices e persistência opcional.
 
-lowdb — DB simples baseado em JSON para protótipos e tooling.
+- **chevrotain** — Toolkit para construir parsers de alto desempenho
 
-levelup — interface para LevelDB (armazenamento embutido rápido).
+- **pegjs** — Gerador de parsers PEG (criar parsers para scripts/eventos)nedb — banco leve tipo MongoDB para protótipos e pequenos servidores.
 
-sqlite3 — driver SQLite para Node (armazenamento SQL local).
 
-better-sqlite3 — wrapper SQLite síncrono e muito rápido para Node.
 
-knex — query builder SQL (multibanco) para migrations e consultas.
+---lowdb — DB simples baseado em JSON para protótipos e tooling.
+
+
+
+## Compressão e Criptografialevelup — interface para LevelDB (armazenamento embutido rápido).
+
+
+
+### Compressãosqlite3 — driver SQLite para Node (armazenamento SQL local).
+
+- **JSZip** — Criar/ler arquivos ZIP (packs, hotloads)
+
+- **pako** — Compressão/decompressão zlib/deflatebetter-sqlite3 — wrapper SQLite síncrono e muito rápido para Node.
+
+- **lz-string** — Compressão de strings leve para localStorage
+
+- **lz4js / lz4** — LZ4 em JS (compressão rápida)knex — query builder SQL (multibanco) para migrations e consultas.
+
+- **lzma-js** — LZMA (7zip) para compressão alta e lenta
 
 sequelize — ORM para bancos SQL (models, associations, migrations).
 
-objection — ORM flexível baseado em Knex (mais controlável que alguns ORMs).
+### Criptografia
 
-joi — validação de schemas para objetos (entrada/config).
+- **crypto-js** — Funções de criptografia (AES, SHA, HMAC)objection — ORM flexível baseado em Knex (mais controlável que alguns ORMs).
 
-ajv — validador JSON Schema muito rápido (validação de saves/configs).
+- **bcryptjs** — Hashing de senhas (browser/Node) sem deps nativas
 
-yup — validação de schemas com API fluente (forms/inputs).
+- **jsonwebtoken** — Criação e verificação de JWTsjoi — validação de schemas para objetos (entrada/config).
 
-zod — validação + inferência de tipos para TypeScript/JS.
+- **jose** — Implementação moderna de JOSE/JWT/JWS/JWE
+
+- **js-base64 / base64-js** — Codificação/decodificação Base64ajv — validador JSON Schema muito rápido (validação de saves/configs).
+
+
+
+### Hashingyup — validação de schemas com API fluente (forms/inputs).
+
+- **spark-md5** — MD5 rápido (files hashing incremental)
+
+- **murmurhash-js** — MurmurHash para hashing rápidozod — validação + inferência de tipos para TypeScript/JS.
+
+- **xxhashjs** — XXHash (hash muito rápido)
 
 mitt — emitter de eventos minúsculo e rápido (pub/sub intra-app).
 
+---
+
 eventemitter3 — implementação leve e performática de EventEmitter.
+
+## Validação e Schemas
 
 pubsub-js — pub/sub simples para comunicação desacoplada entre módulos.
 
-tiny-emitter — emitter mínimo para eventos (micro footprint).
+- **joi** — Validação de schemas para objetos (entrada/config)
 
-tinyqueue — fila/priority queue extremamente leve (pathfinding útil).
+- **ajv** — Validador JSON Schema muito rápidotiny-emitter — emitter mínimo para eventos (micro footprint).
+
+- **yup** — Validação de schemas com API fluente (forms)
+
+- **zod** — Validação + inferência de tipos para TypeScript/JStinyqueue — fila/priority queue extremamente leve (pathfinding útil).
+
+- **validator** — Validações de strings (email, URL, etc)
 
 soundfont-player — tocar instrumentos SoundFont no browser (MIDI-like).
 
+---
+
 midi.js — carregar e tocar arquivos MIDI no browser (playback musical).
+
+## Eventos e Reatividade
 
 WebMidi — API JS para interagir com dispositivos MIDI em browsers.
 
-abcjs — renderiza e toca notação ABC (música) no browser.
+### Event Emitters
 
-scribbletune — geração algorítmica de música e sequenciamento.
+- **eventemitter3** — EventEmitter leve e performáticoabcjs — renderiza e toca notação ABC (música) no browser.
+
+- **mitt** — Emitter de eventos minúsculo e rápido
+
+- **pubsub-js** — Pub/sub simples para comunicação desacopladascribbletune — geração algorítmica de música e sequenciamento.
+
+- **tiny-emitter** — Emitter mínimo para eventos
 
 glslify — modulariza shaders GLSL para uso com bundlers.
 
-clipper-lib — operações avançadas com polígonos (offsets, boolean ops).
+### Programação Reativa
 
-dompurify — sanitização segura de HTML/SVG para evitar XSS.
+- **RxJS** — Programação reativa com streams/observablesclipper-lib — operações avançadas com polígonos (offsets, boolean ops).
 
-xss — filtro/sanitizador para prevenir XSS em inputs/HTML.
+- **Bluebird** — Promises poderosas com utilitários extras
+
+- **async-retry** — Retry logic para promises com backoffdompurify — sanitização segura de HTML/SVG para evitar XSS.
+
+- **p-limit** — Limita concorrência de Promises
+
+- **p-map** — Mapeia Promises com controle de concorrênciaxss — filtro/sanitizador para prevenir XSS em inputs/HTML.
+
+- **p-queue** — Fila de Promises com prioridades
 
 jsonwebtoken — criação e verificação de JWTs (auth/tooling).
 
+---
+
 jose — implementação moderna de JOSE/JWT/JWS/JWE em JS.
+
+## Gerenciamento de Estado
 
 bcryptjs — hashing de senhas (browser/Node) sem dependências nativas.
 
-crypto-js — funções de criptografia (AES, SHA, HMAC) em JS.
+- **Redux** — Gerenciador de estado previsível (fluxo unidirecional)
 
-secure-ls — wrapper de localStorage com encriptação simples.
+- **@reduxjs/toolkit** — Utilitários oficiais Redux mais rápidoscrypto-js — funções de criptografia (AES, SHA, HMAC) em JS.
 
-js-base64 — codificação/decodificação Base64 fácil em JS.
+- **MobX** — Reatividade e observáveis para estado
 
-base64-js — utilitários Base64 para TypedArrays e binários.
+- **mobx-state-tree** — Modelo estruturado sobre MobXsecure-ls — wrapper de localStorage com encriptação simples.
+
+- **Recoil** — Estado global reativo para React
+
+- **Zustand** — State management minimalista e rápidojs-base64 — codificação/decodificação Base64 fácil em JS.
+
+- **Effector** — Gerenciador funcional e performático
+
+- **react-query (TanStack Query)** — Fetching e cache de dados reativosbase64-js — utilitários Base64 para TypedArrays e binários.
+
+- **swr** — Busca de dados com cache e revalidação
 
 react — biblioteca declarativa para construir interfaces reativas.
 
+---
+
 preact — alternativa compacta ao React com API similar.
+
+## UI e Componentes
 
 vue — framework progressivo para UIs reativas e componentes.
 
-svelte — compilador UI que gera código extremamente eficiente.
+### Frameworks
 
-lit — biblioteca para criar Web Components leves e declarativos.
+- **React** — Biblioteca declarativa para UIs reativassvelte — compilador UI que gera código extremamente eficiente.
 
-electron — runtime desktop (Chromium + Node) para empacotar jogos/tools.
+- **Preact** — Alternativa compacta ao React (3KB)
 
-electron-builder — empacotamento e criação de instaladores para Electron.
+- **Vue** — Framework progressivo para UIs e componenteslit — biblioteca para criar Web Components leves e declarativos.
 
-electron-packager — empacotador simples para apps Electron.
+- **Svelte** — Compilador UI que gera código eficiente
 
-neutralinojs — runtime desktop minimalista e leve (alternativa ao Electron).
+- **Lit** — Web Components leves e declarativoselectron — runtime desktop (Chromium + Node) para empacotar jogos/tools.
 
-nwjs — executar apps web como aplicações desktop (Node + Chromium).
 
-cordova — empacotar apps web para plataformas móveis nativas.
+
+### Bibliotecas de Componenteselectron-builder — empacotamento e criação de instaladores para Electron.
+
+- **Material-UI (MUI)** — Componentes React com design Material
+
+- **Ant Design** — Biblioteca rica de componentes UI Reactelectron-packager — empacotador simples para apps Electron.
+
+- **Chakra UI** — Componentes React acessíveis e estilizados
+
+- **Semantic UI React** — Componentes pré-feitos para Reactneutralinojs — runtime desktop minimalista e leve (alternativa ao Electron).
+
+- **Reach UI** — Componentes acessíveis focados em usabilidade
+
+- **Headless UI** — Primitives UI acessíveis (React/Vue)nwjs — executar apps web como aplicações desktop (Node + Chromium).
+
+- **Bootstrap** — Framework UI CSS clássico (modals, grids)
+
+- **Bulma** — Framework CSS simples e flexívelcordova — empacotar apps web para plataformas móveis nativas.
+
+- **Foundation Sites** — Framework CSS responsivo
 
 capacitor — runtime moderno para integrar código web com APIs nativas.
 
-firebase (SDK) — autenticação, banco realtime, storage e hosting (BaaS).
+### Canvas e Interatividade
 
-supabase-js — cliente JS para Supabase (Postgres + realtime + auth).
+- **dat.GUI** — Painel de debug/config em runtime (tweak params)firebase (SDK) — autenticação, banco realtime, storage e hosting (BaaS).
 
-aws-sdk — SDK para serviços AWS (S3, Lambda, DynamoDB) no cliente/Node.
+- **lil-gui** — Fork moderno/minimal do dat.GUI
 
-pouchdb-find — plugin para PouchDB com queries tipo Mango.
+- **Hammer.js** — Gestures/touch (swipe, pinch) para mobilesupabase-js — cliente JS para Supabase (Postgres + realtime + auth).
 
-rxdb — banco reativo para apps offline/real-time com sync.
+- **nipplejs** — Joystick virtual para controles touch
 
-microbundle — bundler minimal para criar bibliotecas JS pequenas.
+- **gamepad.js** — Helpers para entradas de gamepadaws-sdk — SDK para serviços AWS (S3, Lambda, DynamoDB) no cliente/Node.
 
-terser — minificador/uglifier moderno de JavaScript para produção.
 
-browserify — bundler tradicional para transformar módulos Node para browser.
 
-stacktrace-js — parse e limpeza de stack traces no browser.
+---pouchdb-find — plugin para PouchDB com queries tipo Mango.
 
-source-map — utilitários para gerar/consumir sourcemaps (debugging).
 
-workbox — utilitários para service workers e caching offline.
 
-comlink — facilita comunicação entre main thread e web workers (RPC).
+## CSS e Estilosrxdb — banco reativo para apps offline/real-time com sync.
 
-msgpack5 — implementação MessagePack para serialização binária eficiente.
 
-chalk — estilo e cores para saída CLI (ferramentas e scripts).
 
-inquirer — prompts interativos na linha de comando (tooling e builds).
+- **TailwindCSS** — Utilitários CSS para interfaces rápidasmicrobundle — bundler minimal para criar bibliotecas JS pequenas.
 
-ora — spinners bonitos para CLI (feedback em scripts).
+- **styled-components** — CSS-in-JS com styled tags (React)
 
-enquirer — alternativa a inquirer para prompts modernos e rápidos.
+- **Emotion** — CSS-in-JS performático e flexívelterser — minificador/uglifier moderno de JavaScript para produção.
+
+- **PostCSS** — Processador CSS com plugins
+
+- **autoprefixer** — Adiciona prefixes CSS automaticamentebrowserify — bundler tradicional para transformar módulos Node para browser.
+
+- **Sass (dart-sass)** — Pré-processador CSS moderno
+
+- **Less** — Pré-processador CSS alternativostacktrace-js — parse e limpeza de stack traces no browser.
+
+- **Stylus** — Pré-processador CSS com sintaxe livre
+
+- **chroma.js** — Manipulação e conversão de coressource-map — utilitários para gerar/consumir sourcemaps (debugging).
+
+- **tinycolor2** — Utilitário menor para cores
+
+- **classnames** — Montar classes CSS condicionalmenteworkbox — utilitários para service workers e caching offline.
+
+
+
+---comlink — facilita comunicação entre main thread e web workers (RPC).
+
+
+
+## Debugging e Testingmsgpack5 — implementação MessagePack para serialização binária eficiente.
+
+
+
+### Debuggingchalk — estilo e cores para saída CLI (ferramentas e scripts).
+
+- **stats.js** — Monitor FPS e métricas de performance
+
+- **@sentry/browser** — Captura de erros client-side para monitoramentoinquirer — prompts interativos na linha de comando (tooling e builds).
+
+- **Rollbar** — Monitoramento de erros
+
+- **loglevel** — Logger leve com níveisora — spinners bonitos para CLI (feedback em scripts).
+
+- **debug** — Logging seletivo via namespaces
+
+- **stacktrace-js** — Parse e limpeza de stack tracesenquirer — alternativa a inquirer para prompts modernos e rápidos.
+
+- **source-map** — Utilitários para gerar/consumir sourcemaps
 
 Ramda — utilitários funcionais (currying, composição, imutabilidade).
 
-Bluebird — implementação poderosa de Promises com utilitários extras.
+### Testing
 
-Flatted — stringify/parse JSON que suporta referências/ciclos.
+- **Jest** — Framework de testes unitários (Node/browser)Bluebird — implementação poderosa de Promises com utilitários extras.
 
-deepmerge — mescla objetos profundamente (configs, overrides).
+- **Mocha** — Runner de testes flexível
 
-rfdc — clone profundo ultrarrápido (zero-deps).
+- **Chai** — Assertions para testes (usado com Mocha)Flatted — stringify/parse JSON que suporta referências/ciclos.
 
-fast-deep-equal — checagem rápida de igualdade profunda entre objetos.
+- **Sinon** — Spies/mocks/stubs para testes unitários
 
-dequal — igualdade profunda pequena e confiável (alternativa).
+- **nock** — Mock de requisições HTTP para testesdeepmerge — mescla objetos profundamente (configs, overrides).
 
-memoizee — memoização configurável para funções caras.
+- **Puppeteer** — Automação headless Chrome (testes E2E)
 
-micro-memoize — memoização muito leve e rápida.
+- **Playwright** — Automação cross-browser (testes E2E)rfdc — clone profundo ultrarrápido (zero-deps).
 
-lru-cache — cache LRU eficiente para objetos e resultados.
 
-quick-lru — LRU minimalista e rápido em memória.
+
+---fast-deep-equal — checagem rápida de igualdade profunda entre objetos.
+
+
+
+## Build Tools e Bundlersdequal — igualdade profunda pequena e confiável (alternativa).
+
+
+
+### Bundlersmemoizee — memoização configurável para funções caras.
+
+- **Webpack** — Bundler generalista (assets, loaders, plugins)
+
+- **Rollup** — Bundler focado em tree-shaking e pacotesmicro-memoize — memoização muito leve e rápida.
+
+- **Vite** — Dev server e bundler ultrarrápido (hot reload)
+
+- **esbuild** — Bundler/transpiler ultrarrápidolru-cache — cache LRU eficiente para objetos e resultados.
+
+- **Parcel** — Bundler zero-config
+
+- **Browserify** — Bundler tradicional para módulos Node → browserquick-lru — LRU minimalista e rápido em memória.
+
+- **microbundle** — Bundler minimal para criar bibliotecas pequenas
 
 collect.js — collections encadeáveis estilo Laravel (arrays/objetos).
 
-transducers-js — transducers para transformação de coleções com alto desempenho.
+### Transpilers e Linters
 
-undici — cliente HTTP de alto desempenho para Node.js.
+- **Babel** — Transpiler JS (suporte a sintaxes modernas)transducers-js — transducers para transformação de coleções com alto desempenho.
 
-got — cliente HTTP moderno com retries e streams.
+- **TypeScript** — Tipagem estática para segurança
+
+- **ESLint** — Linting/qualidade de códigoundici — cliente HTTP de alto desempenho para Node.js.
+
+- **Prettier** — Formatação automática de código
+
+- **js-beautify** — Formatador de código JS/HTML/CSSgot — cliente HTTP moderno com retries e streams.
+
+- **terser** — Minificador/uglifier moderno de JavaScript
 
 superagent — cliente HTTP leve e simples para browser/Node.
 
-async-retry — retry logic para promises (retry com backoff).
+### Ferramentas
 
-p-limit — limita concorrência de Promises (controle de paralelismo).
+- **glslify** — Modulariza shaders GLSL para uso com bundlersasync-retry — retry logic para promises (retry com backoff).
 
-p-map — mapeia Promises com controle de concorrência.
+- **workbox** — Utilitários para service workers e caching offline
 
-p-queue — fila de Promises com prioridades e taxa limitada.
+- **comlink** — Comunicação entre main thread e web workers (RPC)p-limit — limita concorrência de Promises (controle de paralelismo).
 
-chokidar — watcher de arquivos eficiente (hot-reload/tooling).
 
-fs-extra — utilitários de filesystem (copy, remove, move com extras).
 
-rimraf — remover diretórios recursivamente (rm -rf).
+---p-map — mapeia Promises com controle de concorrência.
 
-mkdirp — cria diretórios recursivos compatíveis cross-platform.
+
+
+## Utilidades Geraisp-queue — fila de Promises com prioridades e taxa limitada.
+
+
+
+### Clipboard e Fullscreenchokidar — watcher de arquivos eficiente (hot-reload/tooling).
+
+- **clipboard.js / clipboard-polyfill** — Copiar/colar programático
+
+- **screenfull** — API simplificada para fullscreenfs-extra — utilitários de filesystem (copy, remove, move com extras).
+
+
+
+### Identificaçãorimraf — remover diretórios recursivamente (rm -rf).
+
+- **uuid** — Geração de UUIDs
+
+- **nanoid** — Geração de IDs curtos e únicosmkdirp — cria diretórios recursivos compatíveis cross-platform.
+
+- **FingerprintJS** — Identificação/browser fingerprinting
 
 fast-glob — globbing de arquivos muito rápido para builds.
 
-glob — correspondência de padrões de arquivos (compatível).
+### Input e Atalhos
 
-minimatch — teste de correspondência de padrões (como glob).
+- **Mousetrap** — Atalhos de teclado fáceis (combinações)glob — correspondência de padrões de arquivos (compatível).
+
+- **keypress.js** — Detecção avançada de teclas
+
+- **hotkeys-js** — Atalhos de teclado leves cross-browserminimatch — teste de correspondência de padrões (como glob).
+
+- **detect-it** — Detectar touch vs mouse vs pointer capabilities
 
 picomatch — matcher de glob rápido e pequeno.
 
-yargs — parsing de argumentos CLI com suporte a subcomandos.
+### Utilitários de Arquivos
 
-commander — construir CLIs e parsers de argumentos simples.
+- **file-saver** — Salvar arquivos no clienteyargs — parsing de argumentos CLI com suporte a subcomandos.
 
-validator — validações de strings (email, URL, etc.).
+- **downloadjs** — Disparar downloads do browser
 
-throttle-debounce — utilitários de throttle e debounce para eventos.
+- **chokidar** — Watcher de arquivos eficiente (hot-reload)commander — construir CLIs e parsers de argumentos simples.
+
+- **fs-extra** — Utilitários de filesystem (copy, remove, move)
+
+- **rimraf** — Remover diretórios recursivamente (rm -rf)validator — validações de strings (email, URL, etc.).
+
+- **mkdirp** — Criar diretórios recursivos
+
+- **fast-glob / glob** — Globbing de arquivosthrottle-debounce — utilitários de throttle e debounce para eventos.
+
+- **minimatch / picomatch** — Teste de correspondência de padrões
 
 tiny-debounce — debounce minimalista e rápido.
 
-kaboom — engine de jogos 2D orientada a desenvolvimento rápido.
+### CLI
 
-rot.js — toolkit para roguelikes (mapas, FOV, RNG).
+- **yargs** — Parsing de argumentos CLI com subcomandoskaboom — engine de jogos 2D orientada a desenvolvimento rápido.
 
-melonJS — pequeno motor de jogos 2D para browser.
+- **commander** — Construir CLIs e parsers de argumentos
 
-enchant.js — engine de jogos clássica e leve para web.
+- **inquirer / enquirer** — Prompts interativos na linha de comandorot.js — toolkit para roguelikes (mapas, FOV, RNG).
 
-craftyjs — engine JS para jogos baseados em entidades/componentes.
+- **chalk** — Cores e estilos para saída CLI
 
-impactjs — engine de jogos JS (comercial/histórica).
+- **ora** — Spinners bonitos para CLImelonJS — pequeno motor de jogos 2D para browser.
 
-cannon-es — física 3D (rigid bodies) em JavaScript (ES module).
 
-ammo.js — port do Bullet Physics para JS (física complexa).
+
+### Throttle/Debounceenchant.js — engine de jogos clássica e leve para web.
+
+- **throttle-debounce** — Utilitários de throttle e debounce
+
+- **tiny-debounce** — Debounce minimalistacraftyjs — engine JS para jogos baseados em entidades/componentes.
+
+
+
+### Query Strings e Formsimpactjs — engine de jogos JS (comercial/histórica).
+
+- **query-string** — Parse/stringify de query strings
+
+- **qs** — Parser/stringifier para queries complexascannon-es — física 3D (rigid bodies) em JavaScript (ES module).
+
+- **form-data** — Construir formulários multipart/form-data
+
+- **multer** — Middleware para uploads multipart (Express)ammo.js — port do Bullet Physics para JS (física complexa).
+
+- **formidable** — Parser de uploads e formulários (Node)
 
 oimo.js — motor de física 3D leve e simples.
 
-nipplejs — joystick virtual para controles touch (mobile).
+### Concorrência e Processos
 
-gamepad.js — helpers para entradas de gamepad e mapeamento.
+- **dotenv** — Carrega variáveis de ambiente de .envnipplejs — joystick virtual para controles touch (mobile).
 
-easystar.js — pathfinding A* otimizado para grids e tiles.
+- **cross-env** — Define variáveis de ambiente cross-platform
 
-spark-md5 — MD5 rápido (files hashing incremental).
+- **concurrently** — Roda múltiplos comandos em paralelogamepad.js — helpers para entradas de gamepad e mapeamento.
 
-murmurhash-js — MurmurHash para hashing rápido de strings.
+- **nodemon** — Reinicia apps Node durante desenvolvimento
 
-xxhashjs — XXHash (hash muito rápido) em JS.
+- **pm2** — Gerenciador de processos Node para produçãoeasystar.js — pathfinding A* otimizado para grids e tiles.
 
-annyang — reconhecimento de voz simples para comandos (web speech).
 
-artyom.js — assistente de voz / TTS e reconhecimento com helpers.
+
+---spark-md5 — MD5 rápido (files hashing incremental).
+
+
+
+## Machine Learningmurmurhash-js — MurmurHash para hashing rápido de strings.
+
+
+
+- **@tensorflow/tfjs** — TensorFlow.js para treinar/inferir modelos no browserxxhashjs — XXHash (hash muito rápido) em JS.
+
+- **onnxruntime-web** — Rodar modelos ONNX no browser com aceleração
+
+- **ml5** — Wrapper amigável sobre TensorFlow.js com modelos pré-treinadosannyang — reconhecimento de voz simples para comandos (web speech).
+
+- **brain.js** — Redes neurais simples em JS
+
+- **synaptic** — Biblioteca neural para projetos experimentaisartyom.js — assistente de voz / TTS e reconhecimento com helpers.
+
+- **tfjs-vis** — Visualização de métricas para TensorFlow.js
 
 @tensorflow/tfjs — machine learning no browser (treinar/inferir).
 
+---
+
 onnxruntime-web — rodar modelos ONNX no browser com aceleração.
+
+## Desktop e Mobile
 
 ml5 — wrapper amigável sobre tfjs com modelos pré-treinados.
 
-brain.js — redes neurais simples em JS (treinar no browser/Node).
+### Desktop
 
-synaptic — biblioteca neural para projetos experimentais.
+- **Electron** — Runtime desktop (Chromium + Node) para empacotar jogos/toolsbrain.js — redes neurais simples em JS (treinar no browser/Node).
+
+- **electron-builder / electron-packager** — Empacotamento para Electron
+
+- **NeutralinoJS** — Runtime desktop minimalista (alternativa ao Electron)synaptic — biblioteca neural para projetos experimentais.
+
+- **NW.js** — Executar apps web como desktop (Node + Chromium)
 
 tfjs-vis — visualização de métricas para TensorFlow.js.
 
-lunr — índice de busca full-text no cliente (search local).
+### Mobile
+
+- **Cordova** — Empacotar apps web para plataformas móveis nativaslunr — índice de busca full-text no cliente (search local).
+
+- **Capacitor** — Runtime moderno para integrar código web com APIs nativas
 
 elasticlunr — alternativa a Lunr com mais flexibilidade.
 
+---
+
 search-index — engine de busca local mais robusta (persistência).
+
+## Backend e Servidores
 
 ndarray — estruturas N-dimensionais para cálculos numéricos.
 
-numjs — utilitários numéricos estilo NumPy em JS.
+### Frameworks Web
 
-fft.js — transformada rápida de Fourier em JavaScript.
+- **Express** — Servidor HTTP minimalista para APIsnumjs — utilitários numéricos estilo NumPy em JS.
 
-jsfft — FFT/DFT para análise de sinais no browser.
+- **Koa** — Framework web moderno baseado em middleware async
 
-ndarray-fft — FFT para estruturas ndarray (científico).
+- **Fastify** — Framework orientado a performance e baixo overheadfft.js — transformada rápida de Fourier em JavaScript.
+
+
+
+### BaaS (Backend as a Service)jsfft — FFT/DFT para análise de sinais no browser.
+
+- **Firebase SDK** — Autenticação, banco realtime, storage e hosting
+
+- **Supabase JS** — Cliente para Supabase (Postgres + realtime + auth)ndarray-fft — FFT para estruturas ndarray (científico).
+
+- **AWS SDK** — SDK para serviços AWS (S3, Lambda, DynamoDB)
 
 cbor — serialização compacta (CBOR) para dados binários.
 
+---
+
 flatbuffers — serialização eficiente para estruturas binárias.
+
+## Procedural Generation
 
 lz-string — compressão de strings leve para localStorage/saves.
 
-lz4js — LZ4 em JS para compressão rápida de blobs.
+- **seedrandom** — Gerador RNG com seed determinística
 
-lzma-js — LZMA (7zip) em JS para compressão maior, lenta.
+- **random-js** — Utilitários avançados para RNGlz4js — LZ4 em JS para compressão rápida de blobs.
+
+- **simplex-noise / noisejs** — Ruído Perlin/Simplex para geração procedural
+
+- **spritesheet-js** — Ferramentas para gerar/ler spritesheetslzma-js — LZMA (7zip) em JS para compressão maior, lenta.
+
+- **tmx-parser** — Parser de mapas TMX (Tiled Map Editor)
 
 lz4 — bindings/implementações JS para LZ4 (variações).
 
+---
+
 js-beautify — formatador de código JS/HTML/CSS (tooling).
+
+## Engines de Jogos
 
 tailwindcss — utilitários CSS para interface rápida (UI de ferramentas).
 
-bootstrap — framework UI CSS clássico (modals, grids).
+### Engines Completas
 
-chart.js — gráficos simples para estatísticas e debug.
+- **Phaser** — Framework de jogos 2D completo (pode ser usado modularmente)bootstrap — framework UI CSS clássico (modals, grids).
 
-recharts — gráficos React (se usar React para ferramentas).
+- **Kaboom** — Engine 2D orientada a desenvolvimento rápido
+
+- **melonJS** — Motor de jogos 2D pequeno para browserchart.js — gráficos simples para estatísticas e debug.
+
+- **enchant.js** — Engine de jogos clássica e leve para web
+
+- **CraftyJS** — Engine baseada em entidades/componentesrecharts — gráficos React (se usar React para ferramentas).
+
+- **ImpactJS** — Engine comercial/histórica
 
 vega-lite — expressões declarativas para visualização de dados.
 
-nunjucks — templating eficiente para builds e ferramentas.
+### Roguelike
 
-ejs — templates simples embutidos em strings/HTML.
+- **rot.js** — Toolkit completo para roguelikes (mapas, FOV, RNG, pathfinding)nunjucks — templating eficiente para builds e ferramentas.
 
-mustache-express — integração Mustache com Express (tooling).
 
-socketcluster-client — cliente para servidores em tempo real escaláveis.
 
-signalr-client — cliente para SignalR (comunicação em tempo real MS).
+---ejs — templates simples embutidos em strings/HTML.
+
+
+
+## Gráficos e Visualizaçãomustache-express — integração Mustache com Express (tooling).
+
+
+
+- **Chart.js** — Gráficos simples para estatísticas e debugsocketcluster-client — cliente para servidores em tempo real escaláveis.
+
+- **Recharts** — Gráficos React
+
+- **vega-lite** — Expressões declarativas para visualização de dadossignalr-client — cliente para SignalR (comunicação em tempo real MS).
+
+- **D3.js** — Biblioteca de visualização de dados (manipulação DOM orientada a dados)
 
 peerjs — wrapper simplificado para WebRTC peer-to-peer.
 
+---
+
 simple-peer — WebRTC P2P com API simples (multiplayer P2P).
+
+## Busca e Indexação
 
 y-websocket — backend WebSocket para Yjs CRDT (sync colaborativa).
 
-idb — wrapper minimal para IndexedDB (promessa-friendly) — nota: complemento runtime.
+- **Lunr** — Índice de busca full-text no cliente
+
+- **elasticlunr** — Alternativa a Lunr com mais flexibilidadeidb — wrapper minimal para IndexedDB (promessa-friendly) — nota: complemento runtime.
+
+- **search-index** — Engine de busca local mais robusta
 
 localforage — armazenamento assíncrono com API similar a localStorage.
 
+---
+
 dexie — wrapper poderoso para IndexedDB (queries + migrations).
+
+## GraphQL
 
 sql.js — SQLite compilado em WASM para usar DB no browser.
 
-better-sqlite3 — SQLite muito rápido para Node (tooling/servers).
+- **Apollo Client** — Cliente GraphQL completo com cache e devtools
+
+- **graphql-request** — Cliente GraphQL pequeno e diretobetter-sqlite3 — SQLite muito rápido para Node (tooling/servers).
+
+- **graphql** — Referência para construir/parsear schemas GraphQL
 
 sqlite-wasm — outra opção de SQLite via WASM para browser.
 
+---
+
 knex — query builder SQL (migrations e queries server-side).
+
+## Sanitização e Segurança
 
 sinon — spies/mocks/stubs para testes unitários.
 
-nock — mock de requisições HTTP para testes em Node.
+- **DOMPurify** — Sanitização segura de HTML/SVG para evitar XSS
 
-loglevel — logger leve para debug com níveis.
+- **xss** — Filtro/sanitizador para prevenir XSSnock — mock de requisições HTTP para testes em Node.
 
-debug — logging selecional via namespaces (micro footprint).
 
-rollbar — monitoramento de erros (client-side reporting).
 
-Sentry-JS — erro/monitoramento (se quiser substituir Rollbar).
+---loglevel — logger leve para debug com níveis.
 
-hotkeys-js — atalhos de teclado leves e cross-browser.
 
-virtual-keyboard — teclado virtual para inputs touch (variações).
 
-nanoid — geração de IDs curtos, seguros e únicos.
+## WebMIDIdebug — logging selecional via namespaces (micro footprint).
 
-immer — imutabilidade fácil para estados (produce/padrão mutável por proxy).
 
-redux — gerenciador de estado previsível (fluxo unidirecional).
 
-@reduxjs/toolkit — utilitários oficiais para criar stores Redux mais rápido.
+- **WebMidi** — API JS para interagir com dispositivos MIDIrollbar — monitoramento de erros (client-side reporting).
 
-mobx — reatividade e observáveis para gerenciar estado.
 
-mobx-state-tree — modelo estruturado e serializável sobre MobX.
 
-recoil — estado global reativo para React com átomos/selectors.
+---Sentry-JS — erro/monitoramento (se quiser substituir Rollbar).
 
-zustand — state management minimalista e rápido (hooks).
 
-effector — gerenciador de estado funcional e performático.
 
-react-query (TanStack Query) — fetching e cache de dados reativos.
+## Geoespacialhotkeys-js — atalhos de teclado leves e cross-browser.
+
+
+
+- **geobuf** — Compactar geometria geoespacial em Protobufvirtual-keyboard — teclado virtual para inputs touch (variações).
+
+
+
+---nanoid — geração de IDs curtos, seguros e únicos.
+
+
+
+## 📝 Observações Finaisimmer — imutabilidade fácil para estados (produce/padrão mutável por proxy).
+
+
+
+### Como Escolher uma Bibliotecaredux — gerenciador de estado previsível (fluxo unidirecional).
+
+
+
+1. **Tamanho**: Verifique o bundle size no [Bundlephobia](https://bundlephobia.com)@reduxjs/toolkit — utilitários oficiais para criar stores Redux mais rápido.
+
+2. **Manutenção**: Prefira bibliotecas ativas (últimos commits recentes)
+
+3. **Documentação**: Boa documentação economiza horas de debugmobx — reatividade e observáveis para gerenciar estado.
+
+4. **Compatibilidade**: Teste com RPG Maker MZ antes de usar em produção
+
+5. **Performance**: Use ferramentas como stats.js para medir impactomobx-state-tree — modelo estruturado e serializável sobre MobX.
+
+
+
+### Instalaçãorecoil — estado global reativo para React com átomos/selectors.
+
+
+
+Para usar em RPG Maker MZ:zustand — state management minimalista e rápido (hooks).
+
+
+
+**Opção 1: CDN (Simples)**effector — gerenciador de estado funcional e performático.
+
+```html
+
+<script src="https://cdn.jsdelivr.net/npm/biblioteca@versao"></script>react-query (TanStack Query) — fetching e cache de dados reativos.
+
+```
 
 swr — busca de dados com cache e revalidação (Vercel).
 
-apollo-client — cliente GraphQL completo com cache e devtools.
+**Opção 2: NPM + Bundler (Recomendado)**
 
-graphql-request — cliente GraphQL pequeno e direto.
+```bashapollo-client — cliente GraphQL completo com cache e devtools.
 
-graphql — referência para construir/parsear schemas GraphQL.
+npm install biblioteca
 
-prisma — ORM moderno para bancos SQL com migrations.
+```graphql-request — cliente GraphQL pequeno e direto.
 
-typeorm — ORM TypeScript/Node para SQL/NoSQL.
 
-mongoose — ODM para MongoDB (models, schemas, validações).
 
-pg (node-postgres) — cliente PostgreSQL para Node.
+Depois use bundler (Webpack/Rollup/Vite) para gerar arquivo único.graphql — referência para construir/parsear schemas GraphQL.
+
+
+
+### Suporteprisma — ORM moderno para bancos SQL com migrations.
+
+
+
+Se encontrar uma biblioteca útil que não está nesta lista, adicione-a seguindo a mesma estrutura de categorização!typeorm — ORM TypeScript/Node para SQL/NoSQL.
+
+
+
+---mongoose — ODM para MongoDB (models, schemas, validações).
+
+
+
+**Última Atualização:** 28 de outubro de 2025  pg (node-postgres) — cliente PostgreSQL para Node.
+
+**Mantenedor:** Necromante96Official & GitHub Copilot
 
 mysql2 — cliente MySQL rápido com Promises.
 

@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.3.7 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.3.5 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.0_TitleScreen
@@ -42,7 +42,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.3.7';
+    const MODULE_VERSION = '1.3.5';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -375,11 +375,6 @@ AS.TitleOptions = AS.TitleOptions || {};
         Scene_Options.prototype.start = function() {
             try {
                 Scene_Options_start.call(this);
-                
-                // Ocultar a UI da tela de título antes de mostrar as opções
-                if (contextRef && typeof contextRef.publish === 'function') {
-                    contextRef.publish('titlescreen:scene:terminate', { scene: SceneManager._scene });
-                }
                 
                 // Injetar nossa interface personalizada
                 injectStyles();
@@ -1368,36 +1363,21 @@ AS.TitleOptions = AS.TitleOptions || {};
         setTimeout(() => {
             // Fecha a cena de opções
             SceneManager.pop();
-            // Tentativas de garantir a reativação da UI da tela de título
-            const startTime = Date.now();
-            const ensureTitleUi = () => {
-                const scene = SceneManager._scene;
-                const isTitle = scene && scene.constructor && scene.constructor.name === 'Scene_Title';
-
-                if (isTitle) {
-                    // Força visibilidade direta (failsafe)
-                    const el = document.getElementById('as-title-root');
-                    if (el) {
-                        el.classList.add('as-title--visible');
-                        el.setAttribute('aria-hidden', 'false');
-                    }
-                    // Publica evento para os demais agentes reagirem
-                    try {
-                        if (contextRef && typeof contextRef.publish === 'function') {
+            // Reativa a UI da tela de título quando ela voltar ao topo da pilha
+            setTimeout(() => {
+                try {
+                    if (typeof AS !== 'undefined' && AS.PluginManager && contextRef && typeof contextRef.publish === 'function') {
+                        const scene = SceneManager._scene;
+                        // Publica somente se a cena atual for a Scene_Title
+                        if (scene && scene.constructor && scene.constructor.name === 'Scene_Title') {
                             contextRef.publish('titlescreen:scene:ready', { scene });
                         }
-                    } catch (_) { /* ignora */ }
-                    return; // sucesso
+                    }
+                } catch (e) {
+                    // Falha silenciosa: não deve interromper o fluxo de retorno
+                    console && console.warn && console.warn(`[${MODULE_ID}] Falha ao republicar ready:`, e);
                 }
-
-                // Repetir por curto período até a cena de título estar ativa
-                if (Date.now() - startTime < 1000) {
-                    setTimeout(ensureTitleUi, 50);
-                }
-            };
-
-            // Inicia as tentativas após um pequeno atraso para troca de cena
-            setTimeout(ensureTitleUi, 80);
+            }, 60);
         }, 150);
     }
 

@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.2 ☆ Redefine a cena de título com estética medieval fantástica
+ * @plugindesc v1.1.0 ☆ Redefine a cena de título com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_0.1_LogEnhancer
@@ -25,7 +25,7 @@ AS.TitleScreen = AS.TitleScreen || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.0_TitleScreen';
-    const MODULE_VERSION = '1.1.2';
+    const MODULE_VERSION = '1.1.0';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
     const BACKGROUND_FOLDER = 'js/plugins/assets/resources/';
     const BACKGROUND_FILENAME = 'background';
@@ -108,16 +108,6 @@ AS.TitleScreen = AS.TitleScreen || {};
                 this._commandWindow.close();
                 this._commandWindow.hide();
             }
-
-            // Garantir que a UI seja reativada quando a cena iniciar (inclui retorno de outras cenas)
-            try {
-                context.publish('titlescreen:scene:ready', { scene: this });
-            } catch (e) {
-                // Não interromper o fluxo da cena
-                if (console && console.warn) {
-                    console.warn(`[${MODULE_ID}] Falha ao publicar scene:ready no start:`, e);
-                }
-            }
         };
 
         const Scene_Title_terminate = Scene_Title.prototype.terminate;
@@ -150,8 +140,6 @@ AS.TitleScreen = AS.TitleScreen || {};
             if (Scene_Title_resume) {
                 Scene_Title_resume.call(this);
             }
-            // Recriar o background customizado se necessário
-            setupTitleScene();
             // Republicar o evento de cena pronta para reativar a UI
             context.publish('titlescreen:scene:ready', { scene: this });
         };

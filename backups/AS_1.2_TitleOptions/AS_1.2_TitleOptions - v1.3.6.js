@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.3.7 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.3.5 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.0_TitleScreen
@@ -42,7 +42,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.3.7';
+    const MODULE_VERSION = '1.3.5';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -375,11 +375,6 @@ AS.TitleOptions = AS.TitleOptions || {};
         Scene_Options.prototype.start = function() {
             try {
                 Scene_Options_start.call(this);
-                
-                // Ocultar a UI da tela de título antes de mostrar as opções
-                if (contextRef && typeof contextRef.publish === 'function') {
-                    contextRef.publish('titlescreen:scene:terminate', { scene: SceneManager._scene });
-                }
                 
                 // Injetar nossa interface personalizada
                 injectStyles();

@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.4.2 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.4.1 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.0_TitleScreen
@@ -42,7 +42,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.4.2';
+    const MODULE_VERSION = '1.4.1';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -94,6 +94,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         screenFilter: 'none',
         screenBrightness: 100,
         uiScale: 100,
+        cursorStyle: 'default',
         
         // Outros
         enableMusicFade: true,
@@ -133,6 +134,9 @@ AS.TitleOptions = AS.TitleOptions || {};
             setTimeout(() => {
                 if (ConfigManager.showFPS) {
                     toggleFPSDisplay(true);
+                }
+                if (ConfigManager.cursorStyle) {
+                    applyCursorStyle(ConfigManager.cursorStyle);
                 }
                 if (ConfigManager.targetFPS && typeof Graphics !== 'undefined') {
                     Graphics._app._ticker.maxFPS = ConfigManager.targetFPS;
@@ -196,6 +200,7 @@ AS.TitleOptions = AS.TitleOptions || {};
             config.screenFilter = resolveString(this.screenFilter, CONFIG_DEFAULTS.screenFilter);
             config.screenBrightness = resolveNumber(this.screenBrightness, CONFIG_DEFAULTS.screenBrightness, 50, 150);
             config.uiScale = resolveNumber(this.uiScale, CONFIG_DEFAULTS.uiScale, 75, 150);
+            config.cursorStyle = resolveString(this.cursorStyle, CONFIG_DEFAULTS.cursorStyle);
             
             // Outros
             config.enableMusicFade = resolveBoolean(this.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade);
@@ -235,6 +240,7 @@ AS.TitleOptions = AS.TitleOptions || {};
             this.screenFilter = config.screenFilter !== undefined ? resolveString(config.screenFilter, CONFIG_DEFAULTS.screenFilter) : CONFIG_DEFAULTS.screenFilter;
             this.screenBrightness = config.screenBrightness !== undefined ? resolveNumber(config.screenBrightness, CONFIG_DEFAULTS.screenBrightness, 50, 150) : CONFIG_DEFAULTS.screenBrightness;
             this.uiScale = config.uiScale !== undefined ? resolveNumber(config.uiScale, CONFIG_DEFAULTS.uiScale, 75, 150) : CONFIG_DEFAULTS.uiScale;
+            this.cursorStyle = config.cursorStyle !== undefined ? resolveString(config.cursorStyle, CONFIG_DEFAULTS.cursorStyle) : CONFIG_DEFAULTS.cursorStyle;
             
             // Outros
             this.enableMusicFade = config.enableMusicFade !== undefined ? resolveBoolean(config.enableMusicFade, CONFIG_DEFAULTS.enableMusicFade) : CONFIG_DEFAULTS.enableMusicFade;
@@ -582,6 +588,7 @@ AS.TitleOptions = AS.TitleOptions || {};
             smoothScaling: resolveBoolean(ConfigManager.smoothScaling, CONFIG_DEFAULTS.smoothScaling),
             showFPS: resolveBoolean(ConfigManager.showFPS, CONFIG_DEFAULTS.showFPS),
             cacheStrategy: resolveString(ConfigManager.cacheStrategy, CONFIG_DEFAULTS.cacheStrategy),
+            cursorStyle: resolveString(ConfigManager.cursorStyle, CONFIG_DEFAULTS.cursorStyle),
             
             // Outros
             fullscreen: Graphics._isFullScreen ? Graphics._isFullScreen() : false
@@ -643,6 +650,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         // Vincular selects
         bindSelect('graphicsQuality');
         bindSelect('cacheStrategy');
+        bindSelect('cursorStyle');
         
         // Vincular sliders de otimização
         bindSlider('targetFPS');
@@ -1027,10 +1035,72 @@ AS.TitleOptions = AS.TitleOptions || {};
             configValues[id] = e.target.value;
             markAsUnsaved();
             
+            // Aplicar cursor em tempo real
+            if (id === 'cursorStyle') {
+                applyCursorStyle(e.target.value);
+            }
+            
             if (typeof SoundManager !== 'undefined') {
                 SoundManager.playCursor();
             }
         });
+    }
+
+    function applyCursorStyle(style) {
+        const root = document.documentElement;
+        
+        // Remover cursor customizado anterior se existir
+        const oldCanvas = document.getElementById('as-cursor-canvas');
+        if (oldCanvas) {
+            oldCanvas.remove();
+        }
+        
+        switch (style) {
+            case 'retro':
+                root.style.cursor = createRetroArrowCursor();
+                break;
+            case 'modern':
+                root.style.cursor = 'pointer';
+                break;
+            default:
+                root.style.cursor = 'default';
+        }
+    }
+    
+    function createRetroArrowCursor() {
+        // Criar canvas para desenhar cursor pixel art
+        const canvas = document.createElement('canvas');
+        canvas.width = 24;
+        canvas.height = 24;
+        const ctx = canvas.getContext('2d');
+        
+        // Limpar canvas
+        ctx.clearRect(0, 0, 24, 24);
+        
+        // Desenhar seta pixel art clássica
+        ctx.fillStyle = '#FFFFFF';
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 1;
+        
+        // Formato da seta (pixel art)
+        const arrowPath = [
+            [2, 2], [2, 18], [7, 13], [10, 20], 
+            [12, 19], [9, 12], [16, 12], [2, 2]
+        ];
+        
+        // Desenhar preenchimento
+        ctx.beginPath();
+        ctx.moveTo(arrowPath[0][0], arrowPath[0][1]);
+        for (let i = 1; i < arrowPath.length; i++) {
+            ctx.lineTo(arrowPath[i][0], arrowPath[i][1]);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        
+        // Converter para data URL
+        const dataUrl = canvas.toDataURL('image/png');
+        return `url("${dataUrl}") 2 2, auto`;
     }
 
     function bindToggle(id) {
@@ -1147,6 +1217,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         smoothScaling: 'Suavizar imagens ao redimensionar',
         showFPS: 'Exibir contador de FPS no canto da tela',
         cacheStrategy: 'Estratégia de carregamento de recursos',
+        cursorStyle: 'Aparência do cursor do mouse no jogo',
         fullscreen: 'Alternar entre tela cheia e janela'
     };
 
@@ -1377,6 +1448,7 @@ AS.TitleOptions = AS.TitleOptions || {};
         ConfigManager.smoothScaling = configValues.smoothScaling;
         ConfigManager.showFPS = configValues.showFPS;
         ConfigManager.cacheStrategy = configValues.cacheStrategy;
+        ConfigManager.cursorStyle = configValues.cursorStyle;
 
         // Aplicar volumes em tempo real
         AudioManager.bgmVolume = configValues.bgmVolume;

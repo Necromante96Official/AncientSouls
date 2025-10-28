@@ -1,0 +1,29 @@
+<!-- Botão de Patch Notes no canto superior esquerdo -->
+<button type="button" id="as-patchnotes-button" class="as-title__button as-patchnotes-corner-btn">
+    <img class="as-title__button-frame" src="js/plugins/assets/resources/botao.png" alt="" draggable="false" />
+    <span class="as-title__button-text">Atualizações</span>
+</button>
+
+<!-- Modal de Patch Notes -->
+<div id="as-patchnotes-root" role="dialog" aria-modal="true" aria-labelledby="patchNotesTitle" aria-hidden="true">
+    <div class="as-patchnotes__container">
+        <header class="as-patchnotes__header">
+            <h1 class="as-patchnotes__title" id="patchNotesTitle">
+                <span class="as-patchnotes__title-icon">📜</span>
+                Notas de Atualização
+            </h1>
+            <button 
+                id="patchNotesClose" 
+                class="as-patchnotes__close" 
+                aria-label="Fechar notas de atualização"
+                title="Fechar (ESC)"
+            >
+                ✕
+            </button>
+        </header>
+        
+        <div class="as-patchnotes__content" id="patchNotesContent">
+            <!-- Conteúdo será injetado dinamicamente pelo JavaScript -->
+        </div>
+    </div>
+</div>

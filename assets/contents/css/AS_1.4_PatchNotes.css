@@ -1,0 +1,284 @@
+/* ==========================================================================
+   AS_1.4_PatchNotes.css - Sistema de Patch Notes Medieval
+   ========================================================================== */
+
+:root {
+    --as-patchnotes-gold: #ffd89f;
+    --as-patchnotes-gold-bright: #ffe8c4;
+    --as-patchnotes-purple: #8b5cf6;
+    --as-patchnotes-purple-dark: #6d28d9;
+    --as-patchnotes-bg: rgba(15, 8, 33, 0.98);
+    --as-patchnotes-bg-light: rgba(30, 20, 60, 0.95);
+}
+
+/* Botão no canto superior esquerdo */
+.as-patchnotes-corner-btn {
+    position: fixed !important;
+    top: 20px;
+    left: 20px;
+    z-index: 9997;
+    opacity: 0;
+    transition: opacity 0.3s ease-out, transform 180ms ease-out, filter 180ms ease-out;
+}
+
+.as-patchnotes-corner-btn.as-title--visible {
+    opacity: 1;
+}
+
+/* Container principal */
+#as-patchnotes-root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10000;
+}
+
+#as-patchnotes-root.as-patchnotes--visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Container de conteúdo */
+.as-patchnotes__container {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    max-height: 85vh;
+    background: var(--as-patchnotes-bg);
+    border: 3px solid var(--as-patchnotes-gold);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8),
+                inset 0 0 80px rgba(139, 92, 246, 0.15);
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#as-patchnotes-root.as-patchnotes--visible .as-patchnotes__container {
+    transform: scale(1);
+}
+
+/* Header */
+.as-patchnotes__header {
+    padding: 30px;
+    background: linear-gradient(135deg, 
+                rgba(139, 92, 246, 0.3) 0%, 
+                rgba(109, 40, 217, 0.3) 100%);
+    border-bottom: 2px solid var(--as-patchnotes-gold);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.as-patchnotes__title {
+    margin: 0;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--as-patchnotes-gold-bright);
+    text-shadow: 0 0 20px rgba(255, 216, 159, 0.5),
+                 0 2px 4px rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.as-patchnotes__title-icon {
+    font-size: 40px;
+}
+
+.as-patchnotes__close {
+    background: rgba(239, 68, 68, 0.2);
+    border: 2px solid #ef4444;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #fca5a5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.as-patchnotes__close:hover {
+    background: rgba(239, 68, 68, 0.4);
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+}
+
+/* Content area */
+.as-patchnotes__content {
+    padding: 30px;
+    max-height: calc(85vh - 150px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Scrollbar customizada */
+.as-patchnotes__content::-webkit-scrollbar {
+    width: 12px;
+}
+
+.as-patchnotes__content::-webkit-scrollbar-track {
+    background: rgba(30, 20, 60, 0.5);
+    border-radius: 10px;
+}
+
+.as-patchnotes__content::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--as-patchnotes-purple), var(--as-patchnotes-purple-dark));
+    border-radius: 10px;
+    border: 2px solid rgba(255, 216, 159, 0.3);
+}
+
+.as-patchnotes__content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #a78bfa, var(--as-patchnotes-purple));
+}
+
+/* Patch note individual */
+.as-patchnote {
+    background: var(--as-patchnotes-bg-light);
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+}
+
+.as-patchnote:hover {
+    border-color: var(--as-patchnotes-purple);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+    transform: translateY(-2px);
+}
+
+.as-patchnote:last-child {
+    margin-bottom: 0;
+}
+
+/* Patch note header */
+.as-patchnote__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.as-patchnote__version {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--as-patchnotes-gold);
+    text-shadow: 0 0 10px rgba(255, 216, 159, 0.3);
+}
+
+.as-patchnote__date {
+    font-size: 14px;
+    color: #c4b5fd;
+    opacity: 0.8;
+}
+
+/* Lista de mudanças */
+.as-patchnote__changes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.as-patchnote__change {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    color: #e9d5ff;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.as-patchnote__change:hover {
+    background: rgba(139, 92, 246, 0.15);
+    transform: translateX(5px);
+}
+
+.as-patchnote__change:last-child {
+    margin-bottom: 0;
+}
+
+/* Badges de tipo */
+.as-patchnote__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.as-patchnote__change--new .as-patchnote__badge {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #d1fae5;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.as-patchnote__change--fix .as-patchnote__badge {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fef3c7;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+.as-patchnote__change--improvement .as-patchnote__badge {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #dbeafe;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.as-patchnote__change--balance .as-patchnote__badge {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: #ede9fe;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.as-patchnote__change--removed .as-patchnote__badge {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #fee2e2;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.as-patchnote {
+    animation: fadeIn 0.4s ease backwards;
+}
+
+.as-patchnote:nth-child(1) { animation-delay: 0.1s; }
+.as-patchnote:nth-child(2) { animation-delay: 0.15s; }
+.as-patchnote:nth-child(3) { animation-delay: 0.2s; }
+.as-patchnote:nth-child(4) { animation-delay: 0.25s; }
+.as-patchnote:nth-child(5) { animation-delay: 0.3s; }

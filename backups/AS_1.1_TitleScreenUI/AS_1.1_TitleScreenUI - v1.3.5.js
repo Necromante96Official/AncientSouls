@@ -3,10 +3,9 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.3.6 ☆ Interface HTML da tela de título (layout medieval fantástico)
+ * @plugindesc v1.3.5 ☆ Interface HTML da tela de título (layout medieval fantástico)
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
- * @orderBefore AS_1.0_TitleScreen
  * 
  * @param enableLogoAnimation
  * @text Ativar Animação do Logo
@@ -63,7 +62,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.1_TitleScreenUI';
-    const MODULE_VERSION = '1.3.6';
+    const MODULE_VERSION = '1.3.5';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     // Carregar parâmetros do plugin (padrões estáticos)

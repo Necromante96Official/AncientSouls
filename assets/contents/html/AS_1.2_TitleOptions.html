@@ -244,35 +244,6 @@
                     </div>
 
                     <div class="as-options-adv__section">
-                        <h3 class="as-options-adv__section-title">Velocidades</h3>
-                        
-                        <!-- Message Speed -->
-                        <div class="as-options-adv__control-group">
-                            <label for="messageSpeed" class="as-options-adv__label">
-                                <span class="as-options-adv__label-text">Velocidade de Mensagens</span>
-                            </label>
-                            <select id="messageSpeed" class="as-options-adv__select">
-                                <option value="slow">Lento</option>
-                                <option value="normal" selected>Normal</option>
-                                <option value="fast">Rápido</option>
-                                <option value="instant">Instantâneo</option>
-                            </select>
-                        </div>
-
-                        <!-- Battle Speed -->
-                        <div class="as-options-adv__control-group">
-                            <label for="battleSpeed" class="as-options-adv__label">
-                                <span class="as-options-adv__label-text">Velocidade de Batalha</span>
-                            </label>
-                            <select id="battleSpeed" class="as-options-adv__select">
-                                <option value="slow">Lento</option>
-                                <option value="normal" selected>Normal</option>
-                                <option value="fast">Rápido</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="as-options-adv__section">
                         <h3 class="as-options-adv__section-title">Interface</h3>
                         
                         <!-- Window Opacity -->
@@ -349,34 +320,6 @@
                                 <option value="high" selected>Alta (Melhor Qualidade)</option>
                                 <option value="ultra">Ultra</option>
                             </select>
-                        </div>
-
-                        <!-- Enable Animations -->
-                        <div class="as-options-adv__control-group">
-                            <label for="enableAnimations" class="as-options-adv__label">
-                                <span class="as-options-adv__label-text">Animações de Batalha</span>
-                                <span class="as-options-adv__description">Exibir animações de habilidades e ataques</span>
-                            </label>
-                            <div class="as-options-adv__toggle-wrapper">
-                                <input type="checkbox" id="enableAnimations" class="as-options-adv__toggle" checked>
-                                <label for="enableAnimations" class="as-options-adv__toggle-label">
-                                    <span class="as-options-adv__toggle-switch"></span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Enable Weather Effects -->
-                        <div class="as-options-adv__control-group">
-                            <label for="enableWeatherEffects" class="as-options-adv__label">
-                                <span class="as-options-adv__label-text">Efeitos Climáticos</span>
-                                <span class="as-options-adv__description">Chuva, neve e outros efeitos de clima</span>
-                            </label>
-                            <div class="as-options-adv__toggle-wrapper">
-                                <input type="checkbox" id="enableWeatherEffects" class="as-options-adv__toggle" checked>
-                                <label for="enableWeatherEffects" class="as-options-adv__toggle-label">
-                                    <span class="as-options-adv__toggle-switch"></span>
-                                </label>
-                            </div>
                         </div>
 
                         <!-- Enable Particles -->
@@ -483,9 +426,9 @@
                                 <span class="as-options-adv__description">Aparência do cursor no jogo</span>
                             </label>
                             <select id="cursorStyle" class="as-options-adv__select">
-                                <option value="default" selected>Padrão</option>
-                                <option value="retro">Retrô (Pixel Art)</option>
-                                <option value="modern">Moderno (Suave)</option>
+                                <option value="default" selected>➤ Seta Padrão</option>
+                                <option value="retro">🎮 Seta Retrô (Pixel Art)</option>
+                                <option value="modern">👆 Mão Apontando</option>
                             </select>
                         </div>
                     </div>
@@ -512,62 +455,130 @@
                     </h2>
 
                     <div class="as-options-adv__credits" style="text-align: center;">
-                        <div class="as-options-adv__credits-section" style="margin-bottom: 2rem;">
-                            <h3 class="as-options-adv__credits-title" style="font-size: 2.5rem; background: linear-gradient(135deg, #8B5CF6, #F59E0B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;">Ancient Souls</h3>
-                            <p class="as-options-adv__credits-subtitle" style="font-size: 1.1rem; color: #A78BFA; font-style: italic;">Um RPG Épico de Fantasia Medieval</p>
-                            <p class="as-options-adv__credits-version" style="font-size: 1.2rem; color: #F59E0B; font-weight: bold; margin-top: 1rem; letter-spacing: 2px;">
-                                v0.0.0.0-alfa
-                            </p>
+                        <!-- Seção principal - sempre visível -->
+                        <div class="as-options-adv__credits-main" style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 2px solid rgba(139, 92, 246, 0.3);">
+                            <div class="as-options-adv__credits-section" style="margin-bottom: 2rem;">
+                                <h3 class="as-options-adv__credits-title" style="font-size: 2.5rem; background: linear-gradient(135deg, #8B5CF6, #F59E0B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;">Ancient Souls</h3>
+                                <p class="as-options-adv__credits-subtitle" style="font-size: 1.1rem; color: #A78BFA; font-style: italic;">Um RPG Épico de Fantasia Medieval</p>
+                                <p class="as-options-adv__credits-version" style="font-size: 1.2rem; color: #F59E0B; font-weight: bold; margin-top: 1rem; letter-spacing: 2px;">
+                                    v0.0.0.0-alfa
+                                </p>
+                            </div>
+
+                            <div class="as-options-adv__credits-section" style="margin-bottom: 1.5rem;">
+                                <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.2rem; margin-bottom: 0.5rem;">👑 Desenvolvimento</h4>
+                                <p class="as-options-adv__credits-name" style="font-size: 1.3rem; font-weight: bold; color: #E9D5FF;">Necromante96Official</p>
+                                <p class="as-options-adv__credits-description" style="color: #D1D5DB;">Game Design • Programação • Direção</p>
+                            </div>
+
+                            <div class="as-options-adv__credits-section" style="margin-bottom: 1.5rem;">
+                                <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.2rem; margin-bottom: 0.5rem;">🤖 Assistência de IA</h4>
+                                <p class="as-options-adv__credits-name" style="font-size: 1.1rem; color: #E9D5FF;">GitHub Copilot</p>
+                                <p class="as-options-adv__credits-description" style="color: #D1D5DB;">Desenvolvimento de Sistemas e Plugins</p>
+                            </div>
+
+                            <div class="as-options-adv__credits-section" style="margin-bottom: 0;">
+                                <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.2rem; margin-bottom: 0.5rem;">⚙️ Engine</h4>
+                                <p class="as-options-adv__credits-name" style="font-size: 1.1rem; color: #E9D5FF;">RPG Maker MZ</p>
+                                <p class="as-options-adv__credits-description" style="color: #D1D5DB;">Kadokawa Corporation</p>
+                            </div>
                         </div>
 
-                        <div class="as-options-adv__credits-section" style="margin-bottom: 1.5rem;">
-                            <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.2rem; margin-bottom: 0.5rem;">👑 Desenvolvimento</h4>
-                            <p class="as-options-adv__credits-name" style="font-size: 1.3rem; font-weight: bold; color: #E9D5FF;">Necromante96Official</p>
-                            <p class="as-options-adv__credits-description" style="color: #D1D5DB;">Game Design • Programação • Direção</p>
-                        </div>
+                        <!-- Sub-abas de créditos -->
+                        <nav class="as-options-adv__credits-subtabs" role="tablist" aria-label="Categorias de Créditos">
+                            <button class="as-options-adv__credits-subtab as-options-adv__credits-subtab--active" 
+                                    data-credits-panel="systems" 
+                                    role="tab" 
+                                    aria-selected="true">
+                                <span class="as-options-adv__credits-subtab-icon">💻</span>
+                                <span>Sistemas</span>
+                            </button>
+                            <button class="as-options-adv__credits-subtab" 
+                                    data-credits-panel="thanks" 
+                                    role="tab" 
+                                    aria-selected="false">
+                                <span class="as-options-adv__credits-subtab-icon">💖</span>
+                                <span>Agradecimentos</span>
+                            </button>
+                            <button class="as-options-adv__credits-subtab" 
+                                    data-credits-panel="legal" 
+                                    role="tab" 
+                                    aria-selected="false">
+                                <span class="as-options-adv__credits-subtab-icon">©</span>
+                                <span>Informações</span>
+                            </button>
+                        </nav>
 
-                        <div class="as-options-adv__credits-section" style="margin-bottom: 1.5rem;">
-                            <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.2rem; margin-bottom: 0.5rem;">🤖 Assistência de IA</h4>
-                            <p class="as-options-adv__credits-name" style="font-size: 1.1rem; color: #E9D5FF;">GitHub Copilot</p>
-                            <p class="as-options-adv__credits-description" style="color: #D1D5DB;">Desenvolvimento de Sistemas e Plugins</p>
-                        </div>
+                        <!-- Painéis das sub-abas -->
+                        <div class="as-options-adv__credits-panels">
+                            <!-- Painel: Sistemas -->
+                            <div class="as-options-adv__credits-subpanel as-options-adv__credits-subpanel--active" 
+                                 data-credits-subpanel="systems"
+                                 role="tabpanel">
+                                <div class="as-options-adv__credits-section" style="margin: 2rem 0;">
+                                    <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.3rem; margin-bottom: 1rem;">💻 Sistemas Desenvolvidos</h4>
+                                    <ul class="as-options-adv__credits-list" style="list-style: none; padding: 0; color: #D1D5DB; line-height: 2; max-width: 700px; margin: 0 auto;">
+                                        <li style="padding: 0.5rem; background: rgba(139, 92, 246, 0.05); margin: 0.3rem 0; border-radius: 8px; border-left: 3px solid #8B5CF6;">✨ Sistema de Gerenciamento de Plugins</li>
+                                        <li style="padding: 0.5rem; background: rgba(139, 92, 246, 0.05); margin: 0.3rem 0; border-radius: 8px; border-left: 3px solid #8B5CF6;">✨ Sistema Avançado de Logs</li>
+                                        <li style="padding: 0.5rem; background: rgba(139, 92, 246, 0.05); margin: 0.3rem 0; border-radius: 8px; border-left: 3px solid #8B5CF6;">✨ Interface Customizada de Título</li>
+                                        <li style="padding: 0.5rem; background: rgba(139, 92, 246, 0.05); margin: 0.3rem 0; border-radius: 8px; border-left: 3px solid #8B5CF6;">✨ Editor de Logo Dinâmico</li>
+                                        <li style="padding: 0.5rem; background: rgba(139, 92, 246, 0.05); margin: 0.3rem 0; border-radius: 8px; border-left: 3px solid #8B5CF6;">✨ Sistema de Opções Avançadas</li>
+                                        <li style="padding: 0.5rem; background: rgba(139, 92, 246, 0.05); margin: 0.3rem 0; border-radius: 8px; border-left: 3px solid #8B5CF6;">✨ Monitor de FPS em Tempo Real</li>
+                                        <li style="padding: 0.5rem; background: rgba(139, 92, 246, 0.05); margin: 0.3rem 0; border-radius: 8px; border-left: 3px solid #8B5CF6;">✨ Detecção Automática de Hardware</li>
+                                        <li style="padding: 0.5rem; background: rgba(139, 92, 246, 0.05); margin: 0.3rem 0; border-radius: 8px; border-left: 3px solid #8B5CF6;">✨ Sistema de Tooltips Interativos</li>
+                                    </ul>
+                                </div>
+                            </div>
 
-                        <div class="as-options-adv__credits-section" style="margin-bottom: 1.5rem;">
-                            <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.2rem; margin-bottom: 0.5rem;">⚙️ Engine</h4>
-                            <p class="as-options-adv__credits-name" style="font-size: 1.1rem; color: #E9D5FF;">RPG Maker MZ</p>
-                            <p class="as-options-adv__credits-description" style="color: #D1D5DB;">Kadokawa Corporation</p>
-                        </div>
+                            <!-- Painel: Agradecimentos -->
+                            <div class="as-options-adv__credits-subpanel" 
+                                 data-credits-subpanel="thanks"
+                                 role="tabpanel"
+                                 hidden>
+                                <div class="as-options-adv__credits-section" style="margin: 2rem auto; max-width: 650px; padding: 2rem; background: rgba(139, 92, 246, 0.1); border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.3);">
+                                    <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.3rem; margin-bottom: 1rem;">💖 Agradecimentos Especiais</h4>
+                                    <p class="as-options-adv__credits-text" style="color: #E9D5FF; line-height: 1.9; font-style: italic; font-size: 1.05rem;">
+                                        A todos os jogadores que embarcaram nesta jornada épica através das Ancient Souls.<br>
+                                        Sua aventura mantém viva a magia deste mundo.<br><br>
+                                        <span style="color: #F59E0B; font-size: 1.2rem;">✨ Que sua jornada seja lendária! ✨</span>
+                                    </p>
+                                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(245, 158, 11, 0.3);">
+                                        <p style="color: #D1D5DB; line-height: 1.8;">
+                                            Agradecimento especial à comunidade RPG Maker por todo o suporte,<br>
+                                            tutoriais e inspiração ao longo desta jornada de desenvolvimento.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="as-options-adv__credits-section" style="margin-bottom: 1.5rem;">
-                            <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.2rem; margin-bottom: 0.75rem;">💻 Sistemas Desenvolvidos</h4>
-                            <ul class="as-options-adv__credits-list" style="list-style: none; padding: 0; color: #D1D5DB; line-height: 1.8;">
-                                <li>✨ Sistema de Gerenciamento de Plugins</li>
-                                <li>✨ Sistema Avançado de Logs</li>
-                                <li>✨ Interface Customizada de Título</li>
-                                <li>✨ Editor de Logo Dinâmico</li>
-                                <li>✨ Sistema de Opções Avançadas</li>
-                                <li>✨ Monitor de FPS em Tempo Real</li>
-                                <li>✨ Detecção Automática de Hardware</li>
-                                <li>✨ Sistema de Tooltips Interativos</li>
-                            </ul>
-                        </div>
-
-                        <div class="as-options-adv__credits-section" style="margin: 2rem auto; max-width: 600px; padding: 1.5rem; background: rgba(139, 92, 246, 0.1); border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.3);">
-                            <h4 class="as-options-adv__credits-role" style="color: #F59E0B; font-size: 1.2rem; margin-bottom: 0.75rem;">💖 Agradecimentos Especiais</h4>
-                            <p class="as-options-adv__credits-text" style="color: #E9D5FF; line-height: 1.8; font-style: italic;">
-                                A todos os jogadores que embarcaram nesta jornada épica através das Ancient Souls.<br>
-                                Sua aventura mantém viva a magia deste mundo.<br><br>
-                                <span style="color: #F59E0B;">✨ Que sua jornada seja lendária! ✨</span>
-                            </p>
-                        </div>
-
-                        <div class="as-options-adv__credits-footer" style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid rgba(139, 92, 246, 0.3);">
-                            <p class="as-options-adv__credits-copyright" style="color: #9CA3AF; font-size: 0.9rem; margin-bottom: 0.5rem;">
-                                © 2025 Ancient Souls - Todos os direitos reservados
-                            </p>
-                            <p style="color: #8B5CF6; font-size: 0.85rem; font-style: italic;">
-                                Feito com ❤️ e muita dedicação
-                            </p>
+                            <!-- Painel: Informações Legais -->
+                            <div class="as-options-adv__credits-subpanel" 
+                                 data-credits-subpanel="legal"
+                                 role="tabpanel"
+                                 hidden>
+                                <div class="as-options-adv__credits-footer" style="margin: 2rem auto; max-width: 650px; padding: 2rem;">
+                                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(139, 92, 246, 0.05); border-radius: 10px; border: 1px solid rgba(139, 92, 246, 0.2);">
+                                        <p class="as-options-adv__credits-copyright" style="color: #E9D5FF; font-size: 1.1rem; margin-bottom: 1rem; font-weight: bold;">
+                                            © 2025 Ancient Souls
+                                        </p>
+                                        <p style="color: #D1D5DB; font-size: 0.95rem; line-height: 1.8;">
+                                            Todos os direitos reservados.<br>
+                                            Este jogo e todos os seus elementos são protegidos por direitos autorais.
+                                        </p>
+                                    </div>
+                                    
+                                    <div style="padding: 1.5rem; background: rgba(245, 158, 11, 0.05); border-radius: 10px; border: 1px solid rgba(245, 158, 11, 0.2);">
+                                        <p style="color: #F59E0B; font-size: 1rem; font-weight: bold; margin-bottom: 0.8rem;">
+                                            🛡️ Desenvolvido com
+                                        </p>
+                                        <p style="color: #D1D5DB; font-size: 0.95rem; line-height: 1.8;">
+                                            RPG Maker MZ © Kadokawa Corporation<br>
+                                            GitHub Copilot © GitHub, Inc.<br><br>
+                                            <span style="color: #8B5CF6; font-style: italic;">Feito com ❤️ e muita dedicação</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>

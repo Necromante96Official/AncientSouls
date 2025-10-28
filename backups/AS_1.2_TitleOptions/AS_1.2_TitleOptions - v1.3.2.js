@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.3.3 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.3.2 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @help
@@ -41,7 +41,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.3.3';
+    const MODULE_VERSION = '1.3.2';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -1353,15 +1353,7 @@ AS.TitleOptions = AS.TitleOptions || {};
             clearTimeout(pendingCloseHandle);
             pendingCloseHandle = null;
         }
-        
-        // Esconder interface antes de sair
-        hideOptions();
-        detachKeyboardSupport();
-        
-        // Pequeno delay para animação
-        setTimeout(() => {
-            SceneManager.pop();
-        }, 150);
+        SceneManager.pop();
     }
 
     function saveConfigValues() {

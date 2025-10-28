@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.3.3 ☆ Interface HTML moderna para opções com estética medieval fantástica
+ * @plugindesc v1.3.1 ☆ Interface HTML moderna para opções com estética medieval fantástica
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @help
@@ -41,7 +41,7 @@ AS.TitleOptions = AS.TitleOptions || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.2_TitleOptions';
-    const MODULE_VERSION = '1.3.3';
+    const MODULE_VERSION = '1.3.1';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -1042,15 +1042,15 @@ AS.TitleOptions = AS.TitleOptions || {};
         switch (style) {
             case 'retro':
                 // Seta pixel art estilo retrô
-                bodyStyle.cursor = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFF' stroke='%23000' stroke-width='1' d='M3 3 L3 18 L8 13 L12 21 L14 20 L10 12 L17 12 Z'/%3E%3C/svg%3E") 3 3, pointer`;
+                bodyStyle.cursor = 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'%3E%3Cpath fill=\'%23FFF\' stroke=\'%23000\' stroke-width=\'1\' d=\'M3 3 L3 18 L8 13 L12 21 L14 20 L10 12 L17 12 Z\'/%3E%3C/svg%3E") 3 3, pointer';
                 break;
             case 'modern':
                 // Mão/dedo apontando estilo moderno
-                bodyStyle.cursor = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath fill='%23F59E0B' stroke='%23000' stroke-width='1.5' d='M8 4 C6.8 4 5.8 4.8 5.8 6 L5.8 14 L4 14 C2.8 14 2 14.8 2 16 C2 17.2 2.8 18 4 18 L8 18 L12 22 L16 22 C18 22 20 20 20 18 L20 10 C20 8 18 6 16 6 C16 4.8 15.2 4 14 4 C12.8 4 12 4.8 12 6 C12 4.8 11.2 4 10 4 C9.2 4 8.4 4.4 8 5 L8 4 Z'/%3E%3C/svg%3E") 8 0, pointer`;
+                bodyStyle.cursor = 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'28\' height=\'28\' viewBox=\'0 0 28 28\'%3E%3Cpath fill=\'%23F59E0B\' stroke=\'%23000\' stroke-width=\'1.5\' d=\'M8 4 C6.8 4 5.8 4.8 5.8 6 L5.8 14 L4 14 C2.8 14 2 14.8 2 16 C2 17.2 2.8 18 4 18 L8 18 L12 22 L16 22 C18 22 20 20 20 18 L20 10 C20 8 18 6 16 6 C16 4.8 15.2 4 14 4 C12.8 4 12 4.8 12 6 C12 4.8 11.2 4 10 4 C9.2 4 8.4 4.4 8 5 L8 4 Z\'/%3E%3C/svg%3E") 8 0, pointer';
                 break;
             default:
                 // Seta padrão melhorada
-                bodyStyle.cursor = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%23FFFFFF' stroke='%23000000' stroke-width='1' d='M2 2 L2 16 L6 11 L9 18 L11 17 L8 10 L14 10 Z'/%3E%3C/svg%3E") 2 2, default`;
+                bodyStyle.cursor = 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\'%3E%3Cpath fill=\'%23FFFFFF\' stroke=\'%23000000\' stroke-width=\'1\' d=\'M2 2 L2 16 L6 11 L9 18 L11 17 L8 10 L14 10 Z\'/%3E%3C/svg%3E") 2 2, default';
         }
     }
 
@@ -1353,15 +1353,7 @@ AS.TitleOptions = AS.TitleOptions || {};
             clearTimeout(pendingCloseHandle);
             pendingCloseHandle = null;
         }
-        
-        // Esconder interface antes de sair
-        hideOptions();
-        detachKeyboardSupport();
-        
-        // Pequeno delay para animação
-        setTimeout(() => {
-            SceneManager.pop();
-        }, 150);
+        SceneManager.pop();
     }
 
     function saveConfigValues() {

@@ -1,0 +1,158 @@
+# ⚙️ Opções Avançadas - Personalize Tudo do Seu Jeito!
+
+**Versão:** 0.0.0.6-alfa  
+**Data:** 29/10/2025  
+**Categoria:** Grande Atualização
+
+---
+
+## 📖 Resumo
+
+Chegou o momento de você ter controle TOTAL sobre sua experiência em Ancient Souls! O menu de opções foi completamente reformulado e agora é uma verdadeira central de personalização com visual medieval fantástico. Ajuste volumes separadamente, escolha a qualidade gráfica ideal para seu computador, ative ou desative efeitos visuais, controle a taxa de quadros por segundo e muito mais! E o melhor: tudo funciona em tempo real - você vê e ouve as mudanças instantaneamente enquanto ajusta!
+
+---
+
+## ✨ Adicionados
+
+### 🎵 Controles de Áudio Profissionais
+
+- **Volume Master (controle geral)** que afeta todos os sons do jogo de uma vez
+- **Volume de Músicas de Fundo** para ajustar trilha sonora independentemente
+- **Volume de Sons Ambientes** como chuva, vento, ondas do mar
+- **Volume de Músicas Especiais** (vitória, game over, eventos importantes)
+- **Volume de Efeitos Sonoros** para golpes, itens, ações do jogador
+- **Ajustes em tempo real** - você ouve a mudança enquanto mexe no controle!
+- **Labels amigáveis** sem termos técnicos complicados
+- **Sliders visuais animados** com barra de progresso colorida (roxo e dourado)
+
+### 🎮 Opções de Jogabilidade Expandidas
+
+- **Sempre Correr** - ative para não precisar segurar tecla shift
+- **Lembrar Escolhas** - o jogo lembra sua última escolha em diálogos
+- **Interface de Toque** - otimiza controles para tablets e celulares
+- **Transparência de Janelas** - ajuste de 0% a 100% em tempo real
+- **Tamanho da Fonte** - pequeno, normal ou grande (em breve)
+- **Auto-Save Automático** - salva seu progresso periodicamente
+- **Confirmar ao Sair** - evita fechar o jogo por acidente
+
+### ⚡ Sistema de Otimização Inteligente
+
+- **Detecção Automática de Hardware** analisa seu computador e sugere o melhor preset!
+- **3 Presets Prontos**:
+  - **Performance** - para computadores mais fracos (prioriza velocidade)
+  - **Balanceado** - equilíbrio perfeito entre visual e performance
+  - **Qualidade** - visual máximo para computadores potentes
+
+- **Controle de FPS** ajustável de 30 a 120 quadros por segundo
+- **Qualidade Gráfica** com 4 níveis:
+  - Baixa (mais rápido)
+  - Média (equilibrado)
+  - Alta (bonito)
+  - Ultra (máximo visual)
+
+- **Partículas Decorativas** liga/desliga efeitos visuais como brilhos e poeira
+- **Suavização de Escala** deixa imagens mais suaves ao redimensionar
+- **Tremor de Tela** ativa/desativa tremores em explosões e impactos
+- **Monitor de FPS em Tempo Real** mostra seus quadros por segundo na tela:
+  - Verde (60+ FPS) = Excelente
+  - Amarelo (30-59 FPS) = Aceitável
+  - Vermelho (abaixo de 30 FPS) = Lento
+
+- **Estratégia de Cache de Recursos**:
+  - Sob Demanda (carrega conforme necessário)
+  - Pré-carregamento (carrega tudo antes)
+  - Agressivo (mantém tudo na memória)
+
+### 🎨 Interface Visual Moderna Medieval
+
+- **Sistema de Abas Organizado** com 4 categorias principais:
+  - Áudio (todos os controles de som)
+  - Jogabilidade (conforto e acessibilidade)
+  - Otimização (performance e qualidade)
+  - Créditos (desenvolvedores e agradecimentos)
+
+- **Design Roxo e Dourado** com gradientes místicos e brilhos mágicos
+- **Animações Suaves** em todos os elementos (transições de 0.3 segundos)
+- **Sliders Interativos** com feedback visual instantâneo
+- **Botões Responsivos** que mudam de cor ao passar o mouse
+- **Scroll Suave do Mouse** para navegar pelas opções
+- **Indicador de Configurações Não Salvas** mostra quando há mudanças pendentes
+
+### 💡 Tooltips Informativos
+
+- **Dicas ao Passar o Mouse** explicam o que cada opção faz
+- **Linguagem Simples** sem termos técnicos
+- **Posicionamento Inteligente** sempre visível na tela
+- **Animação de Entrada/Saída** suave e elegante
+
+### ✅ Sistema de Confirmação Visual
+
+- **Animação de Check Verde** aparece ao salvar configurações
+- **Mensagem de Feedback** confirma que tudo foi salvo corretamente
+- **Transição Suave** ao fechar o menu após salvar (300ms)
+- **Sons de Confirmação** (OK) ou erro (buzzer) em cada ação
+
+### 🌟 Aba de Créditos Expandida
+
+- **Sub-abas Organizadas**:
+  - Desenvolvedores (quem criou o jogo)
+  - Bibliotecas (ferramentas utilizadas)
+  - Agradecimentos (comunidade e apoiadores)
+
+- **Scroll Automático** ao trocar entre sub-abas
+- **Design Elegante** com cards de informação
+- **Links Clicáveis** (em breve) para redes sociais
+
+### 🔧 Recursos Técnicos Avançados
+
+- **Salvamento Automático** de todas as configurações
+- **Persistência Entre Sessões** - suas escolhas são lembradas sempre
+- **Aplicação Imediata** de volumes e transparências
+- **Validação de Valores** garante que nada saia do esperado
+- **Fallback Inteligente** usa valores padrão se algo der errado
+- **Alinhamento Automático** com o canvas do jogo
+- **Responsividade Total** adapta-se a qualquer resolução
+- **Suporte a Teclado** completo (Tab, Enter, Escape)
+
+### 🎬 Transições e Animações Premium
+
+- **Entrada Suave** do menu (fade + scale)
+- **Saída Elegante** ao fechar (reverse da entrada)
+- **Troca de Abas Animada** com fade entre painéis
+- **Feedback Instantâneo** em todas as interações
+- **Toast de Confirmação** aparece por 2.5 segundos após salvar
+
+---
+
+## 🔧 Melhorias
+
+- **Tela de opções completamente reformulada** - agora é uma experiência visual épica
+- **Organização perfeita** com sistema de abas intuitivo
+- **Performance otimizada** com cache de elementos DOM
+- **Código modular** facilitando futuras atualizações
+- **Logs detalhados** mostrando cada ação no console
+- **Compatibilidade total** com sistema de saves do RPG Maker MZ
+- **Sugestão automática** de configurações ideais para seu hardware
+- **Tooltips úteis** em linguagem acessível
+- **Controles de volume unificados** com master volume afetando tudo
+
+---
+
+## 🐛 Correções
+
+- **Corrigido volume que não salvava** entre sessões
+- **Ajustado slider de transparência** aplicando mudanças em tempo real
+- **Resolvido conflito** com janela padrão de opções
+- **Corrigida ordem de aplicação** de configurações ao carregar save
+- **Solucionado problema** de FPS não sendo aplicado corretamente
+- **Ajustado fallback** para janela padrão quando HTML falha
+
+---
+
+## ❌ Removidos
+
+Nenhuma remoção nesta versão
+
+---
+
+**⚙️ Agora você tem o controle total de Ancient Souls na palma da sua mão! Cada configuração, cada ajuste, cada detalhe pode ser personalizado exatamente do jeito que você quer. E tudo com um visual medieval fantástico que combina perfeitamente com a atmosfera épica do jogo. Configure, teste, ajuste e encontre a experiência perfeita para VOCÊ!**

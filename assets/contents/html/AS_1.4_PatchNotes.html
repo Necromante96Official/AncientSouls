@@ -108,8 +108,22 @@
             </button>
         </nav>
         
-        <div class="as-patchnotes__content" id="patchNotesContent" role="tabpanel">
-            <!-- Conteúdo será injetado dinamicamente pelo JavaScript -->
+        <div class="as-patchnotes__layout">
+            <!-- Lista de versões (esquerda) -->
+            <div class="as-patchnotes__version-list" id="patchNotesVersionList">
+                <!-- Versões serão injetadas aqui -->
+            </div>
+            
+            <!-- Divisória -->
+            <div class="as-patchnotes__divider"></div>
+            
+            <!-- Conteúdo detalhado (direita) -->
+            <div class="as-patchnotes__detail-panel" id="patchNotesDetailPanel">
+                <div class="as-patchnotes__detail-empty">
+                    <span class="as-patchnotes__detail-empty-icon">📋</span>
+                    <p>Selecione uma versão para ver os detalhes</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

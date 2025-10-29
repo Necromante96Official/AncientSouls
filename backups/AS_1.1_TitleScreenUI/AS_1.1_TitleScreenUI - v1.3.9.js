@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.4.1 ☆ Interface HTML da tela de título (layout medieval fantástico)
+ * @plugindesc v1.3.9 ☆ Interface HTML da tela de título (layout medieval fantástico)
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.0_TitleScreen
@@ -63,7 +63,7 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.1_TitleScreenUI';
-    const MODULE_VERSION = '1.4.1';
+    const MODULE_VERSION = '1.3.9';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     // Carregar parâmetros do plugin (padrões estáticos)
@@ -681,68 +681,11 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
                 break;
             case 'shutdown':
                 try {
-                    // Fade out de áudio MAIS SUAVE (3 segundos = 180 frames)
-                    AudioManager.fadeOutBgm(180);
-                    AudioManager.fadeOutBgs(180);
-                    AudioManager.fadeOutMe(180);
-                    
-                    // Transição visual MUITO suave
-                    if (rootElement) {
-                        rootElement.style.transition = 'opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1), transform 2.5s cubic-bezier(0.4, 0, 0.2, 1)';
-                        rootElement.style.opacity = '0';
-                        rootElement.style.transform = 'scale(0.92)';
-                        rootElement.style.filter = 'blur(10px)';
-                    }
-                    
-                    // Fade out da tela toda COM BLUR
-                    const fadeOverlay = document.createElement('div');
-                    fadeOverlay.style.cssText = `
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(20,10,40,0.95) 100%);
-                        opacity: 0;
-                        transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
-                        z-index: 99999;
-                        pointer-events: none;
-                        backdrop-filter: blur(0px);
-                    `;
-                    document.body.appendChild(fadeOverlay);
-                    
-                    // Forçar reflow
-                    fadeOverlay.offsetHeight;
-                    
-                    // Aplicar fade gradual
-                    requestAnimationFrame(() => {
-                        fadeOverlay.style.opacity = '1';
-                        fadeOverlay.style.backdropFilter = 'blur(20px)';
-                    });
-                    
-                    // Reduzir volume gradualmente
-                    let volumeStep = 0;
-                    const volumeFade = setInterval(() => {
-                        volumeStep += 0.05;
-                        const newVolume = Math.max(0, 1 - volumeStep);
-                        AudioManager.bgmVolume = Math.floor(newVolume * 100);
-                        AudioManager.bgsVolume = Math.floor(newVolume * 100);
-                        
-                        if (volumeStep >= 1) {
-                            clearInterval(volumeFade);
-                        }
-                    }, 50);
-                    
-                    // Aguardar transição completar antes de sair (2.8 segundos)
-                    setTimeout(() => {
-                        clearInterval(volumeFade);
-                        SceneManager.exit();
-                    }, 2800);
-                    
-                } catch (err) {
-                    console.error('Erro no shutdown:', err);
-                    SceneManager.exit();
-                }
+                    AudioManager.fadeOutBgm(60);
+                    AudioManager.fadeOutBgs(60);
+                    AudioManager.fadeOutMe(60);
+                } catch (_) {}
+                SceneManager.exit();
                 break;
         }
     }

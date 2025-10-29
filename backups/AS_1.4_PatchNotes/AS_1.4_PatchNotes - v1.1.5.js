@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.9 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
+ * @plugindesc v1.1.5 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.1_TitleScreenUI
@@ -23,7 +23,7 @@ AS.PatchNotes = AS.PatchNotes || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.4_PatchNotes';
-    const MODULE_VERSION = '1.1.9';
+    const MODULE_VERSION = '1.1.5';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -617,25 +617,19 @@ AS.PatchNotes = AS.PatchNotes || {};
                 return getMockPatchNotes();
             }
 
-            // Ler todos os arquivos .txt do diretório
+            // Ler todos os arquivos .md do diretório
             const files = fs.readdirSync(patchnotesDir)
-                .filter(file => file.endsWith('.txt'))
+                .filter(file => file.endsWith('.md'))
                 .sort((a, b) => b.localeCompare(a)); // Ordem decrescente (mais recente primeiro)
 
             const patchNotes = [];
 
-            logger.info(`Encontrados ${files.length} arquivos .txt: ${files.join(', ')}`);
-
             for (const file of files) {
                 const filePath = path.join(patchnotesDir, file);
                 const content = fs.readFileSync(filePath, 'utf8');
-                logger.info(`Lendo arquivo: ${file} (${content.length} caracteres)`);
                 const parsed = parseMarkdownPatchNote(content, file);
                 if (parsed) {
-                    logger.info(`✓ Arquivo ${file} parseado com sucesso: ${parsed.title}`);
                     patchNotes.push(parsed);
-                } else {
-                    logger.warn(`✗ Falha ao parsear arquivo: ${file}`);
                 }
             }
 
@@ -651,15 +645,15 @@ AS.PatchNotes = AS.PatchNotes || {};
 
     function parseMarkdownPatchNote(content, filename) {
         try {
-            // Extrair metadados do nome do arquivo: 0.0.0.1-alfa_sistema-de-plugins.txt
-            const filenameMatch = filename.match(/^(\d+\.\d+\.\d+\.\d+)-([^_]+)_(.+)\.txt$/);
+            // Extrair metadados do nome do arquivo: 0.0.0.1-alfa_sistema-de-plugins.md
+            const filenameMatch = filename.match(/^(\d+\.\d+\.\d+\.\d+)-([^_]+)_(.+)\.md$/);
             if (!filenameMatch) {
                 logger.warn(`Nome de arquivo inválido: ${filename}`);
                 return null;
             }
 
-            let version = filenameMatch[1];
-            let stage = filenameMatch[2]; // alfa, beta, release
+            const version = filenameMatch[1];
+            const stage = filenameMatch[2]; // alfa, beta, release
             const slug = filenameMatch[3];
 
             // Extrair informações do conteúdo markdown
@@ -683,6 +677,10 @@ AS.PatchNotes = AS.PatchNotes || {};
                 }
 
                 // Metadados (linhas **Key:** value)
+                if (line.startsWith('**Data:**')) {
+                    date = line.replace('**Data:**', '').trim();
+                    continue;
+                }
                 if (line.startsWith('**Versão:**')) {
                     const versionFull = line.replace('**Versão:**', '').trim();
                     const match = versionFull.match(/^(\d+\.\d+\.\d+\.\d+)-(\w+)/);
@@ -799,26 +797,17 @@ AS.PatchNotes = AS.PatchNotes || {};
                 'Correções Pequenas': 'fix'
             };
 
-            const result = {
+            return {
                 version,
                 stage,
                 title,
                 date,
                 category: categoryMap[category] || 'other',
-                type: category,
+                type,
                 description,
                 sections,
                 filename
             };
-
-            logger.info(`Parser resultado para ${filename}:`, {
-                version: result.version,
-                title: result.title,
-                category: result.category,
-                sectionsCount: result.sections.length
-            });
-
-            return result;
 
         } catch (error) {
             logger.error(`Erro ao parsear ${filename}: ${error.message}`);
@@ -1041,7 +1030,6 @@ AS.PatchNotes = AS.PatchNotes || {};
     function createVersionItem(note) {
         const item = document.createElement('div');
         item.className = 'as-version-item';
-        item.dataset.category = note.category;
         
         const header = document.createElement('div');
         header.className = 'as-version-item__header';
@@ -1093,7 +1081,13 @@ AS.PatchNotes = AS.PatchNotes || {};
         `;
         detailPanel.appendChild(header);
         
-        // NÃO adicionar resumo aqui - ele vai aparecer só na aba Resumo
+        // Resumo
+        if (note.description) {
+            const summary = document.createElement('div');
+            summary.className = 'as-detail-summary';
+            summary.innerHTML = `<p>${parseMarkdown(note.description)}</p>`;
+            detailPanel.appendChild(summary);
+        }
         
         // Organizar seções por categoria
         const categorizedSections = {
@@ -1134,14 +1128,7 @@ AS.PatchNotes = AS.PatchNotes || {};
                 ${data.items.length > 0 ? `<span class="as-detail-tab__count">${data.items.length}</span>` : ''}
             `;
             
-            tabsContainer.appendChild(tab);
-            
-            // Criar conteúdo
-            const content = document.createElement('div');
-            content.className = 'as-detail-content' + (firstTab ? ' active' : '');
-            content.dataset.category = key;
-            
-            // Evento de clique (após content ser criado)
+            // Evento de clique
             tab.addEventListener('click', (e) => {
                 if (typeof SoundManager !== 'undefined') {
                     SoundManager.playCursor();
@@ -1154,9 +1141,14 @@ AS.PatchNotes = AS.PatchNotes || {};
                 // Ativar clicada
                 tab.classList.add('active');
                 content.classList.add('active');
-                
-                logger.info(`Aba ativada: ${data.title} (${key})`);
             });
+            
+            tabsContainer.appendChild(tab);
+            
+            // Criar conteúdo
+            const content = document.createElement('div');
+            content.className = 'as-detail-content' + (firstTab ? ' active' : '');
+            content.dataset.category = key;
             
             if (key === 'summary' && note.description) {
                 content.innerHTML = `<div class="as-detail-summary-content">${parseMarkdown(note.description)}</div>`;
@@ -1324,23 +1316,6 @@ AS.PatchNotes = AS.PatchNotes || {};
                     e.stopPropagation();
                 }, { passive: true });
             }
-            
-            // Habilitar scroll com wheel nos painéis principais
-            const versionList = rootElement.querySelector('.as-patchnotes__version-list');
-            const detailPanel = rootElement.querySelector('.as-patchnotes__detail-panel');
-            
-            [versionList, detailPanel].forEach(panel => {
-                if (panel) {
-                    panel.setAttribute('tabindex', '-1');
-                    panel.addEventListener('wheel', (e) => {
-                        // Permitir scroll natural
-                        const delta = e.deltaY;
-                        panel.scrollTop += delta;
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }, { passive: false });
-                }
-            });
         });
     }
 

@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.1.9 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
+ * @plugindesc v1.1.6 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.1_TitleScreenUI
@@ -23,7 +23,7 @@ AS.PatchNotes = AS.PatchNotes || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.4_PatchNotes';
-    const MODULE_VERSION = '1.1.9';
+    const MODULE_VERSION = '1.1.6';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -658,8 +658,8 @@ AS.PatchNotes = AS.PatchNotes || {};
                 return null;
             }
 
-            let version = filenameMatch[1];
-            let stage = filenameMatch[2]; // alfa, beta, release
+            const version = filenameMatch[1];
+            const stage = filenameMatch[2]; // alfa, beta, release
             const slug = filenameMatch[3];
 
             // Extrair informações do conteúdo markdown
@@ -683,6 +683,10 @@ AS.PatchNotes = AS.PatchNotes || {};
                 }
 
                 // Metadados (linhas **Key:** value)
+                if (line.startsWith('**Data:**')) {
+                    date = line.replace('**Data:**', '').trim();
+                    continue;
+                }
                 if (line.startsWith('**Versão:**')) {
                     const versionFull = line.replace('**Versão:**', '').trim();
                     const match = versionFull.match(/^(\d+\.\d+\.\d+\.\d+)-(\w+)/);
@@ -1041,7 +1045,6 @@ AS.PatchNotes = AS.PatchNotes || {};
     function createVersionItem(note) {
         const item = document.createElement('div');
         item.className = 'as-version-item';
-        item.dataset.category = note.category;
         
         const header = document.createElement('div');
         header.className = 'as-version-item__header';
@@ -1093,7 +1096,13 @@ AS.PatchNotes = AS.PatchNotes || {};
         `;
         detailPanel.appendChild(header);
         
-        // NÃO adicionar resumo aqui - ele vai aparecer só na aba Resumo
+        // Resumo
+        if (note.description) {
+            const summary = document.createElement('div');
+            summary.className = 'as-detail-summary';
+            summary.innerHTML = `<p>${parseMarkdown(note.description)}</p>`;
+            detailPanel.appendChild(summary);
+        }
         
         // Organizar seções por categoria
         const categorizedSections = {
@@ -1134,14 +1143,7 @@ AS.PatchNotes = AS.PatchNotes || {};
                 ${data.items.length > 0 ? `<span class="as-detail-tab__count">${data.items.length}</span>` : ''}
             `;
             
-            tabsContainer.appendChild(tab);
-            
-            // Criar conteúdo
-            const content = document.createElement('div');
-            content.className = 'as-detail-content' + (firstTab ? ' active' : '');
-            content.dataset.category = key;
-            
-            // Evento de clique (após content ser criado)
+            // Evento de clique
             tab.addEventListener('click', (e) => {
                 if (typeof SoundManager !== 'undefined') {
                     SoundManager.playCursor();
@@ -1154,9 +1156,14 @@ AS.PatchNotes = AS.PatchNotes || {};
                 // Ativar clicada
                 tab.classList.add('active');
                 content.classList.add('active');
-                
-                logger.info(`Aba ativada: ${data.title} (${key})`);
             });
+            
+            tabsContainer.appendChild(tab);
+            
+            // Criar conteúdo
+            const content = document.createElement('div');
+            content.className = 'as-detail-content' + (firstTab ? ' active' : '');
+            content.dataset.category = key;
             
             if (key === 'summary' && note.description) {
                 content.innerHTML = `<div class="as-detail-summary-content">${parseMarkdown(note.description)}</div>`;
@@ -1324,23 +1331,6 @@ AS.PatchNotes = AS.PatchNotes || {};
                     e.stopPropagation();
                 }, { passive: true });
             }
-            
-            // Habilitar scroll com wheel nos painéis principais
-            const versionList = rootElement.querySelector('.as-patchnotes__version-list');
-            const detailPanel = rootElement.querySelector('.as-patchnotes__detail-panel');
-            
-            [versionList, detailPanel].forEach(panel => {
-                if (panel) {
-                    panel.setAttribute('tabindex', '-1');
-                    panel.addEventListener('wheel', (e) => {
-                        // Permitir scroll natural
-                        const delta = e.deltaY;
-                        panel.scrollTop += delta;
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }, { passive: false });
-                }
-            });
         });
     }
 

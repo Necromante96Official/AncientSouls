@@ -1,0 +1,142 @@
+# 🎮 Base Inicial - O Começo da Aventura
+
+**Versão:** 0.0.0.0-alfa  
+**Data:** 29/10/2025  
+**Categoria:** Base Inicial
+
+---
+
+## 📖 Resumo
+
+Bem-vindo ao mundo de Ancient Souls! Esta é a versão inicial do jogo, trazendo tudo que um RPG clássico precisa para oferecer aventuras épicas. Explore mapas, lute em batalhas estratégicas, desenvolva seus personagens, colete itens poderosos e mergulhe em uma história envolvente. Esta versão base traz todos os sistemas essenciais funcionando perfeitamente para você começar sua jornada agora mesmo!
+
+---
+
+## ✨ Adicionados
+
+### ⚔️ Sistema de Combate Por Turnos
+
+- **Batalhas táticas e estratégicas** onde você comanda até 4 heróis contra grupos de inimigos
+- **Comandos clássicos de RPG**: Atacar, Defender, usar Habilidades especiais, usar Itens e tentar Fugir
+- **Sistema de HP e MP** para gerenciar a vida e energia mágica dos seus personagens
+- **TP (Pontos Técnicos)** que acumulam durante a luta para desencadear habilidades devastadoras
+- **Elementos mágicos**: Fogo queima, Gelo congela, Trovão paralisa, além de Água, Terra, Vento, Luz e Trevas
+- **Fraquezas e resistências** que tornam cada batalha um desafio estratégico
+- **Estados alterados**: Veneno que corrói HP, Sono que faz perder turno, Paralisia, Silêncio que bloqueia magias, Confusão e muito mais
+- **Animações espetaculares** para cada golpe, magia e habilidade especial
+- **Tela de vitória** mostrando experiência ganha, itens coletados e dinheiro conquistado
+- **Progressão de nível** que torna seus heróis cada vez mais fortes
+
+### 👥 Personagens e Desenvolvimento
+
+- **Heróis únicos** com nome, aparência, classe e personalidade própria
+- **Sistema de níveis de 1 a 99** com crescimento constante de poder
+- **8 Atributos fundamentais**:
+  - HP Máximo (sua resistência)
+  - MP Máximo (energia para magias)
+  - Ataque (força física)
+  - Defesa (proteção contra golpes)
+  - Poder Mágico (força dos feitiços)
+  - Defesa Mágica (resistência a magias)
+  - Agilidade (quem age primeiro)
+  - Sorte (críticos e esquivas)
+- **Classes diferentes** como Guerreiro, Mago, Clérigo, Ladino e mais
+- **Aprendizado de habilidades** conforme sobe de nível
+- **Retratos nos diálogos** que dão vida e personalidade aos personagens
+
+### 🎒 Inventário e Equipamentos
+
+- **Bolsa sem limite** para guardar tudo que encontrar na aventura
+- **4 Categorias organizadas**: Itens consumíveis, Armas, Armaduras e Itens Importantes da história
+- **Até 99 unidades** de cada item (exceto itens importantes que são únicos)
+- **Descrições detalhadas** explicando o que cada item faz
+- **Uso em batalha ou exploração** - cure-se, fortaleça-se ou ajude aliados
+- **5 Slots de equipamento**: Arma, Escudo, Capacete, Armadura e Acessório
+- **Comparação visual** mostrando se um novo equipamento é melhor ou pior que o atual
+- **Troca de equipamentos** entre personagens para otimizar seu time
+
+### 🗺️ Exploração de Mundo
+
+- **Mapas variados** com cidades, masmorras, florestas, cavernas e muito mais
+- **Movimento em 4 direções** usando teclado ou controle
+- **Interação com tudo**: Abra baús, puxe alavancas, converse com NPCs, examine objetos
+- **Colisões realistas** - paredes bloqueiam, água pode afogar, armadilhas machucam
+- **Camadas de profundidade** onde você passa por baixo de pontes e por cima de tapetes
+- **Portas e teletransportes** conectando diferentes áreas do mundo
+- **Corrida rápida** segurando Shift para explorar mais rápido
+- **Encontros aleatórios** onde monstros aparecem em áreas perigosas
+- **Eventos automáticos** que disparam ao pisar em lugares específicos
+
+### 💬 Diálogos e História
+
+- **Caixas de texto** aparecendo em diferentes posições da tela
+- **Rostos dos personagens** durante conversas para maior imersão
+- **Escolhas importantes** que podem mudar o rumo da história
+- **Velocidade de texto ajustável** para ler no seu ritmo
+- **Textos coloridos** destacando nomes, itens e informações importantes
+- **Nome do falante** aparecendo acima da caixa de diálogo
+- **Pausa para leitura** esperando você apertar botão antes de continuar
+
+### 🏪 Lojas e Economia
+
+- **Lojas de itens** vendendo poções, antídotos e suprimentos de aventura
+- **Lojas de armas** com espadas, arcos, lanças e mais
+- **Lojas de armaduras** para proteger seus heróis
+- **Sistema de compra e venda** - venda itens por metade do preço
+- **Seu dinheiro sempre visível** para saber o que pode comprar
+- **Compra em quantidade** quando precisa de muitas poções de uma vez
+- **Comparação na hora** vendo se vale a pena comprar aquele equipamento
+
+### 🎵 Música e Sons
+
+- **Trilha sonora épica** com músicas diferentes para cada lugar e situação
+- **Efeitos sonoros** para abrir baús, golpear inimigos, usar itens
+- **Sons ambientes** como chuva caindo, vento soprando, ondas do mar
+- **Fanfarras especiais** para vitória em batalha e momentos importantes
+- **Controle de volume separado** para música, efeitos e ambiente
+- **Transições suaves** entre músicas diferentes
+
+### 🎨 Gráficos e Efeitos Visuais
+
+- **Gráficos 2D charmosos** com perspectiva de cima para baixo
+- **Animações de caminhada** fluidas em todas as direções
+- **Efeitos de clima**: Chuva molhando o chão, neve caindo, tempestades assustadoras
+- **Efeitos de tela**: Tremor em explosões, flashes em golpes poderosos, escurecimento em momentos tensos
+- **Imagens de fundo** para cenas importantes da história
+- **Iluminação variada** com áreas claras e sombrias
+- **Tons de tela** criando atmosferas (sépia para flashbacks, vermelho para perigo)
+
+### 💾 Salvamento e Opções
+
+- **Múltiplos slots de save** para salvar até 20 partidas diferentes
+- **Salvamento rápido** em pontos específicos do jogo
+- **Carregamento fácil** para voltar de onde parou
+- **Menu de opções completo**:
+  - Volume de música, efeitos e ambiente
+  - Velocidade das mensagens (Lento, Normal, Rápido, Instantâneo)
+  - Modo janela ou tela cheia
+  - Sempre correr sem segurar tecla
+  - Lembrar última escolha em diálogos
+  - Personalizar teclas do controle
+
+---
+
+## 🔧 Melhorias
+
+Nenhuma melhoria nesta versão (é a primeira!)
+
+---
+
+## 🐛 Correções
+
+Nenhuma correção nesta versão (é a primeira!)
+
+---
+
+## ❌ Removidos
+
+Nenhuma remoção nesta versão
+
+---
+
+**🎮 Sua jornada épica começa agora! Explore, lute, evolua e torne-se uma lenda em Ancient Souls!**

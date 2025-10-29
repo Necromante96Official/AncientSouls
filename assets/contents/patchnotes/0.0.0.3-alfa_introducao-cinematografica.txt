@@ -1,0 +1,75 @@
+# 🎮 Introdução Cinematográfica - Primeira Impressão Marcante
+
+**Versão:** 0.0.0.3-alfa  
+**Data:** 29/10/2025  
+**Categoria:** Atualização de Conteúdo
+
+---
+
+## 📖 Resumo
+
+Ancient Souls agora recebe você com estilo! Antes de mergulhar na aventura, uma sequência cinematográfica suave apresenta os criadores do jogo com transições elegantes e profissionais. É como assistir à abertura de um filme - você sabe que algo épico está prestes a começar!
+
+---
+
+## ✨ Adicionados
+
+### 🎬 Sequência de Abertura Cinematográfica
+
+- **Telas de apresentação antes do menu principal** mostrando os logotipos dos criadores
+- **Transições suaves de fade in e fade out** que aparecem e desaparecem delicadamente
+- **Duração perfeita de cada tela** - tempo suficiente para apreciar sem ficar entediante
+- **Duas telas de splash personalizadas** apresentando RPG Maker MZ e os desenvolvedores do jogo
+
+### ✨ Efeitos Visuais Profissionais
+
+- **Fundo preto elegante** que destaca as imagens apresentadas
+- **Imagens em alta definição (1280x720)** mantendo qualidade cristalina
+- **Centralização perfeita automática** independente do tamanho da sua tela
+- **Redimensionamento inteligente** que mantém proporções corretas das imagens
+- **Opacidade gradual** criando transições cinematográficas suaves e agradáveis
+
+### ⚡ Controle Total do Jogador
+
+- **Pular a sequência a qualquer momento** apertando Enter, Espaço ou clicando
+- **Resposta instantânea** - um toque e você vai direto para o menu
+- **Sem espera forçada** - você escolhe se quer assistir ou pular
+
+### 🎯 Timing Cinematográfico Perfeito
+
+- **60 frames para aparecer** (1 segundo de fade in suave)
+- **120 frames de exibição** (2 segundos para apreciar a imagem)
+- **60 frames para desaparecer** (1 segundo de fade out elegante)
+- **Transição automática** entre as telas sem interrupção
+
+### 🖼️ Apresentação Visual Impecável
+
+- **Imagens carregadas de forma inteligente** evitando problemas de exibição
+- **Verificação automática de recursos** garantindo que tudo está pronto antes de mostrar
+- **Ajuste de escala proporcional** para qualquer resolução de tela
+- **Posicionamento centralizado perfeito** na horizontal e vertical
+
+---
+
+## 🔧 Melhorias
+
+- **Primeira impressão muito mais profissional** - o jogo parece polido desde o primeiro segundo
+- **Experiência de início aprimorada** - você entra no clima do jogo imediatamente
+- **Carregamento otimizado** - as imagens aparecem rapidamente sem travamentos
+- **Compatibilidade total com diferentes resoluções** - funciona perfeitamente em qualquer tela
+
+---
+
+## 🐛 Correções
+
+Nenhuma correção nesta versão (é a primeira!)
+
+---
+
+## ❌ Removidos
+
+Nenhuma remoção nesta versão
+
+---
+
+**🎮 Agora Ancient Souls começa com o pé direito! Uma introdução cinematográfica que mostra desde o primeiro momento: você está prestes a viver uma aventura que foi feita com carinho e atenção aos detalhes!**

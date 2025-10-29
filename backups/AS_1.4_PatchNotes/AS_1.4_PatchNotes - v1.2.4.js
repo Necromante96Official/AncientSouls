@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.2.6 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
+ * @plugindesc v1.2.4 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.1_TitleScreenUI
@@ -24,7 +24,7 @@ AS.PatchNotes = AS.PatchNotes || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.4_PatchNotes';
-    const MODULE_VERSION = '1.2.6';
+    const MODULE_VERSION = '1.2.4';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -1171,7 +1171,7 @@ AS.PatchNotes = AS.PatchNotes || {};
                         // Badge com ícone
                         const badge = document.createElement('span');
                         badge.className = `as-badge as-badge--${item.type}`;
-                        badge.innerHTML = getBadgeText(item.type);
+                        badge.innerHTML = `${getTypeIcon(item.type)} ${getBadgeText(item.type)}`;
                         
                         // Texto do item
                         const text = document.createElement('span');
@@ -1218,7 +1218,7 @@ AS.PatchNotes = AS.PatchNotes || {};
         version.textContent = `v${note.version}-${note.stage}`;
         
         const categoryBadge = document.createElement('span');
-        categoryBadge.className = `as-version-item__category as-badge--${getCategoryClass(note.category)}`;
+        categoryBadge.className = `as-version-item__category as-badge--${note.category}`;
         categoryBadge.textContent = getCategoryName(note.category);
         
         header.appendChild(version);
@@ -1353,7 +1353,7 @@ AS.PatchNotes = AS.PatchNotes || {};
                         
                         const badge = document.createElement('span');
                         badge.className = `as-badge as-badge--${item.type}`;
-                        badge.innerHTML = getBadgeText(item.type);
+                        badge.innerHTML = `${getTypeIcon(item.type)} ${getBadgeText(item.type)}`;
                         
                         const text = document.createElement('span');
                         text.className = 'as-patchnote__item-text';
@@ -1374,6 +1374,31 @@ AS.PatchNotes = AS.PatchNotes || {};
         
         detailPanel.appendChild(tabsContainer);
         detailPanel.appendChild(contentContainer);
+        
+        // Adicionar botão de voltar no final
+        const backButtonContainer = document.createElement('div');
+        backButtonContainer.className = 'as-detail-back-container';
+        backButtonContainer.innerHTML = `
+            <button class="as-patchnotes__back-button" id="backToVersionList">
+                ⬅️ Voltar para Lista de Versões
+            </button>
+        `;
+        detailPanel.appendChild(backButtonContainer);
+        
+        // Adicionar evento ao botão de voltar
+        const backBtn = detailPanel.querySelector('#backToVersionList');
+        if (backBtn) {
+            backBtn.addEventListener('click', () => {
+                if (typeof SoundManager !== 'undefined') {
+                    SoundManager.playCancel();
+                }
+                if (currentStage) {
+                    showVersionList(currentStage);
+                } else {
+                    showStageSelection();
+                }
+            });
+        }
     }
     
     function getTypeIcon(type) {
@@ -1450,42 +1475,15 @@ AS.PatchNotes = AS.PatchNotes || {};
     }
 
     function getCategoryName(category) {
-        // Se já for um nome completo, retornar direto
-        const fullNames = [
-            'Base Inicial',
-            'Grande Atualização',
-            'Pequena Atualização',
-            'Correções Importantes',
-            'Correções Pequenas'
-        ];
-        
-        if (fullNames.includes(category)) {
-            return category;
-        }
-        
-        // Caso contrário, mapear códigos para nomes
         const categories = {
             'base': 'Base Inicial',
             'major': 'Grande Atualização',
             'minor': 'Pequena Atualização',
-            'critical': 'Correções Importantes',
-            'fix': 'Correções Pequenas',
+            'critical': 'Correção Importante',
+            'fix': 'Correção',
             'other': 'Outro'
         };
         return categories[category] || 'Outro';
-    }
-    
-    function getCategoryClass(category) {
-        // Mapear nome completo para código CSS
-        const classMap = {
-            'Base Inicial': 'base',
-            'Grande Atualização': 'major',
-            'Pequena Atualização': 'minor',
-            'Correções Importantes': 'critical',
-            'Correções Pequenas': 'fix'
-        };
-        
-        return classMap[category] || 'other';
     }
 
     function getBadgeText(type) {
@@ -1511,62 +1509,83 @@ AS.PatchNotes = AS.PatchNotes || {};
         const versionList = rootElement.querySelector('#patchNotesVersionList');
         const detailPanel = rootElement.querySelector('#patchNotesDetailPanel');
         const titleElement = rootElement.querySelector('.as-patchnotes__title');
-        const tabsContainer = rootElement.querySelector('.as-patchnotes__tabs');
         
         if (!versionList || !detailPanel) {
             return;
         }
 
-        // OCULTAR abas de categoria na seleção de estágios
-        if (tabsContainer) {
-            tabsContainer.style.display = 'none';
-        }
-
         // Atualizar título
         if (titleElement) {
-            titleElement.textContent = '📜 NOTAS DE ATUALIZAÇÃO - Selecione um Estágio';
+            titleElement.textContent = '📜 NOTAS DE ATUALIZAÇÃO';
         }
 
-        // Limpar painéis
+        // Limpar lista de versões
         versionList.innerHTML = '';
-        detailPanel.innerHTML = '';
 
-        // Criar container para botões horizontais de estágio
-        const stageGrid = document.createElement('div');
-        stageGrid.className = 'as-stage-grid';
-        
-        // Criar botões de seleção de estágios em layout horizontal
+        // Criar botões de seleção de estágios
         for (const stageKey in STAGES) {
             const stage = STAGES[stageKey];
             
-            const stageCard = document.createElement('div');
-            stageCard.className = 'as-stage-card';
-            stageCard.innerHTML = `
-                <div class="as-stage-card__emoji">${stage.emoji}</div>
-                <div class="as-stage-card__title">${stage.title}</div>
-                <div class="as-stage-card__description">${stage.description}</div>
+            const stageButton = document.createElement('div');
+            stageButton.className = 'as-stage-button';
+            stageButton.innerHTML = `
+                <span class="as-stage-button__emoji">${stage.emoji}</span>
+                <div class="as-stage-button__content">
+                    <div class="as-stage-button__title">${stage.title}</div>
+                    <div class="as-stage-button__description">${stage.description}</div>
+                </div>
             `;
 
-            stageCard.addEventListener('click', () => {
+            stageButton.addEventListener('click', () => {
                 if (typeof SoundManager !== 'undefined') {
                     SoundManager.playCursor();
                 }
                 showVersionList(stage.folder);
             });
 
-            stageGrid.appendChild(stageCard);
+            versionList.appendChild(stageButton);
         }
-        
-        versionList.appendChild(stageGrid);
 
-        // Mensagem no painel de detalhes
-        detailPanel.innerHTML = `
-            <div class="as-patchnotes__detail-empty">
-                <span class="as-patchnotes__detail-empty-icon">🎮</span>
-                <p style="font-size: 18px; margin-bottom: 10px;">Bem-vindo ao Sistema de Patch Notes!</p>
-                <p style="font-size: 14px; opacity: 0.8;">Escolha um estágio de desenvolvimento à esquerda para visualizar as atualizações.</p>
+        // Adicionar botão de voltar
+        const backButton = document.createElement('div');
+        backButton.className = 'as-stage-button as-stage-button--back';
+        backButton.innerHTML = `
+            <span class="as-stage-button__emoji">⬅️</span>
+            <div class="as-stage-button__content">
+                <div class="as-stage-button__title">Voltar</div>
             </div>
         `;
+
+        backButton.addEventListener('click', () => {
+            if (typeof SoundManager !== 'undefined') {
+                SoundManager.playCancel();
+            }
+            closePatchNotes();
+        });
+
+        versionList.appendChild(backButton);
+
+        // Limpar painel de detalhes e adicionar instruções com botão de voltar
+        detailPanel.innerHTML = `
+            <div class="as-patchnotes__detail-empty">
+                <span class="as-patchnotes__detail-empty-icon">📜</span>
+                <p>Selecione um estágio para ver as atualizações</p>
+                <button class="as-patchnotes__back-button" id="backFromStageSelection">
+                    ⬅️ Fechar
+                </button>
+            </div>
+        `;
+        
+        // Adicionar evento ao botão de voltar no painel
+        const backFromSelectionBtn = detailPanel.querySelector('#backFromStageSelection');
+        if (backFromSelectionBtn) {
+            backFromSelectionBtn.addEventListener('click', () => {
+                if (typeof SoundManager !== 'undefined') {
+                    SoundManager.playCancel();
+                }
+                closePatchNotes();
+            });
+        }
     }
 
     function showVersionList(stage) {
@@ -1577,7 +1596,6 @@ AS.PatchNotes = AS.PatchNotes || {};
         const versionList = rootElement.querySelector('#patchNotesVersionList');
         const detailPanel = rootElement.querySelector('#patchNotesDetailPanel');
         const titleElement = rootElement.querySelector('.as-patchnotes__title');
-        const tabsContainer = rootElement.querySelector('.as-patchnotes__tabs');
         
         if (!versionList || !detailPanel) {
             return;
@@ -1594,14 +1612,9 @@ AS.PatchNotes = AS.PatchNotes || {};
         currentStage = stage;
         currentCategory = 'all';
 
-        // MOSTRAR abas de categoria ao selecionar um estágio
-        if (tabsContainer) {
-            tabsContainer.style.display = 'flex';
-        }
-
         // Atualizar título
         if (titleElement) {
-            titleElement.textContent = `${stageInfo.emoji} ${stageInfo.title}`;
+            titleElement.textContent = `${stageInfo.emoji} ${stageInfo.title} - Todas as Versões`;
         }
 
         // Carregar notas do estágio
@@ -1610,22 +1623,11 @@ AS.PatchNotes = AS.PatchNotes || {};
         versionList.innerHTML = '';
 
         if (notes.length === 0) {
-            // Estágio sem atualizações - mensagem amigável
-            versionList.innerHTML = `
-                <div class="as-stage-empty">
-                    <div class="as-stage-empty__icon">${stageInfo.emoji}</div>
-                    <h3 class="as-stage-empty__title">Ainda não há atualizações</h3>
-                    <p class="as-stage-empty__message">
-                        Este estágio de desenvolvimento ainda não possui versões registradas.
-                        Volte mais tarde para conferir as novidades!
-                    </p>
-                </div>
-            `;
-            
+            versionList.innerHTML = '<p class="as-patchnotes__empty">Nenhuma atualização neste estágio ainda.</p>';
             detailPanel.innerHTML = `
                 <div class="as-patchnotes__detail-empty">
-                    <span class="as-patchnotes__detail-empty-icon">📝</span>
-                    <p>Nenhuma atualização disponível neste estágio</p>
+                    <span class="as-patchnotes__detail-empty-icon">${stageInfo.emoji}</span>
+                    <p>Nenhuma versão disponível</p>
                 </div>
             `;
             

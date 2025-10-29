@@ -2,7 +2,7 @@
 
 **Versão:** 0.0.0.2-alfa  
 **Data:** 29/10/2025  
-**Categoria:** Atualização Técnica
+**Categoria:** Pequena Atualização
 
 ---
 

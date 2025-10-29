@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.2.6 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
+ * @plugindesc v1.2.0 ☆ Sistema completo de patch notes com acordeão, BGM preservada, expandir tudo e contadores
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_1.1_TitleScreenUI
@@ -15,6 +15,90 @@
  * HTML moderna e tema medieval fantástico.
  * 
  * ==========================================================================
+ * 🗂️ ORGANIZAÇÃO DE ARQUIVOS (OBRIGATÓRIA)
+ * ==========================================================================
+ * 
+ * As notas de atualização são organizadas em PASTAS por estágio:
+ * 
+ * patchnotes/
+ * ├── alfa/
+ * │   ├── 0.0.0.0-alfa_base-inicial.txt
+ * │   ├── 0.0.0.1-alfa_sistema-central.txt
+ * │   └── ...
+ * ├── beta/
+ * │   ├── 0.1.0.0-beta_primeira-dungeon.txt
+ * │   └── ...
+ * ├── pre-release/
+ * │   ├── 0.9.0.0-pre-release_balanceamento-final.txt
+ * │   └── ...
+ * └── release/
+ *     ├── 1.0.0.0_lancamento-oficial.txt
+ *     └── ...
+ * 
+ * ==========================================================================
+ * 🎮 NAVEGAÇÃO EM DUAS CAMADAS
+ * ==========================================================================
+ * 
+ * O sistema de navegação funciona em 2 níveis:
+ * 
+ * 1ª CAMADA: Seleção de Estágio
+ * ┌─────────────────────────────────────────┐
+ * │      📜 NOTAS DE ATUALIZAÇÃO            │
+ * ├─────────────────────────────────────────┤
+ * │  🔬 ALFA - Desenvolvimento Inicial      │
+ * │  🧪 BETA - Testes Públicos              │
+ * │  🎯 PRÉ-RELEASE - Versão Candidata      │
+ * │  🏆 RELEASE - Versões Oficiais          │
+ * │  ⬅️  Voltar                              │
+ * └─────────────────────────────────────────┘
+ * 
+ * 2ª CAMADA: Lista de Versões do Estágio
+ * ┌─────────────────────────────────────────┐
+ * │      📜 ALFA - Todas as Versões         │
+ * ├─────────────────────────────────────────┤
+ * │  v0.0.0.4 - Menu Principal Épico        │
+ * │  v0.0.0.3 - Introdução Cinematográfica  │
+ * │  v0.0.0.2 - Diagnóstico Inteligente     │
+ * │  v0.0.0.1 - Sistema Central             │
+ * │  v0.0.0.0 - Base Inicial                │
+ * │  ⬅️  Voltar para Estágios                │
+ * └─────────────────────────────────────────┘
+ * 
+ * 3ª CAMADA: Visualização do Conteúdo
+ * ┌─────────────────────────────────────────┐
+ * │  🎮 Menu Principal Épico                │
+ * │  Versão: 0.0.0.4-alfa                   │
+ * │  Data: 29/10/2025                       │
+ * │  Categoria: Grande Atualização          │
+ * ├─────────────────────────────────────────┤
+ * │  [CONTEÚDO DO PATCH NOTE]               │
+ * │  ⬅️  Voltar para Lista                   │
+ * └─────────────────────────────────────────┘
+ * 
+ * ==========================================================================
+ * 🏷️ ESTÁGIOS E SEUS EMOJIS/TEXTOS
+ * ==========================================================================
+ * 
+ * Para uso na interface:
+ * 
+ * | Estágio      | Emoji | Título       | Descrição            |
+ * |--------------|-------|--------------|----------------------|
+ * | alfa         | 🔬    | ALFA         | Desenvolvimento      |
+ * | beta         | 🧪    | BETA         | Testes Públicos      |
+ * | pre-release  | 🎯    | PRÉ-RELEASE  | Versão Candidata     |
+ * | release      | 🏆    | RELEASE      | Versões Oficiais     |
+ * 
+ * ==========================================================================
+ * 📋 CATEGORIAS PERMITIDAS (APENAS ESTAS 5)
+ * ==========================================================================
+ * 
+ * 1. Base Inicial - Primeira versão
+ * 2. Grande Atualização - Múltiplos sistemas novos
+ * 3. Pequena Atualização - Melhorias pontuais
+ * 4. Correções Importantes - Bugs críticos
+ * 5. Correções Pequenas - Pequenos ajustes
+ * 
+ * ==========================================================================
  */
 
 var AS = AS || {};
@@ -24,7 +108,7 @@ AS.PatchNotes = AS.PatchNotes || {};
     'use strict';
 
     const MODULE_ID = 'AS_1.4_PatchNotes';
-    const MODULE_VERSION = '1.2.6';
+    const MODULE_VERSION = '1.2.0';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
 
     const logger = {
@@ -76,41 +160,9 @@ AS.PatchNotes = AS.PatchNotes || {};
     let detachKeyHandler = null;
     let contextRef = null;
     let currentCategory = 'all';
-    let currentStage = null;
     let patchNotesCache = null;
     let savedBgm = null;
     let isOpen = false;
-    
-    // Função utilitária para atualizar indicadores de scroll
-    function updateScrollIndicators(panel) {
-        if (!panel) return;
-        
-        const hasScrollTop = panel.scrollTop > 20;
-        const hasScrollBottom = panel.scrollTop < (panel.scrollHeight - panel.clientHeight - 20);
-        
-        if (hasScrollTop) {
-            panel.classList.add('has-scroll-top');
-        } else {
-            panel.classList.remove('has-scroll-top');
-        }
-        
-        if (hasScrollBottom) {
-            panel.classList.add('has-scroll-bottom');
-        } else {
-            panel.classList.remove('has-scroll-bottom');
-        }
-    }
-    
-    // Função para atualizar indicadores de todos os painéis
-    function updateAllScrollIndicators() {
-        if (!rootElement) return;
-        
-        const versionList = rootElement.querySelector('.as-patchnotes__version-list');
-        const detailPanel = rootElement.querySelector('.as-patchnotes__detail-panel');
-        
-        if (versionList) updateScrollIndicators(versionList);
-        if (detailPanel) updateScrollIndicators(detailPanel);
-    }
 
     const manifest = {
         id: MODULE_ID,
@@ -484,14 +536,7 @@ AS.PatchNotes = AS.PatchNotes || {};
                 if (typeof SoundManager !== 'undefined') {
                     SoundManager.playCursor();
                 }
-                
-                // Se estamos em um estágio específico, filtrar por categoria
-                if (currentStage) {
-                    filterVersionsByCategory(category, currentStage);
-                } else {
-                    // Caso contrário, usar o comportamento antigo
-                    loadPatchNotes(category);
-                }
+                loadPatchNotes(category);
             });
         });
         
@@ -525,66 +570,6 @@ AS.PatchNotes = AS.PatchNotes || {};
                 }
                 if (typeof SoundManager !== 'undefined') {
                     SoundManager.playCancel();
-                }
-            });
-        }
-        
-        // Vincular botão de scroll ao topo
-        const scrollTopBtn = rootElement.querySelector('#patchNotesScrollTop');
-        const versionList = rootElement.querySelector('.as-patchnotes__version-list');
-        const detailPanel = rootElement.querySelector('.as-patchnotes__detail-panel');
-        
-        if (scrollTopBtn && versionList && detailPanel) {
-            // Função para atualizar indicadores de scroll
-            const updateScrollIndicators = (panel) => {
-                const hasScrollTop = panel.scrollTop > 20;
-                const hasScrollBottom = panel.scrollTop < (panel.scrollHeight - panel.clientHeight - 20);
-                
-                if (hasScrollTop) {
-                    panel.classList.add('has-scroll-top');
-                } else {
-                    panel.classList.remove('has-scroll-top');
-                }
-                
-                if (hasScrollBottom) {
-                    panel.classList.add('has-scroll-bottom');
-                } else {
-                    panel.classList.remove('has-scroll-bottom');
-                }
-            };
-            
-            // Mostrar/esconder botão baseado no scroll
-            const handleScroll = (panel) => {
-                updateScrollIndicators(panel);
-                
-                if (panel.scrollTop > 300) {
-                    scrollTopBtn.classList.add('visible');
-                } else {
-                    scrollTopBtn.classList.remove('visible');
-                }
-            };
-            
-            versionList.addEventListener('scroll', () => handleScroll(versionList));
-            detailPanel.addEventListener('scroll', () => handleScroll(detailPanel));
-            
-            // Atualizar indicadores na inicialização
-            setTimeout(() => {
-                updateScrollIndicators(versionList);
-                updateScrollIndicators(detailPanel);
-            }, 100);
-            
-            // Clicar no botão volta ao topo do painel ativo
-            scrollTopBtn.addEventListener('click', () => {
-                if (typeof SoundManager !== 'undefined') {
-                    SoundManager.playCursor();
-                }
-                
-                // Rolar para o topo do painel que tem scroll
-                if (versionList.scrollTop > 0) {
-                    versionList.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-                if (detailPanel.scrollTop > 0) {
-                    detailPanel.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
         }
@@ -836,7 +821,7 @@ AS.PatchNotes = AS.PatchNotes || {};
             const slug = filenameMatch[3];
 
             // Usar stageFolder passado como parâmetro (alfa, beta, pre-release, release)
-            let stage = stageFolder || stageSuffix;
+            const stage = stageFolder || stageSuffix;
 
             // Extrair informações do conteúdo markdown
             const lines = content.split('\n');
@@ -966,12 +951,21 @@ AS.PatchNotes = AS.PatchNotes || {};
                 sections.push(currentSection);
             }
 
+            // Mapear categoria para sistema de filtros
+            const categoryMap = {
+                'Base Inicial': 'base',
+                'Grandes Atualizações': 'major',
+                'Pequenas Atualizações': 'minor',
+                'Correções Importantes': 'critical',
+                'Correções Pequenas': 'fix'
+            };
+
             const result = {
                 version,
                 stage,
                 title,
                 date,
-                category: category, // Manter categoria original
+                category: categoryMap[category] || 'other',
                 type: category,
                 description,
                 sections,
@@ -1001,7 +995,7 @@ AS.PatchNotes = AS.PatchNotes || {};
                 stage: 'alfa',
                 title: 'Sistema de Plugins Customizados',
                 date: '15/01/2025',
-                category: 'Grande Atualização',
+                category: 'major',
                 type: 'Grande Atualização',
                 description: 'Sistema completo de plugins com gerenciamento de dependências',
                 sections: [
@@ -1024,7 +1018,7 @@ AS.PatchNotes = AS.PatchNotes || {};
                 stage: 'alfa',
                 title: 'Versão Inicial - Base do Sistema',
                 date: '01/01/2025',
-                category: 'Base Inicial',
+                category: 'base',
                 type: 'Base Inicial',
                 description: 'Versão base do Ancient Souls com RPG Maker MZ',
                 sections: [
@@ -1171,7 +1165,7 @@ AS.PatchNotes = AS.PatchNotes || {};
                         // Badge com ícone
                         const badge = document.createElement('span');
                         badge.className = `as-badge as-badge--${item.type}`;
-                        badge.innerHTML = getBadgeText(item.type);
+                        badge.innerHTML = `${getTypeIcon(item.type)} ${getBadgeText(item.type)}`;
                         
                         // Texto do item
                         const text = document.createElement('span');
@@ -1218,7 +1212,7 @@ AS.PatchNotes = AS.PatchNotes || {};
         version.textContent = `v${note.version}-${note.stage}`;
         
         const categoryBadge = document.createElement('span');
-        categoryBadge.className = `as-version-item__category as-badge--${getCategoryClass(note.category)}`;
+        categoryBadge.className = `as-version-item__category as-badge--${note.category}`;
         categoryBadge.textContent = getCategoryName(note.category);
         
         header.appendChild(version);
@@ -1353,7 +1347,7 @@ AS.PatchNotes = AS.PatchNotes || {};
                         
                         const badge = document.createElement('span');
                         badge.className = `as-badge as-badge--${item.type}`;
-                        badge.innerHTML = getBadgeText(item.type);
+                        badge.innerHTML = `${getTypeIcon(item.type)} ${getBadgeText(item.type)}`;
                         
                         const text = document.createElement('span');
                         text.className = 'as-patchnote__item-text';
@@ -1450,42 +1444,15 @@ AS.PatchNotes = AS.PatchNotes || {};
     }
 
     function getCategoryName(category) {
-        // Se já for um nome completo, retornar direto
-        const fullNames = [
-            'Base Inicial',
-            'Grande Atualização',
-            'Pequena Atualização',
-            'Correções Importantes',
-            'Correções Pequenas'
-        ];
-        
-        if (fullNames.includes(category)) {
-            return category;
-        }
-        
-        // Caso contrário, mapear códigos para nomes
         const categories = {
             'base': 'Base Inicial',
             'major': 'Grande Atualização',
             'minor': 'Pequena Atualização',
-            'critical': 'Correções Importantes',
-            'fix': 'Correções Pequenas',
+            'critical': 'Correção Importante',
+            'fix': 'Correção',
             'other': 'Outro'
         };
         return categories[category] || 'Outro';
-    }
-    
-    function getCategoryClass(category) {
-        // Mapear nome completo para código CSS
-        const classMap = {
-            'Base Inicial': 'base',
-            'Grande Atualização': 'major',
-            'Pequena Atualização': 'minor',
-            'Correções Importantes': 'critical',
-            'Correções Pequenas': 'fix'
-        };
-        
-        return classMap[category] || 'other';
     }
 
     function getBadgeText(type) {
@@ -1504,67 +1471,70 @@ AS.PatchNotes = AS.PatchNotes || {};
             return;
         }
 
-        // Limpar estágio atual
-        currentStage = null;
-        currentCategory = 'all';
-
         const versionList = rootElement.querySelector('#patchNotesVersionList');
         const detailPanel = rootElement.querySelector('#patchNotesDetailPanel');
         const titleElement = rootElement.querySelector('.as-patchnotes__title');
-        const tabsContainer = rootElement.querySelector('.as-patchnotes__tabs');
         
         if (!versionList || !detailPanel) {
             return;
         }
 
-        // OCULTAR abas de categoria na seleção de estágios
-        if (tabsContainer) {
-            tabsContainer.style.display = 'none';
-        }
-
         // Atualizar título
         if (titleElement) {
-            titleElement.textContent = '📜 NOTAS DE ATUALIZAÇÃO - Selecione um Estágio';
+            titleElement.textContent = '📜 NOTAS DE ATUALIZAÇÃO';
         }
 
-        // Limpar painéis
+        // Limpar lista de versões
         versionList.innerHTML = '';
-        detailPanel.innerHTML = '';
 
-        // Criar container para botões horizontais de estágio
-        const stageGrid = document.createElement('div');
-        stageGrid.className = 'as-stage-grid';
-        
-        // Criar botões de seleção de estágios em layout horizontal
+        // Criar botões de seleção de estágios
         for (const stageKey in STAGES) {
             const stage = STAGES[stageKey];
             
-            const stageCard = document.createElement('div');
-            stageCard.className = 'as-stage-card';
-            stageCard.innerHTML = `
-                <div class="as-stage-card__emoji">${stage.emoji}</div>
-                <div class="as-stage-card__title">${stage.title}</div>
-                <div class="as-stage-card__description">${stage.description}</div>
+            const stageButton = document.createElement('div');
+            stageButton.className = 'as-stage-button';
+            stageButton.innerHTML = `
+                <span class="as-stage-button__emoji">${stage.emoji}</span>
+                <div class="as-stage-button__content">
+                    <div class="as-stage-button__title">${stage.title}</div>
+                    <div class="as-stage-button__description">${stage.description}</div>
+                </div>
             `;
 
-            stageCard.addEventListener('click', () => {
+            stageButton.addEventListener('click', () => {
                 if (typeof SoundManager !== 'undefined') {
                     SoundManager.playCursor();
                 }
                 showVersionList(stage.folder);
             });
 
-            stageGrid.appendChild(stageCard);
+            versionList.appendChild(stageButton);
         }
-        
-        versionList.appendChild(stageGrid);
 
-        // Mensagem no painel de detalhes
+        // Adicionar botão de voltar
+        const backButton = document.createElement('div');
+        backButton.className = 'as-stage-button as-stage-button--back';
+        backButton.innerHTML = `
+            <span class="as-stage-button__emoji">⬅️</span>
+            <div class="as-stage-button__content">
+                <div class="as-stage-button__title">Voltar</div>
+            </div>
+        `;
+
+        backButton.addEventListener('click', () => {
+            if (typeof SoundManager !== 'undefined') {
+                SoundManager.playCancel();
+            }
+            closePatchNotes();
+        });
+
+        versionList.appendChild(backButton);
+
+        // Limpar painel de detalhes
         detailPanel.innerHTML = `
             <div class="as-patchnotes__detail-empty">
-                <span class="as-patchnotes__detail-empty-icon">🎮</span>
-                <p style="font-size: 18px; margin-bottom: 10px;">Bem-vindo ao Sistema de Patch Notes!</p>
-                <p style="font-size: 14px; opacity: 0.8;">Escolha um estágio de desenvolvimento à esquerda para visualizar as atualizações.</p>
+                <span class="as-patchnotes__detail-empty-icon">📜</span>
+                <p>Selecione um estágio para ver as atualizações</p>
             </div>
         `;
     }
@@ -1577,7 +1547,6 @@ AS.PatchNotes = AS.PatchNotes || {};
         const versionList = rootElement.querySelector('#patchNotesVersionList');
         const detailPanel = rootElement.querySelector('#patchNotesDetailPanel');
         const titleElement = rootElement.querySelector('.as-patchnotes__title');
-        const tabsContainer = rootElement.querySelector('.as-patchnotes__tabs');
         
         if (!versionList || !detailPanel) {
             return;
@@ -1590,18 +1559,9 @@ AS.PatchNotes = AS.PatchNotes || {};
             return;
         }
 
-        // Definir estágio atual
-        currentStage = stage;
-        currentCategory = 'all';
-
-        // MOSTRAR abas de categoria ao selecionar um estágio
-        if (tabsContainer) {
-            tabsContainer.style.display = 'flex';
-        }
-
         // Atualizar título
         if (titleElement) {
-            titleElement.textContent = `${stageInfo.emoji} ${stageInfo.title}`;
+            titleElement.textContent = `${stageInfo.emoji} ${stageInfo.title} - Todas as Versões`;
         }
 
         // Carregar notas do estágio
@@ -1610,22 +1570,11 @@ AS.PatchNotes = AS.PatchNotes || {};
         versionList.innerHTML = '';
 
         if (notes.length === 0) {
-            // Estágio sem atualizações - mensagem amigável
-            versionList.innerHTML = `
-                <div class="as-stage-empty">
-                    <div class="as-stage-empty__icon">${stageInfo.emoji}</div>
-                    <h3 class="as-stage-empty__title">Ainda não há atualizações</h3>
-                    <p class="as-stage-empty__message">
-                        Este estágio de desenvolvimento ainda não possui versões registradas.
-                        Volte mais tarde para conferir as novidades!
-                    </p>
-                </div>
-            `;
-            
+            versionList.innerHTML = '<p class="as-patchnotes__empty">Nenhuma atualização neste estágio ainda.</p>';
             detailPanel.innerHTML = `
                 <div class="as-patchnotes__detail-empty">
-                    <span class="as-patchnotes__detail-empty-icon">📝</span>
-                    <p>Nenhuma atualização disponível neste estágio</p>
+                    <span class="as-patchnotes__detail-empty-icon">${stageInfo.emoji}</span>
+                    <p>Nenhuma versão disponível</p>
                 </div>
             `;
             
@@ -1665,124 +1614,6 @@ AS.PatchNotes = AS.PatchNotes || {};
 
         // Adicionar botão de voltar
         addBackToStagesButton(versionList);
-        
-        // Atualizar contadores das abas de categoria
-        updateCategoryTabsForStage(notes);
-        
-        // Atualizar classe active nas abas
-        updateActiveTab('all');
-        
-        // Atualizar indicadores de scroll após renderizar
-        setTimeout(() => {
-            updateAllScrollIndicators();
-        }, 100);
-    }
-
-    function filterVersionsByCategory(category, stage) {
-        if (!rootElement) return;
-        
-        currentCategory = category;
-        
-        const versionList = rootElement.querySelector('#patchNotesVersionList');
-        const detailPanel = rootElement.querySelector('#patchNotesDetailPanel');
-        
-        if (!versionList || !detailPanel) return;
-        
-        // Carregar todas as notas do estágio
-        const allNotes = getPatchNotesData(stage);
-        
-        // Filtrar por categoria
-        const filteredNotes = category === 'all' 
-            ? allNotes 
-            : allNotes.filter(note => note.category === category);
-        
-        versionList.innerHTML = '';
-        
-        if (filteredNotes.length === 0) {
-            versionList.innerHTML = '<p class="as-patchnotes__empty">Nenhuma atualização nesta categoria.</p>';
-            detailPanel.innerHTML = `
-                <div class="as-patchnotes__detail-empty">
-                    <span class="as-patchnotes__detail-empty-icon">📋</span>
-                    <p>Nenhuma versão disponível</p>
-                </div>
-            `;
-            addBackToStagesButton(versionList);
-            return;
-        }
-        
-        // Renderizar lista filtrada
-        filteredNotes.forEach((note, index) => {
-            const versionItem = createVersionItem(note);
-            
-            // Selecionar automaticamente a primeira versão
-            if (index === 0) {
-                versionItem.classList.add('active');
-                showVersionDetails(note);
-            }
-            
-            // Adicionar evento de clique
-            versionItem.addEventListener('click', () => {
-                if (typeof SoundManager !== 'undefined') {
-                    SoundManager.playCursor();
-                }
-                
-                versionList.querySelectorAll('.as-version-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                versionItem.classList.add('active');
-                showVersionDetails(note);
-            });
-            
-            versionList.appendChild(versionItem);
-        });
-        
-        addBackToStagesButton(versionList);
-        updateActiveTab(category);
-        
-        // Atualizar indicadores de scroll após renderizar
-        setTimeout(() => {
-            updateAllScrollIndicators();
-        }, 100);
-    }
-
-    function updateActiveTab(category) {
-        if (!rootElement) return;
-        
-        const tabs = rootElement.querySelectorAll('.as-patchnotes__tab');
-        tabs.forEach(tab => {
-            if (tab.dataset.category === category) {
-                tab.classList.add('as-patchnotes__tab--active');
-                tab.setAttribute('aria-selected', 'true');
-            } else {
-                tab.classList.remove('as-patchnotes__tab--active');
-                tab.setAttribute('aria-selected', 'false');
-            }
-        });
-    }
-
-    function updateCategoryTabsForStage(notes) {
-        if (!rootElement) return;
-        
-        const tabs = rootElement.querySelectorAll('.as-patchnotes__tab');
-        
-        tabs.forEach(tab => {
-            const tabCategory = tab.dataset.category;
-            
-            // Calcular contador baseado nas notas do estágio
-            const count = tabCategory === 'all' 
-                ? notes.length 
-                : notes.filter(note => note.category === tabCategory).length;
-            
-            // Verificar se já existe badge de contador
-            let badge = tab.querySelector('.as-patchnotes__tab-count');
-            if (!badge) {
-                badge = document.createElement('span');
-                badge.className = 'as-patchnotes__tab-count';
-                tab.appendChild(badge);
-            }
-            badge.textContent = count;
-        });
     }
 
     function addBackToStagesButton(container) {
@@ -1857,40 +1688,9 @@ AS.PatchNotes = AS.PatchNotes || {};
                 return;
             }
 
-            // Verificar se o foco está em um input de texto
-            const activeElement = document.activeElement;
-            const isInputFocused = activeElement && (
-                activeElement.tagName === 'INPUT' ||
-                activeElement.tagName === 'TEXTAREA' ||
-                activeElement.isContentEditable
-            );
-
-            // ESC sempre fecha
             if (event.key === 'Escape') {
                 event.preventDefault();
                 closePatchNotes();
-                return;
-            }
-
-            // Backspace volta (apenas se não estiver em input)
-            if (event.key === 'Backspace' && !isInputFocused) {
-                event.preventDefault();
-                
-                // Se está em detalhe de versão, volta para lista
-                const detailPanel = rootElement.querySelector('#patchNotesDetailPanel');
-                const hasVersionDetails = detailPanel && detailPanel.querySelector('.as-detail-header');
-                
-                if (hasVersionDetails && currentStage) {
-                    // Volta para lista de versões do estágio
-                    showVersionList(currentStage);
-                } else if (currentStage) {
-                    // Volta para seleção de estágios
-                    showStageSelection();
-                } else {
-                    // Está na seleção de estágios, fecha
-                    closePatchNotes();
-                }
-                return;
             }
         };
 

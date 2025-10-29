@@ -242,14 +242,16 @@
 .as-patchnotes__layout {
     display: flex;
     gap: 0;
-    height: calc(100% - 140px);
+    height: calc(100% - 190px); /* Ajustado para acomodar o footer */
     margin: 0;
     padding: 0;
+    overflow: hidden; /* Previne overflow no container pai */
 }
 
 .as-patchnotes__version-list {
     width: 35%;
     min-width: 300px;
+    max-width: 450px; /* Limita largura máxima */
     overflow-y: auto;
     overflow-x: hidden;
     padding: 20px;
@@ -258,6 +260,46 @@
         rgba(60, 40, 100, 0.2) 100%);
     border-right: 2px solid rgba(139, 92, 246, 0.3);
     scroll-behavior: smooth;
+    max-height: 100%; /* Garante que não ultrapasse o container */
+    position: relative;
+}
+
+/* Fade gradiente no topo e fundo para indicar scroll */
+.as-patchnotes__version-list::before,
+.as-patchnotes__version-list::after {
+    content: '';
+    position: sticky;
+    left: 0;
+    right: 0;
+    height: 40px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.as-patchnotes__version-list::before {
+    top: 0;
+    background: linear-gradient(180deg,
+        rgba(30, 20, 60, 0.95) 0%,
+        rgba(30, 20, 60, 0.7) 50%,
+        transparent 100%);
+}
+
+.as-patchnotes__version-list::after {
+    bottom: 0;
+    background: linear-gradient(0deg,
+        rgba(30, 20, 60, 0.95) 0%,
+        rgba(30, 20, 60, 0.7) 50%,
+        transparent 100%);
+}
+
+.as-patchnotes__version-list.has-scroll-top::before {
+    opacity: 1;
+}
+
+.as-patchnotes__version-list.has-scroll-bottom::after {
+    opacity: 1;
 }
 
 /* Scrollbar da lista de versões */
@@ -313,6 +355,47 @@
         rgba(20, 10, 40, 0.3) 0%,
         rgba(40, 20, 80, 0.2) 100%);
     scroll-behavior: smooth;
+    max-height: 100%; /* Garante que não ultrapasse o container */
+    min-width: 0; /* Permite que o flex item encolha corretamente */
+    position: relative;
+}
+
+/* Fade gradiente no topo e fundo para indicar scroll */
+.as-patchnotes__detail-panel::before,
+.as-patchnotes__detail-panel::after {
+    content: '';
+    position: sticky;
+    left: 0;
+    right: 0;
+    height: 40px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.as-patchnotes__detail-panel::before {
+    top: 0;
+    background: linear-gradient(180deg,
+        rgba(20, 10, 40, 0.95) 0%,
+        rgba(20, 10, 40, 0.7) 50%,
+        transparent 100%);
+}
+
+.as-patchnotes__detail-panel::after {
+    bottom: 0;
+    background: linear-gradient(0deg,
+        rgba(20, 10, 40, 0.95) 0%,
+        rgba(20, 10, 40, 0.7) 50%,
+        transparent 100%);
+}
+
+.as-patchnotes__detail-panel.has-scroll-top::before {
+    opacity: 1;
+}
+
+.as-patchnotes__detail-panel.has-scroll-bottom::after {
+    opacity: 1;
 }
 
 /* Scrollbar do painel de detalhes */
@@ -1362,6 +1445,29 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-end;
+    overflow-x: auto; /* Permite scroll horizontal se necessário */
+    overflow-y: hidden;
+    max-width: 100%; /* Não ultrapassa o container */
+    scroll-behavior: smooth;
+}
+
+/* Scrollbar para as tabs se necessário */
+.as-detail-tabs::-webkit-scrollbar {
+    height: 8px;
+}
+
+.as-detail-tabs::-webkit-scrollbar-track {
+    background: rgba(30, 20, 60, 0.4);
+    border-radius: 4px;
+}
+
+.as-detail-tabs::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.6);
+    border-radius: 4px;
+}
+
+.as-detail-tabs::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.8);
 }
 
 .as-detail-tab {
@@ -1577,6 +1683,10 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    word-wrap: break-word; /* Quebra palavras longas */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%; /* Não ultrapassa o container */
 }
 
 .as-detail-meta {
@@ -1619,6 +1729,10 @@
     font-size: 15px;
     line-height: 1.8;
     color: #e9d5ff;
+    word-wrap: break-word; /* Quebra palavras longas */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
 }
 
 .as-detail-subsection {
@@ -1649,4 +1763,402 @@
     font-size: 12px;
     color: #fb923c;
     filter: drop-shadow(0 0 4px rgba(251, 146, 60, 0.8));
+}
+
+/* ==========================================================================
+   Navegação por Estágios (Alfa, Beta, Pré-Release, Release)
+   ========================================================================== */
+
+/* Grid de Estágios Horizontal */
+.as-stage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 20px;
+    width: 100%;
+}
+
+.as-stage-card {
+    background: linear-gradient(135deg,
+        rgba(139, 92, 246, 0.15) 0%,
+        rgba(109, 40, 217, 0.1) 100%);
+    border: 3px solid rgba(255, 216, 159, 0.3);
+    border-radius: 14px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-height: 140px;
+    justify-content: center;
+}
+
+.as-stage-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 216, 159, 0.15),
+        transparent);
+    transition: left 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.as-stage-card:hover::before {
+    left: 100%;
+}
+
+.as-stage-card:hover {
+    background: linear-gradient(135deg,
+        rgba(139, 92, 246, 0.3) 0%,
+        rgba(109, 40, 217, 0.25) 100%);
+    border-color: var(--as-patchnotes-gold);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(139, 92, 246, 0.5),
+                inset 0 0 50px rgba(139, 92, 246, 0.15);
+}
+
+.as-stage-card:active {
+    transform: translateY(-4px) scale(1);
+}
+
+.as-stage-card__emoji {
+    font-size: 48px;
+    filter: drop-shadow(0 3px 10px rgba(255, 216, 159, 0.6));
+    margin-bottom: 4px;
+}
+
+.as-stage-card__title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--as-patchnotes-gold-bright);
+    text-shadow: 0 0 18px rgba(255, 216, 159, 0.8),
+                 0 2px 5px rgba(0, 0, 0, 0.9);
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+.as-stage-card__description {
+    font-size: 13px;
+    color: #c4b5fd;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* Mensagem de Estágio Vazio */
+.as-stage-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    text-align: center;
+    min-height: 400px;
+}
+
+.as-stage-empty__icon {
+    font-size: 100px;
+    margin-bottom: 24px;
+    opacity: 0.4;
+    filter: drop-shadow(0 4px 12px rgba(139, 92, 246, 0.3));
+    animation: float-icon 3s ease-in-out infinite;
+}
+
+.as-stage-empty__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--as-patchnotes-gold);
+    margin: 0 0 16px;
+    text-shadow: 0 0 15px rgba(255, 216, 159, 0.5);
+}
+
+.as-stage-empty__message {
+    font-size: 16px;
+    color: #c4b5fd;
+    line-height: 1.8;
+    max-width: 500px;
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* Botão de Estágio (mantido para compatibilidade) */
+.as-stage-button {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 24px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg,
+        rgba(139, 92, 246, 0.15) 0%,
+        rgba(109, 40, 217, 0.1) 100%);
+    border: 2px solid rgba(255, 216, 159, 0.3);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.as-stage-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 216, 159, 0.1),
+        transparent);
+    transition: left 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.as-stage-button:hover::before {
+    left: 100%;
+}
+
+.as-stage-button:hover {
+    background: linear-gradient(135deg,
+        rgba(139, 92, 246, 0.25) 0%,
+        rgba(109, 40, 217, 0.2) 100%);
+    border-color: var(--as-patchnotes-gold);
+    transform: translateX(10px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4),
+                inset 0 0 40px rgba(139, 92, 246, 0.1);
+}
+
+.as-stage-button:active {
+    transform: translateX(8px) scale(0.98);
+}
+
+.as-stage-button__emoji {
+    font-size: 36px;
+    min-width: 45px;
+    text-align: center;
+    filter: drop-shadow(0 3px 8px rgba(255, 216, 159, 0.5));
+}
+
+.as-stage-button__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.as-stage-button__title {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--as-patchnotes-gold-bright);
+    text-shadow: 0 0 15px rgba(255, 216, 159, 0.6),
+                 0 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 1.5px;
+}
+
+.as-stage-button__description {
+    font-size: 14px;
+    color: #c4b5fd;
+    opacity: 0.9;
+}
+
+.as-stage-button--back {
+    background: linear-gradient(135deg,
+        rgba(217, 119, 6, 0.15) 0%,
+        rgba(161, 98, 7, 0.1) 100%);
+    border-color: rgba(255, 216, 159, 0.4);
+}
+
+.as-stage-button--back:hover {
+    background: linear-gradient(135deg,
+        rgba(217, 119, 6, 0.25) 0%,
+        rgba(161, 98, 7, 0.2) 100%);
+    border-color: #fb923c;
+    box-shadow: 0 8px 24px rgba(217, 119, 6, 0.4),
+                inset 0 0 40px rgba(217, 119, 6, 0.1);
+}
+
+.as-stage-button--back .as-stage-button__title {
+    color: #fbbf24;
+}
+
+/* Versão Item - Botão de Voltar */
+.as-version-item--back {
+    background: linear-gradient(135deg,
+        rgba(217, 119, 6, 0.15) 0%,
+        rgba(161, 98, 7, 0.1) 100%);
+    border-color: rgba(255, 216, 159, 0.4);
+}
+
+.as-version-item--back:hover {
+    background: linear-gradient(135deg,
+        rgba(217, 119, 6, 0.25) 0%,
+        rgba(161, 98, 7, 0.2) 100%);
+    border-color: #fb923c;
+    box-shadow: 0 4px 16px rgba(217, 119, 6, 0.3);
+}
+
+.as-version-item--back .as-version-item__version {
+    color: #fbbf24;
+}
+
+/* Botão de Voltar no Painel de Detalhes */
+.as-detail-back-container {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px solid rgba(139, 92, 246, 0.3);
+    display: flex;
+    justify-content: center;
+}
+
+.as-patchnotes__back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg,
+        rgba(217, 119, 6, 0.2) 0%,
+        rgba(161, 98, 7, 0.15) 100%);
+    border: 2px solid rgba(255, 216, 159, 0.4);
+    border-radius: 12px;
+    color: #fbbf24;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.as-patchnotes__back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 216, 159, 0.15),
+        transparent);
+    transition: left 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.as-patchnotes__back-button:hover::before {
+    left: 100%;
+}
+
+.as-patchnotes__back-button:hover {
+    background: linear-gradient(135deg,
+        rgba(217, 119, 6, 0.35) 0%,
+        rgba(161, 98, 7, 0.25) 100%);
+    border-color: #fb923c;
+    transform: translateX(-8px);
+    box-shadow: 0 6px 20px rgba(217, 119, 6, 0.5),
+                inset 0 0 30px rgba(217, 119, 6, 0.1);
+    color: #ffd89f;
+    text-shadow: 0 0 10px rgba(255, 216, 159, 0.8),
+                 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.as-patchnotes__back-button:active {
+    transform: translateX(-6px) scale(0.98);
+}
+
+/* Footer com atalhos de teclado */
+.as-patchnotes__footer {
+    padding: 12px 25px;
+    background: linear-gradient(135deg,
+        rgba(139, 92, 246, 0.2) 0%,
+        rgba(109, 40, 217, 0.2) 100%);
+    border-top: 2px solid var(--as-patchnotes-gold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.as-patchnotes__shortcuts {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.as-patchnotes__shortcut {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #c4b5fd;
+    font-weight: 500;
+}
+
+.as-patchnotes__shortcut kbd {
+    display: inline-block;
+    padding: 4px 10px;
+    background: linear-gradient(135deg,
+        rgba(30, 20, 60, 0.8) 0%,
+        rgba(20, 10, 40, 0.9) 100%);
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--as-patchnotes-gold);
+    text-shadow: 0 0 8px rgba(255, 216, 159, 0.5);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    min-width: 60px;
+    text-align: center;
+}
+
+/* Botão Voltar ao Topo */
+.as-patchnotes__scroll-top {
+    position: fixed;
+    bottom: 80px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg,
+        rgba(139, 92, 246, 0.9) 0%,
+        rgba(109, 40, 217, 0.9) 100%);
+    border: 2px solid var(--as-patchnotes-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5);
+    z-index: 10001;
+}
+
+.as-patchnotes__scroll-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.as-patchnotes__scroll-top:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 6px 25px rgba(139, 92, 246, 0.7);
+}
+
+.as-patchnotes__scroll-top:active {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.as-patchnotes__scroll-top::before {
+    content: '⬆️';
+    font-size: 24px;
+    filter: drop-shadow(0 0 8px rgba(255, 216, 159, 0.8));
 }

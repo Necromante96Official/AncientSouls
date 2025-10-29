@@ -9,8 +9,7 @@
     <div class="as-patchnotes__container">
         <header class="as-patchnotes__header">
             <h1 class="as-patchnotes__title" id="patchNotesTitle">
-                <span class="as-patchnotes__title-icon">📜</span>
-                Notas de Atualização
+                📜 Notas de Atualização
             </h1>
             <div class="as-patchnotes__header-actions">
                 <button 
@@ -58,53 +57,47 @@
                 role="tab"
                 aria-selected="true"
             >
-                <span class="as-patchnotes__tab-icon">🌟</span>
-                Todas
+                Todas Atualizações
             </button>
             <button 
                 class="as-patchnotes__tab" 
-                data-category="major" 
+                data-category="Grande Atualização" 
                 role="tab"
                 aria-selected="false"
             >
-                <span class="as-patchnotes__tab-icon">⚡</span>
-                Grandes
+                Grande Atualizações
             </button>
             <button 
                 class="as-patchnotes__tab" 
-                data-category="minor" 
+                data-category="Pequena Atualização" 
                 role="tab"
                 aria-selected="false"
             >
-                <span class="as-patchnotes__tab-icon">✨</span>
-                Pequenas
+                Pequenas Atualizações
             </button>
             <button 
                 class="as-patchnotes__tab" 
-                data-category="critical" 
+                data-category="Correções Importantes" 
                 role="tab"
                 aria-selected="false"
             >
-                <span class="as-patchnotes__tab-icon">🔥</span>
-                Críticas
+                Correções Importantes
             </button>
             <button 
                 class="as-patchnotes__tab" 
-                data-category="fix" 
+                data-category="Correções Pequenas" 
                 role="tab"
                 aria-selected="false"
             >
-                <span class="as-patchnotes__tab-icon">🔧</span>
-                Correções
+                Correções Pequenas
             </button>
             <button 
                 class="as-patchnotes__tab" 
-                data-category="base" 
+                data-category="Base Inicial" 
                 role="tab"
                 aria-selected="false"
             >
-                <span class="as-patchnotes__tab-icon">🎮</span>
-                Base
+                Base Inicial
             </button>
         </nav>
         
@@ -125,5 +118,24 @@
                 </div>
             </div>
         </div>
+        
+        <footer class="as-patchnotes__footer">
+            <div class="as-patchnotes__shortcuts">
+                <span class="as-patchnotes__shortcut">
+                    <kbd>ESC</kbd> Fechar
+                </span>
+                <span class="as-patchnotes__shortcut">
+                    <kbd>Backspace</kbd> Voltar
+                </span>
+            </div>
+        </footer>
+        
+        <!-- Botão Voltar ao Topo -->
+        <button 
+            id="patchNotesScrollTop" 
+            class="as-patchnotes__scroll-top"
+            aria-label="Voltar ao topo"
+            title="Voltar ao topo"
+        ></button>
     </div>
 </div>

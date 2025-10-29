@@ -2869,4 +2869,157 @@ Para dúvidas, sugestões ou autorizações:
 
 ---
 
+## 📜 Sistema de Notas de Atualização (Patch Notes)
+
+Este sistema gerencia como as atualizações do jogo são documentadas e apresentadas aos jogadores.
+
+### ⚠️ REGRA DE OURO
+
+**PATCH NOTES DESCREVEM O JOGO PRONTO, NÃO COMO FAZER O JOGO!**
+
+- ✅ **CERTO**: "Batalhas agora são mais rápidas e fluidas"
+- ❌ **ERRADO**: "Sistema de batalha implementado"
+- ❌ **ERRADO**: "Motor de jogo completo rodando"
+
+**Descreva o que o JOGADOR VAI ENCONTRAR, não o que foi desenvolvido!**
+
+### 📁 Estrutura de Arquivos de Patch Notes
+
+Cada atualização possui um arquivo seguindo este padrão:
+
+```
+VERSAO_NOME-DESCRITIVO.txt
+```
+
+**Exemplos:**
+- `0.0.0.0-alfa_base-inicial.txt`
+- `0.1.0.0-beta_nova-classe.txt`
+- `1.0.0.0_lancamento-oficial.txt`
+
+### 📂 Organização por Estágios
+
+```
+patchnotes/
+├── alfa/           # Versões 0.0.x.x-alfa
+├── beta/           # Versões 0.x.x.x-beta
+├── pre-release/    # Versões 0.9.x.x-pre-release
+└── release/        # Versões 1.x.x.x+
+```
+
+### 🎮 Navegação In-Game (Duas Camadas)
+
+**1ª Camada - Seleção de Estágio:**
+```
+🔬 ALFA - Desenvolvimento Inicial
+🧪 BETA - Testes Públicos
+🎯 PRÉ-RELEASE - Versão Candidata
+🏆 RELEASE - Versões Oficiais
+```
+
+**2ª Camada - Lista de Versões:**
+Após selecionar estágio, mostra todas as versões daquele estágio
+
+**3ª Camada - Conteúdo Completo:**
+Exibe o patch note selecionado
+
+### 🎨 Categorias Permitidas (APENAS 5)
+
+1. **Base Inicial** - Primeira versão
+2. **Grande Atualização** - Múltiplos sistemas novos
+3. **Pequena Atualização** - Melhorias pontuais
+4. **Correções Importantes** - Bugs críticos
+5. **Correções Pequenas** - Pequenos ajustes
+
+⚠️ **Nunca invente categorias além destas 5!**
+
+### 📝 Estrutura Obrigatória de Patch Note
+
+```markdown
+# 🎮 Título da Atualização
+
+**Versão:** X.X.X.X-sufixo
+**Data:** DD/MM/AAAA
+**Categoria:** [Uma das 5 categorias]
+
+---
+
+## 📖 Resumo
+[Parágrafo empolgante descrevendo a atualização]
+
+---
+
+## ✨ Adicionados
+[O que há de novo]
+
+---
+
+## 🔧 Melhorias
+[O que ficou melhor]
+
+---
+
+## 🐛 Correções
+[Bugs corrigidos]
+
+---
+
+## ❌ Removidos
+[O que foi removido]
+
+---
+
+**🎮 Mensagem final motivacional!**
+```
+
+### ✅ Regras de Escrita
+
+**SEMPRE:**
+- Use linguagem simples (seu avô entenderia?)
+- Foque na experiência do jogador
+- Seja específico (números, nomes, detalhes)
+- Use verbos de ação (explore, lute, colete)
+- Mantenha tom empolgante
+
+**NUNCA:**
+- Use termos técnicos (plugin, script, engine)
+- Mencione desenvolvimento ou ferramentas
+- Fale sobre "criar" ou "implementar"
+- Seja vago ("melhorias gerais")
+
+### 🎯 Exemplo Correto
+
+```markdown
+## ✨ Adicionados
+
+### ⚔️ Sistema de Combate Épico
+- **Batalhas táticas por turnos** onde você comanda até 4 heróis
+- **15 elementos mágicos** incluindo Fogo Infernal e Trovão Destruidor
+- **Combos devastadores** ao usar habilidades na ordem certa
+```
+
+### ❌ Exemplo Errado
+
+```markdown
+## Adicionados
+- Implementado plugin AS_CombatSystem v2.0
+- Motor de jogo rodando a 60 FPS
+- Arquitetura modular implementada
+```
+
+### 📊 Checklist Antes de Publicar
+
+- [ ] Nome do arquivo segue padrão `VERSAO_nome-descritivo.txt`
+- [ ] Arquivo salvo na pasta correta (alfa/, beta/, pre-release/, release/)
+- [ ] Todas as 4 seções obrigatórias presentes
+- [ ] Categoria é uma das 5 permitidas
+- [ ] Linguagem 100% acessível para jogadores
+- [ ] ZERO termos técnicos
+- [ ] Foca na experiência, não no desenvolvimento
+
+### 🎓 Para Documentação Completa
+
+Consulte: `/js/plugins/assets/contents/patchnotes/README.md`
+
+---
+
 **Fim do Documento README.md**

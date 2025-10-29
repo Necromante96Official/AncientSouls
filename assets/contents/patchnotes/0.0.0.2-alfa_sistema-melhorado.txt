@@ -1,0 +1,94 @@
+**Versão:** 0.0.0.2-alfa
+**Data:** 29 de outubro de 2025
+**Categoria:** major
+
+## 📖 Resumo
+
+Lançamos o novo **Sistema de Splash Screen Profissional**! Antes da tela de título, os jogadores agora veem uma sequência de abertura cinematográfica com transições suaves, animações elegantes e efeitos visuais mágicos. Totalmente configurável com 11 parâmetros avançados para customizar duração, efeitos e comportamento. Além disso, melhoramos significativamente a suavidade das transições de entrada e saída do jogo.
+
+## ✨ Adicionados
+
+### 🎬 Tela de Splash Screen Cinematográfica (NEW PLUGIN: AS_0.2_SplashScreen)
+- **Exibição sequencial de imagens** (RPG Maker MZ logo → Game Dev logo) com transição profissional
+- **Transições suaves entre imagens** usando easing cubic-bezier para máxima fluidez
+- **Efeito Glow/Brilho mágico** nas imagens (drop-shadow configurável de 0-100%)
+- **Animação de Zoom entrante/saintente** nas imagens para dinamismo (0-20% ajustável)
+- **Fundo gradiente elegante** (preto/roxo) mantendo atmosfera sombria do jogo
+- **Suporte a som ambiente** ao iniciar splash screen (volume configurável)
+- **Skip automático** com clique, toque ou tecla para acessibilidade
+- **Dimensões responsivas** adaptando automaticamente a qualquer resolução de tela (max 90% x 90%)
+- **Blur progressivo** na transição entre imagens criando efeito cinematográfico
+- **Integração seamless** com Scene_Boot sem interferir no boot sequence
+
+### ⚙️ Sistema de Parâmetros Avançados para Splash Screen (11 opções)
+- **enableSplashScreen**: Ativar/desativar tela de splash completamente
+- **image1Path**: Caminho customizável para primeira imagem
+- **image2Path**: Caminho customizável para segunda imagem
+- **image1Duration**: Duração individual primeira imagem (1-10s)
+- **image2Duration**: Duração individual segunda imagem (1-10s)
+- **transitionDuration**: Duração da transição entre imagens (500ms-5s)
+- **enableGlowEffect**: Ativar/desativar efeito de brilho
+- **glowIntensity**: Intensidade do glow (0-100%)
+- **enableSound**: Ativar/desativar som ao iniciar
+- **soundFile**: Arquivo de som customizável (SE)
+- **soundVolume**: Volume do som (0-100%)
+- **enableZoomAnimation**: Ativar/desativar animação de zoom
+- **zoomIntensity**: Intensidade do zoom (0-20%)
+- **enableAutoSkip**: Permitir skip com clique/tecla
+
+### 🎨 Efeitos Visuais Splash Screen
+- **Drop-shadow animado** aumentando durante zoom-in e diminuindo em zoom-out
+- **Blur progressivo** (0px → 5px) na transição para suavidade máxima
+- **Gradiente de fundo dinâmico** (135deg linear-gradient)
+- **Image rendering otimizado** com crisp-edges para qualidade alta
+- **Opacity animada** (0 → 1) para entrada elegante das imagens
+- **Transform scale** sincronizado com opacidade para efeito cohesivo
+
+### 🎪 Transições de Tela Melhoradas
+- **Entrada na Tela de Título**: Nova transição suave de entrada com scale + translateY + blur (1.8s cubic-bezier)
+- **Saída do Jogo**: Transição ultra-suave ao pressionar Sair (4s fade audio, 4s visual fade, 25px blur)
+- **Audio fade progressivo**: Fade de volume em 120+ passos para suavidade máxima (4 segundos)
+- **Overlay cinematográfico**: Fundo gradient (preto/roxo) com backdrop-filter blur na saída
+
+### 🔧 Otimizações Técnicas
+- **requestAnimationFrame** para máxima performance e sincronização com refresh rate
+- **Event listeners automáticos** removidos após conclusão para evitar memory leaks
+- **Tratamento de erros robusto** com fallback automático
+- **Carregamento de imagem verificado** antes de aplicar transições
+- **CSS transitions GPU-aceleradas** para máxima fluidez
+- **Pointer-events gerenciado** para evitar cliques em overlay desnecessários
+
+## 🔧 Melhorias
+
+### 🎬 Transições de Tela
+- **Suavidade de entrada aumentada**: Transição de 1.8s com easing cubic-bezier(0.34, 1.56, 0.64, 1) cria bounce elegante
+- **Suavidade de saída triplicada**: De 2.5s para 4s com 120+ passos de volume fade
+- **Blur progressivo**: 0px → 15px na entrada, 0px → 25px na saída
+- **Scale animado**: Entra com 0.97 scale, sai com 0.95 scale
+- **TranslateY na entrada**: -20px → 0px para sensação de elevação
+
+### 🎨 Visual Geral
+- **Maior suavidade na transição de entrada** da tela de título com easing especializado
+- **Sequência de abertura mais profissional** criando primeira impressão memorável
+- **Transições cinematográficas** entre telas criando experiência mais polida
+- **Qualidade visual consistente** em qualquer resolução de tela
+
+### 🎮 Experiência do Usuário
+- **Boot mais elegante**: Splash screen profissional antes da tela de título
+- **Tema mais coeso**: Cores e efeitos visualmente consistentes
+- **Acessibilidade melhorada** com opção de skip para usuários sensíveis a animações
+- **Customização total** sem necessidade de editar código
+
+## 🐛 Correções
+
+- **Suavidade de transição aprimorada** na entrada e saída do jogo
+- **Fade de áudio mais gradual** evitando cortes bruscos na música
+- **Blur aplicado corretamente** em todas as transições
+
+## ❌ Removidos
+
+- Nenhuma remoção nesta versão
+
+---
+
+**🎬 Bem-vindo à epopeia de Ancient Souls! Sua jornada agora começa com uma abertura cinematográfica e transições elegantes que estabelecem o tom de uma aventura lendária...**

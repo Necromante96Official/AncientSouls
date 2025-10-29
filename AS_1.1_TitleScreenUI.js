@@ -296,6 +296,23 @@ AS.TitleScreenUI = AS.TitleScreenUI || {};
             return;
         }
         updateContinueState();
+        
+        // Preparar elemento para animação suave de entrada
+        rootElement.style.opacity = '0';
+        rootElement.style.transform = 'scale(0.97) translateY(20px)';
+        rootElement.style.filter = 'blur(5px)';
+        rootElement.style.transition = 'opacity 1.8s cubic-bezier(0.34, 1.56, 0.64, 1), transform 1.8s cubic-bezier(0.34, 1.56, 0.64, 1), filter 1.8s ease-out';
+        
+        // Forçar reflow
+        rootElement.offsetHeight;
+        
+        // Aplicar animação de entrada
+        requestAnimationFrame(() => {
+            rootElement.style.opacity = '1';
+            rootElement.style.transform = 'scale(1) translateY(0)';
+            rootElement.style.filter = 'blur(0px)';
+        });
+        
         rootElement.classList.add('as-title--visible');
         rootElement.setAttribute('aria-hidden', 'false');
         applyAnimationSettings();

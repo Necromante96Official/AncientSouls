@@ -1,0 +1,94 @@
+# 🎮 Diagnóstico Inteligente - Proteção Invisível e Constante
+
+**Versão:** 0.0.0.2-alfa  
+**Data:** 29/10/2025  
+**Categoria:** Atualização Técnica
+
+---
+
+## 📖 Resumo
+
+Ancient Souls agora possui um sistema de proteção invisível que vigia tudo 24/7! Como um guardião silencioso, ele detecta problemas antes que você sequer perceba, aprende com cada erro e garante que o jogo rode de forma cada vez mais suave e estável. Se algo der errado, ele sabe exatamente o que aconteceu, quando e por quê - tornando correções futuras muito mais rápidas!
+
+---
+
+## ✨ Adicionados
+
+### 🛡️ Sistema de Detecção Automática de Problemas
+
+- **Vigilância constante em segundo plano** monitorando cada ação no jogo sem você perceber
+- **Identificação instantânea de erros** antes que causem travamentos ou comportamentos estranhos
+- **Registro detalhado de tudo que acontece** criando um histórico completo da sua sessão
+- **Captura automática de falhas críticas** que antes podiam fechar o jogo sem aviso
+
+### 🔍 Análise Inteligente de Padrões
+
+- **Detecção de problemas recorrentes** que acontecem mais de uma vez
+- **Agrupamento automático de erros similares** para identificar a raiz do problema
+- **Alertas quando algo está se repetindo demais** ajudando a prevenir bugs futuros
+- **Histórico de padrões detectados** mostrando quais problemas são mais comuns
+
+### ⚡ Monitor de Desempenho em Tempo Real
+
+- **Medição constante da velocidade do jogo** garantindo que tudo roda suave
+- **Alertas quando algo está lento demais** (mais de 100ms entre ações)
+- **Rastreamento de quanto tempo o jogo está rodando** desde que você começou
+- **Estatísticas de performance** mostrando se o jogo está rodando bem
+- **Detecção de lentidão entre cenas** para garantir transições fluidas
+
+### 💾 Vigilância de Memória
+
+- **Monitoramento constante do uso de memória** evitando que o jogo fique pesado
+- **Detecção automática de vazamento de memória** quando o jogo começa a consumir muitos recursos
+- **Alertas quando memória aumenta mais de 50MB** sem motivo aparente
+- **Comparação com baseline inicial** para ver quanto o jogo cresceu na memória
+- **Relatórios de uso de memória** mostrando se está tudo nos conformes
+
+### 🎬 Rastreamento de Transições
+
+- **Registro de cada mudança de cena** (menu → batalha → exploração, etc)
+- **Histórico das últimas 20 transições** com horário exato
+- **Captura do estado da memória em cada transição** para detectar vazamentos
+- **Identificação de cenas problemáticas** que podem estar causando lentidão
+
+### 🔁 Sistema de Retry Inteligente
+
+- **Contador de tentativas quando algo falha** mostrando quantas vezes o sistema tentou
+- **Rastreamento de operações que precisaram de retry** para análise futura
+- **Estatísticas de sucesso vs falha** em cada operação
+- **Histórico de última tentativa** com data e hora precisas
+
+### 📊 Relatórios Detalhados
+
+- **Relatório de performance** mostrando tempo total, logs lentos e médias
+- **Relatório de memória** com baseline, uso atual, limite e porcentagem
+- **Relatório de padrões** listando todos os problemas recorrentes detectados
+- **Rastreamento de até 500 eventos** recentes para análise completa
+
+---
+
+## 🔧 Melhorias
+
+- **Estabilidade dramaticamente aumentada** - o jogo agora se recupera sozinho de pequenos problemas
+- **Detecção de erros muito mais precisa** com stack traces completos e detalhados
+- **Tempo de resposta otimizado** - alertas aparecem instantaneamente quando algo está errado
+- **Prevenção proativa de crashes** - problemas são detectados antes de virarem travamentos
+- **Análise muito mais profunda** - cada erro tem timestamp, cena ativa, estado da memória e muito mais
+
+---
+
+## 🐛 Correções
+
+- **Corrigido loop infinito** em logs que podiam causar travamento do sistema de diagnóstico
+- **Resolvido problema** onde alguns erros não eram capturados corretamente
+- **Ajustada captura de stack trace** para ser mais precisa e útil
+
+---
+
+## ❌ Removidos
+
+Nenhuma remoção nesta versão
+
+---
+
+**🎮 Com um guardião invisível vigiando cada movimento, Ancient Souls está mais protegido do que nunca! Jogue tranquilo sabendo que qualquer problema será detectado e resolvido antes que estrague sua diversão!**

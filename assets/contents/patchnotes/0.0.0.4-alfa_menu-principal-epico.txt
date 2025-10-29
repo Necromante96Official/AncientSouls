@@ -1,0 +1,97 @@
+# 🎮 Menu Principal Épico - Portal Para Aventuras Lendárias
+
+**Versão:** 0.0.0.4-alfa  
+**Data:** 29/10/2025  
+**Categoria:** Grande Atualização
+
+---
+
+## 📖 Resumo
+
+O coração de Ancient Souls agora pulsa com força total! A tela de título foi completamente transformada em uma experiência visual épica e medieval. Um fundo majestoso recebe você, comandos respondem instantaneamente e tudo funciona em perfeita harmonia. É aqui que sua jornada verdadeiramente começa - escolha Novo Jogo e mergulhe na aventura, Continue de onde parou, ajuste Opções ou encerre quando quiser. Tudo linda e funcionalmente integrado!
+
+---
+
+## ✨ Adicionados
+
+### 🏰 Visual Medieval Fantástico Completo
+
+- **Fundo épico e imersivo** que preenche toda a tela perfeitamente
+- **Imagem de fundo customizada em alta qualidade** criando atmosfera medieval mágica
+- **Background centralizado automaticamente** adaptando-se a qualquer resolução
+- **Redimensionamento inteligente** que mantém proporções perfeitas da imagem
+- **Ocultação dos fundos padrão** para dar destaque total ao visual customizado
+
+### 🎯 Sistema de Comandos Refinado
+
+- **5 comandos principais perfeitamente integrados**:
+  - **Novo Jogo** - Inicie uma jornada completamente nova
+  - **Continuar** - Retome sua aventura de onde parou (se houver saves)
+  - **Opções** - Personalize sua experiência
+  - **Notas de Atualização** - Veja as novidades do jogo
+  - **Sair** - Encerre o jogo com fade suave da música
+
+### ⚡ Resposta Instantânea e Inteligente
+
+- **Comandos executam imediatamente** ao serem selecionados
+- **Sons de confirmação** para cada ação (OK ou erro)
+- **Validação automática de saves** - botão Continuar só funciona se houver partidas salvas
+- **Buzzer de erro** quando tenta continuar sem saves disponíveis
+- **Fade de áudio suave** ao sair (60 frames de transição)
+
+### 🔄 Integração Perfeita com Outras Telas
+
+- **Retorno perfeito do menu de Opções** mantendo visual e funcionalidade
+- **Background restaurado automaticamente** ao voltar de qualquer tela
+- **Música de fundo sempre presente** criando atmosfera constante
+- **Transições suaves entre cenas** sem quebras ou bugs visuais
+
+### 🎨 Camadas Visuais Organizadas
+
+- **Background na camada mais profunda** (atrás de tudo)
+- **Elementos de UI perfeitamente posicionados** em camadas superiores
+- **Sprites padrão ocultos** para evitar conflitos visuais
+- **Visibilidade controlada** garantindo que só aparece o que deve aparecer
+
+### 🛡️ Sistema de Fallback Inteligente
+
+- **Detecção automática de interface HTML** disponível ou não
+- **Modo de compatibilidade** usando comandos padrão se a UI avançada falhar
+- **Avisos claros no console** quando recursos não estão disponíveis
+- **Garantia de jogabilidade** mesmo que algo dê errado
+
+### 🔊 Áudio Imersivo
+
+- **Música de título automática** tocando assim que a tela aparece
+- **Sons de feedback** em cada ação do jogador
+- **Fade out suave de BGM, BGS e ME** ao sair do jogo
+- **Transição de áudio profissional** entre cenas
+
+---
+
+## 🔧 Melhorias
+
+- **Primeira impressão tremendamente aprimorada** - o menu agora é digno de um RPG épico
+- **Estabilidade visual perfeita** - backgrounds sempre aparecem corretamente
+- **Performance otimizada** ao carregar e exibir imagens de fundo
+- **Compatibilidade total** com sistema de saves e opções
+- **Retorno de cenas muito mais suave** - sem quebras visuais ao voltar do menu de opções
+
+---
+
+## 🐛 Correções
+
+- **Corrigido problema** onde background não aparecia ao retornar do menu de opções
+- **Resolvido conflito** entre sprites padrão e background customizado
+- **Ajustada ordem de camadas** garantindo que elementos apareçam na sequência correta
+- **Corrigida reativação da UI** ao retornar de outras cenas
+
+---
+
+## ❌ Removidos
+
+Nenhuma remoção nesta versão
+
+---
+
+**🎮 Agora Ancient Souls tem um menu principal digno de uma aventura lendária! Cada pixel, cada som, cada transição foi pensada para criar a atmosfera perfeita. Quando você vir essa tela, saberá: uma jornada épica está prestes a começar!**

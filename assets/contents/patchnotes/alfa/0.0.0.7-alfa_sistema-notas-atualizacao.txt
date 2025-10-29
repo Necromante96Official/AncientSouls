@@ -1,0 +1,143 @@
+# 📜 Sistema de Notas de Atualização
+
+**Versão:** 0.0.0.7-alfa  
+**Data:** 29/10/2025  
+**Categoria:** Grande Atualização
+
+---
+
+## 📖 Resumo
+
+Agora você pode acompanhar TODAS as novidades do jogo de forma organizada e bonita! Um sistema completo mostra o histórico de atualizações com visual medieval fantástico, facilitando entender tudo que foi adicionado, melhorado e corrigido em cada versão.
+
+---
+
+## ✨ Adicionados
+
+### 📋 **Interface Completa de Patch Notes**
+- Sistema visual elegante com tema medieval para visualizar atualizações
+- Tela mostra histórico completo de todas as versões do jogo
+- Design com bordas douradas, fundo roxo escuro e efeitos de brilho
+- Animações suaves ao abrir e fechar a interface
+- Botão de fechar intuitivo no canto superior direito
+
+### 🎯 **Organização por Estágios de Desenvolvimento**
+- Seleção visual de estágios: ALFA 🔬, BETA 🧪, PRÉ-RELEASE 🎯 e RELEASE 🏆
+- Cada estágio tem emoji e descrição exclusivos
+- Cards grandes e clicáveis para escolher qual fase visualizar
+- Sistema mostra apenas atualizações do estágio selecionado
+
+### 🏷️ **Filtros por Categoria**
+- Abas superiores para filtrar por tipo de atualização
+- Categorias disponíveis: Todas, Base Inicial, Grande Atualização, Pequena Atualização, Correções Importantes e Correções Pequenas
+- Contadores automáticos mostrando quantidade de versões em cada categoria
+- Indicação visual da aba ativa com cores e destaques
+
+### 📊 **Visualização Dividida em Dois Painéis**
+- Painel esquerdo: lista compacta de todas as versões disponíveis
+- Painel direito: detalhes completos da versão selecionada
+- Sistema de abas nos detalhes separando Resumo, Adicionados, Removidos, Melhorias e Correções
+- Contadores em cada aba mostrando quantos itens existem
+
+### 🎨 **Sistema de Versões com Cards Visuais**
+- Cada versão aparece como um card clicável
+- Informações mostradas: número da versão, estágio, título, data e categoria
+- Badge colorido indicando o tipo de atualização
+- Versão selecionada fica destacada com borda brilhante
+- Ordenação automática das versões mais recentes para as mais antigas
+
+### 🔍 **Busca em Tempo Real**
+- Campo de pesquisa no topo da interface
+- Filtra conteúdo enquanto você digita
+- Botão de limpar busca aparece automaticamente quando há texto
+- Busca funciona em títulos, descrições e listas de mudanças
+
+### 📝 **Detalhamento Completo de Cada Versão**
+- Cabeçalho com título grande, versão e data
+- Resumo explicativo sobre o que foi feito
+- Listas organizadas por tipo de mudança (novos recursos, melhorias, correções)
+- Badges coloridos identificando cada tipo de modificação
+- Suporte a formatação markdown (negrito, itálico, código)
+
+### ⚡ **Controles de Navegação Intuitivos**
+- Botão "Expandir/Colapsar Tudo" para abrir ou fechar todas as seções
+- Setas de navegação entre versões
+- Botão "Voltar para Estágios" quando está visualizando versões
+- Scroll suave e responsivo em ambos os painéis
+
+### 🎯 **Indicadores Visuais de Scroll**
+- Sombras no topo aparecem quando há conteúdo acima
+- Sombras embaixo aparecem quando há conteúdo abaixo
+- Botão "Voltar ao Topo" aparece após rolar a tela
+- Facilita saber se tem mais conteúdo para ler
+
+### ⌨️ **Suporte Completo a Teclado**
+- Tecla ESC fecha a interface de patch notes
+- Tecla Backspace volta para tela anterior
+- Campo de busca protegido contra interferências do sistema
+- Navegação acessível por teclado
+
+### 🎵 **Preservação de Música**
+- Música de fundo continua tocando normalmente ao abrir patch notes
+- Sistema salva posição exata da música
+- Não há interrupção ou reinício da trilha sonora
+- Experiência contínua e imersiva
+
+### 🌟 **Agrupamento por Subseções**
+- Items organizados em grupos quando há múltiplas categorias
+- Cabeçalhos de subseção para organizar conteúdo extenso
+- Facilita localizar tipos específicos de mudanças
+
+### 📱 **Layout Responsivo**
+- Interface adapta-se a diferentes resoluções
+- Largura máxima de 900px para leitura confortável
+- Altura máxima de 85% da tela
+- Scroll interno para conteúdo extenso
+
+### 🎭 **Efeitos Visuais Premium**
+- Blur de fundo ao abrir a interface
+- Transições suaves entre estados
+- Animações de escala ao aparecer
+- Hover effects em botões e cards
+- Bordas brilhantes com gradientes dourados
+
+### 📚 **Sistema de Carregamento Inteligente**
+- Lê automaticamente arquivos .txt da pasta de patch notes
+- Parser completo de formato markdown
+- Suporte a múltiplos estágios de desenvolvimento
+- Cache inteligente evitando recarregar arquivos repetidamente
+
+### 🎪 **Integração com Menu de Título**
+- Botão "Notas de Atualização" acessível da tela de título
+- Integração via sistema de eventos Pub/Sub
+- Inicialização automática ao carregar o jogo
+- Limpeza adequada ao sair da tela de título
+
+---
+
+## 🔧 Melhorias
+
+- Interface mostra mensagem amigável quando estágio não tem atualizações
+- Sistema detecta automaticamente categoria de cada mudança
+- Versões ordenadas da mais recente para mais antiga automaticamente
+- Códigos de categoria convertidos para nomes legíveis
+- Emojis extraídos corretamente dos títulos das seções
+- Painéis sincronizados mostrando sempre conteúdo relacionado
+- Atualização visual imediata ao trocar de categoria ou versão
+- Scroll independente em cada painel para navegação fluida
+- Proteção contra múltiplas aberturas simultâneas da interface
+- Sistema robusto de fallback caso arquivos CSS/HTML não carreguem
+- Parser tolerante a diferentes formatos de markdown
+- Suporte a arquivos com ou sem emojis nos cabeçalhos
+
+---
+
+## 🐛 Correções
+
+- Nenhuma correção nesta versão (recurso novo)
+
+---
+
+## ❌ Removidos
+
+- Nenhuma remoção nesta versão

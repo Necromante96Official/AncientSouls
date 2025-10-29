@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.4 ☆ Sistema de Splash Screen antes da tela de título
+ * @plugindesc v1.0.3 ☆ Sistema de Splash Screen antes da tela de título
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_0.1_LogEnhancer
@@ -18,8 +18,8 @@
  * - js/plugins/assets/resources/rpgmakermz.png  (primeira imagem)
  * - js/plugins/assets/resources/gamedev.png     (segunda imagem)
  * 
- * As imagens serão redimensionadas para HD (1280x720) mantendo proporção
- * e centralizadas na tela. Transições suaves de fade in/out são aplicadas.
+ * As imagens serão automaticamente redimensionadas para preencher a tela
+ * mantendo a proporção. Transições suaves de fade in/out são aplicadas.
  * 
  * CONTROLES:
  * - Pressione Enter, Espaço ou clique para pular
@@ -33,7 +33,7 @@ AS.SplashScreen = AS.SplashScreen || {};
     'use strict';
 
     const MODULE_ID = 'AS_0.2_SplashScreen';
-    const MODULE_VERSION = '1.0.4';
+    const MODULE_VERSION = '1.0.3';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
     
     // Caminho base para as imagens de splash
@@ -183,14 +183,10 @@ AS.SplashScreen = AS.SplashScreen || {};
         if (!this._sprite.bitmap) return;
 
         const bitmap = this._sprite.bitmap;
-        // Definir tamanho máximo em HD (1280x720)
-        const maxWidth = 1280;
-        const maxHeight = 720;
-        
-        // Calcular escala para caber dentro do limite HD mantendo proporção
-        const scaleX = maxWidth / bitmap.width;
-        const scaleY = maxHeight / bitmap.height;
-        const scale = Math.min(scaleX, scaleY);
+        const scaleX = Graphics.width / bitmap.width;
+        const scaleY = Graphics.height / bitmap.height;
+        // Usar Math.max para preencher toda a tela, mesmo que corte partes da imagem
+        const scale = Math.max(scaleX, scaleY);
 
         this._sprite.scale.x = scale;
         this._sprite.scale.y = scale;

@@ -3,7 +3,7 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc v1.0.4 ☆ Sistema de Splash Screen antes da tela de título
+ * @plugindesc v1.0.2 ☆ Sistema de Splash Screen antes da tela de título
  * @author Necromante96Official & GitHub Copilot
  * @orderAfter AS_0.0_PluginManager
  * @orderAfter AS_0.1_LogEnhancer
@@ -18,8 +18,8 @@
  * - js/plugins/assets/resources/rpgmakermz.png  (primeira imagem)
  * - js/plugins/assets/resources/gamedev.png     (segunda imagem)
  * 
- * As imagens serão redimensionadas para HD (1280x720) mantendo proporção
- * e centralizadas na tela. Transições suaves de fade in/out são aplicadas.
+ * As imagens serão automaticamente redimensionadas para preencher a tela
+ * mantendo a proporção. Transições suaves de fade in/out são aplicadas.
  * 
  * CONTROLES:
  * - Pressione Enter, Espaço ou clique para pular
@@ -33,7 +33,7 @@ AS.SplashScreen = AS.SplashScreen || {};
     'use strict';
 
     const MODULE_ID = 'AS_0.2_SplashScreen';
-    const MODULE_VERSION = '1.0.4';
+    const MODULE_VERSION = '1.0.2';
     const DEPENDENCIES = ['AS_0.0_PluginManager'];
     
     // Caminho base para as imagens de splash
@@ -85,15 +85,6 @@ AS.SplashScreen = AS.SplashScreen || {};
      * Hook em Scene_Boot para redirecionar para splash
      */
     function applySceneBootHook() {
-        const Scene_Boot_start = Scene_Boot.prototype.start;
-        Scene_Boot.prototype.start = function() {
-            Scene_Boot_start.call(this);
-            // Tentar forçar fullscreen no início
-            if (Utils.isNwjs() && Graphics._requestFullScreen) {
-                Graphics._requestFullScreen();
-            }
-        };
-        
         const Scene_Boot_startNormalGame = Scene_Boot.prototype.startNormalGame;
         Scene_Boot.prototype.startNormalGame = function() {
             this.checkPlayerLocation();
@@ -128,10 +119,14 @@ AS.SplashScreen = AS.SplashScreen || {};
     Scene_SplashScreen.prototype.initialize = function() {
         Scene_Base.prototype.initialize.call(this);
         this._imageIndex = 0;
-        this._phase = 'loading';
+        this._phase = 'fadeIn';
         this._phaseFrames = 0;
         this._sprite = null;
         this._backgroundSprite = null;
+        
+        // Forçar tela cheia ao iniciar
+        Graphics._requestFullScreen();
+        
         logger.info('Scene_SplashScreen inicializada.');
     };
 
@@ -169,28 +164,40 @@ AS.SplashScreen = AS.SplashScreen || {};
 
         logger.info(`Carregando imagem: ${config.name}`);
         
-        // Carregar imagem usando Bitmap.load (método nativo do RPG Maker MZ)
+        // Carregar imagem do caminho customizado
         const imagePath = SPLASH_PATH + config.name + '.png';
-        this._sprite.bitmap = Bitmap.load(imagePath);
-        this._sprite.bitmap.addLoadListener(() => {
-            logger.info(`Imagem ${config.name} carregada com sucesso.`);
+        const bitmap = new Bitmap();
+        bitmap._url = imagePath;
+        bitmap._loadingState = 'loading';
+        
+        const image = new Image();
+        image.onload = () => {
+            bitmap._image = image;
+            bitmap._loadingState = 'loaded';
+            bitmap.resize(image.naturalWidth, image.naturalHeight);
+            bitmap._context.drawImage(image, 0, 0);
+            bitmap._baseTexture.update();
             this.adjustSpriteScale();
             this.startPhase('fadeIn');
-        });
+            logger.info(`Imagem ${config.name} carregada e ajustada.`);
+        };
+        image.onerror = () => {
+            logger.error(`Erro ao carregar imagem: ${imagePath}`);
+            bitmap._loadingState = 'error';
+        };
+        image.src = imagePath;
+        
+        this._sprite.bitmap = bitmap;
     };
 
     Scene_SplashScreen.prototype.adjustSpriteScale = function() {
         if (!this._sprite.bitmap) return;
 
         const bitmap = this._sprite.bitmap;
-        // Definir tamanho máximo em HD (1280x720)
-        const maxWidth = 1280;
-        const maxHeight = 720;
-        
-        // Calcular escala para caber dentro do limite HD mantendo proporção
-        const scaleX = maxWidth / bitmap.width;
-        const scaleY = maxHeight / bitmap.height;
-        const scale = Math.min(scaleX, scaleY);
+        const scaleX = Graphics.width / bitmap.width;
+        const scaleY = Graphics.height / bitmap.height;
+        // Usar Math.max para preencher toda a tela, mesmo que corte partes da imagem
+        const scale = Math.max(scaleX, scaleY);
 
         this._sprite.scale.x = scale;
         this._sprite.scale.y = scale;
@@ -214,8 +221,11 @@ AS.SplashScreen = AS.SplashScreen || {};
 
     Scene_SplashScreen.prototype.update = function() {
         Scene_Base.prototype.update.call(this);
-        this.updateInput();
-        this.updatePhase();
+        
+        if (!this.isBusy()) {
+            this.updateInput();
+            this.updatePhase();
+        }
     };
 
     Scene_SplashScreen.prototype.updateInput = function() {
@@ -227,7 +237,6 @@ AS.SplashScreen = AS.SplashScreen || {};
 
     Scene_SplashScreen.prototype.updatePhase = function() {
         if (!this._sprite || !this._sprite.bitmap) return;
-        if (!this._sprite.bitmap.isReady()) return;
 
         this._phaseFrames++;
         const progress = Math.min(this._phaseFrames / this._phaseDuration, 1);

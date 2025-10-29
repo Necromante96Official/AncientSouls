@@ -1,0 +1,147 @@
+# 🏰 Interface Medieval do Título - Sua Porta de Entrada Épica
+
+**Versão:** 0.0.0.5-alfa  
+**Data:** 29/10/2025  
+**Categoria:** Grande Atualização
+
+---
+
+## 📖 Resumo
+
+A primeira coisa que você vê ao abrir Ancient Souls agora é uma obra de arte! A tela de abertura foi completamente reformulada com um visual medieval fantástico que parece ter saído diretamente de um pergaminho antigo. Imagens flutuam suavemente, botões brilham quando você passa o mouse, e tudo responde instantaneamente ao seu comando. É uma experiência visual espetacular que prepara você para a aventura épica que está por vir!
+
+---
+
+## ✨ Adicionados
+
+### 🎨 Design Medieval Fantástico Completo
+
+- **Logo do jogo com efeito de flutuação mágica** que sobe e desce suavemente como se estivesse flutuando no ar
+- **Fundo épico em camadas** criando profundidade e atmosfera medieval
+- **Ícones místicos de alma** posicionados estrategicamente ao redor da tela
+- **Layout totalmente customizado em HTML** dando controle total sobre cada elemento visual
+- **Estilos CSS avançados** com gradientes, sombras e efeitos modernos
+- **Entrada animada da tela** que aparece suavemente com zoom e desfoque (1.8 segundos de transição mágica)
+- **Escala e posição ajustáveis** para logo, texto e todos os elementos decorativos
+
+### 🎯 Botões Interativos de Alta Qualidade
+
+- **5 botões principais estilizados** com visual medieval:
+  - **Novo Jogo** - Comece uma aventura completamente nova
+  - **Continuar** - Retome sua jornada (só aparece se você tiver saves)
+  - **Opções** - Personalize música, efeitos, animações e controles
+  - **Notas de Versão** - Veja todas as novidades desta atualização
+  - **Sair** - Encerre o jogo com animação épica de saída
+
+- **Efeito hover mágico** quando você passa o mouse - botões brilham e fazem som
+- **Som de confirmação** ao clicar em qualquer opção
+- **Som de cursor** ao passar sobre os botões
+- **Navegação por teclado completa**:
+  - Setas ↑↓ ou ←→ para mudar de opção
+  - Enter ou Espaço para confirmar
+  - Foco visual mostrando qual botão está selecionado
+
+### ⚙️ Configurações Personalizáveis
+
+- **Ativar/Desativar animação de flutuação** do logo e elementos decorativos
+- **Controle de velocidade da animação** de 1 a 10 segundos (padrão: 4 segundos)
+- **Fade suave da música** ao sair da tela inicial (pode ser desativado)
+- **Duração do fade da música ajustável** de 100ms a 5000ms (padrão: 1 segundo)
+- **Configurações salvas automaticamente** no arquivo de save do jogo
+- **Valores personalizados mantidos** mesmo ao fechar e reabrir o jogo
+
+### 🎭 Transições e Animações Premium
+
+- **Aparição suave ao entrar** com escala, opacidade e desfoque sincronizados
+- **Animação de flutuação infinita** em loop contínuo para elementos do logo
+- **Transição ultra suave ao sair** (4 segundos de fade gradual com blur)
+- **Fade de áudio profissional** reduzindo volume em 120 passos suaves
+- **Overlay de saída com gradiente** cobrindo a tela antes de fechar
+- **Preservação de fullscreen** ao clicar em links externos
+
+### 🔗 Sistema de Comunicação Avançado
+
+- **Integração total com outros plugins** usando sistema de mensagens
+- **Publicação de eventos** quando botões são clicados (`titlescreen:ui:command`)
+- **Escuta de mudanças de layout** respondendo a ajustes em tempo real
+- **Fallback inteligente** executando ações diretamente se comunicação falhar
+- **Log detalhado no console** mostrando cada ação para facilitar desenvolvimento
+
+### 🛡️ Validação e Segurança
+
+- **Verificação automática de saves** antes de habilitar botão Continuar
+- **Som de erro** quando tenta continuar sem partidas salvas
+- **Detecção de dependências** garantindo que plugins necessários estão ativos
+- **Carregamento seguro de assets** com tratamento de erros
+- **Compatibilidade com NW.js e Electron** para diferentes plataformas
+
+### 📐 Posicionamento Preciso e Responsivo
+
+- **Sistema de offset por pixel** para ajustar posição X e Y de cada elemento
+- **Escala independente** de 0.1x a 3x para cada camada do logo
+- **5 camadas ajustáveis**:
+  - Grupo do logo (controle geral)
+  - Logo base (fundo do logo)
+  - Texto do logo (nome do jogo)
+  - Emblema escuro (sombra/profundidade)
+  - Emblema claro (brilho/destaque)
+
+- **Transform CSS avançado** combinando múltiplas transformações
+- **Configurações salvas no ConfigManager** mantendo personalização entre sessões
+
+### 🎵 Controle de Áudio Cinematográfico
+
+- **Fade out multi-canal** afetando BGM, BGS e ME simultaneamente
+- **Redução gradual de volume** em 33ms steps (120 passos em 4 segundos)
+- **Transição de 240 frames** para áudio ao sair (ultra suave)
+- **Preservação de música** ao navegar entre opções e patch notes
+- **Fade ativado só em comandos específicos** (não afeta Opções e Patch Notes)
+
+### 🌐 Badge do Criador Interativo
+
+- **Link clicável para GitHub** do desenvolvedor
+- **Abertura em navegador externo** preservando fullscreen do jogo
+- **Compatibilidade multiplataforma**:
+  - nw.Shell para NW.js
+  - electron.shell para Electron
+  - window.open como fallback universal
+- **Som de confirmação** ao clicar no badge
+- **Logs informativos** mostrando método usado para abrir link
+
+### 🎬 Modo Fullscreen Automático
+
+- **Solicitação automática de fullscreen** ao entrar na tela de título
+- **Tratamento de erros silencioso** se navegador bloquear a solicitação
+- **Preservação do estado** ao retornar de outras telas
+- **Experiência imersiva total** sem barras e menus do navegador
+
+---
+
+## 🔧 Melhorias
+
+- **Primeira impressão completamente transformada** - agora digna de um RPG épico medieval
+- **Performance otimizada** com cache de elementos do DOM
+- **Código modular e organizado** facilitando manutenção futura
+- **Logs informativos em cada ação** ajudando a entender o que está acontecendo
+- **Compatibilidade total** com sistema de options e scenes do RPG Maker MZ
+- **Transições suavíssimas** usando cubic-bezier easing profissional
+
+---
+
+## 🐛 Correções
+
+- **Corrigido foco automático** no primeiro botão ao entrar na tela
+- **Resolvido problema de cliques** que não eram registrados
+- **Ajustada ordem de eventos** garantindo som antes de transições
+- **Corrigida restauração de layout** ao voltar de outras scenes
+- **Solucionado bug de animação** que não aplicava configurações salvas
+
+---
+
+## ❌ Removidos
+
+Nenhuma remoção nesta versão
+
+---
+
+**🏰 Agora Ancient Souls recebe você com a grandiosidade que uma lenda merece! Cada pixel foi pensado, cada animação foi ajustada, cada som foi sincronizado. Quando essa tela aparecer, você saberá: algo épico está prestes a começar!**

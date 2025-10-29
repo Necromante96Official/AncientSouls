@@ -73,7 +73,7 @@
 
 /* Header */
 .as-patchnotes__header {
-    padding: 25px 30px;
+    padding: 18px 25px;
     background: linear-gradient(135deg, 
                 rgba(139, 92, 246, 0.3) 0%, 
                 rgba(109, 40, 217, 0.3) 100%);
@@ -86,18 +86,18 @@
 
 .as-patchnotes__title {
     margin: 0;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: bold;
     color: var(--as-patchnotes-gold-bright);
     text-shadow: 0 0 20px rgba(255, 216, 159, 0.5),
                  0 2px 4px rgba(0, 0, 0, 0.8);
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .as-patchnotes__title-icon {
-    font-size: 40px;
+    font-size: 32px;
 }
 
 .as-patchnotes__header-actions {
@@ -159,7 +159,7 @@
 
 /* Search bar */
 .as-patchnotes__search-bar {
-    padding: 15px 30px;
+    padding: 12px 25px;
     background: linear-gradient(180deg, 
                 rgba(30, 20, 60, 0.6) 0%, 
                 transparent 100%);
@@ -242,7 +242,7 @@
 .as-patchnotes__layout {
     display: flex;
     gap: 0;
-    height: calc(100% - 200px);
+    height: calc(100% - 140px);
     margin: 0;
     padding: 0;
 }
@@ -308,7 +308,7 @@
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 30px;
+    padding: 20px;
     background: linear-gradient(135deg,
         rgba(20, 10, 40, 0.3) 0%,
         rgba(40, 20, 80, 0.2) 100%);
@@ -1358,9 +1358,10 @@
     gap: 8px;
     margin-bottom: 25px;
     border-bottom: 3px solid rgba(139, 92, 246, 0.3);
-    padding-bottom: 4px;
+    padding-bottom: 8px;
     flex-wrap: wrap;
     justify-content: flex-start;
+    align-items: flex-end;
 }
 
 .as-detail-tab {
@@ -1372,6 +1373,7 @@
         rgba(139, 92, 246, 0.15) 0%,
         rgba(217, 119, 6, 0.10) 100%);
     border: 2px solid rgba(139, 92, 246, 0.3);
+    border-bottom: none;
     border-radius: 10px 10px 0 0;
     color: #d4a574;
     font-size: 13px;
@@ -1383,6 +1385,7 @@
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     flex: 0 1 auto;
     min-width: fit-content;
+    margin-bottom: -3px;
 }
 
 .as-detail-tab::before {
@@ -1417,31 +1420,14 @@
         rgba(139, 92, 246, 0.5) 0%,
         rgba(217, 119, 6, 0.4) 100%);
     border-color: #a78bfa;
-    border-bottom-color: transparent;
+    border-bottom-color: #fb923c;
     color: #ffffff;
     box-shadow: 0 4px 20px rgba(139, 92, 246, 0.8),
                 0 0 30px rgba(217, 119, 6, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transform: translateY(-3px);
     z-index: 10;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
                  0 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.as-detail-tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg,
-        #8b5cf6 0%,
-        #a78bfa 25%,
-        #fb923c 50%,
-        #d97706 75%,
-        #8b5cf6 100%);
-    box-shadow: 0 0 10px rgba(139, 92, 246, 0.8);
 }
 
 .as-detail-tab__icon {
